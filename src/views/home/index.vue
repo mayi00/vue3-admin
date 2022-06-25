@@ -1,4 +1,5 @@
 <template>
+  <img src="@/assets/logo.png" alt="">
   <p class="home">home</p>
   {{ count }}
   <el-button class="home" @click="count++">+1</el-button>
