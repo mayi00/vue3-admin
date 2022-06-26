@@ -5,6 +5,12 @@
   <el-button class="home" @click="count++">+1</el-button>
 </template>
 
+<script>
+export default {
+  name: 'Home'
+}
+</script>
+
 <script setup>
 import { ref } from 'vue'
 
