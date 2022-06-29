@@ -12,7 +12,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import '@/assets/style/style.less'
 
 const env = import.meta.env
-console.log('当前环境==>', env.VITE_NODE_ENV, '环境变量==>', env);
+console.log('当前环境变量==>', env)
 
 const app = createApp(App)
 

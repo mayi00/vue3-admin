@@ -1,7 +1,7 @@
 <template>
   <section class="sidebar">
     <el-menu active-text-color="#ffd04b" background-color="#304156" class="el-menu-vertical-demo" default-active="2"
-      text-color="#fff" @open="handleOpen" @close="handleClose" router>
+      text-color="#fff" router>
       <template v-for="item in routes">
         <!-- 有二级菜单 -->
         <el-sub-menu v-if="item.children && item.children.length > 0" :index="item.path">
@@ -37,19 +37,6 @@ import { useRouter } from 'vue-router'
 import { routes } from '@/route'
 
 const router = useRouter()
-
-const handleOpen = (key, keyPath) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key, keyPath) => {
-  console.log(key, keyPath)
-}
-onMounted(() => {
-  // setTimeout(() => {
-  //   router.push({ path: 'tableB' })
-  // }, 1000)
-  console.log(router, routes)
-})
 </script>
 
 <style lang="less" scoped>
