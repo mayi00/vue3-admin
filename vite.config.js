@@ -5,13 +5,14 @@ import path from 'path'
 export default ({ mode }) => {
   // 获取当前环境变量
   const env = loadEnv(mode, process.cwd())
-  // console.log('当前环境==>', mode, '环境变量==>', env)
+  console.log('>>> 当前环境==>', mode)
+  console.log('>>> 环境变量==>', env)
 
   return defineConfig({
     // 项目根目录
     root: process.cwd(),
     // 公共基础路径
-    base: '/',
+    base: env.VITE_NODE_ENV === 'dev' ? '/' : '/vue3-vite-pc/',
     // 环境配置
     mode: mode,
     // 需要用到的插件数组

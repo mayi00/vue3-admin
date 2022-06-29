@@ -1,0 +1,1 @@
+import{_ as e,o as a,c as n}from"./index-71ec49c0.js";const r={class:"container"};var s=e({name:"example"},[["render",function(e,s,c,i,t,o){return a(),n("p",r,"example")}],["__file","E:/06-前端学习资料/02-自己的项目/vue3-vite-pc/src/views/example/index.vue"]]);export{s as default};

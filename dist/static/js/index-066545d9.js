@@ -1,0 +1,1 @@
+import{_ as e,o as n,c as l,F as s,f as i}from"./index-71ec49c0.js";const r={},a=i("h2",null," login ",-1),o=i("p",null," 登录 ",-1);var u=e(r,[["render",function(e,i){return n(),l(s,null,[a,o],64)}],["__file","E:/06-前端学习资料/02-自己的项目/vue3-vite-pc/src/views/login/index.vue"]]);export{u as default};
