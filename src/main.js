@@ -1,15 +1,12 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './route'
+import router from './router'
 import store from './store'
-
 import 'normalize.css' // css样式重置
-
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-// 引入自定义样式
-import '@/assets/style/style.less'
+import '@/styles/index.less' // 引入自定义样式
 
 const env = import.meta.env
 console.log('当前环境变量==>', env)

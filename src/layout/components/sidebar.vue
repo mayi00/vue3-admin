@@ -1,18 +1,18 @@
 <template>
   <section class="sidebar">
-    <el-menu active-text-color="#ffd04b" background-color="#304156" class="el-menu-vertical-demo" default-active="2"
-      text-color="#fff" router>
+    <el-menu class="el-menu-vertical-demo" default-active="2" text-color="#fff">
       <template v-for="item in routes">
         <!-- 有二级菜单 -->
         <el-sub-menu v-if="item.children && item.children.length > 0" :index="item.path">
           <template #title>
+            <!-- TODO 菜单icon 需要解决 -->
             <!-- <el-icon></el-icon> -->
             <span>{{ item.meta.title }}</span>
           </template>
-          <el-menu-item v-for="subItem in item.children" :index="subItem.path">{{ subItem.meta.title }}</el-menu-item>
+          <el-menu-item v-for="subItem in item.children" :index="subItem.path" @click="handleMenuSelect">{{ subItem.meta.title }}</el-menu-item>
         </el-sub-menu>
         <!-- 只有一级菜单 -->
-        <el-menu-item v-else :index="item.path" @click="handleRoute">
+        <el-menu-item v-else :index="item.path" @click="handleMenuSelect">
           <!-- <el-icon>
             <icon-menu />
           </el-icon> -->
@@ -34,9 +34,14 @@ export default {
 import { Menu as IconMenu } from '@element-plus/icons-vue'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { routes } from '@/route'
+import { routes } from '@/router'
 
 const router = useRouter()
+
+// 选中菜单，跳转路由
+function handleMenuSelect(menu) {
+  router.push(menu.index)
+}
 </script>
 
 <style lang="less" scoped>
@@ -45,5 +50,24 @@ const router = useRouter()
   width: 100%;
   height: 100%;
   background-color: #304156;
+  background-color: @primaryColor;
+}
+
+.el-menu {
+  background-color: @primaryColor;
+  border-right: none;
+
+  .el-menu-item {
+    background-color: @primaryColor;
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &.is-active {
+      background-color: @bgColor;
+      border-right: 1px solid @primaryColor;
+      color: @primaryColor;
+    }
+  }
 }
 </style>
