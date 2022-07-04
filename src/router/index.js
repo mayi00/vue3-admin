@@ -3,8 +3,8 @@
  * @Author      : huazf
  * @Date        : 2022-06-25
  * @LastEditors : huazf
- * @LastEditTime: 2022-06-26
- * @FilePath    : \vue3-vite-pc\src\route\index.js
+ * @LastEditTime: 2022-07-04
+ * @FilePath    : \vue3-vite-pc\src\router\index.js
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '@/layout/index.vue'
@@ -15,6 +15,8 @@ export const routes = [
     redirect: 'home',
     component: Layout,
     meta: { title: '首页' },
+    // TODO 路由隐藏问题需要解决
+    isHidden: true,
     children: [
       {
         path: '/home',

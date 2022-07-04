@@ -35,7 +35,13 @@ export default ({ mode }) => {
       // 指定传递给 CSS 预处理器的选项，文件扩展名用作选项的键
       preprocessorOptions: {
         less: {
-          avascriptEnabled: true
+          avascriptEnabled: true,
+          // 全局引入 less 变量 --方式 1
+          additionalData: `@import "${path.resolve(__dirname, 'src/styles/variables.less')}"; `,
+          // 全局引入 less 变量 --方式 2
+          // modifyVars: {
+          //   hack: `true; @import (reference) "${path.resolve('src/styles/variables.less')}";`,
+          // },
         }
       },
       // 在开发过程中是否启用 sourcemap
