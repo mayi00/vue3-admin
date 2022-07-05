@@ -1,11 +1,13 @@
 import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
+import app from './modules/app'
 import user from './modules/user'
 
 // 创建一个新的 store 实例
 const store = createStore({
   modules: {
+    app,
     user
   },
   // vuex 本地持久化配置

@@ -10,35 +10,39 @@
 <script setup name="Layout">
 import Sidebar from './components/sidebar.vue'
 import Navbar from './components/navbar.vue'
-import AppMain from './components/appMain.vue'
 </script>
 
 <template>
-  <el-container class="layout-container">
-    <!-- 侧边栏 -->
+  <el-container class="layout">
     <el-aside width="200px">
       <Sidebar></Sidebar>
     </el-aside>
     <el-container>
-      <!-- 顶部导航栏 -->
       <el-header class="navbar-container">
         <Navbar></Navbar>
       </el-header>
-      <!-- 主体容器 -->
-      <el-main>
-        <AppMain></AppMain>
+
+      <el-main class="main">
+        <!-- 二级路由 -->
+        <router-view />
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <style lang="less" scoped>
-.layout-container {
+.layout {
   position: relative;
   width: 100%;
   height: 100%;
+
   .navbar-container {
     padding: 0;
+    height: 50px;
+  }
+
+  .main {
+    background-color: #f3f5f7;
   }
 }
 </style>
