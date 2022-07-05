@@ -1,9 +1,12 @@
 <script setup name="App">
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
 </script>
 
 <template>
-  <!-- 一级路由 -->
-  <router-view/>
+  <el-config-provider :locale="zhCn">
+    <!-- 一级路由 -->
+    <router-view />
+  </el-config-provider>
 </template>
 
 <style>
