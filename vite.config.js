@@ -1,6 +1,7 @@
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
+import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 
 export default ({ mode }) => {
   // 获取当前环境变量
@@ -16,7 +17,11 @@ export default ({ mode }) => {
     // 环境配置
     mode: mode,
     // 需要用到的插件数组
-    plugins: [vue()],
+    plugins: [
+      vue(),
+      // 使用 vite-plugin-vue-setup-extend 插件可以在 script setup 标签中添加 name 属性，如 <script setup name="Home"></script>
+      VueSetupExtend()
+    ],
     // 静态资源服务文件夹
     publicDir: 'public',
     resolve: {

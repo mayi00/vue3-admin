@@ -1,3 +1,18 @@
+<script setup name="Sidebar">
+// 因为 HTML 标准已经定义了 menu 标签，需要使用别名来渲染图标
+import { Menu as IconMenu } from '@element-plus/icons-vue'
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { routes } from '@/router'
+
+const router = useRouter()
+
+// 选中菜单，跳转路由
+function handleMenuSelect(menu) {
+  router.push(menu.index)
+}
+</script>
+
 <template>
   <section class="sidebar">
     <el-menu class="el-menu-vertical-demo" default-active="2" text-color="#fff">
@@ -23,26 +38,7 @@
   </section>
 </template>
 
-<script>
-export default {
-  name: 'Sidebar'
-}
-</script>
 
-<script setup>
-// 因为 HTML 标准已经定义了 menu 标签，需要使用别名来渲染图标
-import { Menu as IconMenu } from '@element-plus/icons-vue'
-import { onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { routes } from '@/router'
-
-const router = useRouter()
-
-// 选中菜单，跳转路由
-function handleMenuSelect(menu) {
-  router.push(menu.index)
-}
-</script>
 
 <style lang="less" scoped>
 .sidebar {

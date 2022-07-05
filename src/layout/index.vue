@@ -3,9 +3,15 @@
  * @Author      : huazf
  * @Date        : 2022-06-25
  * @LastEditors : huazf
- * @LastEditTime: 2022-06-26
+ * @LastEditTime: 2022-07-05
  * @FilePath    : \vue3-vite-pc\src\layout\index.vue
 -->
+
+<script setup name="Layout">
+import Sidebar from './components/sidebar.vue'
+import Navbar from './components/navbar.vue'
+import AppMain from './components/appMain.vue'
+</script>
 
 <template>
   <el-container class="layout-container">
@@ -25,19 +31,6 @@
     </el-container>
   </el-container>
 </template>
-
-<script>
-export default {
-  name: 'Layout'
-}
-</script>
-
-<script setup>
-import Sidebar from './components/sidebar.vue'
-import Navbar from './components/navbar.vue'
-import AppMain from './components/appMain.vue'
-</script>
-
 
 <style lang="less" scoped>
 .layout-container {

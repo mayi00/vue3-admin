@@ -1,7 +1,5 @@
-<script>
-export default {
-  name: 'Navbar'
-}
+<script setup name="Navbar">
+
 </script>
 
 <template>
