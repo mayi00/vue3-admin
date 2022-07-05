@@ -3,13 +3,11 @@
  * @Author      : huazf
  * @Date        : 2022-06-26
  * @LastEditors : huazf
- * @LastEditTime: 2022-06-26
+ * @LastEditTime: 2022-07-05
  * @FilePath    : \vue3-vite-pc\src\layout\components\appMain.vue
 -->
-<script>
-export default {
-  name: 'AppMain'
-}
+<script setup name="AppMain">
+
 </script>
 
 <template>
