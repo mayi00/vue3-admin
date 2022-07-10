@@ -4,7 +4,7 @@
  * @Date        : 2022-06-25
  * @LastEditors : huazf
  * @LastEditTime: 2022-07-04
- * @FilePath    : \vue3-vite-pc\src\router\index.js
+ * @FilePath    : \vue3-admin\src\router\index.js
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '@/layout/index.vue'
@@ -81,7 +81,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title
   } else {
-    document.title = 'vue3-vite-pc'
+    document.title = 'vue3-admin'
   }
   next()
 })

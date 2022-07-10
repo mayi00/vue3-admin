@@ -1,4 +1,4 @@
-# Vue3-vite-pc
+# vue3-admin
 
 > 基于 vue3 + vite 开发的PC端demo
 

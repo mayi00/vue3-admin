@@ -13,7 +13,7 @@ export default ({ mode }) => {
     // 项目根目录
     root: process.cwd(),
     // 公共基础路径
-    base: env.VITE_NODE_ENV === 'dev' ? '/' : '/vue3-vite-pc/',
+    base: env.VITE_NODE_ENV === 'development' ? '/' : '/vue3-admin/',
     // 环境配置
     mode: mode,
     // 需要用到的插件数组
