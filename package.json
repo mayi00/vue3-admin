@@ -1,9 +1,10 @@
 {
-  "name": "vue3-vite-pc",
+  "name": "vue3-admin",
   "private": true,
   "version": "0.0.1",
   "scripts": {
-    "dev": "vite --mode dev",
+    "dev": "vite --mode development",
+    "test": "vite --mode test",
     "prod": "vite --mode production",
     "build:test": "vite build --mode test",
     "build:prod": "vite build --mode production",

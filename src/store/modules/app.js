@@ -4,7 +4,7 @@
  * @Date        : 2022-07-05
  * @LastEditors : huazf
  * @LastEditTime: 2022-07-05
- * @FilePath    : \vue3-vite-pc\src\store\modules\app.js
+ * @FilePath    : \vue3-admin\src\store\modules\app.js
  */
 
 export default {

@@ -4,7 +4,7 @@
  * @Date        : 2022-06-25
  * @LastEditors : huazf
  * @LastEditTime: 2022-07-05
- * @FilePath    : \vue3-vite-pc\src\layout\index.vue
+ * @FilePath    : \vue3-admin\src\layout\index.vue
 -->
 
 <script setup name="Layout">

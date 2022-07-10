@@ -15,7 +15,7 @@ const store = createStore({
     // 默认存储在 localStorage
     createPersistedState({
       // 本地存储 key
-      key: 'vue3-vite-pc',
+      key: 'vue3-admin',
       // 指定需要存储的模块
       paths: ['user']
     })
