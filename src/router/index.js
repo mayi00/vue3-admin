@@ -9,21 +9,90 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '@/layout/index.vue'
 
+/**
+ * hidden: true|false    true-侧边栏不展示该菜单，默认为 false，优先级高于 alwaysShow
+ * alwaysShow: true      true-总是展示根目录及子菜单
+ *                       此属性只针对一个菜单下只有一个子页面的情况
+ *                       如果不设置 alwaysShow，若一个菜单只有一个子页面，侧边栏只渲染根菜单
+ */
+
 export const routes = [
   {
-    path: '/',
-    redirect: 'home',
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/login/index.vue'),
+    meta: { title: '登录' },
+    hidden: true
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/Error/404.vue'),
+    meta: { title: '404' },
+    hidden: true
+  },
+  {
+    path: '/error',
+    name: 'Error',
+    redirect: '/error/404',
     component: Layout,
-    meta: { title: '首页' },
-    // TODO 路由隐藏问题需要解决
-    isHidden: true,
+    meta: { title: 'Error' },
+    hidden: true,
     children: [
       {
-        path: '/home',
+        path: '404',
+        name: '404',
+        component: () => import('@/views/Error/404.vue'),
+        meta: { title: '404', icon: 'form' }
+      }
+    ]
+  },
+  {
+    path: '/',
+    redirect: '/home',
+    component: Layout,
+    meta: { title: '首页', show: true },
+    children: [
+      {
+        path: 'home',
         name: 'home',
         component: () => import('@/views/home/index.vue'),
         meta: { title: '首页', icon: '' }
       },
+    ]
+  },
+  {
+    path: '/example',
+    component: Layout,
+    meta: { title: 'example' },
+    alwaysShow: true,
+    children: [
+      {
+        path: 'index',
+        name: 'Example',
+        component: () => import('@/views/example/index.vue'),
+        meta: { title: 'example', icon: 'form' }
+      }
+    ]
+  },
+  {
+    path: '/multilevelMenu',
+    name: 'MultilevelMenu',
+    component: Layout,
+    meta: { title: '二级导航' },
+    children: [
+      {
+        path: 'level1',
+        name: 'Level1',
+        component: () => import('@/views/MultilevelMenu/Level1/index.vue'),
+        meta: { title: '导航1', icon: 'form' }
+      },
+      {
+        path: 'level2',
+        name: 'Level2',
+        component: () => import('@/views/MultilevelMenu/Level2/index.vue'),
+        meta: { title: '导航2', icon: 'form' }
+      }
     ]
   },
   {
@@ -46,29 +115,26 @@ export const routes = [
     ]
   },
   {
-    path: '/example',
-    component: Layout,
-    meta: { title: 'example' },
+    path: '/externalLink',
+    name: 'ExternalLink',
+    meta: { title: '外链' },
     children: [
       {
-        path: '/example/index',
-        name: 'Example',
-        component: () => import('@/views/example/index.vue'),
-        meta: { title: 'example', icon: 'form' }
+        name: 'Gitee',
+        path: 'https://gitee.com/huazf/vue3-admin',
+        meta: { title: 'Gitee 仓库', icon: 'form' }
+      },
+      {
+        name: 'Preview',
+        path: 'https://huazf.gitee.io/vue3-admin',
+        meta: { title: '在线预览', icon: 'form' }
       }
     ]
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/login/index.vue'),
-    meta: { title: '登录' },
-    hidden: true
   }
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(), // createWebHashHistory hash 模式 createWebHistory 历史模式
+  history: createWebHashHistory(),
   routes,
   // 每次切换路由的时候滚动到页面顶部
   scrollBehavior() {

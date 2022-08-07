@@ -1,0 +1,1 @@
+import{_ as r,c as s,o as e}from"./index-8dba5530.js";const a={class:""};const n=r({},[["render",function(r,n){return e(),s("div",a," 404 ")}],["__file","E:/06-前端学习资料/02-自己的项目/vue3-admin/src/views/Error/404.vue"]]);export{n as default};

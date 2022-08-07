@@ -1,1 +1,0 @@
-import{_ as n,c as e,o as l,F as s,g as a}from"./index-c869f8b5.js";const i={},r=a("h2",null," login ",-1),o=a("p",null," 登录 ",-1);var u=n(i,[["render",function(n,a){return l(),e(s,null,[r,o],64)}],["__file","E:/06-前端学习资料/02-自己的项目/vue3-admin/src/views/login/index.vue"]]);export{u as default};
