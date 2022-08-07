@@ -1,1 +1,0 @@
-import{_ as e,c as a,o as n}from"./index-c869f8b5.js";const r={class:"container"};var s=e({},[["render",function(e,s){return n(),a("p",r,"tableA")}],["__file","E:/06-前端学习资料/02-自己的项目/vue3-admin/src/views/table/tableA/index.vue"]]);export{s as default};

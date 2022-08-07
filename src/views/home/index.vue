@@ -1,17 +1,22 @@
-<template>
-  <img src="@/assets/logo.png" alt="">
-  <p class="home">home</p>
-  {{ count }}
-  <el-button class="home" @click="count++">+1</el-button>
-  <el-date-picker v-model="date" type="date" placeholder="Pick a day" />
-</template>
-
 <script setup name="Home">
 import { ref } from 'vue'
 
-const count = ref(0)
 const date = ref(null)
 </script>
+
+<template>
+  <div class="home-container container">
+    <p class="home">home</p>
+    <el-date-picker v-model="date" type="date" placeholder="请选择日期" />
+    <el-button>Default</el-button>
+    <el-button type="primary">Primary</el-button>
+    <el-button type="success">Success</el-button>
+    <el-button type="info">Info</el-button>
+    <el-button type="warning">Warning</el-button>
+    <el-button type="danger">Danger</el-button>
+    <el-button>中文</el-button>
+  </div>
+</template>
 
 <style lang="less" scoped>
 .home {

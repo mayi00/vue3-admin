@@ -1,0 +1,1 @@
+import{_ as e,C as s,c as a,o as i}from"./index-8dba5530.js";const l={class:""},n=s({name:"Level2"}),t=e(Object.assign(n,{setup:e=>(e,s)=>(i(),a("div",l," 页面2 "))}),[["__file","E:/06-前端学习资料/02-自己的项目/vue3-admin/src/views/MultilevelMenu/Level2/index.vue"]]);export{t as default};
