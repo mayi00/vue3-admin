@@ -58,16 +58,17 @@ export default ({ mode }) => {
     // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
     clearScreen: false,
     server: {
+      host: '0.0.0.0',
       // 指定开发服务器端口
-      // port: 5173,
+      port: 5188,
       // 在开发服务器启动时自动打开
       open: true,
-      // 开发代理
+      // 反向代理
       proxy: {
-        '/api': {
-          target: env.VITE_APP_BASE_API,
+        '/proxy': {
+          target: env.VITE_APP_BASE_URL,
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, '')
+          rewrite: path => path.replace(/^\/proxy/, '')
         }
       }
     },
@@ -82,10 +83,10 @@ export default ({ mode }) => {
       },
       minify: 'terser',
       terserOptions: {
-        // 打包移除 console.log，debugger
+        // 生产环境构建移除 console debugger
         compress: {
-          drop_console: true,
-          drop_debugger: true
+          drop_console: env.VITE_NODE_ENV === 'production',
+          drop_debugger:  env.VITE_NODE_ENV === 'production'
         }
       },
       // 启用/禁用 gzip 压缩大小报告
