@@ -101,13 +101,13 @@ export const routes = [
     meta: { title: '表格' },
     children: [
       {
-        path: '/table/tableA',
+        path: 'tableA',
         name: 'TableA',
         component: () => import('@/views/table/tableA/index.vue'),
         meta: { title: 'tableA', icon: '' }
       },
       {
-        path: '/table/tableB',
+        path: 'tableB',
         name: 'TableB',
         component: () => import('@/views/table/tableB/index.vue'),
         meta: { title: 'tableB', icon: '' }

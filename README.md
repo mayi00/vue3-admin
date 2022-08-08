@@ -2,22 +2,24 @@
 
 > 基于 vue3 + vite 开发的PC端demo
 
-## 项目构建
+## Build Setup
 
 ```bash
-# 安装依赖
-npm install
+# install dependency
+yarn
 
-# 启动服务
-npm run dev
+# develop
+yarn dev
 
-# 构建
-npm run build
+This will automatically open http://localhost:5188
 ```
 
-## 开发访问
+## Build
 
 ```bash
-http://localhost:3000
+# build for test environment
+yarn build:test
 
+# build for production environment
+yarn build:prod
 ```

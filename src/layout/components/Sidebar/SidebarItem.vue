@@ -3,7 +3,7 @@
  * @Author       : hzf
  * @Date         : 2022-08-07
  * @LastEditors  : hzf
- * @LastEditTime : 2022-08-07
+ * @LastEditTime : 2022-08-08
  * @FilePath     : \vue3-admin\src\layout\components\Sidebar\SidebarItem.vue
 -->
 <script setup name="SidebarItem">
@@ -47,7 +47,7 @@ function resolveRoutePath (routePath) {
     <!-- 没有子菜单或只有1个子菜单 -->
     <router-link v-if="!hasChildren" v-slot="{ href, navigate, isActive, isExactActive }" custom :to="resolveRoutePath(route.path)">
       <a :href="isExternalLink(resolveRoutePath(route.path)) ? resolveRoutePath(route.path) : href" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']" :target="isExternalLink(resolveRoutePath(route.path)) ? '_blank' : '_self'" @click="navigate">
-        <el-menu-item :title="route.meta.title">
+        <el-menu-item :title="route.meta.title" :index="resolveRoutePath(route.path)">
           <span>{{ route.meta.title }}</span>
         </el-menu-item>
       </a>

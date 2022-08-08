@@ -1,1 +1,0 @@
-import{_ as n,c as e,o as s,F as a,a as l}from"./index-8dba5530.js";const i={},o=l("h2",null," login ",-1),r=l("p",null," 登录 ",-1);const u=n(i,[["render",function(n,l){return s(),e(a,null,[o,r],64)}],["__file","E:/06-前端学习资料/02-自己的项目/vue3-admin/src/views/login/index.vue"]]);export{u as default};

@@ -1,0 +1,1 @@
+import{_ as n,c as a,o as e,F as s,a as l}from"./index-fd431c5b.js";const i={},o=l("h2",null," login ",-1),r=l("p",null," 登录 ",-1);const t=n(i,[["render",function(n,l){return e(),a(s,null,[o,r],64)}],["__file","E:/data/vue3-admin/src/views/login/index.vue"]]);export{t as default};
