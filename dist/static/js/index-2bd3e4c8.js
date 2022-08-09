@@ -1,1 +1,0 @@
-import{_ as e,c as a,o as t}from"./index-fd431c5b.js";const n={class:"container"};const s=e({},[["render",function(e,s){return t(),a("p",n,"tableB")}],["__file","E:/data/vue3-admin/src/views/table/tableB/index.vue"]]);export{s as default};

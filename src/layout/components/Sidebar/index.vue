@@ -3,7 +3,7 @@
  * @Author       : hzf
  * @Date         : 2022-08-07
  * @LastEditors  : hzf
- * @LastEditTime : 2022-08-08
+ * @LastEditTime : 2022-08-09
  * @FilePath     : \vue3-admin\src\layout\components\Sidebar\index.vue
 -->
 <script setup name="Sidebar">
@@ -15,7 +15,7 @@ import { routes } from '@/router'
 <template>
   <div class="sidebar-container">
     <Logo></Logo>
-    <el-menu :unique-opened="true" background-color="#222b45" text-color="#fff" active-text-color="#fff000">
+    <el-menu class="sidebar-menu" :unique-opened="false" background-color="transparent" text-color="#fff" active-text-color="#fff000">
       <transition-group name="Sidebar">
         <template v-for="(item, index) in routes">
           <SidebarItem v-if="!item.hidden" :route="item" :key="item.path || index" :basePath="item.path"/>
@@ -27,8 +27,22 @@ import { routes } from '@/router'
 
 <style lang="less" scoped>
 .sidebar-container {
-  height: 100%;
-  background-color: #222b45;
+  background-color: #2d3a4b;
+  box-shadow: 10px 0 10px -10px rgba(0, 0, 0, 0.12);
+}
+
+.sidebar-menu {
+  height: calc(100vh - 50px);
+  border: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  // firefox隐藏滚动条
+  scrollbar-width: none;
+  // chrome隐藏滚动条
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+  }
 }
 </style>
 

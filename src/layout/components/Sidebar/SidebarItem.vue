@@ -3,7 +3,7 @@
  * @Author       : hzf
  * @Date         : 2022-08-07
  * @LastEditors  : hzf
- * @LastEditTime : 2022-08-08
+ * @LastEditTime : 2022-08-09
  * @FilePath     : \vue3-admin\src\layout\components\Sidebar\SidebarItem.vue
 -->
 <script setup name="SidebarItem">
@@ -64,6 +64,21 @@ function resolveRoutePath (routePath) {
 </template>
 
 <style lang="less" scoped>
-
+::v-deep(.el-sub-menu) {
+  .el-sub-menu__title {
+    &:hover {
+      background-color: #263445 !important;
+    }
+  }
+}
+.el-menu-item {
+  &:hover {
+    background-color: #263445;
+  }
+  &.is-active {
+    background-color: #fff;
+    color: #263445;
+    border-right: 1px solid #263445;
+  }
+}
 </style>
-
