@@ -42,7 +42,7 @@ export const routes = [
       {
         path: '404',
         name: '404',
-        component: () => import('@/views/Error/404.vue'),
+        component: () => import('@/views/error/404.vue'),
         meta: { title: '404', icon: 'form' }
       }
     ]
@@ -76,21 +76,21 @@ export const routes = [
     ]
   },
   {
-    path: '/multilevelMenu',
-    name: 'MultilevelMenu',
+    path: '/nested',
+    name: 'Nested',
     component: Layout,
     meta: { title: '二级导航' },
     children: [
       {
-        path: 'level1',
-        name: 'Level1',
-        component: () => import('@/views/MultilevelMenu/Level1/index.vue'),
+        path: 'menu1',
+        name: 'Menu1',
+        component: () => import('@/views/nested/menu1/index.vue'),
         meta: { title: '导航1', icon: 'form' }
       },
       {
-        path: 'level2',
-        name: 'Level2',
-        component: () => import('@/views/MultilevelMenu/Level2/index.vue'),
+        path: 'menu2',
+        name: 'Menu2',
+        component: () => import('@/views/nested/menu2/index.vue'),
         meta: { title: '导航2', icon: 'form' }
       }
     ]
@@ -145,9 +145,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // 路由发生变化修改页面 title
   if (to.meta.title) {
-    document.title = to.meta.title
+    document.title = `${to.meta.title} - Vue3-admin`
   } else {
-    document.title = 'vue3-admin'
+    document.title = 'Vue3-admin'
   }
   next()
 })
