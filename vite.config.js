@@ -1,7 +1,6 @@
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import path from 'path'
-import VueSetupExtend from 'vite-plugin-vue-setup-extend'
+import * as path from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -15,25 +14,28 @@ export default ({ mode }) => {
   return defineConfig({
     // 公共基础路径
     base: env.VITE_NODE_ENV === 'development' ? '/' : '/vue3-admin/',
+    define: {
+      'process.env': env
+    },
     // 环境配置
     mode,
     // 需要用到的插件数组
     plugins: [
       vue(),
-      // 使用 vite-plugin-vue-setup-extend 插件可以在 script setup 标签中添加 name 属性，如 <script setup name="Home"></script>
-      VueSetupExtend(),
       AutoImport({
-        resolvers: [ElementPlusResolver()],
+        resolvers: [ElementPlusResolver()]
       }),
       Components({
-        resolvers: [ElementPlusResolver()],
-      }),
+        resolvers: [ElementPlusResolver()]
+      })
     ],
+    // 静态资源服务文件夹
+    publicDir: 'public',
     resolve: {
       // 配置路径别名
       alias: {
-        "@": path.join(__dirname, "./src")
-      },
+        '@': path.join(__dirname, './src')
+      }
     },
     css: {
       // 配置 CSS modules 的行为。选项将被传递给 postcss-modules
@@ -45,7 +47,7 @@ export default ({ mode }) => {
         less: {
           avascriptEnabled: true,
           // 全局引入 less 变量 --方式 1
-          additionalData: `@import "${path.resolve(__dirname, 'src/styles/variables.less')}"; `,
+          additionalData: `@import "${path.resolve(__dirname, 'src/styles/variables.less')}"; `
           // 全局引入 less 变量 --方式 2
           // modifyVars: {
           //   hack: `true; @import (reference) "${path.resolve('src/styles/variables.less')}";`,
@@ -53,7 +55,7 @@ export default ({ mode }) => {
         }
       },
       // 在开发过程中是否启用 sourcemap
-      devSourcemap: false
+      devSourcemap: true
     },
     // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
     clearScreen: false,
@@ -66,13 +68,15 @@ export default ({ mode }) => {
       // 反向代理
       proxy: {
         '/proxy': {
-          target: env.VITE_APP_BASE_URL,
+          target: env.VITE_BASE_URL,
           changeOrigin: true,
           rewrite: path => path.replace(/^\/proxy/, '')
         }
       }
     },
     build: {
+      // 启用/禁用 CSS 代码拆分
+      cssCodeSplit: true,
       // Rollup 打包配置，打包文件按照类型分文件夹显示
       rollupOptions: {
         output: {
@@ -86,7 +90,7 @@ export default ({ mode }) => {
         // 生产环境构建移除 console debugger
         compress: {
           drop_console: env.VITE_NODE_ENV === 'production',
-          drop_debugger:  env.VITE_NODE_ENV === 'production'
+          drop_debugger: env.VITE_NODE_ENV === 'production'
         }
       },
       // 启用/禁用 gzip 压缩大小报告

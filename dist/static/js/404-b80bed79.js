@@ -1,1 +1,0 @@
-import{_ as e,c as r,o as s}from"./index-ddfc172e.js";const a={class:""};const d=e({},[["render",function(e,d){return s(),r("div",a," 404 ")}],["__file","E:/data/vue3-admin/src/views/Error/404.vue"]]);export{d as default};
