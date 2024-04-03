@@ -15,11 +15,17 @@ export const routes = [
     component: () => import('@/views/login/index.vue'),
     meta: { title: '登录' },
     hidden: true
+  },{
+    path: '/upload',
+    name: 'Upload',
+    component: () => import('@/views/upload/upload.vue'),
+    meta: { title: '上传' },
+    hidden: true
   },
   {
-    path: '/404',
+    path: '/:catchAll(.*)',
     name: '404',
-    component: () => import('@/views/Error/404.vue'),
+    component: () => import('@/views/error/404.vue'),
     meta: { title: '404' },
     hidden: true
   },
@@ -50,7 +56,7 @@ export const routes = [
         name: 'home',
         component: () => import('@/views/home/index.vue'),
         meta: { title: '首页', icon: '' }
-      },
+      }
     ]
   },
   {
@@ -103,7 +109,7 @@ export const routes = [
         name: 'TableB',
         component: () => import('@/views/table/tableB/index.vue'),
         meta: { title: 'tableB', icon: '' }
-      },
+      }
     ]
   },
   {

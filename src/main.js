@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import '@/styles/index.less' // 引入自定义样式
-// import 'default-passive-events'
+import 'default-passive-events'
 
 const env = import.meta.env
 console.log('当前环境变量==>', env)
