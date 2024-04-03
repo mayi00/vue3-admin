@@ -1,1 +1,0 @@
-import{_ as n,c as e,o as a,F as s,a as l}from"./index-ddfc172e.js";const i={},o=l("h2",null," login ",-1),d=l("p",null," 登录 ",-1);const r=n(i,[["render",function(n,l){return a(),e(s,null,[o,d],64)}],["__file","E:/data/vue3-admin/src/views/login/index.vue"]]);export{r as default};

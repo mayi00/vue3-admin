@@ -1,12 +1,4 @@
-﻿/*
- * @Description  : CSS 样式重置
- * @Author       : hzf
- * @Date         : 2022-08-07
- * @LastEditors  : hzf
- * @LastEditTime : 2022-08-07
- * @FilePath     : \vue3-admin\src\styles\reset.css
- */
-*, ::before, ::after {
+﻿*, ::before, ::after {
 	margin: 0;
 	padding: 0;
 	border: 0;

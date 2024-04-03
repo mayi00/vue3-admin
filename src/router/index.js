@@ -1,11 +1,3 @@
-/*
- * @Description : 路由
- * @Author      : huazf
- * @Date        : 2022-06-25
- * @LastEditors : huazf
- * @LastEditTime: 2022-07-04
- * @FilePath    : \vue3-admin\src\router\index.js
- */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '@/layout/index.vue'
 
