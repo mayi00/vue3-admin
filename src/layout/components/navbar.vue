@@ -1,9 +1,11 @@
-<script setup name="Navbar">
-import { ref } from 'vue'
+<script setup>
+defineOptions({
+  name: 'Navbar'
+})
 
-let isCollapse = ref(false)
+const isCollapse = ref(false)
 // 切换侧边栏显示/隐藏
-function handleToggleSideBar () {
+function handleToggleSideBar() {
   isCollapse.value = !isCollapse.value
 }
 </script>
@@ -25,9 +27,7 @@ function handleToggleSideBar () {
         <el-breadcrumb-item>tableA</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <div class="right-box">
-      右
-    </div>
+    <div class="right-box">右</div>
   </nav>
 </template>
 
@@ -36,9 +36,9 @@ function handleToggleSideBar () {
   position: relative;
   display: flex;
   justify-content: space-between;
+  padding: 0 16px;
   width: 100%;
   height: 100%;
-  padding: 0 16px;
   line-height: 50px;
 }
 
@@ -51,6 +51,7 @@ function handleToggleSideBar () {
     align-items: center;
     margin-right: 16px;
     cursor: pointer;
+
     &:hover {
       color: #409eff;
     }

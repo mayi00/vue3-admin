@@ -1,7 +1,7 @@
-<script setup name="Home">
-import { ref } from 'vue'
-
-const date = ref(null)
+<script setup>
+defineOptions({
+  name: 'Home'
+})
 </script>
 
 <template>

@@ -1,0 +1,21 @@
+{
+  "Vue3+defineOptions": {
+    "scope": "vue",
+    "prefix": "Vue3",
+    "body": [
+      "<script setup>",
+      "defineOptions({",
+      "  name: '$1'",
+      "})",
+      "</script>",
+      "",
+      "<template>",
+      "  <div class=\"\"></div>",
+      "</template>",
+      "",
+      "<style lang=\"less\" scoped></style>",
+      ""
+    ],
+    "description": "Vue3+defineOptions快速生成模板"
+  }
+}

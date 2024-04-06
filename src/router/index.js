@@ -15,17 +15,18 @@ export const routes = [
     component: () => import('@/views/login/index.vue'),
     meta: { title: '登录' },
     hidden: true
-  },{
-    path: '/upload',
-    name: 'Upload',
-    component: () => import('@/views/upload/upload.vue'),
-    meta: { title: '上传' },
+  },
+  {
+    path: '/student-class-hours',
+    name: 'StudentClassHours',
+    component: () => import('@/views/studentClassHours/studentClassHours.vue'),
+    meta: { title: '学生课时' },
     hidden: true
   },
   {
     path: '/:catchAll(.*)',
     name: '404',
-    component: () => import('@/views/error/404.vue'),
+    component: () => import('@/views/const/error/404.vue'),
     meta: { title: '404' },
     hidden: true
   },
@@ -40,7 +41,7 @@ export const routes = [
       {
         path: '404',
         name: '404',
-        component: () => import('@/views/error/404.vue'),
+        component: () => import('@/views/const/error/404.vue'),
         meta: { title: '404', icon: 'form' }
       }
     ]

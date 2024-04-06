@@ -2,7 +2,12 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import '@/styles/index.less' // 引入自定义样式
+// 引入自定义样式
+import '@/styles/reset.css'
+import '@/styles/base.less'
+// 全局引入elementplus的函数式组件的样式
+import 'element-plus/theme-chalk/el-message.css'
+import 'element-plus/theme-chalk/el-message-box.css'
 import 'default-passive-events'
 
 const env = import.meta.env
