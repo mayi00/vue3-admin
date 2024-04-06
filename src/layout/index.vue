@@ -8,14 +8,16 @@
 -->
 
 <script setup name="Layout">
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
 import Sidebar from './components/Sidebar/index.vue'
+
+defineOptions({
+  name: 'Layout'
+})
 
 const router = useRouter()
 const allRoutes = router.getRoutes()
 const keepAliveRoutes = computed(() => {
-  return allRoutes.filter((route) => route.meta?.keepAlive).map((route) => route.name)
+  return allRoutes.filter(route => route.meta?.keepAlive).map(route => route.name)
 })
 </script>
 
@@ -25,9 +27,7 @@ const keepAliveRoutes = computed(() => {
       <Sidebar />
     </div>
     <div class="main-box">
-      <div class="navbar">
-        顶部
-      </div>
+      <div class="navbar">顶部</div>
       <main class="main">
         <router-view v-slot="{ Component, route }">
           <transition name="fade" mode="out-in" appear>
@@ -48,18 +48,22 @@ const keepAliveRoutes = computed(() => {
   width: 100%;
   height: 100%;
 }
+
 .sidebar-box {
   width: 220px;
   background-color: #efefef;
 }
+
 .main-box {
   display: flex;
   flex-direction: column;
   flex: 1;
+
   .navbar {
     height: 50px;
     background-color: #f0f0f0;
   }
+
   .main {
     flex: 1;
   }

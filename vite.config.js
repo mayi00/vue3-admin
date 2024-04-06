@@ -1,9 +1,6 @@
 import { defineConfig, loadEnv } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import createVitePlugins from './vite'
 import * as path from 'path'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 export default ({ mode }) => {
   // 获取当前环境变量
@@ -13,22 +10,14 @@ export default ({ mode }) => {
 
   return defineConfig({
     // 公共基础路径
-    base: env.VITE_NODE_ENV === 'development' ? '/' : '/vue3-admin/',
+    base: '/vue3-admin/',
     define: {
       'process.env': env
     },
     // 环境配置
     mode,
-    // 需要用到的插件数组
-    plugins: [
-      vue(),
-      AutoImport({
-        resolvers: [ElementPlusResolver()]
-      }),
-      Components({
-        resolvers: [ElementPlusResolver()]
-      })
-    ],
+    // 需要用到的插件
+    plugins: [...createVitePlugins(env)],
     // 静态资源服务文件夹
     publicDir: 'public',
     resolve: {
@@ -45,13 +34,8 @@ export default ({ mode }) => {
       // 指定传递给 CSS 预处理器的选项，文件扩展名用作选项的键
       preprocessorOptions: {
         less: {
-          avascriptEnabled: true,
-          // 全局引入 less 变量 --方式 1
-          additionalData: `@import "${path.resolve(__dirname, 'src/styles/variables.less')}"; `
-          // 全局引入 less 变量 --方式 2
-          // modifyVars: {
-          //   hack: `true; @import (reference) "${path.resolve('src/styles/variables.less')}";`,
-          // },
+          math: 'always',
+          avascriptEnabled: true
         }
       },
       // 在开发过程中是否启用 sourcemap
@@ -62,15 +46,16 @@ export default ({ mode }) => {
     server: {
       host: '0.0.0.0',
       // 指定开发服务器端口
-      port: 5188,
+      port: 920,
       // 在开发服务器启动时自动打开
       open: true,
       // 反向代理
       proxy: {
-        '/proxy': {
-          target: env.VITE_BASE_URL,
+        // 极速数据API
+        '/proxy-jisuapi': {
+          target: env.VITE_BASE_URL_JISUAPI,
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/proxy/, '')
+          rewrite: path => path.replace(/^\/proxy-jisuapi/, '')
         }
       }
     },
@@ -82,15 +67,23 @@ export default ({ mode }) => {
         output: {
           chunkFileNames: 'static/js/[name]-[hash].js',
           entryFileNames: 'static/js/[name]-[hash].js',
-          assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+          // 打包文件拆分
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return id.toString().split('node_modules/')[1].split('/')[0].toString()
+            }
+          }
         }
       },
       minify: 'terser',
       terserOptions: {
         // 生产环境构建移除 console debugger
         compress: {
+          /* eslint-disable */
           drop_console: env.VITE_NODE_ENV === 'production',
           drop_debugger: env.VITE_NODE_ENV === 'production'
+          /* eslint-enable */
         }
       },
       // 启用/禁用 gzip 压缩大小报告
