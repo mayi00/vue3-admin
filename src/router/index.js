@@ -17,6 +17,18 @@ export const routes = [
     hidden: true
   },
   {
+    path: '/redirect',
+    component: Layout,
+    meta: { hidden: true },
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect/index.vue')
+      }
+    ]
+  },
+
+  {
     path: '/student-class-hours',
     name: 'StudentClassHours',
     component: () => import('@/views/studentClassHours/studentClassHours.vue'),
