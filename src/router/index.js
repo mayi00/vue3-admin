@@ -23,7 +23,7 @@ export const routes = [
     children: [
       {
         path: '/redirect/:path(.*)',
-        component: () => import('@/views/redirect/index.vue')
+        component: () => import('@/views/const/redirect/index.vue')
       }
     ]
   },

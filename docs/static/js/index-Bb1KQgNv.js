@@ -1,0 +1,1 @@
+import{_ as n}from"./index-Y4qhfhjp.js";import{g as o,o as s,F as r,d as l}from"./.pnpm-DAM4NbZ-.js";const t={},a=l("h2",null,"login",-1),e=l("p",null,"登录",-1);const p=n(t,[["render",function(n,l){return s(),o(r,null,[a,e],64)}]]);export{p as default};

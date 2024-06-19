@@ -1,0 +1,1 @@
+import{_ as n}from"./index-Y4qhfhjp.js";import{g as o,o as r}from"./.pnpm-DAM4NbZ-.js";const s={class:"container"};const e=n({},[["render",function(n,e){return r(),o("p",s,"example")}]]);export{e as default};

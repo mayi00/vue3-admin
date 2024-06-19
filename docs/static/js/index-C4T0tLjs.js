@@ -1,0 +1,1 @@
+import{C as a,q as e,g as s,o as t}from"./.pnpm-DAM4NbZ-.js";const p={__name:"index",setup(p){const r=a(),n=e(),{params:o,query:c}=r,{path:m}=o;return n.replace({path:"/".concat(m),query:c}),(a,e)=>(t(),s("div"))}};export{p as default};
