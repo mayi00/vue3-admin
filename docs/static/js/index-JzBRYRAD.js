@@ -1,1 +1,0 @@
-import{_ as n}from"./index-CdCvfhrn.js";import{g as o,o as r}from"./.pnpm-DGulWNm0.js";const s={class:"container"};const e=n({},[["render",function(n,e){return r(),o("p",s,"example")}]]);export{e as default};
