@@ -1,5 +1,5 @@
 {
-  "Vue3+defineOptions": {
+  "Vue3+defineOptions模板": {
     "scope": "vue",
     "prefix": "Vue3",
     "body": [

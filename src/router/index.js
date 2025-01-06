@@ -20,6 +20,7 @@ export const routes = [
     path: '/redirect',
     component: Layout,
     meta: { hidden: true },
+    hidden: true,
     children: [
       {
         path: '/redirect/:path(.*)',
@@ -33,13 +34,6 @@ export const routes = [
     name: 'StudentClassHours',
     component: () => import('@/views/studentClassHours/studentClassHours.vue'),
     meta: { title: '学生课时' },
-    hidden: true
-  },
-  {
-    path: '/:catchAll(.*)',
-    name: '404',
-    component: () => import('@/views/const/error/404.vue'),
-    meta: { title: '404' },
     hidden: true
   },
   {
@@ -132,15 +126,27 @@ export const routes = [
     children: [
       {
         name: 'Gitee',
-        path: 'https://gitee.com/huazf/vue3-admin',
+        path: 'https://gitee.com/madt/vue3-admin',
         meta: { title: 'Gitee 仓库', icon: 'form' }
       },
       {
-        name: 'Preview',
-        path: 'https://huazf.gitee.io/vue3-admin',
+        name: 'GitHub',
+        path: 'https://github.com/mayi00/vue3-admin',
+        meta: { title: 'GitHub 仓库', icon: 'form' }
+      },
+      {
+        name: 'OnlinePreview',
+        path: 'https://mayi00.github.io/vue3-admin',
         meta: { title: '在线预览', icon: 'form' }
       }
     ]
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: '404',
+    component: () => import('@/views/const/error/404.vue'),
+    meta: { title: '404' },
+    hidden: true
   }
 ]
 
