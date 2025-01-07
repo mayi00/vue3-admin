@@ -28,7 +28,7 @@ const keepAliveRoutes = computed(() => {
     </div>
     <div class="main-box">
       <div class="navbar">顶部</div>
-      <main class="main">
+      <section class="main">
         <router-view v-slot="{ Component, route }">
           <transition name="fade" mode="out-in" appear>
             <keep-alive :include="keepAliveRoutes">
@@ -36,7 +36,7 @@ const keepAliveRoutes = computed(() => {
             </keep-alive>
           </transition>
         </router-view>
-      </main>
+      </section>
     </div>
   </div>
 </template>
@@ -51,6 +51,7 @@ const keepAliveRoutes = computed(() => {
 
 .sidebar-box {
   width: 220px;
+  flex-shrink: 0;
   background-color: #efefef;
 }
 
@@ -65,7 +66,9 @@ const keepAliveRoutes = computed(() => {
   }
 
   .main {
+    position: relative;
     flex: 1;
+    overflow-y: auto;
   }
 }
 </style>

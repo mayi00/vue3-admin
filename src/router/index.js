@@ -18,6 +18,7 @@ export const routes = [
   },
   {
     path: '/redirect',
+    name: 'Redirect',
     component: Layout,
     meta: { hidden: true },
     hidden: true,
@@ -28,7 +29,6 @@ export const routes = [
       }
     ]
   },
-
   {
     path: '/student-class-hours',
     name: 'StudentClassHours',
@@ -127,17 +127,17 @@ export const routes = [
       {
         name: 'Gitee',
         path: 'https://gitee.com/madt/vue3-admin',
-        meta: { title: 'Gitee 仓库', icon: 'form' }
+        meta: { title: 'Gitee 仓库', icon: 'form', link: 'https://gitee.com/madt/vue3-admin' }
       },
       {
         name: 'GitHub',
         path: 'https://github.com/mayi00/vue3-admin',
-        meta: { title: 'GitHub 仓库', icon: 'form' }
+        meta: { title: 'GitHub 仓库', icon: 'form', link: 'https://github.com/mayi00/vue3-admin' }
       },
       {
         name: 'OnlinePreview',
         path: 'https://mayi00.github.io/vue3-admin',
-        meta: { title: '在线预览', icon: 'form' }
+        meta: { title: '在线预览', icon: 'form', link: 'https://mayi00.github.io/vue3-admin' }
       }
     ]
   },

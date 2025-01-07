@@ -37,7 +37,7 @@ import { routes } from '@/router'
 <style lang="less" scoped>
 .sidebar-container {
   background-color: #2d3a4b;
-  box-shadow: 10px 0 10px -10px rgb(0 0 0 / 12%);
+  box-shadow: 10px 0 10px -10px rgba(0, 0, 0, 0.12);
 }
 
 .sidebar-menu {

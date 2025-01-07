@@ -1,25 +1,25 @@
 # vue3-admin
 
-> 基于 vue3 + vite 开发的PC端demo
+> 基于 Vue3 + Vite + Element Plus 开发的PC端项目
 
-## Build Setup
-
-```bash
-# install dependency
-yarn
-
-# develop
-yarn dev
-
-This will automatically open http://localhost:5188
-```
-
-## Build
+## 项目构建
 
 ```bash
-# build for test environment
-yarn build:test
+# 安装所有依赖
+pnpm install
 
-# build for production environment
-yarn build:prod
+# 启动服务
+pnpm dev
+
+# 测试环境打包
+pnpm build:test
+
+# 生产环境打包
+pnpm build:prod
+
+# 本地访问地址
+http://localhost:920
+
+# 线上预览
+https://mayi00.github.io/vue3-admin
 ```

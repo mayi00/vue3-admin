@@ -89,7 +89,7 @@ export default ({ mode }) => {
       // 启用/禁用 gzip 压缩大小报告
       reportCompressedSize: true,
       // chunk 大小警告的限制（以 kbs 为单位）
-      chunkSizeWarningLimit: 500
+      chunkSizeWarningLimit: 1024
     }
   })
 }
