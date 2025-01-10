@@ -1,6 +1,8 @@
 // 全局样式
 import '@/styles/reset.css'
-import '@/styles/base.less'
+import '@/styles/variables.css'
+import '@/styles/globals.css'
+import '@/styles/style.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
