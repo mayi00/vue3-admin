@@ -1,0 +1,19 @@
+{
+  "vue3.2 less 模板": {
+    "scope": "vue",
+    "prefix": "vue3.2",
+    "body": [
+      "<script setup>",
+      "",
+      "</script>",
+      "",
+      "<template>",
+      "  <div class=\"\">${1}</div>",
+      "</template>",
+      "",
+      "<style lang=\"less\" scoped></style>",
+      ""
+    ],
+    "description": "vue3.2 模板"
+  }
+}

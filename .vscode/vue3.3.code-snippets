@@ -1,0 +1,22 @@
+{
+  "vue3.3 defineOptions 模板": {
+    "scope": "vue",
+    "prefix": "vue3",
+    "body": [
+      "<script setup>",
+      "defineOptions({",
+      "  name: '$1'",
+      "})",
+      "",
+      "</script>",
+      "",
+      "<template>",
+      "  <div class=\"\"></div>",
+      "</template>",
+      "",
+      "<style lang=\"less\" scoped></style>",
+      ""
+    ],
+    "description": "vue3.3 defineOptions 模板"
+  }
+}

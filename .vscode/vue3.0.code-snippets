@@ -1,0 +1,23 @@
+{
+  "vue3.0 less 模板": {
+    "scope": "vue",
+    "prefix": "vue3.0",
+    "body": [
+      "<template>",
+      "  <div class=\"\">$1</div>",
+      "</template>",
+      "",
+      "<script>",
+      "export default {",
+      "  setup() {",
+      "    return {}",
+      "  },",
+      "}",
+      "</script>",
+      "",
+      "<style lang=\"less\" scoped></style>",
+      ""
+    ],
+    "description": "vue3.0 模板"
+  }
+}

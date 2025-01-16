@@ -10,7 +10,7 @@ const form = ref({
 </script>
 
 <template>
-  <div class="g-container login-container">
+  <div class="g-main login-container">
     <div class="form-warpper">
       <el-form :model="form" label-width="80px">
         <el-form-item label="用户名">

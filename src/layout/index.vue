@@ -29,13 +29,13 @@ const keepAliveRoutes = computed(() => {
     <div class="main-box">
       <div class="navbar">顶部</div>
       <section class="main">
-        <router-view v-slot="{ Component, route }">
+        <RouterView v-slot="{ Component, route }">
           <transition name="fade" mode="out-in" appear>
-            <keep-alive :include="keepAliveRoutes">
+            <KeepAlive :include="keepAliveRoutes">
               <component :is="Component" :key="route.path" />
-            </keep-alive>
+            </KeepAlive>
           </transition>
-        </router-view>
+        </RouterView>
       </section>
     </div>
   </div>

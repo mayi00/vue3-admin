@@ -7,12 +7,11 @@
  * @FilePath     : \vue3-admin\src\layout\components\Sidebar\index.vue
 -->
 <script setup>
-defineOptions({
-  name: 'Sidebar'
-})
 import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
 import { routes } from '@/router'
+
+defineOptions({ name: 'Sidebar' })
 </script>
 
 <template>

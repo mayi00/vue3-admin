@@ -1,12 +1,16 @@
 {
-  "Vue3+defineOptions模板": {
+  "vue3.3 component 组件模板": {
     "scope": "vue",
-    "prefix": "Vue3",
+    "prefix": "vue3 component",
     "body": [
       "<script setup>",
       "defineOptions({",
       "  name: '$1'",
       "})",
+      "",
+      "const props = defineProps({})",
+      "const emit = defineEmits([])",
+      "",
       "</script>",
       "",
       "<template>",
@@ -16,6 +20,6 @@
       "<style lang=\"less\" scoped></style>",
       ""
     ],
-    "description": "Vue3+defineOptions快速生成模板"
+    "description": "vue3.3 component 组件模板"
   }
 }
