@@ -1,6 +1,6 @@
 :root {
   font-size: 16px;
-  color: rgb(255 255 255 / 87%);
+  color: #000000A6;
   background-color: #242424;
   line-height: 24px;
   font-weight: 400;
@@ -18,7 +18,7 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #666;
     background-color: #fff;
   }
 }

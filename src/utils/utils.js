@@ -1,4 +1,42 @@
 /**
+ * @description : 获取随机字符串
+ *                传入的 length 为空时，则返回 ''
+ *                若 uppercase , lowercase, num 均不传，则默认全部包含
+ * @param         {Number|String} length 字符串长度，如不传则默认生成32位
+ * @param         {Boolean} uppercase  是否包含大写字母
+ * @param         {Boolean} lowercase 是否包含小写字母
+ * @param         {Boolean} num 是否包含数字
+ * @return        {String} 生成的字符串
+ * @Author      : MDT
+ */
+export function getRandomString({ length = 32, uppercase = true, lowercase = true, num = true }) {
+  const lengthNo = Number(length)
+  if (!lengthNo || lengthNo < 1 || (!uppercase && !lowercase && !num)) {
+    return ''
+  }
+
+  const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz'
+  const numChars = '0123456789'
+  let chars = ''
+  if (uppercase) chars += uppercaseChars
+  if (lowercase) chars += lowercaseChars
+  if (num) chars += numChars
+
+  const maxLength = chars.length
+  const array = new Uint32Array(lengthNo)
+  crypto.getRandomValues(array)
+
+  let str = ''
+  for (let i = 0; i < lengthNo; i++) {
+    str += chars.charAt(array[i] % maxLength)
+    // str = str + chars.charAt(Math.floor(Math.random() * maxLength))
+  }
+
+  return str
+}
+
+/**
  * @description  : 判断是否为外部链接
  * @param         {String} path
  * @return        {Boolean}

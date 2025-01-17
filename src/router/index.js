@@ -60,7 +60,7 @@ export const routes = [
     children: [
       {
         path: 'home',
-        name: 'home',
+        name: 'Home',
         component: () => import('@/views/home/index.vue'),
         meta: { title: '首页', icon: '' }
       }
@@ -166,7 +166,21 @@ router.beforeEach((to, from, next) => {
   } else {
     document.title = 'Vue3-admin'
   }
-  next()
+
+  const token = localStorage.getItem('token')
+  if (token) {
+    if (to.path === '/login') {
+      next({ path: '/' })
+    } else {
+      next()
+    }
+  } else {
+    if (to.path === '/login') {
+      next()
+    } else {
+      next({ path: '/login' })
+    }
+  }
 })
 
 export default router
