@@ -4,18 +4,31 @@ import dayjs from 'dayjs'
 import { getRandomString } from '@/utils/utils'
 
 defineOptions({
-  name: 'Login'
+  name: 'Login',
 })
 
 const router = useRouter()
+
+const loginFormRef = ref()
 const loginForm = ref({
-  username: '',
-  password: ''
+  username: 'admin',
+  password: '123456',
+})
+const rules = reactive({
+  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  password: [
+    { required: true, message: '请输入密码', trigger: 'blur' },
+    { min: 6, max: 16, message: '长度6-16位', trigger: 'blur' },
+  ],
 })
 
 function handleLogin() {
-  localStorage.setItem('token', getRandomString({}))
-  router.push('/home')
+  loginFormRef.value.validate(valid => {
+    if (valid) {
+      localStorage.setItem('token', getRandomString({}))
+      router.push('/home')
+    }
+  })
 }
 
 const copyrightYear = dayjs().format('YYYY')
@@ -25,7 +38,7 @@ const copyrightYear = dayjs().format('YYYY')
   <div class="g-main login-container">
     <div class="login-form">
       <h2 class="login-title">vue3-admin</h2>
-      <ElForm :model="loginForm">
+      <ElForm :model="loginForm" :rules="rules" ref="loginFormRef">
         <ElFormItem prop="username">
           <ElInput
             v-model="loginForm.username"
@@ -33,6 +46,7 @@ const copyrightYear = dayjs().format('YYYY')
             size="large"
             :prefix-icon="User"
             maxlength="16"
+            clearable
           />
         </ElFormItem>
         <ElFormItem prop="password">
@@ -43,6 +57,7 @@ const copyrightYear = dayjs().format('YYYY')
             size="large"
             show-password
             maxlength="16"
+            clearable
           >
             <template #prefix>
               <ElIcon><Lock /></ElIcon>

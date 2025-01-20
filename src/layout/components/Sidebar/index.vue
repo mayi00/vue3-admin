@@ -17,7 +17,7 @@ defineOptions({ name: 'Sidebar' })
 <template>
   <div class="sidebar-container">
     <Logo></Logo>
-    <el-menu
+    <ElMenu
       class="sidebar-menu"
       :unique-opened="false"
       background-color="transparent"
@@ -29,7 +29,7 @@ defineOptions({ name: 'Sidebar' })
           <SidebarItem v-if="!item.hidden" :key="item.path || index" :route="item" :basePath="item.path" />
         </template>
       </transition-group>
-    </el-menu>
+    </ElMenu>
   </div>
 </template>
 

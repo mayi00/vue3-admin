@@ -1,9 +1,8 @@
 <script setup>
 import * as XLSX from 'xlsx'
+import FileUpload from '@/components/FileUpload/FileUpload.vue'
 
-defineOptions({
-  name: 'StudentClassHours'
-})
+defineOptions({ name: 'StudentClassHours' })
 
 // 控制上传弹框的显示/隐藏
 const dialogVisible = ref(false)
@@ -16,7 +15,7 @@ const excelData = ref([])
 // 学生的课时数据所在的行
 const rowList = [
   3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 27, 28, 29, 30, 31, 32, 35, 36, 37, 38, 39, 40, 43,
-  44, 45, 46, 47, 48
+  44, 45, 46, 47, 48,
 ]
 
 // 打开上传弹框
@@ -52,7 +51,7 @@ function readExcel(file) {
       workbook.SheetNames.forEach(sheetName => {
         const sheet = {
           sheetName,
-          sheetData: XLSX.utils.sheet_to_json(workbook.Sheets[sheetName])
+          sheetData: XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]),
         }
         excelData.push(sheet)
       })
@@ -92,7 +91,7 @@ function handleDownload(sheet) {
         studentClassHours[item] = {
           name: item,
           classHours: [filteredData[i + 1]],
-          sum: 0
+          sum: 0,
         }
       }
     }
@@ -114,7 +113,7 @@ function handleDownload(sheet) {
     const obj = {
       序号: String(i + 1),
       姓名: studentInfo.name,
-      总计: studentInfo.sum
+      总计: studentInfo.sum,
     }
     studentInfo.classHours.forEach((timeItem, j) => {
       obj[`第${j + 1}节`] = timeItem
@@ -126,7 +125,7 @@ function handleDownload(sheet) {
   const obj = {
     序号: '',
     姓名: '',
-    总计: totolClassHours
+    总计: totolClassHours,
   }
   downloadData.push(obj)
   console.log('下载的数据格式', downloadData)
@@ -147,19 +146,19 @@ function downloadExcel(val, name) {
 </script>
 
 <template>
-  <div class="g-main container">
-    <el-card class="card">
-      <el-button type="primary" @click="handelUploadDialogOpen">上传文件</el-button>
+  <div class="g-main hours-container">
+    <ElCard class="card">
+      <ElButton type="primary" @click="handelUploadDialogOpen">上传文件</ElButton>
       <p v-if="excelData.length > 1" class="tip">检测到存在多个Sheet页，请选择一个下载</p>
       <ul v-if="excelData.length > 1" class="sheet-list">
         <li v-for="item in excelData" :key="item.sheetName" class="sheet-item" @click="handleDownload(item)">
           {{ item.sheetName }}
         </li>
       </ul>
-    </el-card>
+    </ElCard>
 
-    <UploadDialog
-      :dialogVisible="dialogVisible"
+    <FileUpload
+      :dialog-visible="dialogVisible"
       :accept="accept"
       :loading="loading"
       @on-confirm="handleUploadConfirm"
@@ -169,7 +168,7 @@ function downloadExcel(val, name) {
 </template>
 
 <style lang="less" scoped>
-.container {
+.hours-container {
   padding: 16px;
 }
 

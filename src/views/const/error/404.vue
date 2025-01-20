@@ -1,5 +1,7 @@
-<script setup name="Error"></script>
+<script setup>
+defineOptions({ name: 'Error404' })
+</script>
 
 <template>
-  <div class="">404</div>
+  <div class="g-main">404</div>
 </template>

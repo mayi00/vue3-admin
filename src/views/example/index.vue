@@ -1,4 +1,6 @@
-<script setup name="Example"></script>
+<script setup>
+defineOptions({ name: 'Example' })
+</script>
 
 <template>
   <p class="container">example</p>

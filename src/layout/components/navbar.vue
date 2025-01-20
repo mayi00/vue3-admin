@@ -15,17 +15,17 @@ function handleToggleSideBar() {
     <div class="left-box">
       <!-- 切换侧边栏显示/隐藏图标 -->
       <div class="sidebar-collapse" @click.stop="handleToggleSideBar">
-        <el-icon :size="20">
+        <ElIcon :size="20">
           <Expand v-if="isCollapse" />
           <Fold v-else />
-        </el-icon>
+        </ElIcon>
       </div>
       <!-- 面包屑导航 -->
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>表格</el-breadcrumb-item>
-        <el-breadcrumb-item>tableA</el-breadcrumb-item>
-      </el-breadcrumb>
+      <ElBreadcrumb separator="/">
+        <ElBreadcrumb-item :to="{ path: '/' }">首页</ElBreadcrumb-item>
+        <ElBreadcrumb-item>表格</ElBreadcrumb-item>
+        <ElBreadcrumb-item>tableA</ElBreadcrumb-item>
+      </ElBreadcrumb>
     </div>
     <div class="right-box">右</div>
   </nav>

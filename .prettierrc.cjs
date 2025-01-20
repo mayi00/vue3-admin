@@ -14,7 +14,7 @@ module.exports = {
   // jsx 中使用双引号
   jsxSingleQuote: true,
   // 末尾使用逗号
-  trailingComma: 'none',
+  trailingComma: 'es5',
   // 大括号内的首尾需要空格 { foo: bar }
   bracketSpacing: true,
   // 多行HTML、JSX等元素的结束标签 > 放在最后一行

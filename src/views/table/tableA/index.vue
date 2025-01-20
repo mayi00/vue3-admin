@@ -1,4 +1,6 @@
-<script setup name="TableA"></script>
+<script setup>
+defineOptions({ name: 'TableA' })
+</script>
 
 <template>
   <p class="container">tableA</p>

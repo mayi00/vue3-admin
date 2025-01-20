@@ -60,24 +60,24 @@ function resolveRoutePath(routePath) {
         :target="isExternalLink(resolveRoutePath(route.path)) ? '_blank' : '_self'"
         @click="navigate"
       >
-        <el-menu-item :title="route.meta.title" :index="resolveRoutePath(route.path)">
+        <ElMenu-item :title="route.meta.title" :index="resolveRoutePath(route.path)">
           <span>{{ route.meta.title }}</span>
-        </el-menu-item>
+        </ElMenu-item>
       </a>
     </router-link>
-    <el-sub-menu v-else :title="route.meta.title" :index="resolveRoutePath(route.path)">
+    <ElSubMenu v-else :title="route.meta.title" :index="resolveRoutePath(route.path)">
       <template #title>
         <span>{{ route.meta.title }}</span>
       </template>
       <template v-for="item in route.children">
         <SidebarItem v-if="!item.hidden" :key="item.path" :route="item" :basePath="resolveRoutePath(route.path)" />
       </template>
-    </el-sub-menu>
+    </ElSubMenu>
   </div>
 </template>
 
 <style lang="less" scoped>
-::v-deep(.el-sub-menu) {
+::v-deep(.ElSubMenu) {
   .el-sub-menu__title {
     &:hover {
       background-color: #263445 !important;
@@ -85,7 +85,7 @@ function resolveRoutePath(routePath) {
   }
 }
 
-.el-menu-item {
+.ElMenu-item {
   &:hover {
     background-color: #263445;
   }

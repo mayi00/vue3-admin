@@ -17,28 +17,28 @@ function handleMenuSelect(menu) {
 
 <template>
   <section class="sidebar">
-    <el-menu class="el-menu-vertical-demo" default-active="2" text-color="#fff">
+    <ElMenu class="el-menu-vertical-demo" default-active="2" text-color="#fff">
       <template v-for="item in routes">
         <!-- 有二级菜单 -->
-        <el-sub-menu v-if="item.children && item.children.length > 0" :index="item.path">
+        <ElSubMenu v-if="item.children && item.children.length > 0" :index="item.path">
           <template #title>
             <!-- TODO 菜单icon 需要解决 -->
-            <!-- <el-icon></el-icon> -->
+            <!-- <ElIcon></ElIcon> -->
             <span>{{ item.meta.title }}</span>
           </template>
-          <el-menu-item v-for="subItem in item.children" :index="subItem.path" @click="handleMenuSelect">{{
+          <ElMenuItem v-for="subItem in item.children" :index="subItem.path" @click="handleMenuSelect">{{
             subItem.meta.title
-          }}</el-menu-item>
-        </el-sub-menu>
+          }}</ElMenuItem>
+        </ElSubMenu>
         <!-- 只有一级菜单 -->
-        <el-menu-item v-else :index="item.path" @click="handleMenuSelect">
-          <!-- <el-icon>
+        <ElMenuItem v-else :index="item.path" @click="handleMenuSelect">
+          <!-- <ElIcon>
             <icon-menu />
-          </el-icon> -->
+          </ElIcon> -->
           <span>{{ item.meta.title }}</span>
-        </el-menu-item>
+        </ElMenuItem>
       </template>
-    </el-menu>
+    </ElMenu>
   </section>
 </template>
 
@@ -51,11 +51,11 @@ function handleMenuSelect(menu) {
   background-color: @primaryColor;
 }
 
-.el-menu {
+.ElMenu {
   background-color: @primaryColor;
   border-right: none;
 
-  .el-menu-item {
+  .ElMenuItem {
     background-color: @primaryColor;
 
     &:hover {

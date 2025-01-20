@@ -4,9 +4,7 @@
     "prefix": "vue3",
     "body": [
       "<script setup>",
-      "defineOptions({",
-      "  name: '$1'",
-      "})",
+      "defineOptions({ name: '$1' })",
       "",
       "</script>",
       "",

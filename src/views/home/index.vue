@@ -1,65 +1,63 @@
 <script setup>
-defineOptions({
-  name: 'Home'
-})
+defineOptions({ name: 'Home' })
 </script>
 
 <template>
   <div class="home-container container">
     <div class="mb-4">
-      <el-button>Default</el-button>
-      <el-button type="primary">Primary</el-button>
-      <el-button type="success">Success</el-button>
-      <el-button type="info">Info</el-button>
-      <el-button type="warning">Warning</el-button>
-      <el-button type="danger">Danger</el-button>
+      <ElButton>Default</ElButton>
+      <ElButton type="primary">Primary</ElButton>
+      <ElButton type="success">Success</ElButton>
+      <ElButton type="info">Info</ElButton>
+      <ElButton type="warning">Warning</ElButton>
+      <ElButton type="danger">Danger</ElButton>
     </div>
 
     <div class="mb-4">
-      <el-button plain>Plain</el-button>
-      <el-button type="primary" plain>Primary</el-button>
-      <el-button type="success" plain>Success</el-button>
-      <el-button type="info" plain>Info</el-button>
-      <el-button type="warning" plain>Warning</el-button>
-      <el-button type="danger" plain>Danger</el-button>
+      <ElButton plain>Plain</ElButton>
+      <ElButton type="primary" plain>Primary</ElButton>
+      <ElButton type="success" plain>Success</ElButton>
+      <ElButton type="info" plain>Info</ElButton>
+      <ElButton type="warning" plain>Warning</ElButton>
+      <ElButton type="danger" plain>Danger</ElButton>
     </div>
 
     <div class="mb-4">
-      <el-button round>Round</el-button>
-      <el-button type="primary" round>Primary</el-button>
-      <el-button type="success" round>Success</el-button>
-      <el-button type="info" round>Info</el-button>
-      <el-button type="warning" round>Warning</el-button>
-      <el-button type="danger" round>Danger</el-button>
+      <ElButton round>Round</ElButton>
+      <ElButton type="primary" round>Primary</ElButton>
+      <ElButton type="success" round>Success</ElButton>
+      <ElButton type="info" round>Info</ElButton>
+      <ElButton type="warning" round>Warning</ElButton>
+      <ElButton type="danger" round>Danger</ElButton>
     </div>
 
     <div>
-      <el-button icon="Search" circle />
-      <el-button type="primary" icon="Edit" circle />
-      <el-button type="success" icon="Check" circle />
-      <el-button type="info" icon="Message" circle />
-      <el-button type="warning" icon="Star" circle />
-      <el-button type="danger" icon="Delete" circle />
+      <ElButton icon="Search" circle />
+      <ElButton type="primary" icon="Edit" circle />
+      <ElButton type="success" icon="Check" circle />
+      <ElButton type="info" icon="Message" circle />
+      <ElButton type="warning" icon="Star" circle />
+      <ElButton type="danger" icon="Delete" circle />
     </div>
 
-    <el-icon :size="20">
+    <ElIcon :size="20">
       <Edit />
-    </el-icon>
-    <el-icon color="#409efc" class="no-inherit">
+    </ElIcon>
+    <ElIcon color="#409efc" class="no-inherit">
       <Share />
-    </el-icon>
-    <el-icon>
+    </ElIcon>
+    <ElIcon>
       <Delete />
-    </el-icon>
-    <el-icon class="is-loading">
+    </ElIcon>
+    <ElIcon class="is-loading">
       <Loading />
-    </el-icon>
-    <el-button type="primary">
-      <el-icon style="vertical-align: middle">
+    </ElIcon>
+    <ElButton type="primary">
+      <ElIcon style="vertical-align: middle">
         <Search />
-      </el-icon>
+      </ElIcon>
       <span style="vertical-align: middle"> Search </span>
-    </el-button>
+    </ElButton>
 
     <div style="font-size: 20px">
       <!-- 由于SVG图标默认不携带任何属性 -->
@@ -70,7 +68,7 @@ defineOptions({
       <Search style="width: 1em; height: 1em; margin-right: 8px" />
     </div>
 
-    <el-icon><Plus /></el-icon>
+    <ElIcon><Plus /></ElIcon>
     <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
       <path
         fill="currentColor"

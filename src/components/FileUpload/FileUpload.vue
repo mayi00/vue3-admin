@@ -1,9 +1,7 @@
 <script setup>
 import { ElMessage } from 'element-plus'
 
-defineOptions({
-  name: 'UploadDialog'
-})
+defineOptions({ name: 'FileUpload' })
 
 const props = defineProps({
   // 控制弹框显示/隐藏
@@ -23,7 +21,7 @@ const props = defineProps({
   // 接受上传的文件类型
   accept: { type: [String, Array], default: '.xls,.xlsx' },
   // 上传时的按钮loading
-  loading: { type: Boolean, default: false }
+  loading: { type: Boolean, default: false },
 })
 const emits = defineEmits(['on-confirm', 'on-cancel'])
 
@@ -74,7 +72,7 @@ function handleConfirm() {
 </script>
 
 <template>
-  <el-dialog
+  <ElDialog
     v-model="dialogVisible"
     :title="title"
     :width="width"
@@ -82,7 +80,7 @@ function handleConfirm() {
     :draggable="draggable"
     :before-close="handleCancel"
   >
-    <el-upload
+    <ElUpload
       :multiple="multiple"
       :limit="limit"
       drag
@@ -91,22 +89,22 @@ function handleConfirm() {
       :before-upload="handleBeforeUpload"
       :disabled="disabled"
     >
-      <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+      <ElIcon class="el-icon--upload"><upload-filled /></ElIcon>
       <p>将文件拖到此处或点击上传</p>
-    </el-upload>
+    </ElUpload>
     <ul v-if="fileList.length > 0" class="file-list">
       <li v-for="item in fileList" :key="item.uid" class="file-box">
         <span>{{ item.name }}</span>
-        <el-icon class="icon-del" size="16px" @click="handleDelFile(item)"><CircleClose /></el-icon>
+        <ElIcon class="icon-del" size="16px" @click="handleDelFile(item)"><CircleClose /></ElIcon>
       </li>
     </ul>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="handleCancel">取消</el-button>
-        <el-button type="primary" :loading="loading" @click="handleConfirm">确定</el-button>
+        <ElButton @click="handleCancel">取消</ElButton>
+        <ElButton type="primary" :loading="loading" @click="handleConfirm">确定</ElButton>
       </div>
     </template>
-  </el-dialog>
+  </ElDialog>
 </template>
 
 <style lang="less" scoped>
