@@ -14,7 +14,7 @@ export const routes = [
     name: 'Login',
     component: () => import('@/views/login/index.vue'),
     meta: { title: '登录' },
-    hidden: true
+    hidden: true,
   },
   {
     path: '/redirect',
@@ -25,21 +25,21 @@ export const routes = [
     children: [
       {
         path: '/redirect/:path(.*)',
-        component: () => import('@/views/const/redirect/index.vue')
-      }
+        component: () => import('@/views/const/redirect/index.vue'),
+      },
     ],
     beforeEnter: (to, from, next) => {
-      console.log(9999,to, from,);
+      console.log(9999, to, from)
       // next({ path: `/${to.params.path}`, query: to.query })
       next()
-    }
+    },
   },
   {
     path: '/student-class-hours',
     name: 'StudentClassHours',
     component: () => import('@/views/studentClassHours/studentClassHours.vue'),
     meta: { title: '学生课时' },
-    hidden: true
+    hidden: true,
   },
   {
     path: '/error',
@@ -53,9 +53,9 @@ export const routes = [
         path: '404',
         name: '404',
         component: () => import('@/views/const/error/404.vue'),
-        meta: { title: '404', icon: 'form' }
-      }
-    ]
+        meta: { title: '404', icon: 'form' },
+      },
+    ],
   },
   {
     path: '/',
@@ -67,9 +67,9 @@ export const routes = [
         path: 'home',
         name: 'Home',
         component: () => import('@/views/home/index.vue'),
-        meta: { title: '首页', icon: '' }
-      }
-    ]
+        meta: { title: '首页', icon: '' },
+      },
+    ],
   },
   {
     path: '/example',
@@ -81,9 +81,9 @@ export const routes = [
         path: 'index',
         name: 'Example',
         component: () => import('@/views/example/index.vue'),
-        meta: { title: 'example', icon: 'form' }
-      }
-    ]
+        meta: { title: 'example', icon: 'form' },
+      },
+    ],
   },
   {
     path: '/nested',
@@ -95,15 +95,15 @@ export const routes = [
         path: 'menu1',
         name: 'Menu1',
         component: () => import('@/views/nested/menu1/index.vue'),
-        meta: { title: '导航1', icon: 'form' }
+        meta: { title: '导航1', icon: 'form' },
       },
       {
         path: 'menu2',
         name: 'Menu2',
         component: () => import('@/views/nested/menu2/index.vue'),
-        meta: { title: '导航2', icon: 'form' }
-      }
-    ]
+        meta: { title: '导航2', icon: 'form' },
+      },
+    ],
   },
   {
     path: '/table',
@@ -114,15 +114,15 @@ export const routes = [
         path: 'tableA',
         name: 'TableA',
         component: () => import('@/views/table/tableA/index.vue'),
-        meta: { title: 'tableA', icon: '' }
+        meta: { title: 'tableA', icon: '' },
       },
       {
         path: 'tableB',
         name: 'TableB',
         component: () => import('@/views/table/tableB/index.vue'),
-        meta: { title: 'tableB', icon: '' }
-      }
-    ]
+        meta: { title: 'tableB', icon: '' },
+      },
+    ],
   },
   {
     path: '/externalLink',
@@ -132,27 +132,27 @@ export const routes = [
       {
         name: 'Gitee',
         path: 'https://gitee.com/madt/vue3-admin',
-        meta: { title: 'Gitee 仓库', icon: 'form', link: 'https://gitee.com/madt/vue3-admin' }
+        meta: { title: 'Gitee 仓库', icon: 'form', link: 'https://gitee.com/madt/vue3-admin' },
       },
       {
         name: 'GitHub',
         path: 'https://github.com/mayi00/vue3-admin',
-        meta: { title: 'GitHub 仓库', icon: 'form', link: 'https://github.com/mayi00/vue3-admin' }
+        meta: { title: 'GitHub 仓库', icon: 'form', link: 'https://github.com/mayi00/vue3-admin' },
       },
       {
         name: 'OnlinePreview',
         path: 'https://mayi00.github.io/vue3-admin',
-        meta: { title: '在线预览', icon: 'form', link: 'https://mayi00.github.io/vue3-admin' }
-      }
-    ]
+        meta: { title: '在线预览', icon: 'form', link: 'https://mayi00.github.io/vue3-admin' },
+      },
+    ],
   },
   {
     path: '/:catchAll(.*)',
     name: '404',
     component: () => import('@/views/const/error/404.vue'),
     meta: { title: '404' },
-    hidden: true
-  }
+    hidden: true,
+  },
 ]
 
 const router = createRouter({
@@ -161,13 +161,13 @@ const router = createRouter({
   // 每次切换路由的时候滚动到页面顶部
   scrollBehavior() {
     return { left: 0, top: 0 }
-  }
+  },
 })
 
 router.beforeEach((to, from, next) => {
   // 路由发生变化修改页面 title
   if (to.meta.title) {
-    document.title = `${to.meta.title} - Vue3-admin`
+    document.title = `${to.meta.title} | Vue3-admin`
   } else {
     document.title = 'Vue3-admin'
   }

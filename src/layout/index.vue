@@ -1,17 +1,10 @@
-<!--
- * @Description : layout 布局容器
- * @Author      : huazf
- * @Date        : 2022-06-25
- * @LastEditors : huazf
- * @LastEditTime: 2022-07-05
- * @FilePath    : \vue3-admin\src\layout\index.vue
--->
-
 <script setup name="Layout">
-import Sidebar from './components/Sidebar/index.vue'
+import Sidebar from './Sidebar/Sidebar.vue'
+import NavBar from './NavBar/NavBar.vue'
+import AppMain from './AppMain/AppMain.vue'
 
 defineOptions({
-  name: 'Layout'
+  name: 'Layout',
 })
 
 const router = useRouter()
@@ -23,21 +16,23 @@ const keepAliveRoutes = computed(() => {
 
 <template>
   <div class="layout-container">
-    <div class="sidebar-box">
+    <aside class="layout-sidebar">
       <Sidebar />
-    </div>
-    <div class="main-box">
-      <div class="navbar">顶部</div>
-      <section class="main">
-        <RouterView v-slot="{ Component, route }">
+    </aside>
+    <article class="layout-main">
+      <NavBar />
+      <AppMain />
+      <!-- <nav class="navbar">顶部</nav> -->
+      <!-- <section class="main"> -->
+      <!-- <RouterView v-slot="{ Component, route }">
           <transition name="fade" mode="out-in" appear>
             <KeepAlive :include="keepAliveRoutes">
               <component :is="Component" :key="route.path" />
             </KeepAlive>
           </transition>
-        </RouterView>
-      </section>
-    </div>
+        </RouterView> -->
+      <!-- </section> -->
+    </article>
   </div>
 </template>
 
@@ -47,17 +42,17 @@ const keepAliveRoutes = computed(() => {
   display: flex;
   width: 100%;
   height: 100%;
+  background-color: var(--gray-3);
 }
 
-.sidebar-box {
+.layout-sidebar {
   width: 220px;
   flex-shrink: 0;
-  background-color: #efefef;
 }
 
-.main-box {
-  display: flex;
-  flex-direction: column;
+.layout-main {
+  position: relative;
+  height: 100%;
   flex: 1;
 
   .navbar {

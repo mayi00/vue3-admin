@@ -60,9 +60,9 @@ function resolveRoutePath(routePath) {
         :target="isExternalLink(resolveRoutePath(route.path)) ? '_blank' : '_self'"
         @click="navigate"
       >
-        <ElMenu-item :title="route.meta.title" :index="resolveRoutePath(route.path)">
+        <ElMenuItem :title="route.meta.title" :index="resolveRoutePath(route.path)">
           <span>{{ route.meta.title }}</span>
-        </ElMenu-item>
+        </ElMenuItem>
       </a>
     </router-link>
     <ElSubMenu v-else :title="route.meta.title" :index="resolveRoutePath(route.path)">
@@ -85,7 +85,7 @@ function resolveRoutePath(routePath) {
   }
 }
 
-.ElMenu-item {
+.ElMenuItem {
   &:hover {
     background-color: #263445;
   }

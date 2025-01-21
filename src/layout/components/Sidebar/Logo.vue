@@ -15,10 +15,10 @@ const logo = ref(imgLogo)
 </script>
 
 <template>
-  <router-link to="/" class="logo-container">
+  <RouterLink to="/" class="logo-container">
     <img :src="logo" alt="" class="logo" />
     <h2 class="title">Vue3-admin</h2>
-  </router-link>
+  </RouterLink>
 </template>
 
 <style lang="less" scoped>
