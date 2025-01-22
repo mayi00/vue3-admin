@@ -7,14 +7,11 @@ import '@/styles/style.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import '@/plugins/element-plus.js'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-// 全局引入 elementplus 的函数式组件的样式
-import 'element-plus/theme-chalk/el-message.css'
-import 'element-plus/theme-chalk/el-message-box.css'
-import 'default-passive-events'
 
 const env = import.meta.env
-console.log('当前环境变量==>', env)
+console.log('【当前环境变量】', env)
 
 const app = createApp(App)
 

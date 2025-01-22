@@ -1,6 +1,7 @@
 <script setup name="Layout">
 import Sidebar from './Sidebar/Sidebar.vue'
 import NavBar from './NavBar/NavBar.vue'
+import TagsBar from './TagsBar/TagsBar.vue'
 import AppMain from './AppMain/AppMain.vue'
 
 defineOptions({
@@ -21,8 +22,8 @@ const keepAliveRoutes = computed(() => {
     </aside>
     <article class="layout-main">
       <NavBar />
+      <TagsBar />
       <AppMain />
-      <!-- <nav class="navbar">顶部</nav> -->
       <!-- <section class="main"> -->
       <!-- <RouterView v-slot="{ Component, route }">
           <transition name="fade" mode="out-in" appear>
@@ -43,6 +44,7 @@ const keepAliveRoutes = computed(() => {
   width: 100%;
   height: 100%;
   background-color: var(--gray-3);
+  border: 1px solid var(--gray-5);
 }
 
 .layout-sidebar {
@@ -54,16 +56,5 @@ const keepAliveRoutes = computed(() => {
   position: relative;
   height: 100%;
   flex: 1;
-
-  .navbar {
-    height: 50px;
-    background-color: #f0f0f0;
-  }
-
-  .main {
-    position: relative;
-    flex: 1;
-    overflow-y: auto;
-  }
 }
 </style>

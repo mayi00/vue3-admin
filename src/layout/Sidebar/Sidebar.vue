@@ -1,14 +1,21 @@
 <script setup>
-import SideLogo from './SideLogo.vue'
+import SidebarLogo from './SidebarLogo.vue'
+import SidebarMenu from './SidebarMenu.vue'
 
 defineOptions({ name: 'Sidebar' })
 </script>
 
 <template>
-  <div class="">
-    Sidebar
-    <SideLogo />
+  <div class="sidebar-container">
+    <SidebarLogo />
+    <SidebarMenu />
   </div>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.sidebar-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+</style>
