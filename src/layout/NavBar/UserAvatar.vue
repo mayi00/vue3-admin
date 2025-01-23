@@ -8,6 +8,8 @@ defineOptions({ name: 'UserAvatar' })
 
 <style lang="less" scoped>
 .user-avatar {
-  flex-shrink: 0;
+  background-color: var(--gray-5);
+  display: flex;
+  align-items: center;
 }
 </style>

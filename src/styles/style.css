@@ -1,7 +1,6 @@
 :root {
   font-size: 16px;
-  color: #000000A6;
-  background-color: #242424;
+  color: var(--gray-12);
   line-height: 24px;
   font-weight: 400;
   color-scheme: light dark;
@@ -18,7 +17,7 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #666;
-    background-color: #fff;
+    color: var(--gray-12);
+    background-color: var(--gray-2);
   }
 }

@@ -2,43 +2,28 @@
 import Sidebar from './Sidebar/Sidebar.vue'
 import NavBar from './NavBar/NavBar.vue'
 import TagsBar from './TagsBar/TagsBar.vue'
+import Breadcrumb from './Breadcrumb/Breadcrumb.vue'
 import AppMain from './AppMain/AppMain.vue'
 
-defineOptions({
-  name: 'Layout',
-})
-
-const router = useRouter()
-const allRoutes = router.getRoutes()
-const keepAliveRoutes = computed(() => {
-  return allRoutes.filter(route => route.meta?.keepAlive).map(route => route.name)
-})
+defineOptions({ name: 'Layout' })
 </script>
 
 <template>
-  <div class="layout-container">
+  <div class="layout">
     <aside class="layout-sidebar">
       <Sidebar />
     </aside>
     <article class="layout-main">
       <NavBar />
       <TagsBar />
+      <Breadcrumb />
       <AppMain />
-      <!-- <section class="main"> -->
-      <!-- <RouterView v-slot="{ Component, route }">
-          <transition name="fade" mode="out-in" appear>
-            <KeepAlive :include="keepAliveRoutes">
-              <component :is="Component" :key="route.path" />
-            </KeepAlive>
-          </transition>
-        </RouterView> -->
-      <!-- </section> -->
     </article>
   </div>
 </template>
 
 <style lang="less" scoped>
-.layout-container {
+.layout {
   position: relative;
   display: flex;
   width: 100%;
@@ -56,5 +41,7 @@ const keepAliveRoutes = computed(() => {
   position: relative;
   height: 100%;
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 </style>

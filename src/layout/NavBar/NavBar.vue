@@ -1,4 +1,7 @@
 <script setup>
+import Collapse from './Collapse.vue'
+import Theme from './Theme.vue'
+import Fullscreen from './Fullscreen.vue'
 import UserAvatar from './UserAvatar.vue'
 
 defineOptions({ name: 'NavBar' })
@@ -6,8 +9,15 @@ defineOptions({ name: 'NavBar' })
 
 <template>
   <div class="navbar">
-    <nav class="navbar__left">NavBar</nav>
-    <UserAvatar />
+    <nav class="navbar__left">
+      <Collapse />
+      NavBar
+    </nav>
+    <div class="navbar__right">
+      <Theme />
+      <Fullscreen />
+      <UserAvatar />
+    </div>
   </div>
 </template>
 
@@ -15,14 +25,24 @@ defineOptions({ name: 'NavBar' })
 .navbar {
   display: flex;
   justify-content: space-between;
+  width: 100%;
   height: 50px;
   background-color: var(--white);
 }
 
 .navbar__left {
   flex: 1;
-  padding: 0 16px;
   display: flex;
   align-items: center;
+}
+
+.navbar__right {
+  flex-shrink: 0;
+  min-width: 100px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border: 1px solid var(--gray-5);
 }
 </style>

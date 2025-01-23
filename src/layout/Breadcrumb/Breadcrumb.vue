@@ -1,17 +1,16 @@
 <script setup>
-defineOptions({ name: 'TagsBar' })
+defineOptions({ name: 'Breadcrumb' })
 </script>
 
 <template>
-  <div class="tagsbar">TagsBar</div>
+  <div class="breadcrumb">Breadcrumb</div>
 </template>
 
 <style lang="less" scoped>
-.tagsbar {
+.breadcrumb {
   padding: 0 16px;
   height: 30px;
   display: flex;
   align-items: center;
-  background-color: var(--gray-2);
 }
 </style>
