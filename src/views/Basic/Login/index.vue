@@ -66,7 +66,7 @@ const copyrightYear = dayjs().format('YYYY')
         </ElFormItem>
       </ElForm>
 
-      <ElButton type="primary" size="large" class="login-btn" @click="handleLogin">登录</ElButton>
+      <el-button type="primary" size="large" class="login-btn" @click="handleLogin">登录</el-button>
     </div>
 
     <div class="login-footer">

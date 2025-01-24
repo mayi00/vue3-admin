@@ -1,18 +1,24 @@
 <script setup>
 defineOptions({ name: 'Theme' })
 
-const isLight = ref(true)
+const isDark = ref(false)
 
-function handleToggleLight() {
-  isLight.value = !isLight.value
+function toggleTheme() {
+  isDark.value = !isDark.value
+
+  if (isDark.value) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
 }
 </script>
 
 <template>
-  <div class="collapse" @click.stop="handleToggleLight">
+  <div class="collapse" @click.stop="toggleTheme">
     <el-icon :size="20">
-      <Sunny v-if="isLight"/>
-      <Moon v-else />
+      <Moon v-if="isDark" />
+      <Sunny v-else />
     </el-icon>
   </div>
 </template>

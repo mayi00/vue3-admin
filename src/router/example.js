@@ -5,7 +5,7 @@ export const exampleRoutes = [
     path: '/',
     redirect: '/home',
     component: Layout,
-    meta: { title: '首页' },
+    meta: { title: '首页', icon: '' },
     children: [
       {
         path: 'home',
@@ -19,7 +19,7 @@ export const exampleRoutes = [
     path: '/example',
     redirect: '/example/index',
     component: Layout,
-    meta: { title: '示例' },
+    meta: { title: '示例', icon: '' },
     children: [
       {
         path: 'index',
@@ -31,7 +31,7 @@ export const exampleRoutes = [
         path: 'student-class-hours',
         name: 'StudentClassHours',
         component: () => import('@/views/Example/StudentClassHours/StudentClassHours.vue'),
-        meta: { title: '学生课时' },
+        meta: { title: '学生课时', icon: '' },
       },
     ],
   },

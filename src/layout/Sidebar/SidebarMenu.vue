@@ -1,5 +1,10 @@
 <script setup>
+import { routes } from '@/router'
+
 defineOptions({ name: 'SidebarMenu' })
+
+console.log(routes);
+
 </script>
 
 <template>

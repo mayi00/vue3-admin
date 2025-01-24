@@ -3,5 +3,5 @@ defineOptions({ name: 'TableA' })
 </script>
 
 <template>
-  <p class="container">tableA</p>
+  <p class="g-mian">tableA</p>
 </template>

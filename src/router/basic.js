@@ -9,6 +9,6 @@ export const basicRoutes = [
     path: '/:all(.*)*',
     name: 'NotFound',
     component: () => import('@/views/Basic/Error/404.vue'),
-    meta: { title: '404' },
+    meta: { title: '404', hidden: true },
   },
 ]

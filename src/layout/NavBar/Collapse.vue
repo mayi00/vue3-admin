@@ -3,13 +3,13 @@ defineOptions({ name: 'Collapse' })
 
 const isCollapse = ref(false)
 // 切换侧边栏显示/隐藏
-function handleToggleSideBar() {
+function toggleSideBar() {
   isCollapse.value = !isCollapse.value
 }
 </script>
 
 <template>
-  <div class="collapse" @click.stop="handleToggleSideBar">
+  <div class="collapse" @click.stop="toggleSideBar">
     <el-icon :size="20">
       <Expand v-if="isCollapse" />
       <Fold v-else />

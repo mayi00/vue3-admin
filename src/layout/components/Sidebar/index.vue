@@ -7,7 +7,6 @@
  * @FilePath     : \vue3-admin\src\layout\components\Sidebar\index.vue
 -->
 <script setup>
-import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
 import { routes } from '@/router'
 
@@ -16,7 +15,6 @@ defineOptions({ name: 'Sidebar' })
 
 <template>
   <div class="sidebar-container">
-    <Logo></Logo>
     <ElMenu
       class="sidebar-menu"
       :unique-opened="false"

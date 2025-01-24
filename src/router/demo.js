@@ -14,24 +14,6 @@ export const routes = [
     hidden: true,
   },
   {
-    path: '/redirect',
-    name: 'Redirect',
-    component: Layout,
-    meta: { title: 'Redirect', hidden: true },
-    hidden: true,
-    children: [
-      {
-        path: '/redirect/:path(.*)',
-        component: () => import('@/views/const/redirect/index.vue'),
-      },
-    ],
-    beforeEnter: (to, from, next) => {
-      console.log(9999, to, from)
-      // next({ path: `/${to.params.path}`, query: to.query })
-      next()
-    },
-  },
-  {
     path: '/student-class-hours',
     name: 'StudentClassHours',
     component: () => import('@/views/studentClassHours/studentClassHours.vue'),

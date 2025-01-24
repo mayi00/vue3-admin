@@ -147,15 +147,15 @@ function downloadExcel(val, name) {
 
 <template>
   <div class="g-main hours-container">
-    <ElCard class="card">
-      <ElButton type="primary" @click="handelUploadDialogOpen">上传文件</ElButton>
+    <el-card class="card">
+      <el-button type="primary" @click="handelUploadDialogOpen">上传文件</el-button>
       <p v-if="excelData.length > 1" class="tip">检测到存在多个Sheet页，请选择一个下载</p>
       <ul v-if="excelData.length > 1" class="sheet-list">
         <li v-for="item in excelData" :key="item.sheetName" class="sheet-item" @click="handleDownload(item)">
           {{ item.sheetName }}
         </li>
       </ul>
-    </ElCard>
+    </el-card>
 
     <FileUpload
       :dialog-visible="dialogVisible"

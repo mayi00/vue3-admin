@@ -3,6 +3,8 @@ import '@/styles/reset.css'
 import '@/styles/variables.css'
 import '@/styles/globals.css'
 import '@/styles/style.css'
+// 暗黑模式的css样式
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'

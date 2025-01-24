@@ -39,6 +39,7 @@
     "eslint-plugin-vue": "^9.32.0",
     "less": "^4.2.1",
     "prettier": "^3.4.2",
+    "sass": "^1.83.4",
     "stylelint": "^16.13.2",
     "stylelint-config-recommended-less": "^3.0.1",
     "stylelint-config-standard": "^36.0.1",

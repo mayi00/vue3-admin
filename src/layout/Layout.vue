@@ -28,7 +28,6 @@ defineOptions({ name: 'Layout' })
   display: flex;
   width: 100%;
   height: 100%;
-  background-color: var(--gray-3);
   border: 1px solid var(--gray-5);
 }
 
