@@ -1,6 +1,7 @@
 // 全局样式
 import '@/styles/reset.css'
 import '@/styles/variables.css'
+import '@/styles/theme.css'
 import '@/styles/globals.css'
 import '@/styles/style.css'
 // 暗黑模式的css样式

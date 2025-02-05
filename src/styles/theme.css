@@ -1,6 +1,11 @@
 /* 灰色模式 */
-html[gray] {
+html.gray {
   filter: grayscale(100%);
-  -webkit-filter: grayscale(100%);
   -moz-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  /* IE10-IE11 */
+  -ms-filter: grayscale(100%);
+  /* IE6-IE9 */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+  -webkit-filter: grayscale(1);
 }
