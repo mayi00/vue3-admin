@@ -9,7 +9,7 @@ defineOptions({ name: 'NavBar' })
 
 <template>
   <div class="navbar">
-    <nav class="navbar__left">
+    <nav class="navbar__left g-no-select">
       <Collapse />
       NavBar
     </nav>
@@ -39,7 +39,6 @@ defineOptions({ name: 'NavBar' })
 .navbar__right {
   flex-shrink: 0;
   min-width: 100px;
-  padding: 0 8px;
   display: flex;
   align-items: center;
   justify-content: flex-end;

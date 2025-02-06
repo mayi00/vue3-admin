@@ -31,6 +31,6 @@ export function createVitePlugins() {
     }),
     vue(),
     vueJsx(),
-    vueDevTools()
+    // vueDevTools()
   ]
 }

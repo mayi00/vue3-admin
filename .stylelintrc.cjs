@@ -38,6 +38,8 @@ module.exports = {
         ignoreProperties: []
       }
     ],
+
+    'property-no-vendor-prefix': null,
     // 允许未知规则
     'at-rule-no-unknown': [
       true,

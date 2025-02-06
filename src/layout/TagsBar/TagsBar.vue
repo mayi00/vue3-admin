@@ -13,5 +13,6 @@ defineOptions({ name: 'TagsBar' })
   display: flex;
   align-items: center;
   background-color: var(--gray-2);
+  border: 1px solid var(--gray-4);
 }
 </style>

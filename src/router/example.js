@@ -2,20 +2,6 @@ import Layout from '@/layout/Layout.vue'
 
 export const exampleRoutes = [
   {
-    path: '/',
-    redirect: '/home',
-    component: Layout,
-    meta: { title: '首页', icon: '' },
-    children: [
-      {
-        path: 'home',
-        name: 'Home',
-        component: () => import('@/views/Example/Home/Home.vue'),
-        meta: { title: '首页', icon: '' },
-      },
-    ],
-  },
-  {
     path: '/example',
     redirect: '/example/index',
     component: Layout,

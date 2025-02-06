@@ -27,6 +27,10 @@ function handleLogin() {
     if (valid) {
       localStorage.setItem('token', getRandomString({}))
       router.push('/home')
+      ElMessage({
+        type: 'success',
+        message: '登录成功',
+      })
     }
   })
 }

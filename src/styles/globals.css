@@ -6,3 +6,33 @@
   height: 100%;
   background-color: var(--gray-2);
 }
+
+/* 禁止用户选择文本 */
+.g-no-select {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE */
+  user-select: none;
+}
+
+/* 文本换行 */
+.g-break {
+  word-break: break-all;
+  white-space: normal;
+}
+
+/* 单行文本溢出省略号 */
+.g-single-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 多行文本溢出省略号 */
+.g-multi-ellipsis {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
