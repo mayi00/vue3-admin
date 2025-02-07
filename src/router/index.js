@@ -2,9 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import { basicRoutes } from './basic'
 import { routes as systemRoutes } from './system'
 import { exampleRoutes } from './example'
-import { routes as tableRoutes } from './table'
 
-export const routes = [...basicRoutes, ...systemRoutes, ...exampleRoutes, ...tableRoutes]
+export const routes = [...basicRoutes, ...systemRoutes, ...exampleRoutes]
 
 const router = createRouter({
   history: createWebHashHistory(),

@@ -17,7 +17,7 @@ export const basicRoutes = [
     path: '/',
     redirect: '/home',
     component: Layout,
-    meta: { title: '首页', icon: '' },
+    meta: { title: '首页', hidden: true, icon: '' },
     children: [
       {
         path: 'home',

@@ -1,5 +1,6 @@
 <script setup>
 import Collapse from './Collapse.vue'
+import Module from './Module.vue'
 import Theme from './Theme.vue'
 import Fullscreen from './Fullscreen.vue'
 import UserAvatar from './UserAvatar.vue'
@@ -11,7 +12,7 @@ defineOptions({ name: 'NavBar' })
   <div class="navbar">
     <nav class="navbar__left g-no-select">
       <Collapse />
-      NavBar
+      <Module />
     </nav>
     <div class="navbar__right">
       <Theme />

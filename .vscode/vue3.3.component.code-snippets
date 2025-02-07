@@ -4,9 +4,7 @@
     "prefix": "vue3 component",
     "body": [
       "<script setup>",
-      "defineOptions({",
-      "  name: '$1'",
-      "})",
+      "defineOptions({ name: '$1' })",
       "",
       "const props = defineProps({})",
       "const emit = defineEmits([])",

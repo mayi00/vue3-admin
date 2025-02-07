@@ -4,13 +4,16 @@ import NavBar from './NavBar/NavBar.vue'
 import TagsBar from './TagsBar/TagsBar.vue'
 import Breadcrumb from './Breadcrumb/Breadcrumb.vue'
 import AppMain from './AppMain/AppMain.vue'
+import { useAppStore } from '@/store'
 
 defineOptions({ name: 'Layout' })
+
+const { collapsed } = storeToRefs(useAppStore())
 </script>
 
 <template>
   <div class="layout">
-    <aside class="layout-sidebar">
+    <aside class="layout-sidebar" :style="{ width: collapsed ? '64px' : '220px' }">
       <Sidebar />
     </aside>
     <article class="layout-main">
@@ -32,8 +35,8 @@ defineOptions({ name: 'Layout' })
 }
 
 .layout-sidebar {
-  width: 220px;
   flex-shrink: 0;
+  background-color: var(--white);
 }
 
 .layout-main {
