@@ -10,13 +10,17 @@ const currentRoute = useRoute()
 const { isCollapse, activeModule } = storeToRefs(useAppStore())
 const menuList = ref([])
 
-watch(
-  () => activeModule.value,
-  () => {
-    menuList.value = routes.find(item => item.path === activeModule.value)?.children
-  },
-  { immediate: true }
-)
+// watch(
+//   () => activeModule.value,
+//   () => {
+//     menuList.value = routes.find(item => item.path === activeModule.value)?.children
+//   },
+//   { immediate: true }
+// )
+
+watchEffect(() => {
+  menuList.value = routes.find(item => item.path === activeModule.value)?.children
+})
 </script>
 
 <template>

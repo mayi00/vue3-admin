@@ -15,12 +15,17 @@ function resolveRoutePath(routePath) {
   return `${props.basePath}/${routePath}`
 }
 
-// 点击菜单项跳转菜单
-function handleClickMenuItem(path, item) {
+/**
+ * 点击菜单项跳转菜单
+ * @param {Object} menuItem 菜单项
+ * @param {Object} item 路由对象
+ */
+function handleClickMenuItem(menuItem, item) {
+  // 如果是外链且设置为不是内嵌访问，则直接打开新窗口
   if (isExternalLink(item.meta.link) && !item.meta.embeddedAccess) {
     window.open(item.meta.link, '_blank')
   } else {
-    router.push(path.index)
+    router.push(menuItem.index)
   }
 }
 </script>
@@ -29,7 +34,7 @@ function handleClickMenuItem(path, item) {
   <el-menu-item
     v-if="!item.children || item.children.length === 0"
     :index="resolveRoutePath(item.path)"
-    @click="path => handleClickMenuItem(path, item)"
+    @click="menuItem => handleClickMenuItem(menuItem, item)"
   >
     <!-- TODO 图标需要解决 -->
     <el-icon><setting /></el-icon>

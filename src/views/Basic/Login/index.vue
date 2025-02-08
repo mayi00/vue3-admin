@@ -42,9 +42,9 @@ const copyrightYear = dayjs().format('YYYY')
   <div class="g-main login-container">
     <div class="login-form">
       <h2 class="login-title">vue3-admin</h2>
-      <ElForm :model="loginForm" :rules="rules" ref="loginFormRef">
-        <ElFormItem prop="username">
-          <ElInput
+      <el-form :model="loginForm" :rules="rules" ref="loginFormRef">
+        <el-form-item prop="username">
+          <el-input
             v-model="loginForm.username"
             placeholder="请输入用户名"
             size="large"
@@ -52,9 +52,9 @@ const copyrightYear = dayjs().format('YYYY')
             maxlength="16"
             clearable
           />
-        </ElFormItem>
-        <ElFormItem prop="password">
-          <ElInput
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input
             v-model="loginForm.password"
             type="password"
             placeholder="请输入密码"
@@ -64,11 +64,11 @@ const copyrightYear = dayjs().format('YYYY')
             clearable
           >
             <template #prefix>
-              <ElIcon><Lock /></ElIcon>
+              <el-icon><Lock /></el-icon>
             </template>
-          </ElInput>
-        </ElFormItem>
-      </ElForm>
+          </el-input>
+        </el-form-item>
+      </el-form>
 
       <el-button type="primary" size="large" class="login-btn" @click="handleLogin">登录</el-button>
     </div>

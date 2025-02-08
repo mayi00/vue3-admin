@@ -72,7 +72,7 @@ function handleConfirm() {
 </script>
 
 <template>
-  <ElDialog
+  <el-dialog
     v-model="dialogVisible"
     :title="title"
     :width="width"
@@ -80,7 +80,7 @@ function handleConfirm() {
     :draggable="draggable"
     :before-close="handleCancel"
   >
-    <ElUpload
+    <el-upload
       :multiple="multiple"
       :limit="limit"
       drag
@@ -89,13 +89,13 @@ function handleConfirm() {
       :before-upload="handleBeforeUpload"
       :disabled="disabled"
     >
-      <ElIcon class="el-icon--upload"><upload-filled /></ElIcon>
+      <el-icon class="el-icon--upload"><upload-filled /></el-icon>
       <p>将文件拖到此处或点击上传</p>
-    </ElUpload>
+    </el-upload>
     <ul v-if="fileList.length > 0" class="file-list">
       <li v-for="item in fileList" :key="item.uid" class="file-box">
         <span>{{ item.name }}</span>
-        <ElIcon class="icon-del" size="16px" @click="handleDelFile(item)"><CircleClose /></ElIcon>
+        <el-icon class="icon-del" size="16px" @click="handleDelFile(item)"><CircleClose /></el-icon>
       </li>
     </ul>
     <template #footer>
@@ -104,7 +104,7 @@ function handleConfirm() {
         <el-button type="primary" :loading="loading" @click="handleConfirm">确定</el-button>
       </div>
     </template>
-  </ElDialog>
+  </el-dialog>
 </template>
 
 <style lang="less" scoped>
