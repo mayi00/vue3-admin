@@ -7,7 +7,7 @@ export const useAppStore = defineStore('app', {
   },
   state: () => ({
     // 侧边栏折叠
-    collapsed: false,
+    isCollapse: false,
     // 顶栏激活的模块
     activeModule: '',
   }),

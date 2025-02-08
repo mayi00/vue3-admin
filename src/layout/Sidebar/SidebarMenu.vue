@@ -7,7 +7,7 @@ defineOptions({ name: 'SidebarMenu' })
 
 const currentRoute = useRoute()
 
-const { collapsed, activeModule } = storeToRefs(useAppStore())
+const { isCollapse, activeModule } = storeToRefs(useAppStore())
 const menuList = ref([])
 
 watch(
@@ -21,7 +21,7 @@ watch(
 
 <template>
   <div class="sidebar-menu">
-    <el-menu class="menu" :default-active="currentRoute.path" unique-opened :collapse="collapsed">
+    <el-menu class="menu" :default-active="currentRoute.path" unique-opened :collapse="isCollapse">
       <SidebarMenuItem v-for="item in menuList" :key="item.path" :item="item" :basePath="activeModule" />
     </el-menu>
   </div>

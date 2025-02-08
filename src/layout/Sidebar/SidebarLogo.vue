@@ -4,16 +4,18 @@ import { useAppStore } from '@/store'
 
 defineOptions({ name: 'SidebarLogo' })
 
-const { collapsed } = storeToRefs(useAppStore())
+const { isCollapse } = storeToRefs(useAppStore())
 
 const logo = ref(imgLogo)
 </script>
 
 <template>
-  <RouterLink to="/" class="sidebar-logo">
-    <img :src="logo" alt="" class="logo" />
-    <h2 v-if="!collapsed" class="title">Vue3-admin</h2>
-  </RouterLink>
+  <Transition name="el-fade-in-linear" mode="out-in">
+    <RouterLink to="/" class="sidebar-logo">
+      <img :src="logo" alt="" class="logo" />
+      <h2 v-if="!isCollapse" class="title">Vue3-admin</h2>
+    </RouterLink>
+  </Transition>
 </template>
 
 <style lang="less" scoped>
@@ -27,14 +29,15 @@ const logo = ref(imgLogo)
   background-color: var(--white);
 
   .logo {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
   }
 
   .title {
     margin-left: 12px;
     font-size: 18px;
     color: var(--black);
+    transition: all 0.3s ease;
   }
 }
 </style>

@@ -8,12 +8,12 @@ import { useAppStore } from '@/store'
 
 defineOptions({ name: 'Layout' })
 
-const { collapsed } = storeToRefs(useAppStore())
+const { isCollapse } = storeToRefs(useAppStore())
 </script>
 
 <template>
   <div class="layout">
-    <aside class="layout-sidebar" :style="{ width: collapsed ? '64px' : '220px' }">
+    <aside class="layout-sidebar" :style="{ width: isCollapse ? '64px' : '220px' }">
       <Sidebar />
     </aside>
     <article class="layout-main">
@@ -37,6 +37,7 @@ const { collapsed } = storeToRefs(useAppStore())
 .layout-sidebar {
   flex-shrink: 0;
   background-color: var(--white);
+  transition: width 0.3s ease;
 }
 
 .layout-main {

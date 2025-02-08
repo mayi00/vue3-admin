@@ -43,6 +43,5 @@ defineOptions({ name: 'NavBar' })
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  border: 1px solid var(--gray-5);
 }
 </style>
