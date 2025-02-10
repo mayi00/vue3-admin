@@ -15,6 +15,8 @@
     "lint:prettier": "prettier --write \"./**/*.{html,vue,ts,tsx,js,cjs,json,css,less,scss,md}\""
   },
   "dependencies": {
+    "@antv/g6": "^5.0.42",
+    "@antv/g6-extension-3d": "^0.1.16",
     "@element-plus/icons-vue": "^2.3.1",
     "@vueuse/core": "^12.5.0",
     "axios": "^1.7.9",

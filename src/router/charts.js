@@ -18,6 +18,19 @@ export const routes = [
         component: () => import('@/views/Charts/RelationGraph/RelationGraph.vue'),
         meta: { title: 'RelationGraph', icon: '' },
       },
+      {
+        path: 'ant-v',
+        name: 'AntV',
+        meta: { title: 'AntV', icon: '' },
+        children: [
+          {
+            path: 'g6',
+            name: 'G6',
+            component: () => import('@/views/Charts/AntV/G6/G6.vue'),
+            meta: { title: 'G6', icon: '' },
+          },
+        ],
+      },
     ],
   },
 ]
