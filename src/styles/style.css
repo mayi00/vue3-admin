@@ -7,6 +7,25 @@
   font-synthesis: none;
 }
 
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+/* 滚动条滑块样式 */
+::-webkit-scrollbar-thumb {
+  background: var(--gray-6);
+  border-radius: 8px;
+}
+/* 滚动条轨道样式 */
+::-webkit-scrollbar-track {
+  background: var(--gray-4);
+}
+/* 滚动条角样式 */
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 #app {
   position: relative;
   overflow: hidden;

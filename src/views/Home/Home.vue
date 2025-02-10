@@ -37,7 +37,7 @@ function goExample() {
     </div>
 
     <el-card>
-      <p v-for="i in 100" :key="i">Home{{ i }}</p>
+      <p v-for="i in 10" :key="i">Home{{ i }}</p>
     </el-card>
   </div>
 </template>
