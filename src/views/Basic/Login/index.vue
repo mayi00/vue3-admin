@@ -39,7 +39,7 @@ const copyrightYear = dayjs().format('YYYY')
 </script>
 
 <template>
-  <div class="g-main login-container">
+  <div class="login-container">
     <div class="login-form">
       <h2 class="login-title">vue3-admin</h2>
       <el-form :model="loginForm" :rules="rules" ref="loginFormRef">
@@ -81,6 +81,10 @@ const copyrightYear = dayjs().format('YYYY')
 
 <style lang="less" scoped>
 .login-container {
+  position: relative;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
   background: url('@/assets/images/bg.jpg') no-repeat center center;
   background-size: cover;
 }

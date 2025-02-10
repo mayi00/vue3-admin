@@ -9,7 +9,7 @@ function goExample() {
 </script>
 
 <template>
-  <div class="g-main home-container">
+  <div class="g-main">
     <div class="mb-4">
       <el-button @click="goExample">Example</el-button>
       <el-button type="primary">Primary</el-button>
@@ -42,8 +42,4 @@ function goExample() {
   </div>
 </template>
 
-<style lang="less" scoped>
-.home-container {
-  padding: 16px;
-}
-</style>
+<style lang="less" scoped></style>

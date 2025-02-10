@@ -146,7 +146,7 @@ function downloadExcel(val, name) {
 </script>
 
 <template>
-  <div class="g-main hours-container">
+  <div class="g-main">
     <el-card class="card">
       <el-button type="primary" @click="handelUploadDialogOpen">上传文件</el-button>
       <p v-if="excelData.length > 1" class="tip">检测到存在多个Sheet页，请选择一个下载</p>
@@ -168,10 +168,6 @@ function downloadExcel(val, name) {
 </template>
 
 <style lang="less" scoped>
-.hours-container {
-  padding: 16px;
-}
-
 .card {
   text-align: center;
 

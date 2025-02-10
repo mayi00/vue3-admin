@@ -66,7 +66,7 @@ function initLineChart() {
 </script>
 
 <template>
-  <div class="g-main echarts-container">
+  <div class="g-main">
     <el-card>
       <div ref="barRef" class="bar-box"></div>
       <div ref="lineRef" class="line-box"></div>
@@ -75,9 +75,6 @@ function initLineChart() {
 </template>
 
 <style lang="less" scoped>
-.echarts-container {
-  padding: 16px;
-}
 .bar-box,
 .line-box {
   width: 400px;

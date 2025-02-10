@@ -12,6 +12,12 @@ export const routes = [
         component: () => import('@/views/Charts/ECharts/ECharts.vue'),
         meta: { title: 'ECharts', icon: '' },
       },
+      {
+        path: 'relation-graph',
+        name: 'RelationGraph',
+        component: () => import('@/views/Charts/RelationGraph/RelationGraph.vue'),
+        meta: { title: 'RelationGraph', icon: '' },
+      },
     ],
   },
 ]
