@@ -17,13 +17,13 @@ export const basicRoutes = [
     path: '/',
     redirect: '/home',
     component: Layout,
-    meta: { title: '首页', hidden: true, icon: '' },
+    meta: { title: '首页', hidden: true, icon: 'House' },
     children: [
       {
         path: 'home',
         name: 'Home',
         component: () => import('@/views/Home/Home.vue'),
-        meta: { title: '首页', icon: '' },
+        meta: { title: '首页', icon: 'House' },
       },
     ],
   },

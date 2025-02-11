@@ -4,13 +4,13 @@ export const routes = [
   {
     path: '/charts',
     component: Layout,
-    meta: { title: '图表', icon: '' },
+    meta: { title: '图表', icon: 'TrendCharts' },
     children: [
       {
         path: 'e-charts',
         name: 'ECharts',
         component: () => import('@/views/Charts/ECharts/ECharts.vue'),
-        meta: { title: 'ECharts', icon: '' },
+        meta: { title: 'ECharts', icon: 'TrendCharts' },
       },
       {
         path: 'relation-graph',
@@ -27,7 +27,7 @@ export const routes = [
             path: 'g6',
             name: 'G6',
             component: () => import('@/views/Charts/AntV/G6/G6.vue'),
-            meta: { title: 'G6', icon: '' },
+            meta: { title: 'G6', icon: 'PieChart' },
           },
         ],
       },
