@@ -35,7 +35,7 @@ function initGraph() {
 </script>
 
 <template>
-  <div class="g-main">
+  <div class="g-container">
     <el-card>
       <div ref="g6Ref" id="g6-20250210"></div>
     </el-card>

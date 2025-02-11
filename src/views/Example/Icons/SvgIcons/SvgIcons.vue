@@ -1,10 +1,10 @@
 <script setup>
-defineOptions({ name: 'UserManage' })
+defineOptions({ name: 'SvgIcons' })
 
 </script>
 
 <template>
-  <div class="g-container">UserManage</div>
+  <div class="g-container">SvgIcons</div>
 </template>
 
 <style lang="less" scoped></style>

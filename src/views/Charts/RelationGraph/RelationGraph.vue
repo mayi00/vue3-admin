@@ -248,7 +248,7 @@ function initGraph() {
 </script>
 
 <template>
-  <div class="g-main">
+  <div class="g-container">
     <el-card>
       <div style="border: #efefef solid 1px; height: 600px; width: 100%">
         <relation-graph ref="graphRef" :options="options" />

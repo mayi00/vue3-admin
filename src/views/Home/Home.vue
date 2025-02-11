@@ -9,7 +9,7 @@ function goExample() {
 </script>
 
 <template>
-  <div class="g-main">
+  <div class="g-container">
     <div class="mb-4">
       <el-button @click="goExample">Example</el-button>
       <el-button type="primary">Primary</el-button>

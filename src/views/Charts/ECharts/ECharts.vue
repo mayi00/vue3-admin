@@ -66,7 +66,7 @@ function initLineChart() {
 </script>
 
 <template>
-  <div class="g-main">
+  <div class="g-container">
     <el-card>
       <div ref="barRef" class="bar-box"></div>
       <div ref="lineRef" class="line-box"></div>

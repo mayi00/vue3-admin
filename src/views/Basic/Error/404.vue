@@ -3,5 +3,5 @@ defineOptions({ name: 'Error404' })
 </script>
 
 <template>
-  <div class="g-main">404</div>
+  <div class="g-container">404</div>
 </template>
