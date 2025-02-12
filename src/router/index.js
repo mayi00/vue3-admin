@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import NProgress from '@/plugins/nprogress'
 import { basicRoutes } from './basic'
 import { routes as systemRoutes } from './system'
 import { exampleRoutes } from './example'
@@ -16,6 +17,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  NProgress.start()
   // 路由发生变化修改页面 title
   if (to.meta.title) {
     document.title = `${to.meta.title} | Vue3-admin`
@@ -37,6 +39,10 @@ router.beforeEach((to, from, next) => {
       next({ path: '/login' })
     }
   }
+})
+
+router.afterEach(() => {
+  NProgress.done()
 })
 
 export default router
