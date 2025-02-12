@@ -18,16 +18,16 @@ export const exampleRoutes = [
         meta: { title: '富文本', icon: '' },
         children: [
           {
-            path: 'vue-quill-editor',
-            name: 'VueQuillEditor',
-            component: () => import('@/views/Example/RichText/VueQuillEditor/VueQuillEditor.vue'),
-            meta: { title: 'VueQuillEditor', icon: '' },
-          },
-          {
             path: 'wang-editor',
             name: 'WangEditor',
             component: () => import('@/views/Example/RichText/WangEditor/WangEditor.vue'),
             meta: { title: 'WangEditor', icon: '' },
+          },
+          {
+            path: 'vue-quill-editor',
+            name: 'VueQuillEditor',
+            component: () => import('@/views/Example/RichText/VueQuillEditor/VueQuillEditor.vue'),
+            meta: { title: 'VueQuillEditor', icon: '' },
           },
         ],
       },
