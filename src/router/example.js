@@ -32,6 +32,19 @@ export const exampleRoutes = [
         ],
       },
       {
+        path: 'e-signature',
+        name: 'ESignature',
+        meta: { title: '电子签名', icon: 'EditPen' },
+        children: [
+          {
+            path: 'vue-esign',
+            name: 'VueEsign',
+            component: () => import('@/views/Example/ESignature/VueEsign/VueEsign.vue'),
+            meta: { title: 'VueEsign', icon: 'PictureFilled' },
+          },
+        ],
+      },
+      {
         path: 'icons',
         name: 'Icons',
         meta: { title: '图标', icon: '' },

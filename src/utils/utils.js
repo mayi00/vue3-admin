@@ -96,7 +96,7 @@ export function checkPsidno(value) {
     71: '台湾',
     81: '香港',
     82: '澳门',
-    91: '国外'
+    91: '国外',
   }
   if (!province[Number(psidno.slice(0, 2))]) {
     return false
@@ -166,4 +166,87 @@ export function checkPsidno(value) {
     }
   }
   return true
+}
+
+/**
+ * 将 base64 字符串转换为 Blob 对象
+ * @param {string} base64Content - 要转换的 base64 字符串
+ * @returns {Blob} - 转换后的 Blob 对象
+ * @throws {Error} - 如果输入不是有效的 base64 字符串，将抛出错误
+ */
+export function base64ToBlob(base64Content) {
+  // 检查输入是否为有效的字符串
+  if (typeof base64Content !== 'string') {
+    throw new Error('输入必须是有效的 base64 字符串')
+  }
+  // 分割 base64 字符串以获取内容类型和实际数据
+  const parts = base64Content.split(';base64,')
+  if (parts.length !== 2) {
+    throw new Error('输入不是有效的 base64 字符串')
+  }
+  const contentType = parts[0].split(':')[1]
+  const base64Data = parts[1]
+  try {
+    // 解码 base64 数据
+    const binaryData = window.atob(base64Data)
+    const arrayBuffer = new ArrayBuffer(binaryData.length)
+    const uint8Array = new Uint8Array(arrayBuffer)
+    // 将解码后的数据复制到 Uint8Array 中
+    for (let i = 0; i < binaryData.length; i++) {
+      uint8Array[i] = binaryData.charCodeAt(i)
+    }
+    // 创建并返回 Blob 对象
+    return new Blob([uint8Array], { type: contentType })
+  } catch (error) {
+    // 处理解码过程中可能出现的错误
+    throw new Error('无法解码 base64 数据: ' + error.message)
+  }
+}
+
+/**
+ * 创建并触发文件下载
+ * @param {Blob} blob - 要下载的 Blob 对象
+ * @param {string} fileName - 下载文件的名称
+ * @throws {Error} - 如果输入的参数类型不正确，将抛出错误
+ */
+export function createAndTriggerDownload(blob, fileName) {
+  // 检查输入参数的类型
+  if (!(blob instanceof Blob) || typeof fileName !== 'string') {
+    throw new Error('Invalid input: blob must be a Blob object and fileName must be a string')
+  }
+  // 创建一个 <a> 元素用于触发下载
+  const aLink = document.createElement('a')
+  aLink.href = URL.createObjectURL(blob)
+  aLink.download = fileName
+  aLink.style.display = 'none'
+  // 将 <a> 元素添加到文档中并触发点击事件
+  document.body.appendChild(aLink)
+  aLink.click()
+  // 异步移除 <a> 元素并释放 URL 对象
+  setTimeout(() => {
+    document.body.removeChild(aLink)
+    URL.revokeObjectURL(aLink.href)
+  }, 0)
+}
+
+/**
+ * 根据 base64 字符串下载图片
+ * @param {string} base64Content - 图片的 base64 字符串
+ * @param {string} fileName - 下载图片的文件名
+ * @throws {Error} - 如果输入的参数类型不正确，将抛出错误
+ */
+export function downloadImageByBase64(base64Content, fileName) {
+  // 检查输入参数的类型
+  if (typeof base64Content !== 'string' || typeof fileName !== 'string') {
+    throw new Error('Invalid input: base64Content and fileName must be strings')
+  }
+  try {
+    // 将 base64 字符串转换为 Blob 对象
+    const blob = base64ToBlob(base64Content)
+    // 创建并触发下载
+    createAndTriggerDownload(blob, fileName)
+  } catch (error) {
+    // 处理转换或下载过程中可能出现的错误
+    console.error('下载图片时出错:', error)
+  }
 }
