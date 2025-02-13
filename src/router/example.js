@@ -56,6 +56,12 @@ export const exampleRoutes = [
             meta: { title: 'ElementPlusIcons', icon: 'ElementPlus' },
           },
           {
+            path: 'iconify',
+            name: 'Iconify',
+            component: () => import('@/views/Example/Icons/Iconify/Iconify.vue'),
+            meta: { title: 'Iconify', icon: '' },
+          },
+          {
             path: 'svg-icons',
             name: 'SvgIcons',
             component: () => import('@/views/Example/Icons/SvgIcons/SvgIcons.vue'),
