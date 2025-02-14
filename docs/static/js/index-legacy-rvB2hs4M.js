@@ -1,1 +1,0 @@
-System.register(["./.pnpm-legacy-ZnALLiJh.js"],(function(e,t){"use strict";var r,n,s,u;return{setters:[e=>{r=e.C,n=e.q,s=e.g,u=e.o}],execute:function(){e("default",{__name:"index",setup(e){const t=r(),a=n(),{params:c,query:p}=t,{path:i}=c;return a.replace({path:`/${i}`,query:p}),(e,t)=>(u(),s("div"))}})}}}));

@@ -1,1 +1,0 @@
-import{_ as a}from"./index-Y4qhfhjp.js";import{g as s,o as e,p as o,e as d,d as m}from"./.pnpm-DAM4NbZ-.js";const n={class:"home-container container"},t=[(a=>(o("data-v-fdb6d42a"),a=a(),d(),a))((()=>m("p",{class:"home"},"home",-1)))],p=a(Object.assign({name:"Home"},{__name:"index",setup:a=>(a,o)=>(e(),s("div",n,t))}),[["__scopeId","data-v-fdb6d42a"]]);export{p as default};
