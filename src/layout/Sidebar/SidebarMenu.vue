@@ -26,7 +26,9 @@ watchEffect(() => {
 <template>
   <div class="sidebar-menu">
     <el-menu class="menu" :default-active="currentRoute.path" unique-opened :collapse="isCollapse">
-      <SidebarMenuItem v-for="item in menuList" :key="item.path" :item="item" :basePath="activeModule" />
+      <template v-for="item in menuList" :key="item.path">
+        <SidebarMenuItem v-if="!item.meta.hidden" :item="item" :basePath="activeModule" />
+      </template>
     </el-menu>
   </div>
 </template>
