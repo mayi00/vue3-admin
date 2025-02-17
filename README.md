@@ -34,7 +34,8 @@ pnpm build:test
 
 # 生产环境打包
 pnpm build:prod
-
-# 线上预览
-https://mayi00.github.io/vue3-admin
 ```
+
+## 在线预览
+
+[https://mayi00.github.io/vue3-admin](https://mayi00.github.io/vue3-admin)
