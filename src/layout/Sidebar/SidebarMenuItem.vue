@@ -1,6 +1,7 @@
 <script setup>
 import { isExternalLink } from '@/utils/utils.js'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import { Icon } from '@iconify/vue'
 
 defineOptions({ name: 'SidebarMenuItem' })
 
@@ -48,19 +49,21 @@ function getIcon4Sub(iconName) {
       :index="resolveRoutePath(item.path)"
       @click="menuItem => handleClickMenuItem(menuItem, item)"
     >
-      <!-- <el-icon><Document /></el-icon> -->
-      <el-icon>
+      <Icon :icon="item.meta.icon || 'mdi:auto-awesome-outline'" class="iconify-icon" />
+      <!-- <el-icon>
         <component :is="getIcon4Menu(item.meta.icon)" />
-      </el-icon>
-      <template #title>{{ item.meta.title }}</template>
+      </el-icon> -->
+      <template #title>
+        <span>{{ item.meta.title }}</span>
+      </template>
     </el-menu-item>
 
     <el-sub-menu v-else :index="resolveRoutePath(item.path)">
       <template #title>
-        <!-- <el-icon><Folder /></el-icon> -->
-        <el-icon>
+        <Icon :icon="item.meta.icon || 'flowbite:grid-outline'" class="iconify-icon" />
+        <!-- <el-icon>
           <component :is="getIcon4Sub(item.meta.icon)" />
-        </el-icon>
+        </el-icon> -->
         <span>{{ item.meta.title }}</span>
       </template>
 
@@ -71,4 +74,9 @@ function getIcon4Sub(iconName) {
   </div>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.iconify-icon {
+  font-size: 16px;
+  margin: 0 4px;
+}
+</style>

@@ -10,12 +10,12 @@ export const exampleRoutes = [
         path: 'student-class-hours',
         name: 'StudentClassHours',
         component: () => import('@/views/Example/StudentClassHours/StudentClassHours.vue'),
-        meta: { title: '学生课时', icon: 'Timer' },
+        meta: { title: '学生课时', icon: 'mingcute:hours-line' },
       },
       {
         path: 'rich-text',
         name: 'RichText',
-        meta: { title: '富文本', icon: '' },
+        meta: { title: '富文本', icon: 'bi:file-earmark-richtext' },
         children: [
           {
             path: 'wang-editor',
@@ -27,95 +27,95 @@ export const exampleRoutes = [
             path: 'vue-quill-editor',
             name: 'VueQuillEditor',
             component: () => import('@/views/Example/RichText/VueQuillEditor/VueQuillEditor.vue'),
-            meta: { title: 'VueQuillEditor', icon: '' },
+            meta: { title: 'VueQuillEditor', icon: 'mdi:quill' },
           },
         ],
       },
       {
         path: 'e-signature',
         name: 'ESignature',
-        meta: { title: '电子签名', icon: 'EditPen' },
+        meta: { title: '电子签名', icon: 'fluent:document-signature-16-regular' },
         children: [
           {
             path: 'vue-esign',
             name: 'VueEsign',
             component: () => import('@/views/Example/ESignature/VueEsign/VueEsign.vue'),
-            meta: { title: 'VueEsign', icon: 'PictureFilled' },
+            meta: { title: 'VueEsign', icon: 'quill:signature' },
           },
         ],
       },
       {
         path: 'icons',
         name: 'Icons',
-        meta: { title: '图标', icon: '' },
+        meta: { title: '图标', icon: 'flowbite:grid-outline' },
         children: [
           {
             path: 'element-plus-icons',
             name: 'ElementPlusIcons',
             component: () => import('@/views/Example/Icons/ElementPlusIcons/ElementPlusIcons.vue'),
-            meta: { title: 'ElementPlusIcons', icon: 'ElementPlus' },
+            meta: { title: 'ElementPlusIcons', icon: 'ep:element-plus' },
           },
           {
             path: 'iconify',
             name: 'Iconify',
             component: () => import('@/views/Example/Icons/Iconify/Iconify.vue'),
-            meta: { title: 'Iconify', icon: '' },
+            meta: { title: 'Iconify', icon: 'line-md:iconify2-static' },
           },
           {
             path: 'svg-icons',
             name: 'SvgIcons',
             component: () => import('@/views/Example/Icons/SvgIcons/SvgIcons.vue'),
-            meta: { title: 'SvgIcons', icon: '' },
+            meta: { title: 'SvgIcons', icon: 'tabler:svg' },
           },
         ],
       },
       {
         path: 'table',
-        meta: { title: '表格', icon: 'Folder' },
+        meta: { title: '表格', icon: 'material-symbols:table-outline' },
         children: [
           {
             path: 'table-a',
             name: 'TableA',
             component: () => import('@/views/Example/Table/TableA/TableA.vue'),
-            meta: { title: 'TableA', icon: 'List' },
+            meta: { title: 'TableA', icon: '' },
           },
           {
             path: 'table-b',
             name: 'TableB',
             component: () => import('@/views/Example/Table/TableB/TableB.vue'),
-            meta: { title: 'TableB', icon: 'List' },
+            meta: { title: 'TableB', icon: '' },
           },
           {
             path: 'table-c',
             name: 'TableC',
             component: () => import('@/views/Example/Table/TableC/TableC.vue'),
-            meta: { title: 'TableC', icon: 'List', hidden: true },
+            meta: { title: 'TableC', icon: '', hidden: true },
           },
         ],
       },
       {
         path: 'external-links',
-        meta: { title: '外链', icon: 'Link' },
+        meta: { title: '外链', icon: 'tabler:external-link' },
         children: [
           {
             path: 'https://element-plus.org/zh-CN/',
-            meta: { title: 'Element Plus', icon: 'ElementPlus', link: 'https://element-plus.org/zh-CN/' },
+            meta: { title: 'Element Plus', icon: 'ep:element-plus', link: 'https://element-plus.org/zh-CN/' },
           },
           {
             path: 'https://element.eleme.cn/#/zh-CN',
-            meta: { title: 'Element UI', icon: 'Eleme', link: 'https://element.eleme.cn/#/zh-CN' },
+            meta: { title: 'Element UI', icon: 'logos:element', link: 'https://element.eleme.cn/#/zh-CN' },
           },
           {
             path: 'https://www.google.cn/chrome/',
-            meta: { title: 'Chrome', icon: 'ChromeFilled', link: 'https://www.google.cn/chrome/' },
+            meta: { title: 'Chrome', icon: 'logos:chrome', link: 'https://www.google.cn/chrome/' },
           },
           {
             path: 'https://gitee.com/madt/vue3-admin',
-            meta: { title: 'Gitee 仓库', icon: '', link: 'https://gitee.com/madt/vue3-admin' },
+            meta: { title: 'Gitee 仓库', icon: 'simple-icons:gitee', link: 'https://gitee.com/madt/vue3-admin' },
           },
           {
             path: 'https://github.com/mayi00/vue3-admin',
-            meta: { title: 'GitHub 仓库', icon: '', link: 'https://github.com/mayi00/vue3-admin' },
+            meta: { title: 'GitHub 仓库', icon: 'mdi:github', link: 'https://github.com/mayi00/vue3-admin' },
           },
           {
             path: 'https://mayi00.github.io/vue3-admin',
@@ -125,7 +125,7 @@ export const exampleRoutes = [
       },
       {
         path: 'ext-links',
-        meta: { title: '外链（内嵌访问）', icon: 'Link' },
+        meta: { title: '外链（内嵌访问）', icon: 'line-md:link' },
         children: [
           {
             path: 'element-plus',
@@ -133,18 +133,18 @@ export const exampleRoutes = [
             component: () => import('@/views/Example/ExtLinks/ExtLinks.vue'),
             meta: {
               title: 'Element Plus',
-              icon: 'ElementPlus',
+              icon: 'ep:element-plus',
               link: 'https://element-plus.org/zh-CN/',
               embeddedAccess: true,
             },
           },
           {
             path: 'element-ui',
-            name: 'Element',
+            name: 'logos:element',
             component: () => import('@/views/Example/ExtLinks/ExtLinks.vue'),
             meta: {
               title: 'Element UI',
-              icon: 'Eleme',
+              icon: 'logos:element',
               link: 'https://element.eleme.cn/#/zh-CN',
               embeddedAccess: true,
             },
@@ -155,7 +155,7 @@ export const exampleRoutes = [
             component: () => import('@/views/Example/ExtLinks/ExtLinks.vue'),
             meta: {
               title: 'Chrome',
-              icon: 'ChromeFilled',
+              icon: 'mdi:google-chrome',
               link: 'https://www.google.cn/chrome/',
               embeddedAccess: true,
             },
@@ -166,7 +166,7 @@ export const exampleRoutes = [
             component: () => import('@/views/Example/ExtLinks/ExtLinks.vue'),
             meta: {
               title: 'Gitee 仓库',
-              icon: '',
+              icon: 'simple-icons:gitee',
               link: 'https://gitee.com/madt/vue3-admin',
               embeddedAccess: true,
             },
@@ -177,7 +177,7 @@ export const exampleRoutes = [
             component: () => import('@/views/Example/ExtLinks/ExtLinks.vue'),
             meta: {
               title: 'GitHub 仓库',
-              icon: '',
+              icon: 'mdi:github',
               link: 'https://github.com/mayi00/vue3-admin',
               embeddedAccess: true,
             },
