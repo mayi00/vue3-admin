@@ -54,11 +54,11 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       pinia:
-        specifier: ^2.3.1
-        version: 2.3.1(vue@3.5.13)
+        specifier: ^3.0.1
+        version: 3.0.1(vue@3.5.13)
       pinia-plugin-persistedstate:
         specifier: ^4.2.0
-        version: 4.2.0(pinia@2.3.1(vue@3.5.13))
+        version: 4.2.0(pinia@3.0.1(vue@3.5.13))
       relation-graph-vue3:
         specifier: ^2.2.10
         version: 2.2.10
@@ -91,11 +91,11 @@ importers:
         specifier: ^9.20.1
         version: 9.20.1(jiti@2.4.2)
       eslint-config-prettier:
-        specifier: ^9.1.0
-        version: 9.1.0(eslint@9.20.1(jiti@2.4.2))
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@9.20.1(jiti@2.4.2))
       eslint-plugin-prettier:
         specifier: ^5.2.3
-        version: 5.2.3(@types/eslint@9.6.1)(eslint-config-prettier@9.1.0(eslint@9.20.1(jiti@2.4.2)))(eslint@9.20.1(jiti@2.4.2))(prettier@3.5.1)
+        version: 5.2.3(@types/eslint@9.6.1)(eslint-config-prettier@10.0.1(eslint@9.20.1(jiti@2.4.2)))(eslint@9.20.1(jiti@2.4.2))(prettier@3.5.1)
       eslint-plugin-vue:
         specifier: ^9.32.0
         version: 9.32.0(eslint@9.20.1(jiti@2.4.2))
@@ -115,8 +115,8 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1(postcss@8.5.2)(stylelint@16.14.1)
       stylelint-config-standard:
-        specifier: ^36.0.1
-        version: 36.0.1(stylelint@16.14.1)
+        specifier: ^37.0.0
+        version: 37.0.0(stylelint@16.14.1)
       stylelint-config-standard-vue:
         specifier: ^1.0.0
         version: 1.0.0(postcss-html@1.6.0)(stylelint@16.14.1)
@@ -127,14 +127,14 @@ importers:
         specifier: ^6.0.4
         version: 6.0.4(stylelint@16.14.1)
       unplugin-auto-import:
-        specifier: ^0.17.8
-        version: 0.17.8(@nuxt/kit@3.15.4)(@vueuse/core@12.7.0)(rollup@4.34.8)
+        specifier: ^19.1.0
+        version: 19.1.0(@nuxt/kit@3.15.4)(@vueuse/core@12.7.0)
       unplugin-icons:
         specifier: ^22.0.0
         version: 22.0.0(@vue/compiler-sfc@3.5.13)
       unplugin-vue-components:
-        specifier: ^0.26.0
-        version: 0.26.0(@babel/parser@7.26.9)(@nuxt/kit@3.15.4)(rollup@4.34.8)(vue@3.5.13)
+        specifier: ^28.1.0
+        version: 28.1.0(@babel/parser@7.26.9)(@nuxt/kit@3.15.4)(vue@3.5.13)
       vite:
         specifier: ^6.1.0
         version: 6.1.0(@types/node@22.13.4)(jiti@2.4.2)(less@4.2.2)(sass@1.85.0)(terser@5.39.0)
@@ -1474,6 +1474,9 @@ packages:
   '@vue/devtools-api@6.6.4':
     resolution: {integrity: sha512-sGhTPMuXqZ1rVOk32RylztWkfXTRhuS7vgAKv0zjqk8gbsHkJ7xfFf+jbySxt7tWObEJwyKaHMikV/WGDiQm8g==}
 
+  '@vue/devtools-api@7.7.2':
+    resolution: {integrity: sha512-1syn558KhyN+chO5SjlZIwJ8bV/bQ1nOVTG66t2RbG66ZGekyiYNmRO7X9BJCXQqPsFHlnksqvPhce2qpzxFnA==}
+
   '@vue/devtools-core@7.7.2':
     resolution: {integrity: sha512-lexREWj1lKi91Tblr38ntSsy6CvI8ba7u+jmwh2yruib/ltLUcsIzEjCnrkh1yYGGIKXbAuYV2tOG10fGDB9OQ==}
     peerDependencies:
@@ -1774,9 +1777,6 @@ packages:
 
   brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
-
-  brace-expansion@2.0.1:
-    resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
 
   braces@3.0.3:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
@@ -2215,8 +2215,8 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
-  eslint-config-prettier@9.1.0:
-    resolution: {integrity: sha512-NSWl5BFQWEPi1j4TjVNItzYV7dZXZ+wP6I6ZhrBGpChQhZRUaElihE9uRRkcbRnNb76UMKDF3r+WTmNcGPKsqw==}
+  eslint-config-prettier@10.0.1:
+    resolution: {integrity: sha512-lZBts941cyJyeaooiKxAtzoPHTN+GbQTJFAIdQbRhA4/8whaAraEh47Whw/ZFfrjNSnlAxqfm9i0XVAEkULjCw==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -2351,6 +2351,14 @@ packages:
 
   fastq@1.19.0:
     resolution: {integrity: sha512-7SFSRCNjBQIZH/xZR3iy5iQYR8aGBE0h3VG6/cwlbrpdciNYBMotQav8c1XI3HjHH+NikUpP53nPdlZSdWmFzA==}
+
+  fdir@6.4.3:
+    resolution: {integrity: sha512-PMXmW2y1hDDfTSRc9gaXIuCCRpuoz3Kaz8cUelp3smouvfT632ozg2vrT6lJsHKKOF59YLbOGfAWGUcKEfRMQw==}
+    peerDependencies:
+      picomatch: ^3 || ^4
+    peerDependenciesMeta:
+      picomatch:
+        optional: true
 
   fecha@4.2.3:
     resolution: {integrity: sha512-OP2IUU6HeYKJi3i0z4A19kHMQoLVs4Hc+DPqqxI2h/DPZHTm/vjsfC6P0b4jCMy14XizLBqvndQ+UilD7707Jw==}
@@ -2760,10 +2768,6 @@ packages:
     resolution: {integrity: sha512-xXqpXoINfFhgua9xiqD8fPFHgkoq1mmmpE92WlDbm9rNRd/EbRb+Gqf908T2DMfuHjjJlksiK2RbHVOdD/MqSw==}
     engines: {node: '>=8.9.0'}
 
-  local-pkg@0.4.3:
-    resolution: {integrity: sha512-SFppqq5p42fe2qcZQqqEOiVRXl+WCP1MdT6k7BDEW1j++sp5fIY+/fdRQitvKgB5BrBcmrs5m/L0v2FrU5MY1g==}
-    engines: {node: '>=14'}
-
   local-pkg@0.5.1:
     resolution: {integrity: sha512-9rrA30MRRP3gBD3HTGnC6cDFpaE1kVDWxWgqWJUN0RvDNAo+Nz/9GxB+nHOH0ifbVFy0hSA1V6vFDvnx54lTEQ==}
     engines: {node: '>=14'}
@@ -2873,10 +2877,6 @@ packages:
 
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
-
-  minimatch@9.0.5:
-    resolution: {integrity: sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==}
-    engines: {node: '>=16 || 14 >=14.17'}
 
   minipass@3.3.6:
     resolution: {integrity: sha512-DxiNidxSEK+tHG6zOIklvNOwm3hvCrbUrdtzY74U6HKTJxvIDfOUL5W5P2Ghd3DTkhhKPYGqeNUIh5qcM4YBfw==}
@@ -3077,8 +3077,8 @@ packages:
       pinia:
         optional: true
 
-  pinia@2.3.1:
-    resolution: {integrity: sha512-khUlZSwt9xXCaTbbxFYBKDc/bWAGWJjOgvxETwkTN7KRm66EeT1ZdZj6i2ceh9sP2Pzqsbc704r2yngBrxBVug==}
+  pinia@3.0.1:
+    resolution: {integrity: sha512-WXglsDzztOTH6IfcJ99ltYZin2mY8XZCXujkYWVIJlBjqsP6ST7zw+Aarh63E1cDVYeyUcPCxPHzJpEOmzB6Wg==}
     peerDependencies:
       typescript: '>=4.4.4'
       vue: ^2.7.0 || ^3.5.11
@@ -3394,9 +3394,6 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
-  strip-literal@2.1.1:
-    resolution: {integrity: sha512-631UJ6O00eNGfMiWG78ck80dfBab8X6IVFB51jZK5Icd7XAs60Z5y7QdSd/wGIklnWvRbUNloVzhOKKmutxQ6Q==}
-
   strip-literal@3.0.0:
     resolution: {integrity: sha512-TcccoMhJOM3OebGhSBEmp3UZ2SfDMZUEBdRA/9ynfLi8yYajyWX3JiXArcJt4Umh4vISpspkQIY8ZZoCqjbviA==}
 
@@ -3442,11 +3439,11 @@ packages:
       postcss-html: ^1.0.0
       stylelint: '>=14.0.0'
 
-  stylelint-config-standard@36.0.1:
-    resolution: {integrity: sha512-8aX8mTzJ6cuO8mmD5yon61CWuIM4UD8Q5aBcWKGSf6kg+EC3uhB+iOywpTK4ca6ZL7B49en8yanOFtUW0qNzyw==}
+  stylelint-config-standard@37.0.0:
+    resolution: {integrity: sha512-+6eBlbSTrOn/il2RlV0zYGQwRTkr+WtzuVSs1reaWGObxnxLpbcspCUYajVQHonVfxVw2U+h42azGhrBvcg8OA==}
     engines: {node: '>=18.12.0'}
     peerDependencies:
-      stylelint: ^16.1.0
+      stylelint: ^16.13.0
 
   stylelint-less@3.0.1:
     resolution: {integrity: sha512-6GkZ4jhmReXxX61IiNaniZFuyTzYTTC4HvRLNNok883d1ux/wUodM1uik+iAHZM1VSCwNASaj0Th6ZX46WZLMw==}
@@ -3539,6 +3536,10 @@ packages:
   tinyexec@0.3.2:
     resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==}
 
+  tinyglobby@0.2.11:
+    resolution: {integrity: sha512-32TmKeeKUahv0Go8WmQgiEp9Y21NuxjwjqiRC1nrUB51YacfSwuB44xgXD+HdIppmMRgjQNPdrHyA6vIybYZ+g==}
+    engines: {node: '>=12.0.0'}
+
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
@@ -3593,9 +3594,6 @@ packages:
     resolution: {integrity: sha512-+QBBXBCvifc56fsbuxZQ6Sic3wqqc3WWaqxs58gvJrcOuN83HGTCwz3oS5phzU9LthRNE9VrJCFCLUgHeeFnfA==}
     engines: {node: '>=18'}
 
-  unimport@3.14.6:
-    resolution: {integrity: sha512-CYvbDaTT04Rh8bmD8jz3WPmHYZRG/NnvYVzwD6V1YAlvvKROlAeNDUBhkBGzNav2RKaeuXvlWYaa1V4Lfi/O0g==}
-
   unimport@4.1.1:
     resolution: {integrity: sha512-j9+fijH6aDd05yv1fXlyt7HSxtOWtGtrZeYTVBsSUg57Iuf+Ps2itIZjeyu7bEQ4k0WOgYhHrdW8m/pJgOpl5g==}
     engines: {node: '>=18.12.0'}
@@ -3604,8 +3602,8 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
 
-  unplugin-auto-import@0.17.8:
-    resolution: {integrity: sha512-CHryj6HzJ+n4ASjzwHruD8arhbdl+UXvhuAIlHDs15Y/IMecG3wrf7FVg4pVH/DIysbq/n0phIjNHAjl7TG7Iw==}
+  unplugin-auto-import@19.1.0:
+    resolution: {integrity: sha512-B+TGBEBHqY9aR+7YfShfLujETOHstzpV+yaqgy5PkfV0QG7Py+TYMX7vJ9W4SrysHR+UzR+gzcx/nuZjmPeclA==}
     engines: {node: '>=14'}
     peerDependencies:
       '@nuxt/kit': ^3.2.2
@@ -3643,8 +3641,8 @@ packages:
     resolution: {integrity: sha512-8U/MtpkPkkk3Atewj1+RcKIjb5WBimZ/WSLhhR3w6SsIj8XJuKTacSP8g+2JhfSGw0Cb125Y+2zA/IzJZDVbhA==}
     engines: {node: '>=18.12.0'}
 
-  unplugin-vue-components@0.26.0:
-    resolution: {integrity: sha512-s7IdPDlnOvPamjunVxw8kNgKNK8A5KM1YpK5j/p97jEKTjlPNrA0nZBiSfAKKlK1gWZuyWXlKL5dk3EDw874LQ==}
+  unplugin-vue-components@28.1.0:
+    resolution: {integrity: sha512-ScHoDBTf7NVxM+YzzV1b1YNHU1rRnLWIG5hhD8D3hKjgYLd6FNJife0zQhUafv3NKuGLdujRgoqy2vcdt7a55g==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -3655,10 +3653,6 @@ packages:
         optional: true
       '@nuxt/kit':
         optional: true
-
-  unplugin@1.16.1:
-    resolution: {integrity: sha512-4/u/j4FrCKdi17jaxuJA0jClGxB1AvU2hw/IuayPc4ay1XGaJs/rbb4v5WKwAjNifjmXK9PIFyuPiaK8azyR9w==}
-    engines: {node: '>=14.0.0'}
 
   unplugin@2.2.0:
     resolution: {integrity: sha512-m1ekpSwuOT5hxkJeZGRxO7gXbXT3gF26NjQ7GdVHoLoF8/nopLcd/QfPigpCy7i51oFHiRJg/CyHhj4vs2+KGw==}
@@ -5476,6 +5470,10 @@ snapshots:
 
   '@vue/devtools-api@6.6.4': {}
 
+  '@vue/devtools-api@7.7.2':
+    dependencies:
+      '@vue/devtools-kit': 7.7.2
+
   '@vue/devtools-core@7.7.2(vite@6.1.0(@types/node@22.13.4)(jiti@2.4.2)(less@4.2.2)(sass@1.85.0)(terser@5.39.0))(vue@3.5.13)':
     dependencies:
       '@vue/devtools-kit': 7.7.2
@@ -5860,10 +5858,6 @@ snapshots:
     dependencies:
       balanced-match: 1.0.2
       concat-map: 0.0.1
-
-  brace-expansion@2.0.1:
-    dependencies:
-      balanced-match: 1.0.2
 
   braces@3.0.3:
     dependencies:
@@ -6310,11 +6304,11 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  eslint-config-prettier@9.1.0(eslint@9.20.1(jiti@2.4.2)):
+  eslint-config-prettier@10.0.1(eslint@9.20.1(jiti@2.4.2)):
     dependencies:
       eslint: 9.20.1(jiti@2.4.2)
 
-  eslint-plugin-prettier@5.2.3(@types/eslint@9.6.1)(eslint-config-prettier@9.1.0(eslint@9.20.1(jiti@2.4.2)))(eslint@9.20.1(jiti@2.4.2))(prettier@3.5.1):
+  eslint-plugin-prettier@5.2.3(@types/eslint@9.6.1)(eslint-config-prettier@10.0.1(eslint@9.20.1(jiti@2.4.2)))(eslint@9.20.1(jiti@2.4.2))(prettier@3.5.1):
     dependencies:
       eslint: 9.20.1(jiti@2.4.2)
       prettier: 3.5.1
@@ -6322,7 +6316,7 @@ snapshots:
       synckit: 0.9.2
     optionalDependencies:
       '@types/eslint': 9.6.1
-      eslint-config-prettier: 9.1.0(eslint@9.20.1(jiti@2.4.2))
+      eslint-config-prettier: 10.0.1(eslint@9.20.1(jiti@2.4.2))
 
   eslint-plugin-vue@9.32.0(eslint@9.20.1(jiti@2.4.2)):
     dependencies:
@@ -6488,6 +6482,10 @@ snapshots:
   fastq@1.19.0:
     dependencies:
       reusify: 1.0.4
+
+  fdir@6.4.3(picomatch@4.0.2):
+    optionalDependencies:
+      picomatch: 4.0.2
 
   fecha@4.2.3: {}
 
@@ -6854,8 +6852,6 @@ snapshots:
       emojis-list: 3.0.0
       json5: 2.2.3
 
-  local-pkg@0.4.3: {}
-
   local-pkg@0.5.1:
     dependencies:
       mlly: 1.7.4
@@ -6947,10 +6943,6 @@ snapshots:
   minimatch@3.1.2:
     dependencies:
       brace-expansion: 1.1.11
-
-  minimatch@9.0.5:
-    dependencies:
-      brace-expansion: 2.0.1
 
   minipass@3.3.6:
     dependencies:
@@ -7118,25 +7110,22 @@ snapshots:
   pify@4.0.1:
     optional: true
 
-  pinia-plugin-persistedstate@4.2.0(pinia@2.3.1(vue@3.5.13)):
+  pinia-plugin-persistedstate@4.2.0(pinia@3.0.1(vue@3.5.13)):
     dependencies:
       '@nuxt/kit': 3.15.4
       deep-pick-omit: 1.2.1
       defu: 6.1.4
       destr: 2.0.3
     optionalDependencies:
-      pinia: 2.3.1(vue@3.5.13)
+      pinia: 3.0.1(vue@3.5.13)
     transitivePeerDependencies:
       - magicast
       - supports-color
 
-  pinia@2.3.1(vue@3.5.13):
+  pinia@3.0.1(vue@3.5.13):
     dependencies:
-      '@vue/devtools-api': 6.6.4
+      '@vue/devtools-api': 7.7.2
       vue: 3.5.13
-      vue-demi: 0.14.10(vue@3.5.13)
-    transitivePeerDependencies:
-      - '@vue/composition-api'
 
   pkg-types@1.3.1:
     dependencies:
@@ -7438,10 +7427,6 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  strip-literal@2.1.1:
-    dependencies:
-      js-tokens: 9.0.1
-
   strip-literal@3.0.0:
     dependencies:
       js-tokens: 9.0.1
@@ -7482,12 +7467,12 @@ snapshots:
       stylelint: 16.14.1
       stylelint-config-html: 1.1.0(postcss-html@1.6.0)(stylelint@16.14.1)
       stylelint-config-recommended-vue: 1.6.0(postcss-html@1.6.0)(stylelint@16.14.1)
-      stylelint-config-standard: 36.0.1(stylelint@16.14.1)
+      stylelint-config-standard: 37.0.0(stylelint@16.14.1)
 
-  stylelint-config-standard@36.0.1(stylelint@16.14.1):
+  stylelint-config-standard@37.0.0(stylelint@16.14.1):
     dependencies:
       stylelint: 16.14.1
-      stylelint-config-recommended: 14.0.1(stylelint@16.14.1)
+      stylelint-config-recommended: 15.0.0(stylelint@16.14.1)
 
   stylelint-less@3.0.1(postcss@8.5.2)(stylelint@16.14.1):
     dependencies:
@@ -7619,6 +7604,11 @@ snapshots:
 
   tinyexec@0.3.2: {}
 
+  tinyglobby@0.2.11:
+    dependencies:
+      fdir: 6.4.3(picomatch@4.0.2)
+      picomatch: 4.0.2
+
   to-regex-range@5.0.1:
     dependencies:
       is-number: 7.0.0
@@ -7661,25 +7651,6 @@ snapshots:
 
   unicorn-magic@0.3.0: {}
 
-  unimport@3.14.6(rollup@4.34.8):
-    dependencies:
-      '@rollup/pluginutils': 5.1.4(rollup@4.34.8)
-      acorn: 8.14.0
-      escape-string-regexp: 5.0.0
-      estree-walker: 3.0.3
-      fast-glob: 3.3.3
-      local-pkg: 1.0.0
-      magic-string: 0.30.17
-      mlly: 1.7.4
-      pathe: 2.0.3
-      picomatch: 4.0.2
-      pkg-types: 1.3.1
-      scule: 1.3.0
-      strip-literal: 2.1.1
-      unplugin: 1.16.1
-    transitivePeerDependencies:
-      - rollup
-
   unimport@4.1.1:
     dependencies:
       acorn: 8.14.0
@@ -7699,21 +7670,17 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  unplugin-auto-import@0.17.8(@nuxt/kit@3.15.4)(@vueuse/core@12.7.0)(rollup@4.34.8):
+  unplugin-auto-import@19.1.0(@nuxt/kit@3.15.4)(@vueuse/core@12.7.0):
     dependencies:
-      '@antfu/utils': 0.7.10
-      '@rollup/pluginutils': 5.1.4(rollup@4.34.8)
-      fast-glob: 3.3.3
-      local-pkg: 0.5.1
+      local-pkg: 1.0.0
       magic-string: 0.30.17
-      minimatch: 9.0.5
-      unimport: 3.14.6(rollup@4.34.8)
-      unplugin: 1.16.1
+      picomatch: 4.0.2
+      unimport: 4.1.1
+      unplugin: 2.2.0
+      unplugin-utils: 0.2.4
     optionalDependencies:
       '@nuxt/kit': 3.15.4
       '@vueuse/core': 12.7.0
-    transitivePeerDependencies:
-      - rollup
 
   unplugin-icons@22.0.0(@vue/compiler-sfc@3.5.13):
     dependencies:
@@ -7734,30 +7701,22 @@ snapshots:
       pathe: 2.0.3
       picomatch: 4.0.2
 
-  unplugin-vue-components@0.26.0(@babel/parser@7.26.9)(@nuxt/kit@3.15.4)(rollup@4.34.8)(vue@3.5.13):
+  unplugin-vue-components@28.1.0(@babel/parser@7.26.9)(@nuxt/kit@3.15.4)(vue@3.5.13):
     dependencies:
-      '@antfu/utils': 0.7.10
-      '@rollup/pluginutils': 5.1.4(rollup@4.34.8)
       chokidar: 3.6.0
       debug: 4.4.0
-      fast-glob: 3.3.3
-      local-pkg: 0.4.3
+      local-pkg: 1.0.0
       magic-string: 0.30.17
-      minimatch: 9.0.5
-      resolve: 1.22.10
-      unplugin: 1.16.1
+      mlly: 1.7.4
+      tinyglobby: 0.2.11
+      unplugin: 2.2.0
+      unplugin-utils: 0.2.4
       vue: 3.5.13
     optionalDependencies:
       '@babel/parser': 7.26.9
       '@nuxt/kit': 3.15.4
     transitivePeerDependencies:
-      - rollup
       - supports-color
-
-  unplugin@1.16.1:
-    dependencies:
-      acorn: 8.14.0
-      webpack-virtual-modules: 0.6.2
 
   unplugin@2.2.0:
     dependencies:
