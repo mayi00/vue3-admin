@@ -2,9 +2,11 @@
   <h1>vue3-admin</h1>
 </div>
 
+
 ## 简介
 
-vue3-admin 是一个基于 Vue3 + Vite + Element Plus 等技术栈构建的PC端中后台项目。
+[vue3-admin](https://gitee.com/madt/vue3-admin) 是一个基于 Vue3 + Vite + Element Plus 等技术栈构建的PC端中后台项目。
+
 
 ## 项目启动
 
@@ -20,11 +22,11 @@ pnpm install
 
 # 启动服务
 pnpm dev
-pnpm run dev
 
 # 本地开发访问地址
 http://localhost:920
 ```
+
 
 ## 项目构建
 
@@ -36,6 +38,9 @@ pnpm build:test
 pnpm build:prod
 ```
 
-## 在线预览
 
-[https://mayi00.github.io/vue3-admin](https://mayi00.github.io/vue3-admin)
+## 项目地址
+
+[Gitee 源码](https://gitee.com/madt/vue3-admin)
+[GitHub 源码](https://github.com/mayi00/vue3-admin)
+[在线预览](https://mayi00.github.io/vue3-admin)
