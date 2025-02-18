@@ -19,7 +19,7 @@
     "@antv/g6-extension-3d": "^0.1.17",
     "@element-plus/icons-vue": "^2.3.1",
     "@iconify/vue": "^4.3.0",
-    "@vueuse/core": "^12.6.1",
+    "@vueuse/core": "^12.7.0",
     "@wangeditor/editor": "^5.1.23",
     "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^1.7.9",
@@ -39,7 +39,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.306",
+    "@iconify/json": "^2.2.307",
     "@vitejs/plugin-legacy": "^6.0.1",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",

@@ -2,6 +2,7 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import dayjs from 'dayjs'
 import { getRandomString } from '@/utils/utils'
+import { encrypt } from '@/utils/aesUtils'
 
 defineOptions({
   name: 'Login',
@@ -25,7 +26,11 @@ const rules = reactive({
 function handleLogin() {
   loginFormRef.value.validate(valid => {
     if (valid) {
-      localStorage.setItem('token', getRandomString({}))
+      const randomStr = getRandomString()
+      const currentTime = dayjs().valueOf()
+      const expirationTime = dayjs(currentTime).add(1, 'hour').valueOf()
+      const token = encrypt(`${loginForm.value.username}-${randomStr}-${currentTime}-${expirationTime}`, process.env.VITE_AES_SECRET_KEY, process.env.VITE_AES_SECRET_IV)
+      localStorage.setItem('token', token)
       router.push('/home')
       ElMessage({
         type: 'success',

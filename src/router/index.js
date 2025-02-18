@@ -4,6 +4,7 @@ import { basicRoutes } from './basic'
 import { routes as systemRoutes } from './system'
 import { exampleRoutes } from './example'
 import { routes as chartsRoutes } from './charts'
+import { decrypt } from '@/utils/aesUtils'
 
 export const routes = [...basicRoutes, ...systemRoutes, ...exampleRoutes, ...chartsRoutes]
 
@@ -27,7 +28,13 @@ router.beforeEach((to, from, next) => {
 
   const token = localStorage.getItem('token')
   if (token) {
-    if (to.path === '/login') {
+    const plaintext = decrypt(token, process.env.VITE_AES_SECRET_KEY, process.env.VITE_AES_SECRET_IV)
+    const currentTime = new Date().getTime()
+    const expirationTime = plaintext.split('-')[3]
+    if (currentTime > expirationTime) {
+      localStorage.removeItem('token')
+      next({ path: '/login' })
+    } else if (to.path === '/login') {
       next({ path: '/' })
     } else {
       next()

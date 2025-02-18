@@ -9,7 +9,8 @@
  * @return        {String} 生成的字符串
  * @Author      : MDT
  */
-export function getRandomString({ length = 32, uppercase = true, lowercase = true, num = true }) {
+export function getRandomString(obj) {
+  const { length = 32, uppercase = true, lowercase = true, num = true } = obj || {}
   const lengthNo = Number(length)
   if (!lengthNo || lengthNo < 1 || (!uppercase && !lowercase && !num)) {
     return ''
@@ -29,7 +30,9 @@ export function getRandomString({ length = 32, uppercase = true, lowercase = tru
 
   let str = ''
   for (let i = 0; i < lengthNo; i++) {
-    str += chars.charAt(array[i] % maxLength)
+    const randomIndex = Math.floor((array[i] / 4294967296) * maxLength)
+    str += chars.charAt(randomIndex)
+    // str += chars.charAt(array[i] % maxLength)
     // str = str + chars.charAt(Math.floor(Math.random() * maxLength))
   }
 
