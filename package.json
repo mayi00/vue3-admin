@@ -27,7 +27,7 @@
     "dayjs": "^1.11.13",
     "decimal.js": "^10.5.0",
     "echarts": "^5.6.0",
-    "element-plus": "^2.9.4",
+    "element-plus": "^2.9.5",
     "nprogress": "^0.2.0",
     "path-browserify": "^1.0.1",
     "pinia": "^3.0.1",
@@ -39,16 +39,16 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.307",
+    "@iconify/json": "^2.2.310",
     "@vitejs/plugin-legacy": "^6.0.1",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
-    "eslint": "^9.20.1",
+    "eslint": "^9.21.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-vue": "^9.32.0",
     "less": "^4.2.2",
-    "prettier": "^3.5.1",
+    "prettier": "^3.5.2",
     "sass": "^1.85.0",
     "stylelint": "^16.14.1",
     "stylelint-config-recommended-less": "^3.0.1",
@@ -57,9 +57,9 @@
     "stylelint-less": "^3.0.1",
     "stylelint-order": "^6.0.4",
     "unplugin-auto-import": "^19.1.0",
-    "unplugin-icons": "^22.0.0",
-    "unplugin-vue-components": "^28.1.0",
-    "vite": "^6.1.0",
+    "unplugin-icons": "^22.1.0",
+    "unplugin-vue-components": "^28.4.0",
+    "vite": "^6.1.1",
     "vite-plugin-vue-devtools": "^7.7.2"
   }
 }
