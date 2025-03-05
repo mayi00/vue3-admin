@@ -1,4 +1,5 @@
 <script setup>
+import PopulationChart from './PopulationChart.vue'
 import * as echarts from 'echarts'
 
 defineOptions({ name: 'ECharts' })
@@ -67,17 +68,19 @@ function initLineChart() {
 
 <template>
   <div class="g-container">
-    <el-card>
-      <div ref="barRef" class="bar-box"></div>
-      <div ref="lineRef" class="line-box"></div>
-    </el-card>
+    <el-card class="chart-card"> <PopulationChart /> </el-card>
+    <el-card class="chart-card"> <div ref="barRef" class="bar-box"></div> </el-card>
+    <el-card class="chart-card"> <div ref="lineRef" class="line-box"></div> </el-card>
   </div>
 </template>
 
 <style lang="less" scoped>
+.chart-card {
+  margin-bottom: 20px;
+}
 .bar-box,
 .line-box {
-  width: 400px;
+  width: 100%;
   height: 400px;
 }
 </style>
