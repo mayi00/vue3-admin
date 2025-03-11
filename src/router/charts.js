@@ -9,8 +9,15 @@ export const routes = [
       {
         path: 'e-charts',
         name: 'ECharts',
-        component: () => import('@/views/Charts/ECharts/ECharts.vue'),
         meta: { title: 'ECharts', icon: 'simple-icons:apacheecharts' },
+        children: [
+          {
+            path: 'population-chart',
+            name: 'PopulationChart',
+            component: () => import('@/views/Charts/ECharts/PopulationChart/PopulationChart.vue'),
+            meta: { title: '我国人口统计', icon: 'mdi:chart-line' },
+          },
+        ],
       },
       {
         path: 'relation-graph',
