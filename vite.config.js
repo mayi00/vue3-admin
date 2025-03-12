@@ -11,11 +11,11 @@ export default ({ mode }) => {
   return defineConfig({
     // 公共基础路径
     base: '/vue3-admin/',
+    // 环境配置
+    mode,
     define: {
       'process.env': env
     },
-    // 环境配置
-    mode,
     // 需要用到的插件
     plugins: [...createVitePlugins(env)],
     // 静态资源服务文件夹
@@ -61,7 +61,7 @@ export default ({ mode }) => {
     },
     build: {
       // 启用/禁用 CSS 代码拆分
-      cssCodeSplit: true,
+      cssCodeSplit: false,
       // Rollup 打包配置，打包文件按照类型分文件夹显示
       rollupOptions: {
         output: {
