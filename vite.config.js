@@ -14,7 +14,7 @@ export default ({ mode }) => {
     // 环境配置
     mode,
     define: {
-      'process.env': env
+      'process.env': env,
     },
     // 需要用到的插件
     plugins: [...createVitePlugins(env)],
@@ -23,8 +23,8 @@ export default ({ mode }) => {
     resolve: {
       // 配置路径别名
       alias: {
-        '@': path.join(__dirname, './src')
-      }
+        '@': path.join(__dirname, './src'),
+      },
     },
     css: {
       // 配置 CSS modules 的行为。选项将被传递给 postcss-modules
@@ -35,11 +35,11 @@ export default ({ mode }) => {
       preprocessorOptions: {
         less: {
           math: 'always',
-          avascriptEnabled: true
-        }
+          avascriptEnabled: true,
+        },
       },
       // 在开发过程中是否启用 sourcemap
-      devSourcemap: true
+      devSourcemap: true,
     },
     // 设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
     clearScreen: false,
@@ -55,9 +55,15 @@ export default ({ mode }) => {
         '/proxy-jisuapi': {
           target: env.VITE_BASE_URL_JISUAPI,
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/proxy-jisuapi/, '')
-        }
-      }
+          rewrite: path => path.replace(/^\/proxy-jisuapi/, ''),
+        },
+        // ioplife
+        '/proxy-ioplife': {
+          target: 'https://ioplettest.taikanglife.com',
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/proxy-ioplife/, ''),
+        },
+      },
     },
     build: {
       // 启用/禁用 CSS 代码拆分
@@ -73,8 +79,8 @@ export default ({ mode }) => {
             if (id.includes('node_modules')) {
               return id.toString().split('node_modules/')[1].split('/')[0].toString()
             }
-          }
-        }
+          },
+        },
       },
       minify: 'terser',
       terserOptions: {
@@ -82,14 +88,14 @@ export default ({ mode }) => {
         compress: {
           /* eslint-disable */
           drop_console: env.VITE_NODE_ENV === 'production',
-          drop_debugger: env.VITE_NODE_ENV === 'production'
+          drop_debugger: env.VITE_NODE_ENV === 'production',
           /* eslint-enable */
-        }
+        },
       },
       // 启用/禁用 gzip 压缩大小报告
       reportCompressedSize: true,
       // chunk 大小警告的限制（以 kbs 为单位）
-      chunkSizeWarningLimit: 1024
-    }
+      chunkSizeWarningLimit: 1024,
+    },
   })
 }

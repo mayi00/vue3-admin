@@ -120,7 +120,7 @@ function handleConfirm() {
     .icon-del {
       cursor: pointer;
       &:hover {
-        color: #f60;
+        color: #f00;
       }
     }
   }

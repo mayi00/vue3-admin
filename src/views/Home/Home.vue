@@ -1,7 +1,26 @@
 <script setup>
+import { encryptECB } from '@/utils/aesUtils'
+import iopsys from '@/api/ioplife/iop-sys'
+
 defineOptions({ name: 'Home' })
 
 const router = useRouter()
+
+function handleAES() {
+  console.log(encryptECB('poikt@test2020', process.env.VITE_IOP_AES_SECRET_KEY))
+  const data = {
+    userName: 'luxun',
+    password: encryptECB('poikt@test2020', process.env.VITE_IOP_AES_SECRET_KEY),
+  }
+  iopsys
+    .queryByLoginId(data)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
 
 function goExample() {
   router.push({ name: 'Example' })
@@ -12,7 +31,7 @@ function goExample() {
   <div class="g-container">
     <div class="mb-4">
       <el-button @click="goExample">Example</el-button>
-      <el-button type="primary">Primary</el-button>
+      <el-button type="primary" @click="handleAES">Primary</el-button>
       <el-button type="success">Success</el-button>
       <el-button type="info">Info</el-button>
       <el-button type="warning">Warning</el-button>
