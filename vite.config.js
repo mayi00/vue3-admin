@@ -67,13 +67,28 @@ export default ({ mode }) => {
     },
     build: {
       // 启用/禁用 CSS 代码拆分
-      cssCodeSplit: false,
+      cssCodeSplit: true,
       // Rollup 打包配置，打包文件按照类型分文件夹显示
       rollupOptions: {
         output: {
-          chunkFileNames: 'static/js/[name]-[hash].js',
-          entryFileNames: 'static/js/[name]-[hash].js',
-          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+          chunkFileNames: 'assets/js/[hash].js',
+          entryFileNames: 'assets/js/[hash].js',
+          // assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+          // 用于输出静态资源的命名，[ext]表示文件扩展名
+          assetFileNames: assetInfo => {
+            console.log('>>> assetInfo==>', assetInfo.names)
+
+            const info = assetInfo.names[0].split('.')
+            let extType = info[info.length - 1]
+            if (/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/i.test(assetInfo.names[0])) {
+              extType = 'media'
+            } else if (/\.(png|jpe?g|gif|svg)(\?.*)?$/.test(assetInfo.names[0])) {
+              extType = 'img'
+            } else if (/\.(woff2?|eot|ttf|otf)(\?.*)?$/i.test(assetInfo.names[0])) {
+              extType = 'fonts'
+            }
+            return `assets/${extType}/[hash].[ext]`
+          },
           // 打包文件拆分
           manualChunks(id) {
             if (id.includes('node_modules')) {
