@@ -6,20 +6,18 @@ defineOptions({ name: 'StudentClassHours' })
 
 // 控制上传弹框的显示/隐藏
 const dialogVisible = ref(false)
-// 允许上传的文件类型
-const accept = '.xls,.xlsx'
 // 上传文件时的loading
 const loading = ref(false)
 // excel数据
 const excelData = ref([])
 // 学生的课时数据所在的行
-const rowList = [
+const STUDENT_DATA_ROWS = [
   3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 27, 28, 29, 30, 31, 32, 35, 36, 37, 38, 39, 40, 43,
   44, 45, 46, 47, 48,
 ]
 
 // 打开上传弹框
-function handelUploadDialogOpen() {
+function handleUploadDialogOpen() {
   dialogVisible.value = true
 }
 // 关闭弹框
@@ -71,7 +69,7 @@ function handleDownload(sheet) {
    */
   const filteredData = []
   sheet.sheetData.forEach(item => {
-    if (rowList.includes(item.__rowNum__)) {
+    if (STUDENT_DATA_ROWS.includes(item.__rowNum__)) {
       for (const key in item) {
         if (key.includes('EMPTY')) {
           filteredData.push(item[key])
@@ -148,7 +146,7 @@ function downloadExcel(val, name) {
 <template>
   <div class="g-container">
     <el-card class="card">
-      <el-button type="primary" @click="handelUploadDialogOpen">上传文件</el-button>
+      <el-button type="primary" @click="handleUploadDialogOpen">上传文件</el-button>
       <p v-if="excelData.length > 1" class="tip">检测到存在多个Sheet页，请选择一个下载</p>
       <ul v-if="excelData.length > 1" class="sheet-list">
         <li v-for="item in excelData" :key="item.sheetName" class="sheet-item" @click="handleDownload(item)">
@@ -159,7 +157,7 @@ function downloadExcel(val, name) {
 
     <FileUpload
       :dialog-visible="dialogVisible"
-      :accept="accept"
+      accept=".xls,.xlsx"
       :loading="loading"
       @on-confirm="handleUploadConfirm"
       @on-cancel="handleUploadDialogClose"
@@ -172,19 +170,31 @@ function downloadExcel(val, name) {
   text-align: center;
 
   .tip {
-    margin-top: 16px;
+    margin: 15px 0;
     color: #666;
+    font-size: 14px;
   }
+
   .sheet-list {
-    padding-top: 16px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    padding: 0;
+    list-style: none;
 
     .sheet-item {
-      margin: 8px;
+      padding: 8px 12px;
+      background-color: #f5f7fa;
+      border-radius: 4px;
       cursor: pointer;
+      transition: all 0.3s;
       color: #409eff;
+
+      &:hover {
+        background-color: #ecf5ff;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
     }
   }
 }

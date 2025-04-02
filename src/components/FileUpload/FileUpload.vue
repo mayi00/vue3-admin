@@ -67,6 +67,7 @@ function handleConfirm() {
     ElMessage.error('请选择要上传的文件')
   } else {
     emits('on-confirm', fileList.value)
+    fileList.value = []
   }
 }
 </script>
