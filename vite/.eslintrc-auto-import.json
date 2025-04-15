@@ -88,6 +88,9 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true
+    "watchSyncEffect": true,
+    "Slot": true,
+    "Slots": true,
+    "ElMess": true
   }
 }

@@ -49,6 +49,7 @@
     "eslint-plugin-vue": "^10.0.0",
     "less": "^4.3.0",
     "prettier": "^3.5.3",
+    "rollup-plugin-visualizer": "^5.14.0",
     "sass": "^1.86.3",
     "stylelint": "^16.18.0",
     "stylelint-config-recommended-less": "^3.0.1",

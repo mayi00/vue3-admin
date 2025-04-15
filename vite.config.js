@@ -1,6 +1,7 @@
 import { defineConfig, loadEnv } from 'vite'
 import { createVitePlugins } from './vite/plugins'
 import * as path from 'path'
+// import { visualizer } from 'rollup-plugin-visualizer'
 
 export default ({ mode }) => {
   // 获取当前环境变量
@@ -70,14 +71,14 @@ export default ({ mode }) => {
       cssCodeSplit: true,
       // Rollup 打包配置，打包文件按照类型分文件夹显示
       rollupOptions: {
+        // 分析打包大小
+        // plugins: [visualizer()],
         output: {
           chunkFileNames: 'assets/js/[hash].js',
           entryFileNames: 'assets/js/[hash].js',
           // assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
           // 用于输出静态资源的命名，[ext]表示文件扩展名
           assetFileNames: assetInfo => {
-            console.log('>>> assetInfo==>', assetInfo.names)
-
             const info = assetInfo.names[0].split('.')
             let extType = info[info.length - 1]
             if (/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/i.test(assetInfo.names[0])) {

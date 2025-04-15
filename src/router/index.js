@@ -4,9 +4,10 @@ import { basicRoutes } from './basic'
 import { routes as systemRoutes } from './system'
 import { exampleRoutes } from './example'
 import { routes as chartsRoutes } from './charts'
+import { routes as iopRoutes } from './iop'
 import { decrypt } from '@/utils/aesUtils'
 
-export const routes = [...basicRoutes, ...systemRoutes, ...exampleRoutes, ...chartsRoutes]
+export const routes = [...basicRoutes, ...systemRoutes, ...exampleRoutes, ...chartsRoutes, ...iopRoutes]
 
 const router = createRouter({
   history: createWebHashHistory(),
