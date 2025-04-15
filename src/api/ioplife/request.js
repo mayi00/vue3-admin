@@ -20,7 +20,7 @@ service.interceptors.request.use(
       config.headers['loginid'] = user.user.loginId
     }
     config.headers['access-token'] = 'tokenforui'
-    console.log('【请求config：】', config)
+    // console.log('【请求config：】', config)
     return config
   },
   error => {
@@ -36,7 +36,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     return new Promise((resolve, reject) => {
-      console.log('【响应】', response)
+      // console.log('【响应】', response)
       if (response.status === 200) {
         if (['blob', 'arraybuffer'].includes(response.config.responseType)) {
           // 处理二进制数据

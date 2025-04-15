@@ -10,7 +10,7 @@ function handleLogin() {
     userName: 'luxun',
     password: encryptECB('poikt@test2020', process.env.VITE_IOP_AES_SECRET_KEY),
   }
-  ioplifeAPI.iopsys
+  ioplifeAPI.iopSys
     .login(data)
     .then(res => {
       console.log(res)
@@ -23,7 +23,7 @@ function handleLogin() {
 
 // 获取用户信息
 function getUserProfile() {
-  ioplifeAPI.iopsys
+  ioplifeAPI.iopSys
     .userProfile()
     .then(res => {
       console.log(res)

@@ -25,6 +25,19 @@ export const routes = [
           },
         ],
       },
+      {
+        path: 'oprdiff',
+        name: 'Oprdiff',
+        meta: { title: '运营差异化管理', icon: 'codicon:diff' },
+        children: [
+          {
+            path: 'agentWhite',
+            name: 'AgentWhite',
+            component: () => import('@/views/Iop/Oprdiff/AgentWhite/index.vue'),
+            meta: { title: '代理人白名单', icon: 'gg:list' },
+          },
+        ],
+      },
     ],
   },
 ]

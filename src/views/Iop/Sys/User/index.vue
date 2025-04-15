@@ -6,7 +6,7 @@ defineOptions({ name: 'User' })
 
 // 模板下载
 function handleDownloadTemplate() {
-  ioplifeAPI.iopsys
+  ioplifeAPI.iopSys
     .download()
     .then(res => {
       downloadBlob(res, '用户信息模板.xlsx')
