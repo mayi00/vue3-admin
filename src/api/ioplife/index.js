@@ -1,7 +1,7 @@
-import iopSys from './iop-sys'
-import iopOprdiff from './iop-oprdiff'
+import sys from './sys'
+import oprdiff from './oprdiff'
 
 export default {
-  iopSys,
-  iopOprdiff,
+  sys,
+  oprdiff,
 }

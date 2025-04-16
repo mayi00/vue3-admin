@@ -10,7 +10,7 @@ getAgentWhiteList()
 function getAgentWhiteList() {
   const params = { pageNo: 1, pageSize: 10 }
   const data = { agentCode: '', branchTypeNo: '', comCode: '', whiteListType: '' }
-  ioplifeAPI.iopOprdiff
+  ioplifeAPI.oprdiff.agentWhiteList
     .queryPage(params, data)
     .then(res => {
       console.log('代理人白名单列表', res)
@@ -22,7 +22,7 @@ function getAgentWhiteList() {
 
 // 模板下载
 function handleDownloadTemplate() {
-  ioplifeAPI.iopOprdiff
+  ioplifeAPI.oprdiff.agentWhiteList
     .agentWhiteListTemplate()
     .then(res => {
       downloadBlob(res, '代理人白名单清单模板.xlsx')

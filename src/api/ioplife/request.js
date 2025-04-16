@@ -70,16 +70,7 @@ service.interceptors.response.use(
 )
 
 const request = async ({ baseURL, url, method, params, data, timeout, headers, responseType }) => {
-  return await service({
-    baseURL,
-    url,
-    method,
-    params,
-    data,
-    timeout,
-    headers,
-    responseType,
-  })
+  return await service({ baseURL, url, method, params, data, timeout, headers, responseType })
 }
 
 export default request
