@@ -5,7 +5,7 @@ import { routes as systemRoutes } from './system'
 import { exampleRoutes } from './example'
 import { routes as chartsRoutes } from './charts'
 import { routes as iopRoutes } from './iop'
-import { decrypt } from '@/utils/aesUtils'
+import { decryptCBC } from '@/utils/aesUtils'
 
 export const routes = [...basicRoutes, ...systemRoutes, ...exampleRoutes, ...chartsRoutes, ...iopRoutes]
 
@@ -29,7 +29,7 @@ router.beforeEach((to, from, next) => {
 
   const token = localStorage.getItem('token')
   if (token) {
-    const plaintext = decrypt(token, process.env.VITE_AES_SECRET_KEY, process.env.VITE_AES_SECRET_IV)
+    const plaintext = decryptCBC(token, process.env.VITE_AES_SECRET_KEY, process.env.VITE_AES_SECRET_IV)
     const currentTime = new Date().getTime()
     const expirationTime = plaintext.split('-')[3]
     if (currentTime > expirationTime) {
