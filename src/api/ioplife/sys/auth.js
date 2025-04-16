@@ -1,7 +1,7 @@
 import request from '../request'
-import { getProxy } from '../config'
+import { getProxyConfig } from '../config'
 
-const { sys } = getProxy()
+const { sys } = getProxyConfig()
 
 export default {
   // 登录

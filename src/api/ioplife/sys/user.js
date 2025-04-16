@@ -1,7 +1,7 @@
 import request from '../request'
-import { getProxy } from '../config'
+import { getProxyConfig } from '../config'
 
-const { sys } = getProxy()
+const { sys } = getProxyConfig()
 
 export default {
   // 获取用户信息
@@ -9,7 +9,17 @@ export default {
     return request({
       url: `${sys}/user/userProfile`,
       method: 'get',
-      timeout: 30000,
+    })
+  },
+  /**
+   * 获取用户信息
+   * 实际上不存在此接口，只是为了测试
+   * @returns
+   */
+  userProfile2() {
+    return request({
+      url: `${sys}/user/userProfile2`,
+      method: 'get',
     })
   },
   // 下载人员管理模板

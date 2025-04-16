@@ -13,7 +13,6 @@ function handleLogin() {
   ioplifeAPI.sys.auth
     .login(data)
     .then(res => {
-      console.log(res)
       localStorage.setItem('user', JSON.stringify(res))
     })
     .catch(err => {
@@ -32,12 +31,24 @@ function getUserProfile() {
       console.log(err)
     })
 }
+// 获取用户信息
+function getUserProfile2() {
+  ioplifeAPI.sys.user
+    .userProfile2()
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
 </script>
 
 <template>
   <div class="g-container">
     <el-button type="primary" @click="handleLogin">Login</el-button>
     <el-button type="primary" @click="getUserProfile">getUserProfile</el-button>
+    <el-button type="primary" @click="getUserProfile2">getUserProfile2</el-button>
   </div>
 </template>
 

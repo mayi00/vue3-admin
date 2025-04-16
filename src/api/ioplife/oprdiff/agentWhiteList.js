@@ -5,12 +5,12 @@
  * 其中包括了 localhost ，端口为 8080 的访问，
  */
 import request from '../request'
-import { getProxy } from '../config'
+import { getProxyConfig } from '../config'
 
-const { oprdiff } = getProxy()
+const { oprdiff } = getProxyConfig()
 
 export default {
-  //  获取代理人白名单列表
+  // 获取代理人白名单列表
   queryPage(params, data) {
     return request({
       url: `${oprdiff}/api/agentWhiteList/queryPage`,
@@ -19,7 +19,12 @@ export default {
       data,
     })
   },
-  // 下载人员管理模板
+
+  /**
+   * 下载人员管理模板
+   * 这个实际上是一个放在服务器的文件，并不是一个接口
+   * @returns {Promise} 二进制流
+   */
   agentWhiteListTemplate() {
     return request({
       url: `${oprdiff}/agentWhiteListTemplate.xlsx`,

@@ -8,8 +8,7 @@
  * 代码是写出来给人看的，附带能在机器上运行。
  * Copyright (c) 2025 by MDT, All Rights Reserved.
  */
-
-export const getProxy = () => {
+export const getProxyConfig = () => {
   let sys = ''
   let oprdiff = ''
   switch (import.meta.env.VITE_NODE_ENV) {

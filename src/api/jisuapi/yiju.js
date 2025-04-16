@@ -1,10 +1,13 @@
 import request from '@/utils/request'
+import { getProxyConfig } from './config'
+
+const { jisuapi } = getProxyConfig()
 
 export default {
   // 名人名言查询
   query(params) {
     return request({
-      url: '/proxy-jisuapi/yiju/query',
+      url: `${jisuapi}/yiju/query`,
       method: 'get',
       params,
     })
@@ -12,7 +15,7 @@ export default {
   // 名言类型
   class(params) {
     return request({
-      url: '/proxy-jisuapi/yiju/class',
+      url: `${jisuapi}/yiju/class`,
       method: 'get',
       params,
     })
@@ -20,7 +23,7 @@ export default {
   // 名言作者
   author(params) {
     return request({
-      url: '/proxy-jisuapi/yiju/author',
+      url: `${jisuapi}/yiju/author`,
       method: 'get',
       params,
     })

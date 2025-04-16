@@ -1,10 +1,13 @@
 import request from '@/utils/request'
+import { getProxyConfig } from './config'
+
+const { jisuapi } = getProxyConfig()
 
 export default {
   // 获取全部省份
   province(params) {
     return request({
-      url: '/proxy-jisuapi/area/province',
+      url: `${jisuapi}/area/province`,
       method: 'get',
       params,
     })
@@ -12,7 +15,7 @@ export default {
   // 根据省份获取市
   city(params) {
     return request({
-      url: '/proxy-jisuapi/area/city',
+      url: `${jisuapi}/area/city`,
       method: 'get',
       params,
     })
@@ -20,7 +23,7 @@ export default {
   // 根据市获取区县
   town(params) {
     return request({
-      url: '/proxy-jisuapi/area/town',
+      url: `${jisuapi}/area/town`,
       method: 'get',
       params,
     })

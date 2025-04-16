@@ -1,6 +1,4 @@
 <script setup>
-import { encryptECB } from '@/utils/aesUtils'
-
 defineOptions({ name: 'Home' })
 
 const router = useRouter()

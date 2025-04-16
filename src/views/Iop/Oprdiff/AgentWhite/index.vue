@@ -4,8 +4,6 @@ import { downloadBlob } from '@/utils/download.js'
 
 defineOptions({ name: 'AgentWhite' })
 
-getAgentWhiteList()
-
 // 代理人白名单列表
 function getAgentWhiteList() {
   const params = { pageNo: 1, pageSize: 10 }
@@ -37,6 +35,7 @@ function handleDownloadTemplate() {
   <div class="g-container">
     <el-card>
       <el-button @click="handleDownloadTemplate">模板下载</el-button>
+      <el-button @click="getAgentWhiteList">代理人白名单列表</el-button>
     </el-card>
   </div>
 </template>
