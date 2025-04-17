@@ -1,9 +1,11 @@
 <script setup>
 import imgLogo from '@/assets/icons/vue.svg'
+import { useUserStore } from '@/store'
 
 defineOptions({ name: 'UserAvatar' })
 
 const router = useRouter()
+const { userInfo } = storeToRefs(useUserStore())
 
 const logo = ref(imgLogo)
 
@@ -14,7 +16,7 @@ function logout() {
     type: 'warning',
   })
     .then(() => {
-      localStorage.clear()
+      useUserStore().logout()
       router.push({ path: '/login' })
       ElMessage({
         type: 'success',
@@ -29,7 +31,7 @@ function logout() {
   <el-dropdown trigger="hover">
     <div class="user-avatar">
       <el-avatar :size="24" :src="logo" />
-      <span class="username g-no-select g-single-ellipsis">张三四五六七 jiushiqfuewn ireavhreujfl</span>
+      <span class="username g-no-select g-single-ellipsis">{{ userInfo.username }}</span>
     </div>
     <template #dropdown>
       <el-dropdown-menu>

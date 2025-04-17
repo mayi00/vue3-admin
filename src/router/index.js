@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import NProgress from '@/plugins/nprogress'
+import { useUserStore } from '@/store'
 import { basicRoutes } from './basic'
 import { routes as systemRoutes } from './system'
 import { exampleRoutes } from './example'
@@ -27,17 +28,21 @@ router.beforeEach((to, from, next) => {
     document.title = 'Vue3-admin'
   }
 
-  const token = localStorage.getItem('token')
+  const token = useUserStore().token
   if (token) {
     const plaintext = decryptCBC(token, process.env.VITE_AES_SECRET_KEY, process.env.VITE_AES_SECRET_IV)
     const currentTime = new Date().getTime()
     const expirationTime = plaintext.split('-')[3]
     if (currentTime > expirationTime) {
-      localStorage.removeItem('token')
+      useUserStore().logout()
       next({ path: '/login' })
     } else if (to.path === '/login') {
       next({ path: '/' })
     } else {
+      // 仅在过期时间剩余5分钟内时才刷新token
+      if (expirationTime - currentTime <= 5 * 60 * 1000) {
+        useUserStore().generateToken(useUserStore().userInfo.username)
+      }
       next()
     }
   } else {
