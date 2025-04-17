@@ -6,12 +6,12 @@ module.exports = {
   overrides: [
     {
       files: ['**/*.(less|css|vue|html)'],
-      customSyntax: 'postcss-less'
+      customSyntax: 'postcss-less',
     },
     {
       files: ['**/*.(html|vue)'],
-      customSyntax: 'postcss-html'
-    }
+      customSyntax: 'postcss-html',
+    },
   ],
   ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts', '**/*.json', '**/*.md', '**/*.yaml'],
   rules: {
@@ -20,32 +20,35 @@ module.exports = {
     'selector-pseudo-element-no-unknown': [
       true,
       {
-        ignorePseudoElements: ['v-deep']
-      }
+        ignorePseudoElements: ['v-deep'],
+      },
     ],
     // 允许 global 、export 、deep伪类
-    'selector-pseudo-class-no-unknown': [
-      true,
-      {
-        ignorePseudoClasses: ['global', 'export', 'deep']
-      }
-    ],
+    'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['global', 'export', 'deep'] }],
 
     // 允许未知属性
     'property-no-unknown': [
       true,
       {
-        ignoreProperties: []
-      }
+        ignoreProperties: ['backdrop-filter', 'scroll-margin'],
+      },
     ],
+    //
+    'color-hex-length': 'short',
+    // 颜色小写
+    'color-hex-case': 'lower',
+    // 禁止在一个块中出现重复的属性
+    'declaration-block-no-duplicate-properties': true,
+    // 禁止重复选择器
+    'no-duplicate-selectors': true,
 
     'property-no-vendor-prefix': null,
     // 允许未知规则
     'at-rule-no-unknown': [
       true,
       {
-        ignoreAtRules: ['apply', 'use']
-      }
+        ignoreAtRules: ['apply', 'use'],
+      },
     ],
     // 指定样式的排序
     'order/properties-order': [
@@ -119,7 +122,7 @@ module.exports = {
       'box-shadow',
       'text-shadow',
       'resize',
-      'transition'
-    ]
-  }
+      'transition',
+    ],
+  },
 }

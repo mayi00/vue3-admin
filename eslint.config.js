@@ -8,12 +8,12 @@ import * as parserVue from 'vue-eslint-parser'
 export default [
   {
     ...js.configs.recommended,
-    ignores: ['node_modules', 'dist', 'public', 'src/assets/**'],
+    ignores: ['node_modules', 'dist', 'public', 'src/assets/**', '*.config.js'],
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node }
+      globals: { ...globals.browser, ...globals.node },
     },
     plugins: {
-      prettier: pluginPrettier
+      prettier: pluginPrettier,
     },
     rules: {
       ...configPrettier.rules,
@@ -58,8 +58,8 @@ export default [
       // 语句强制分号结尾
       semi: [1, 'never'],
       // 注释的 * 或 // 后要有一个空格
-      'spaced-comment': [1, 'always']
-    }
+      'spaced-comment': [1, 'always'],
+    },
   },
 
   // Vue 文件配置
@@ -68,11 +68,11 @@ export default [
     languageOptions: {
       parser: parserVue,
       parserOptions: {
-        sourceType: 'module'
-      }
+        sourceType: 'module',
+      },
     },
     plugins: {
-      vue: pluginVue
+      vue: pluginVue,
     },
     processor: pluginVue.processors['.vue'],
     rules: {
@@ -82,7 +82,7 @@ export default [
       // 关闭组件名称多词要求
       'vue/multi-word-component-names': 0,
       // 允许 v-html
-      'vue/no-v-html': 0
-    }
-  }
+      'vue/no-v-html': 0,
+    },
+  },
 ]
