@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import request from './request'
 import { getProxyConfig } from './config'
 
 const { jisuapi } = getProxyConfig()

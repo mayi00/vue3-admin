@@ -13,6 +13,12 @@ export const exampleRoutes = [
         meta: { title: '学生课时', icon: 'mingcute:hours-line' },
       },
       {
+        path: 'jisu',
+        name: 'Jisu',
+        component: () => import('@/views/Example/Jisu/index.vue'),
+        meta: { title: '极速数据', icon: 'mingcute:hours-line' },
+      },
+      {
         path: 'rich-text',
         name: 'RichText',
         meta: { title: '富文本', icon: 'bi:file-earmark-richtext' },
