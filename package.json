@@ -1,7 +1,9 @@
 {
   "name": "vue3-admin",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "一个基于 Vue3 + Vite + Element Plus 等技术栈构建的PC端中后台项目",
+  "author": "MDT",
   "type": "module",
   "scripts": {
     "dev": "vite --mode development",
