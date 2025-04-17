@@ -4,245 +4,84 @@ import { ElMessage } from 'element-plus'
 
 defineOptions({ name: 'Jisu' })
 
-function province() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
+const appkey = import.meta.env.VITE_JISUAPI_APPKEY
+
+// 通用API请求方法
+async function callAPI(apiPath, params = {}) {
+  try {
+    const res = await jisuAPI[apiPath]({ appkey, ...params })
+    console.log(res)
+    return res
+  } catch (err) {
+    console.error(err)
+    ElMessage.error(err.msg || '请求失败')
+    throw err
   }
-  jisuAPI.area
-    .province(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      console.error(err)
-      ElMessage.error(err.msg)
-    })
 }
 
+// 区域相关
+function province() {
+  callAPI('area.province')
+}
 function city() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
-    parentid: '2',
-  }
-  jisuAPI.area
-    .city(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  callAPI('area.city', { parentid: '2' })
 }
 function town() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
-    parentid: 3400,
-  }
-  jisuAPI.area
-    .town(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  callAPI('area.town', { parentid: 3400 })
 }
 
+// 艺句相关
 function query() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
+  callAPI('yiju.query', {
     num: 20,
     page: 1,
     classid: '',
     authorid: '',
-  }
-  jisuAPI.yiju
-    .query(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  })
 }
 function yijuClass() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
-  }
-  jisuAPI.yiju
-    .class(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  callAPI('yiju.class')
 }
 function author() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
-  }
-  jisuAPI.yiju
-    .author(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  callAPI('yiju.author')
 }
 
+// 汇率相关
 function convert() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
+  callAPI('exchange.convert', {
     from: 'CNY',
     to: 'USD',
     amount: 100,
-  }
-  jisuAPI.exchange
-    .convert(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  })
 }
 function single() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
-    currency: 'CNY',
-  }
-  jisuAPI.exchange
-    .single(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  callAPI('exchange.single', { currency: 'CNY' })
 }
 function currency() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
-  }
-  jisuAPI.exchange
-    .currency(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  callAPI('exchange.currency')
 }
 function bank() {
-  // 银行编码，工商银行：ICBC ，中国银行：BOC ，农业银行：ABCHINA ，交通银行：BANKCOMM ，建设银行：CCB ，招商银行：CMBCHINA ，光大银行：CEBBANK ，浦发银行：SPDB ，兴业银行：CIB ，中信银行：ECITIC，默认BOC
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
-    bank: 'ICBC',
-  }
-  jisuAPI.exchange
-    .bank(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  callAPI('exchange.bank', { bank: 'ICBC' })
 }
 
+// 黄金相关
 function shgold() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
-  }
-  jisuAPI.glod
-    .shgold(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  callAPI('glod.shgold')
 }
 function shfutures() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
-  }
-  jisuAPI.glod
-    .shfutures(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  callAPI('glod.shfutures')
 }
 function hkgold() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
-  }
-  jisuAPI.glod
-    .hkgold(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  callAPI('glod.hkgold')
 }
 function glodBank() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
-  }
-  jisuAPI.glod
-    .bank(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  callAPI('glod.bank')
 }
 function london() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
-  }
-  jisuAPI.glod
-    .london(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  callAPI('glod.london')
 }
 function storegold() {
-  const params = {
-    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
-  }
-  jisuAPI.glod
-    .storegold(params)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      ElMessage.error(err.msg)
-      console.error(err)
-    })
+  callAPI('glod.storegold')
 }
 </script>
 
