@@ -159,6 +159,91 @@ function bank() {
       console.error(err)
     })
 }
+
+function shgold() {
+  const params = {
+    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
+  }
+  jisuAPI.glod
+    .shgold(params)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      ElMessage.error(err.msg)
+      console.error(err)
+    })
+}
+function shfutures() {
+  const params = {
+    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
+  }
+  jisuAPI.glod
+    .shfutures(params)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      ElMessage.error(err.msg)
+      console.error(err)
+    })
+}
+function hkgold() {
+  const params = {
+    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
+  }
+  jisuAPI.glod
+    .hkgold(params)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      ElMessage.error(err.msg)
+      console.error(err)
+    })
+}
+function glodBank() {
+  const params = {
+    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
+  }
+  jisuAPI.glod
+    .bank(params)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      ElMessage.error(err.msg)
+      console.error(err)
+    })
+}
+function london() {
+  const params = {
+    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
+  }
+  jisuAPI.glod
+    .london(params)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      ElMessage.error(err.msg)
+      console.error(err)
+    })
+}
+function storegold() {
+  const params = {
+    appkey: import.meta.env.VITE_JISUAPI_APPKEY,
+  }
+  jisuAPI.glod
+    .storegold(params)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      ElMessage.error(err.msg)
+      console.error(err)
+    })
+}
 </script>
 
 <template>
@@ -173,6 +258,12 @@ function bank() {
     <el-button type="warning" @click="single">single</el-button>
     <el-button type="danger" @click="currency">currency</el-button>
     <el-button type="primary" @click="bank">bank</el-button>
+    <el-button type="success" @click="shgold">shgold</el-button>
+    <el-button type="success" @click="shfutures">shfutures</el-button>
+    <el-button type="success" @click="hkgold">hkgold</el-button>
+    <el-button type="success" @click="glodBank">bank</el-button>
+    <el-button type="success" @click="london">london</el-button>
+    <el-button type="success" @click="storegold">storegold</el-button>
   </div>
 </template>
 
