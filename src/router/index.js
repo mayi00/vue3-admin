@@ -39,8 +39,8 @@ router.beforeEach((to, from, next) => {
     } else if (to.path === '/login') {
       next({ path: '/' })
     } else {
-      // 仅在过期时间剩余5分钟内时才刷新token
-      if (expirationTime - currentTime <= 5 * 60 * 1000) {
+      // 仅在过期时间剩余10分钟内时才刷新token
+      if (expirationTime - currentTime <= 10 * 60 * 1000) {
         useUserStore().generateToken(useUserStore().userInfo.username)
       }
       next()

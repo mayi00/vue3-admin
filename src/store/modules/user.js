@@ -6,7 +6,7 @@ import { encryptCBC } from '@/utils/aesUtils'
 export const useUserStore = defineStore('user', {
   persist: {
     key: 'user',
-    storage: window.sessionStorage,
+    storage: window.localStorage,
   },
   state: () => ({
     userInfo: {},
@@ -20,7 +20,7 @@ export const useUserStore = defineStore('user', {
     generateToken(username) {
       const randomStr = getRandomString()
       const currentTime = dayjs().valueOf()
-      const expirationTime = dayjs(currentTime).add(1, 'hour').valueOf()
+      const expirationTime = dayjs(currentTime).add(1, 'day').valueOf()
       this.token = encryptCBC(
         `${username}-${randomStr}-${currentTime}-${expirationTime}`,
         process.env.VITE_AES_SECRET_KEY,

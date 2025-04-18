@@ -14,10 +14,10 @@ service.interceptors.request.use(
     } else if (!config.timeout) {
       config.timeout = 1000 * 10
     }
-    const user = JSON.parse(localStorage.getItem('user'))
-    if (user?.token) {
-      config.headers['Auth'] = user.token
-      config.headers['loginid'] = user.user.loginId
+    const iopUser = JSON.parse(localStorage.getItem('iop-user'))
+    if (iopUser?.token) {
+      config.headers['Auth'] = iopUser.token
+      config.headers['loginid'] = iopUser.user.loginId
     }
     config.headers['access-token'] = 'tokenforui'
     // console.log('【请求config：】', config)

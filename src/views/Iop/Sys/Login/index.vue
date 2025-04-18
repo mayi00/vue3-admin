@@ -13,7 +13,7 @@ function handleLogin() {
   ioplifeAPI.sys.auth
     .login(data)
     .then(res => {
-      localStorage.setItem('user', JSON.stringify(res))
+      localStorage.setItem('iop-user', JSON.stringify(res))
     })
     .catch(err => {
       console.log(err)
