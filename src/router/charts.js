@@ -14,7 +14,7 @@ export const routes = [
           {
             path: 'population-chart',
             name: 'PopulationChart',
-            component: () => import('@/views/Charts/ECharts/PopulationChart/PopulationChart.vue'),
+            component: () => import('@/views/Charts/ECharts/PopulationChart/index.vue'),
             meta: { title: '我国人口统计', icon: 'mdi:chart-line' },
           },
         ],
@@ -22,7 +22,7 @@ export const routes = [
       {
         path: 'relation-graph',
         name: 'RelationGraph',
-        component: () => import('@/views/Charts/RelationGraph/RelationGraph.vue'),
+        component: () => import('@/views/Charts/RelationGraph/index.vue'),
         meta: { title: 'RelationGraph', icon: '' },
       },
       {
@@ -33,7 +33,7 @@ export const routes = [
           {
             path: 'g6',
             name: 'G6',
-            component: () => import('@/views/Charts/AntV/G6/G6.vue'),
+            component: () => import('@/views/Charts/AntV/G6/index.vue'),
             meta: { title: 'G6', icon: '' },
           },
         ],

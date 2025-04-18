@@ -1,6 +1,6 @@
 <script setup>
 import vueEsign from 'vue-esign'
-import { downloadImageByBase64 } from '@/utils/download.js
+import { downloadImageByBase64 } from '@/utils/download.js'
 
 defineOptions({ name: 'VueEsign' })
 

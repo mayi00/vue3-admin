@@ -9,7 +9,7 @@ export const exampleRoutes = [
       {
         path: 'student-class-hours',
         name: 'StudentClassHours',
-        component: () => import('@/views/Example/StudentClassHours/StudentClassHours.vue'),
+        component: () => import('@/views/Example/StudentClassHours/index.vue'),
         meta: { title: '学生课时', icon: 'mingcute:hours-line' },
       },
       {
@@ -26,13 +26,13 @@ export const exampleRoutes = [
           {
             path: 'wang-editor',
             name: 'WangEditor',
-            component: () => import('@/views/Example/RichText/WangEditor/WangEditor.vue'),
+            component: () => import('@/views/Example/RichText/WangEditor/index.vue'),
             meta: { title: 'WangEditor', icon: '' },
           },
           {
             path: 'vue-quill-editor',
             name: 'VueQuillEditor',
-            component: () => import('@/views/Example/RichText/VueQuillEditor/VueQuillEditor.vue'),
+            component: () => import('@/views/Example/RichText/VueQuillEditor/index.vue'),
             meta: { title: 'VueQuillEditor', icon: 'mdi:quill' },
           },
         ],
@@ -45,7 +45,7 @@ export const exampleRoutes = [
           {
             path: 'vue-esign',
             name: 'VueEsign',
-            component: () => import('@/views/Example/ESignature/VueEsign/VueEsign.vue'),
+            component: () => import('@/views/Example/ESignature/VueEsign/index.vue'),
             meta: { title: 'VueEsign', icon: 'quill:signature' },
           },
         ],
@@ -58,19 +58,19 @@ export const exampleRoutes = [
           {
             path: 'element-plus-icons',
             name: 'ElementPlusIcons',
-            component: () => import('@/views/Example/Icons/ElementPlusIcons/ElementPlusIcons.vue'),
+            component: () => import('@/views/Example/Icons/ElementPlusIcons/index.vue'),
             meta: { title: 'ElementPlusIcons', icon: 'ep:element-plus' },
           },
           {
             path: 'iconify',
             name: 'Iconify',
-            component: () => import('@/views/Example/Icons/Iconify/Iconify.vue'),
+            component: () => import('@/views/Example/Icons/Iconify/index.vue'),
             meta: { title: 'Iconify', icon: 'line-md:iconify2-static' },
           },
           {
             path: 'svg-icons',
             name: 'SvgIcons',
-            component: () => import('@/views/Example/Icons/SvgIcons/SvgIcons.vue'),
+            component: () => import('@/views/Example/Icons/SvgIcons/index.vue'),
             meta: { title: 'SvgIcons', icon: 'tabler:svg' },
           },
         ],
@@ -82,19 +82,19 @@ export const exampleRoutes = [
           {
             path: 'table-a',
             name: 'TableA',
-            component: () => import('@/views/Example/Table/TableA/TableA.vue'),
+            component: () => import('@/views/Example/Table/TableA/index.vue'),
             meta: { title: 'TableA', icon: '' },
           },
           {
             path: 'table-b',
             name: 'TableB',
-            component: () => import('@/views/Example/Table/TableB/TableB.vue'),
+            component: () => import('@/views/Example/Table/TableB/index.vue'),
             meta: { title: 'TableB', icon: '' },
           },
           {
             path: 'table-c',
             name: 'TableC',
-            component: () => import('@/views/Example/Table/TableC/TableC.vue'),
+            component: () => import('@/views/Example/Table/TableC/index.vue'),
             meta: { title: 'TableC', icon: '', hidden: true },
           },
         ],
