@@ -1,4 +1,4 @@
-<script setup name="Layout">
+<script setup>
 import Sidebar from './Sidebar/Sidebar.vue'
 import NavBar from './NavBar/NavBar.vue'
 import TagsBar from './TagsBar/TagsBar.vue'
