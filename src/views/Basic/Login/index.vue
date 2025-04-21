@@ -3,9 +3,7 @@ import { User, Lock } from '@element-plus/icons-vue'
 import dayjs from 'dayjs'
 import { useUserStore } from '@/store'
 
-defineOptions({
-  name: 'Login',
-})
+defineOptions({ name: 'Login' })
 
 const router = useRouter()
 
@@ -21,22 +19,25 @@ const rules = reactive({
     { min: 6, max: 16, message: '长度6-16位', trigger: 'blur' },
   ],
 })
+const loading = ref(false)
 
 function handleLogin() {
   loginFormRef.value.validate(valid => {
     if (valid) {
-      useUserStore().setUserInfo({ username: loginForm.value.username })
-      useUserStore().generateToken(loginForm.value.username)
-      router.push('/home')
-      ElMessage({
-        type: 'success',
-        message: '登录成功',
-      })
+      loading.value = true
+      setTimeout(() => {
+        useUserStore().setUserInfo({ username: loginForm.value.username })
+        useUserStore().generateToken(loginForm.value.username)
+        ElMessage({ type: 'success', message: '登录成功' })
+        loading.value = false
+        router.push('/home')
+      }, 1000)
     }
   })
 }
 
-const copyrightYear = dayjs().format('YYYY')
+// const copyrightYear = dayjs().format('YYYY')
+const copyrightYear = new Date().getFullYear()
 </script>
 
 <template>
@@ -46,7 +47,7 @@ const copyrightYear = dayjs().format('YYYY')
       <el-form :model="loginForm" :rules="rules" ref="loginFormRef">
         <el-form-item prop="username">
           <el-input
-            v-model="loginForm.username"
+            v-model.trim="loginForm.username"
             placeholder="请输入用户名"
             size="large"
             :prefix-icon="User"
@@ -56,7 +57,7 @@ const copyrightYear = dayjs().format('YYYY')
         </el-form-item>
         <el-form-item prop="password">
           <el-input
-            v-model="loginForm.password"
+            v-model.trim="loginForm.password"
             type="password"
             placeholder="请输入密码"
             size="large"
@@ -71,7 +72,7 @@ const copyrightYear = dayjs().format('YYYY')
         </el-form-item>
       </el-form>
 
-      <el-button type="primary" size="large" class="login-btn" @click="handleLogin">登录</el-button>
+      <el-button type="primary" size="large" class="login-btn" :loading="loading" @click="handleLogin">登录</el-button>
     </div>
 
     <div class="login-footer">
@@ -86,8 +87,9 @@ const copyrightYear = dayjs().format('YYYY')
   overflow-y: auto;
   width: 100%;
   height: 100%;
-  background: url('@/assets/images/bg.jpg') no-repeat center center;
-  background-size: cover;
+  // background: url('@/assets/images/bg.jpg') no-repeat center center;
+  // background-size: cover;
+  background: linear-gradient(120deg, var(--el-color-primary-light-9) 0%, var(--el-bg-color) 100%);
 }
 
 .login-title {
@@ -96,6 +98,7 @@ const copyrightYear = dayjs().format('YYYY')
   font-size: 24px;
   line-height: 32px;
   color: var(--gray-13);
+  letter-spacing: 2px;
 }
 
 .login-form {
@@ -120,5 +123,6 @@ const copyrightYear = dayjs().format('YYYY')
   left: 0;
   right: 0;
   text-align: center;
+  color: var(--gray-7);
 }
 </style>
