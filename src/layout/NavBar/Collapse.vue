@@ -3,17 +3,17 @@ import { useAppStore } from '@/store'
 
 defineOptions({ name: 'Collapse' })
 
-const { isCollapse } = storeToRefs(useAppStore())
+const { sidebarIsCollapse } = storeToRefs(useAppStore())
 // 切换侧边栏显示/隐藏
 function toggleCollapsed() {
-  isCollapse.value = !isCollapse.value
+  sidebarIsCollapse.value = !sidebarIsCollapse.value
 }
 </script>
 
 <template>
   <div class="collapse" @click.stop="toggleCollapsed">
     <el-icon :size="20">
-      <Expand v-if="isCollapse" />
+      <Expand v-if="sidebarIsCollapse" />
       <Fold v-else />
     </el-icon>
   </div>

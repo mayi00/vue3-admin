@@ -6,7 +6,7 @@ import { encryptCBC } from '@/utils/aesUtils'
 export const useUserStore = defineStore('user', {
   persist: {
     key: 'user',
-    storage: window.localStorage,
+    storage: window.sessionStorage,
   },
   state: () => ({
     userInfo: {},

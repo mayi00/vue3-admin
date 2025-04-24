@@ -1,9 +1,11 @@
 <script setup name="App">
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import { useAppStore } from '@/store'
+
+const appStore = useAppStore()
 </script>
 
 <template>
-  <el-config-provider :locale="zhCn">
+  <el-config-provider :locale="appStore.locale">
     <RouterView />
   </el-config-provider>
 </template>

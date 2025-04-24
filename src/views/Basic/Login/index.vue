@@ -1,11 +1,15 @@
 <script setup>
 import { User, Lock } from '@element-plus/icons-vue'
 import dayjs from 'dayjs'
-import { useUserStore } from '@/store'
+import { useUserStore, useAppStore } from '@/store'
+import { useI18n } from 'vue-i18n'
 
 defineOptions({ name: 'Login' })
 
+const { t } = useI18n()
 const router = useRouter()
+
+console.log(t('login.login'))
 
 const loginFormRef = ref()
 const loginForm = ref({
@@ -34,6 +38,11 @@ function handleLogin() {
       }, 1000)
     }
   })
+}
+
+function handleToggleLocale() {
+  const appStore = useAppStore()
+  appStore.toggleLocale()
 }
 
 // const copyrightYear = dayjs().format('YYYY')
@@ -72,7 +81,11 @@ const copyrightYear = new Date().getFullYear()
         </el-form-item>
       </el-form>
 
-      <el-button type="primary" size="large" class="login-btn" :loading="loading" @click="handleLogin">登录</el-button>
+      <el-button type="primary" size="large" class="login-btn" :loading="loading" @click="handleLogin"
+        >{{ t('login.login') }}
+      </el-button>
+      <el-button type="primary" size="large" class="login-btn" @click="handleToggleLocale"
+        >切换语言</el-button>
     </div>
 
     <div class="login-footer">
@@ -89,7 +102,7 @@ const copyrightYear = new Date().getFullYear()
   height: 100%;
   // background: url('@/assets/images/bg.jpg') no-repeat center center;
   // background-size: cover;
-  background: linear-gradient(120deg, var(--el-color-primary-light-9) 0%, var(--el-bg-color) 100%);
+  background: linear-gradient(120deg, var(--gray-12) 0%, var(--gray-6) 100%);
 }
 
 .login-title {

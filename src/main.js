@@ -13,6 +13,7 @@ import router from './router'
 import store from './store'
 import '@/plugins/element-plus.js'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import i18n from './lang'
 
 const env = import.meta.env
 console.log('【当前环境变量】', env)
@@ -24,5 +25,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
 app.use(store)
+app.use(i18n)
 app.use(router)
 app.mount('#app')
