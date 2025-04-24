@@ -27,7 +27,10 @@ function handleUploadDialogClose() {
 // 确认上传
 async function handleUploadConfirm(fileList) {
   loading.value = true
+  const start = performance.now()
   excelData.value = await readExcel(fileList[0])
+  const end = performance.now()
+  console.log(`读取excel数据耗时：${end - start}ms`)
   loading.value = false
   dialogVisible.value = false
   if (excelData.value.length === 1) {
@@ -57,12 +60,14 @@ function readExcel(file) {
 
       resolve(excelData)
     }
-    fileReader.readAsBinaryString(file)
+    // 由于 readAsBinaryString 已弃用，使用 readAsArrayBuffer 替代
+    fileReader.readAsArrayBuffer(file)
   })
 }
 
 // 下载
 function handleDownload(sheet) {
+  console.time('handleDownload')
   /**
    * 从原始数据中把学生姓名和对应的课时数据过滤出来
    * 过滤出包含'EMPTY'关键词的列，并按行合并数据
@@ -140,6 +145,7 @@ function downloadExcel(val, name) {
 
   XLSX.utils.book_append_sheet(excel, data, sheetName)
   XLSX.writeFile(excel, fileName)
+  console.timeEnd('handleDownload')
 }
 </script>
 
