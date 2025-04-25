@@ -8,12 +8,30 @@ function goExample() {
 }
 
 const value = ref(new Date())
+
+// 控制上传弹框的显示/隐藏
+const dialogVisible = ref(false)
+// 上传文件时的loading
+const loading = ref(false)
+
+function handleUploadDialog() {
+  dialogVisible.value = true
+}
+function handleUploadConfirm(fileList) {
+  console.log('fileList', fileList)
+
+  dialogVisible.value = false
+}
+function handleUploadDialogClose() {
+  dialogVisible.value = false
+}
 </script>
 
 <template>
   <div class="g-container">
     <el-card>
       <div class="mb-4">
+        <el-button @click="handleUploadDialog">dialogVisible</el-button>
         <el-button @click="goExample">Example</el-button>
         <el-button type="primary">Login</el-button>
         <el-button type="success">Success</el-button>
@@ -42,6 +60,17 @@ const value = ref(new Date())
       <el-calendar v-model="value" />
       <p v-for="i in 10" :key="i">Home{{ i }}</p>
     </el-card>
+
+    <FileUpload
+      :dialog-visible="dialogVisible"
+      accept=".xls,.xlsx"
+      :multiple="true"
+      limit="2"
+      maxSize="1024 * 4"
+      :loading="loading"
+      @on-confirm="handleUploadConfirm"
+      @on-cancel="handleUploadDialogClose"
+    />
   </div>
 </template>
 

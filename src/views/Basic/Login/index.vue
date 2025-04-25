@@ -42,7 +42,7 @@ function handleLogin() {
 
 function handleToggleLocale() {
   const appStore = useAppStore()
-  appStore.toggleLocale()
+  appStore.changeLanguage()
 }
 
 // const copyrightYear = dayjs().format('YYYY')
@@ -81,11 +81,8 @@ const copyrightYear = new Date().getFullYear()
         </el-form-item>
       </el-form>
 
-      <el-button type="primary" size="large" class="login-btn" :loading="loading" @click="handleLogin"
-        >{{ t('login.login') }}
-      </el-button>
-      <el-button type="primary" size="large" class="login-btn" @click="handleToggleLocale"
-        >切换语言</el-button>
+      <el-button type="primary" size="large" class="login-btn" :loading="loading" @click="handleLogin">登录</el-button>
+      <!-- <el-button type="primary" size="large" class="login-btn" @click="handleToggleLocale">切换语言</el-button> -->
     </div>
 
     <div class="login-footer">
