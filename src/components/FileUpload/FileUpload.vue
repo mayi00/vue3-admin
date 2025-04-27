@@ -68,7 +68,7 @@ function onExceed() {
 }
 // 上传文件之前
 function beforeUpload(file) {
-  console.log('file', file.size)
+  // console.log('file', file)
   // 文件大小限制
   const maxSize = parseInt(props.maxSize)
   if (file.size / 1024 > maxSize) {
@@ -76,11 +76,20 @@ function beforeUpload(file) {
     ElMessage.error(`文件大小不能超过 ${max.value} ${max.unit}`)
     return false
   }
-  if (fileList.value.length < props.limit) {
-    fileList.value.push(file)
-  } else {
+  // 文件数量限制
+  if (fileList.value.length >= props.limit) {
     ElMessage.warning(`最多允许上传${props.limit}个文件`)
+    return false
   }
+  // 上传同一个文件时，提示用户
+  const isSameFile = fileList.value.some(
+    item => item.name === file.name && item.size === file.size && item.lastModified === file.lastModified
+  )
+  if (isSameFile) {
+    ElMessage.warning('已选择相同的文件，请重新选择')
+    return false
+  }
+  fileList.value.push(file)
   return false
 }
 // 删除已选择的文件
@@ -131,15 +140,22 @@ function handleConfirm() {
 
     <ul v-if="fileList.length > 0" class="file-list">
       <li v-for="item in fileList" :key="item.uid" class="file-box">
-        <span>{{ item.name }}</span>
-        <el-icon class="icon-del" size="16px" @click="handleDelFile(item)"><CircleClose /></el-icon>
+        <el-tooltip effect="dark" :content="item.name" placement="top">
+          <template #content>
+            <p style="max-width: 300px; max-height: 200px; overflow-y: auto">
+              {{ item.name }}
+            </p>
+          </template>
+          <span class="file-name g-single-ellipsis">{{ item.name }}</span>
+        </el-tooltip>
+        <el-icon class="file-del" size="18px" @click="handleDelFile(item)"><CircleClose /></el-icon>
       </li>
     </ul>
 
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="handleCancel">取消</el-button>
         <el-button type="primary" :loading="loading" @click="handleConfirm">确定</el-button>
+        <el-button @click="handleCancel">取消</el-button>
       </div>
     </template>
   </el-dialog>
@@ -155,7 +171,14 @@ function handleConfirm() {
     justify-content: space-between;
     line-height: 24px;
 
-    .icon-del {
+    .file-name {
+      flex: 1;
+      margin-right: 32px;
+      cursor: default;
+    }
+
+    .file-del {
+      color: #999;
       cursor: pointer;
       &:hover {
         color: #f00;

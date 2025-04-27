@@ -66,7 +66,7 @@ function handleUploadDialogClose() {
       accept=".xls,.xlsx"
       :multiple="true"
       limit="2"
-      maxSize="1024 * 4"
+      :maxSize="1024 * 4"
       :loading="loading"
       @on-confirm="handleUploadConfirm"
       @on-cancel="handleUploadDialogClose"
