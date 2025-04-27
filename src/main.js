@@ -4,16 +4,14 @@ import '@/styles/variables.css'
 import '@/styles/theme.css'
 import '@/styles/globals.css'
 import '@/styles/style.css'
-// 暗黑模式的css样式
-import 'element-plus/theme-chalk/dark/css-vars.css'
+import '@/plugins/element-plus.js'
 
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import '@/plugins/element-plus.js'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import i18n from './lang'
+import i18n from '@/plugins/i18n'
 
 const env = import.meta.env
 console.log('【当前环境变量】', env)

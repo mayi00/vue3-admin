@@ -2,14 +2,10 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import dayjs from 'dayjs'
 import { useUserStore, useAppStore } from '@/store'
-import { useI18n } from 'vue-i18n'
 
 defineOptions({ name: 'Login' })
 
-const { t } = useI18n()
 const router = useRouter()
-
-console.log(t('login.login'))
 
 const loginFormRef = ref()
 const loginForm = ref({
@@ -82,7 +78,6 @@ const copyrightYear = new Date().getFullYear()
       </el-form>
 
       <el-button type="primary" size="large" class="login-btn" :loading="loading" @click="handleLogin">登录</el-button>
-      <!-- <el-button type="primary" size="large" class="login-btn" @click="handleToggleLocale">切换语言</el-button> -->
     </div>
 
     <div class="login-footer">

@@ -7,6 +7,6 @@ export default {
     light: 'light',
     username: 'username',
     password: 'password',
-    login: 'login',
+    login: 'Login',
   },
 }
