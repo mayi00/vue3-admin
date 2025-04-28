@@ -1,14 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import NProgress from '@/plugins/nprogress'
-import { useUserStore } from '@/store'
-import { basicRoutes } from './basic'
-import { routes as systemRoutes } from './system'
-import { exampleRoutes } from './example'
-import { routes as chartsRoutes } from './charts'
-import { routes as iopRoutes } from './iop'
 import { decryptCBC } from '@/utils/aesUtils'
+import { useUserStore } from '@/store'
+import * as routes from './modules'
 
-export const routes = [...basicRoutes, ...systemRoutes, ...exampleRoutes, ...chartsRoutes, ...iopRoutes]
+export * from './modules'
 
 const router = createRouter({
   history: createWebHashHistory(),

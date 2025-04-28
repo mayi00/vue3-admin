@@ -10,17 +10,26 @@ const currentRoute = useRoute()
 const { sidebarIsCollapse, activeModule } = storeToRefs(useAppStore())
 const menuList = ref([])
 
-// watch(
-//   () => activeModule.value,
-//   () => {
-//     menuList.value = routes.find(item => item.path === activeModule.value)?.children
-//   },
-//   { immediate: true }
-// )
+/**
+ * 下面 watch 和 watchEffect 实现的功能是相同的
+ *  watch
+ *    需要明确知道依赖项；
+ *    添加了 immediate 才会在组件初始化时执行；
+ *  watchEffect
+ *    不需要明确知道依赖项；
+ *    在组件初始化的时候就会执行一次；
+ */
+watch(
+  () => activeModule.value,
+  () => {
+    menuList.value = routes.find(item => item.path === activeModule.value)?.children
+  },
+  { immediate: true }
+)
 
-watchEffect(() => {
-  menuList.value = routes.find(item => item.path === activeModule.value)?.children
-})
+// watchEffect(() => {
+//   menuList.value = routes.find(item => item.path === activeModule.value)?.children
+// })
 </script>
 
 <template>

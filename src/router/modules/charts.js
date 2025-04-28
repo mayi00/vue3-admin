@@ -1,6 +1,6 @@
 import Layout from '@/layout/Layout.vue'
 
-export const routes = [
+export const chartsRoutes = [
   {
     path: '/charts',
     component: Layout,

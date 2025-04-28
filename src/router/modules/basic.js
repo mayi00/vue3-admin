@@ -1,6 +1,6 @@
 import Layout from '@/layout/Layout.vue'
 
-export const basicRoutes = [
+export default [
   {
     path: '/login',
     name: 'Login',
