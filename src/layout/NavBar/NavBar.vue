@@ -10,7 +10,7 @@ defineOptions({ name: 'NavBar' })
 
 <template>
   <div class="navbar">
-    <nav class="navbar__left g-no-select">
+    <nav class="navbar__left g-unselectable">
       <Collapse />
       <Module />
     </nav>

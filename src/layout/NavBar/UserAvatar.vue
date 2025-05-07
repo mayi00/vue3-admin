@@ -31,7 +31,7 @@ function logout() {
   <el-dropdown trigger="hover">
     <div class="user-avatar">
       <el-avatar :size="24" :src="logo" />
-      <span class="username g-no-select g-single-ellipsis">{{ userInfo.username }}</span>
+      <span class="username g-unselectable g-single-ellipsis">{{ userInfo.username }}</span>
     </div>
     <template #dropdown>
       <el-dropdown-menu>

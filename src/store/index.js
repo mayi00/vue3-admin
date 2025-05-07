@@ -8,5 +8,4 @@ const store = createPinia()
 store.use(piniaPluginPersistedstate)
 
 export default store
-
 export { useAppStore, useUserStore }

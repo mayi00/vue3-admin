@@ -4,7 +4,7 @@ import i18n from '@/plugins/i18n'
 
 export const useAppStore = defineStore('app', {
   persist: {
-    key: 'user',
+    key: 'app',
     storage: window.localStorage,
   },
   state: () => ({
