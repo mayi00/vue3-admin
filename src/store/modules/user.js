@@ -18,28 +18,24 @@ export const useUserStore = defineStore('user', {
       this.userInfo = userInfo
     },
     // 生成token
-    generateToken(username) {
+    generateToken(username, expirationHours = 12) {
       const randomStr = getRandomString()
-      const currentTime = dayjs().valueOf()
-      const expirationTime = dayjs(currentTime).add(1, 'day').valueOf()
-      this.token = encryptCBC(
-        `${username}-${randomStr}-${expirationTime}`,
-        process.env.VITE_AES_SECRET_KEY,
-        process.env.VITE_AES_SECRET_IV
-      )
+      const expirationTime = dayjs().add(expirationHours, 'hour').valueOf()
+      const tempToken = `${username}-${randomStr}-${expirationTime}`
+      return encryptCBC(tempToken, process.env.VITE_AES_SECRET_KEY, process.env.VITE_AES_SECRET_IV)
     },
     // 验证token
     validateToken() {
-      const plaintextToken = decryptCBC(this.token, process.env.VITE_AES_SECRET_KEY, process.env.VITE_AES_SECRET_IV)
+      const plaintext = decryptCBC(this.token, process.env.VITE_AES_SECRET_KEY, process.env.VITE_AES_SECRET_IV)
       const currentTime = new Date().getTime()
-      const expirationTime = plaintextToken.split('-')[2]
+      const expirationTime = plaintext.split('-')[2]
       if (currentTime > expirationTime) {
         this.logout()
         return false
       } else {
         // 在过期时间剩余10分钟内时刷新token
         if (expirationTime - currentTime <= 10 * 60 * 1000) {
-          this.generateToken(this.userInfo.username)
+          this.token = this.generateToken(this.userInfo.username)
         }
         return true
       }

@@ -6,6 +6,7 @@ import { useUserStore, useAppStore } from '@/store'
 defineOptions({ name: 'Login' })
 
 const router = useRouter()
+const { token } = storeToRefs(useUserStore())
 
 const loginFormRef = ref()
 const loginForm = ref({
@@ -26,8 +27,8 @@ function handleLogin() {
     if (valid) {
       loading.value = true
       setTimeout(() => {
+        token.value = useUserStore().generateToken(loginForm.value.username)
         useUserStore().setUserInfo({ username: loginForm.value.username })
-        useUserStore().generateToken(loginForm.value.username)
         ElMessage({ type: 'success', message: '登录成功' })
         loading.value = false
         router.push('/home')
