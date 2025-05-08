@@ -30,9 +30,9 @@ export const useUserStore = defineStore('user', {
     },
     // 验证token
     validateToken() {
-      const plaintext = decryptCBC(this.token, process.env.VITE_AES_SECRET_KEY, process.env.VITE_AES_SECRET_IV)
+      const plaintextToken = decryptCBC(this.token, process.env.VITE_AES_SECRET_KEY, process.env.VITE_AES_SECRET_IV)
       const currentTime = new Date().getTime()
-      const expirationTime = plaintext.split('-')[3]
+      const expirationTime = plaintextToken.split('-')[2]
       if (currentTime > expirationTime) {
         this.logout()
         return false
