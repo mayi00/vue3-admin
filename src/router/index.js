@@ -21,9 +21,10 @@ router.beforeEach((to, from, next) => {
   } else {
     document.title = 'Vue3-admin'
   }
-
-  if (useUserStore().token) {
-    if (!useUserStore().validateToken()) {
+  
+  const token = localStorage.getItem('token')
+  if (token) {
+    if (!useUserStore().validateToken(token)) {
       useUserStore().logout()
       next({ path: '/login' })
     } else if (to.path === '/login') {

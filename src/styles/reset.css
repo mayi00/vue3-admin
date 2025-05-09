@@ -25,9 +25,9 @@ html,
 body {
   width: 100%;
   height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', '微软雅黑';
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', '微软雅黑', sans-serif;
   line-height: 1.5;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;

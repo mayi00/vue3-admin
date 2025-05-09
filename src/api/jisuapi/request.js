@@ -9,10 +9,17 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   config => {
+    // 设置超时时间
     if (config.timeout === 0) {
       config.timeout = 0
     } else if (!config.timeout) {
       config.timeout = 1000 * 10
+    }
+
+    // 添加 token 到请求头
+    const token = localStorage.getItem('token')
+    if (token) {
+      config.headers['Authorization'] = token
     }
     // console.log('【请求config：】', config)
     return config
