@@ -1,11 +1,12 @@
 <script setup>
 import { User, Lock } from '@element-plus/icons-vue'
 import dayjs from 'dayjs'
-import { useUserStore, useAppStore } from '@/store'
+import { useUserStore } from '@/store'
 
 defineOptions({ name: 'Login' })
 
 const router = useRouter()
+const userStore = useUserStore()
 
 const loginFormRef = ref()
 const loginForm = ref({
@@ -26,9 +27,9 @@ function handleLogin() {
     if (valid) {
       loading.value = true
       setTimeout(() => {
-        const token = useUserStore().generateToken(loginForm.value.username)
+        const token = userStore.generateToken(loginForm.value.username)
         localStorage.setItem('token', token)
-        useUserStore().setUserInfo({ username: loginForm.value.username })
+        userStore.setUserInfo({ username: loginForm.value.username })
         ElMessage({ type: 'success', message: '登录成功' })
         loading.value = false
         router.push('/home')

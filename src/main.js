@@ -9,7 +9,7 @@ import '@/plugins/element-plus.js'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store'
+import pinia from './store'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import i18n from '@/plugins/i18n'
 
@@ -22,7 +22,7 @@ const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
-app.use(store)
+app.use(pinia)
 app.use(i18n)
 app.use(router)
 app.mount('#app')
