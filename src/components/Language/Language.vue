@@ -6,6 +6,10 @@ import { setI18nLanguage } from '@/plugins/i18n'
 defineOptions({ name: 'Language' })
 
 const { locale, t } = useI18n()
+const languages = [
+  { code: 'zh-CN', label: '中文' },
+  { code: 'en', label: 'English' },
+]
 // 切换语言
 function changeLanguage(lang) {
   setI18nLanguage(lang)
@@ -25,8 +29,14 @@ function changeLanguage(lang) {
     </div>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item @click="changeLanguage('zh-CN')">中文</el-dropdown-item>
-        <el-dropdown-item @click="changeLanguage('en')">English</el-dropdown-item>
+        <el-dropdown-item
+          v-for="lang in languages"
+          :key="lang.code"
+          :class="{ 'active-language': locale === lang.code }"
+          @click.stop="changeLanguage(lang.code)"
+        >
+          {{ lang.label }}
+        </el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
@@ -49,5 +59,10 @@ function changeLanguage(lang) {
     width: 18px;
     height: 18px;
   }
+}
+
+:deep(.active-language) {
+  color: var(--primary-color);
+  background-color: var(--gray-4);
 }
 </style>

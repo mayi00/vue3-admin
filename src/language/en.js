@@ -11,15 +11,14 @@ export default {
     search: 'Search',
     reset: 'Reset',
   },
-  home: {},
-  // 登录页面国际化
+  // 登录页面
   login: {
-    theneToggle: 'theneToggle',
-    languageToggle: 'languageToggle',
-    dark: 'dark',
-    light: 'light',
-    username: 'username',
-    password: 'Password',
+    username_placeholder: 'Enter username',
+    password_placeholder: 'Enter password',
+    username_required: 'Please enter username',
+    password_required: 'Please enter password',
+    password_length: 'Length should be 6-16 characters',
     login: 'Login',
   },
+  home: {},
 }

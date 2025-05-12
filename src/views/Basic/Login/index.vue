@@ -2,11 +2,13 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import dayjs from 'dayjs'
 import { useUserStore } from '@/store'
+import { useI18n } from 'vue-i18n'
 
 defineOptions({ name: 'Login' })
 
 const router = useRouter()
 const userStore = useUserStore()
+const { t } = useI18n()
 
 const loginFormRef = ref()
 const loginForm = ref({
@@ -14,10 +16,10 @@ const loginForm = ref({
   password: '123456',
 })
 const rules = reactive({
-  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  username: [{ required: true, message: t('login.username_required'), trigger: 'blur' }],
   password: [
-    { required: true, message: '请输入密码', trigger: 'blur' },
-    { min: 6, max: 16, message: '长度6-16位', trigger: 'blur' },
+    { required: true, message: t('login.password_required'), trigger: 'blur' },
+    { min: 6, max: 16, message: t('login.password_length'), trigger: 'blur' },
   ],
 })
 const loading = ref(false)
@@ -42,6 +44,9 @@ function handleLogin() {
 <template>
   <div class="g-container login-container">
     <div class="login-wrapper">
+      <div class="language-switcher">
+        <Language />
+      </div>
       <div class="login-form">
         <h2 class="login-title">vue3-admin</h2>
 
@@ -49,7 +54,7 @@ function handleLogin() {
           <el-form-item prop="username">
             <el-input
               v-model.trim="loginForm.username"
-              placeholder="请输入用户名"
+              :placeholder="$t('login.username_placeholder')"
               size="large"
               :prefix-icon="User"
               maxlength="16"
@@ -60,7 +65,7 @@ function handleLogin() {
             <el-input
               v-model.trim="loginForm.password"
               type="password"
-              placeholder="请输入密码"
+              :placeholder="$t('login.password_placeholder')"
               size="large"
               show-password
               maxlength="16"
@@ -74,7 +79,7 @@ function handleLogin() {
         </el-form>
 
         <el-button type="primary" size="large" class="login-btn" :loading="loading" @click="handleLogin">
-          登录
+          {{ $t('login.login') }}
         </el-button>
       </div>
 
@@ -102,6 +107,12 @@ function handleLogin() {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.language-switcher {
+  position: absolute;
+  top: 24px;
+  right: 24px;
 }
 
 .login-form {
