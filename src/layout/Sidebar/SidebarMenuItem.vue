@@ -48,13 +48,13 @@ function getIcon4Sub(iconName) {
     :index="resolveRoutePath(item.path)"
     @click="menuItem => handleClickMenuItem(menuItem, item)"
   >
-    <Icon :icon="item.meta.icon || 'mdi:auto-awesome-outline'" class="iconify-icon" />
+    <Icon :icon="item.meta.icon || 'mdi:auto-awesome-outline'" class="g-iconify" />
     <template #title> {{ item.meta.title }} </template>
   </el-menu-item>
 
   <el-sub-menu v-else :index="resolveRoutePath(item.path)">
     <template #title>
-      <Icon :icon="item.meta.icon || 'flowbite:grid-outline'" class="iconify-icon" />
+      <Icon :icon="item.meta.icon || 'flowbite:grid-outline'" class="g-iconify" />
       <span>{{ item.meta.title }}</span>
     </template>
 
@@ -63,10 +63,3 @@ function getIcon4Sub(iconName) {
     </template>
   </el-sub-menu>
 </template>
-
-<style lang="less" scoped>
-.iconify-icon {
-  font-size: 16px;
-  margin: 0 4px;
-}
-</style>

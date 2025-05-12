@@ -17,6 +17,7 @@ defineOptions({ name: 'NavBar' })
     <div class="navbar__right">
       <Theme />
       <Fullscreen />
+      <Language />
       <UserAvatar />
     </div>
   </div>

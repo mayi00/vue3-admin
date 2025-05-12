@@ -6,7 +6,7 @@ export default {
     dark: 'dark',
     light: 'light',
     username: 'username',
-    password: 'password',
+    password: 'Password',
     login: 'Login',
   },
 }

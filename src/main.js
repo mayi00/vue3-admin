@@ -11,7 +11,7 @@ import App from './App.vue'
 import router from './router'
 import pinia from './store'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import i18n from '@/plugins/i18n'
+import { i18n, setupI18n } from '@/plugins/i18n'
 
 const env = import.meta.env
 console.log('【当前环境变量】', env)
@@ -22,7 +22,8 @@ const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
+setupI18n(app)
 app.use(pinia)
-app.use(i18n)
+// app.use(i18n)
 app.use(router)
 app.mount('#app')

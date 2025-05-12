@@ -1,18 +1,7 @@
 <script setup>
-import { useAppStore } from '@/store'
-import { useI18n } from 'vue-i18n'
-
 defineOptions({ name: 'Home' })
 
 const router = useRouter()
-
-const { locale, t } = useI18n()
-
-// 切换语言
-function changeLanguage(lang) {
-  useAppStore().setLanguage(lang)
-  console.log(locale.value, t('login.login'))
-}
 
 function goExample() {
   router.push({ name: 'Example' })
@@ -42,9 +31,6 @@ function handleUploadDialogClose() {
   <div class="g-container">
     <el-card>
       <div class="mb-4">
-        {{ $t('login.login') }}
-        <el-button type="primary" @click="changeLanguage('zhCn')">中文</el-button>
-        <el-button type="primary" @click="changeLanguage('en')">en</el-button>
         <el-button @click="handleUploadDialog">dialogVisible</el-button>
         <el-button @click="goExample">Example</el-button>
         <el-button type="primary">Login</el-button>
