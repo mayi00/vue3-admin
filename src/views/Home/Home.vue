@@ -33,7 +33,7 @@ function handleUploadDialogClose() {
       <div class="mb-4">
         <el-button @click="handleUploadDialog">dialogVisible</el-button>
         <el-button @click="goExample">Example</el-button>
-        <el-button type="primary">Login</el-button>
+        <el-button type="primary">{{ $t('common.add') }}</el-button>
         <el-button type="success">Success</el-button>
         <el-button type="info">Info</el-button>
         <el-button type="warning">Warning</el-button>

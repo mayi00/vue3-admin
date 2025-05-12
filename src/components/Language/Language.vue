@@ -9,14 +9,19 @@ const { locale, t } = useI18n()
 // 切换语言
 function changeLanguage(lang) {
   setI18nLanguage(lang)
-  console.log(lang, locale.value, t('login.login'))
+  console.log(lang, locale.value, t('common.common'))
 }
 </script>
 
 <template>
   <el-dropdown trigger="hover">
     <div class="language-wrapper">
-      <Icon icon="material-icon-theme:i18n" class="iconify-icon" />
+      <svg class="language-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+        <path
+          fill="currentColor"
+          d="M24 14h-2l-6 14h3l.857-2h6.286L27 28h3Zm-2.856 9L23 18.67L24.856 23ZM12 6V4h-2v2H2v2h11.959a13.4 13.4 0 0 1-2.876 7.07A41 41 0 0 1 8.786 12H6.408a42 42 0 0 0 3.404 4.685a64 64 0 0 1-5.49 5.579l1.355 1.472a68 68 0 0 0 5.454-5.523a49 49 0 0 0 3.279 3.342l1.42-1.42a50 50 0 0 1-3.415-3.498A15.34 15.34 0 0 0 15.97 8H20V6Z"
+        />
+      </svg>
     </div>
     <template #dropdown>
       <el-dropdown-menu>
@@ -34,14 +39,15 @@ function changeLanguage(lang) {
   padding: 8px;
   cursor: pointer;
   border-radius: 4px;
+  color: var(--gray-10);
 
   &:hover {
     background-color: var(--gray-4);
   }
 
-  .iconify-icon {
-    font-size: 20px;
-    color: var(--gray-12);
+  .language-icon {
+    width: 18px;
+    height: 18px;
   }
 }
 </style>

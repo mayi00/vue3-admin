@@ -1,9 +1,9 @@
 <script setup name="App">
-import { eleLocale } from '@/plugins/i18n.js'
+import { elLocale } from '@/plugins/i18n.js'
 </script>
 
 <template>
-  <el-config-provider :locale="eleLocale">
+  <el-config-provider :locale="elLocale">
     <RouterView />
   </el-config-provider>
 </template>

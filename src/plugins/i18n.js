@@ -4,26 +4,28 @@ import { ref } from 'vue'
 // 引入语言文件
 import zhCn from '../language/zh-cn.js'
 import en from '../language/en.js'
-// 引入element-plus的语言包
-import eleZhCn from 'element-plus/es/locale/lang/zh-cn'
-import eleEn from 'element-plus/es/locale/lang/en'
 
 /**
  * i18n 国际化配置实例
  */
 const i18n = createI18n({
-  legacy: false, // 关闭传统模式以兼容Vue3组合式API
-  locale: '', // 默认语言
+  // 关闭传统模式以兼容Vue3组合式API
+  legacy: false,
+  // 默认语言
+  locale: navigator.language || 'zh-CN',
+  // 回退语言，如果没有找到对应的语言包，则使用回退语言
+  fallbackLocale: 'zh-CN',
   // 语言包配置
   messages: { 'zh-CN': zhCn, en },
 })
-const eleLocale = ref(eleZhCn)
+const elLocale = ref(null)
 
 // 设置语言
 function setI18nLanguage(locale) {
   i18n.global.locale.value = locale
-  loadThirdPartyMessage(locale)
-  document?.querySelector('html')?.setAttribute('lang', locale)
+  localStorage.setItem('dt-i18n-locale', i18n.global.locale.value)
+  loadThirdPartyMessage(i18n.global.locale.value)
+  document?.querySelector('html')?.setAttribute('lang', i18n.global.locale.value)
 }
 
 /**
@@ -38,20 +40,22 @@ async function loadThirdPartyMessage(lang) {
  * @param lang
  */
 async function loadElementLocale(lang) {
-  switch (lang) {
-    case 'en': {
-      eleLocale.value = eleEn
-      break
+  try {
+    const elLocales = {
+      'zh-CN': () => import('element-plus/es/locale/lang/zh-cn'),
+      en: () => import('element-plus/es/locale/lang/en'),
     }
-    case 'zh-CN': {
-      eleLocale.value = eleZhCn
-      break
-    }
+    const module = await elLocales[lang]()
+    elLocale.value = module.default
+  } catch (error) {
+    console.error('加载Element语言包失败:', error)
+    elLocale.value = (await import('element-plus/es/locale/lang/zh-cn')).default
   }
 }
 
-async function setupI18n(app, options = {}) {
-  const { defaultLocale = 'zh-CN' } = options
+async function setupI18n(app) {
+  const savedLocale = localStorage.getItem('dt-i18n-locale')
+  const defaultLocale = savedLocale || 'zh-CN'
   setI18nLanguage(defaultLocale)
 
   app.use(i18n)
@@ -65,4 +69,4 @@ async function setupI18n(app, options = {}) {
   })
 }
 
-export { i18n, eleLocale, setI18nLanguage, setupI18n }
+export { i18n, elLocale, setI18nLanguage, setupI18n }
