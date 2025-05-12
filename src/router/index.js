@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import NProgress from '@/plugins/nprogress'
-import { decryptCBC } from '@/utils/aesUtils'
 import { useUserStore } from '@/store'
 import routes from './modules'
 
@@ -13,19 +12,22 @@ const router = createRouter({
   },
 })
 
+const userStore = useUserStore()
+
 router.beforeEach((to, from, next) => {
   NProgress.start()
+
   // 路由发生变化修改页面 title
   if (to.meta.title) {
     document.title = `${to.meta.title} | Vue3-admin`
   } else {
     document.title = 'Vue3-admin'
   }
-  
+
   const token = localStorage.getItem('token')
   if (token) {
-    if (!useUserStore().validateToken(token)) {
-      useUserStore().logout()
+    if (!userStore.validateToken(token)) {
+      userStore.logout()
       next({ path: '/login' })
     } else if (to.path === '/login') {
       next({ path: '/' })
