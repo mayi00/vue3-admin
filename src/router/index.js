@@ -12,8 +12,6 @@ const router = createRouter({
   },
 })
 
-const userStore = useUserStore()
-
 router.beforeEach((to, from, next) => {
   NProgress.start()
 
@@ -26,8 +24,8 @@ router.beforeEach((to, from, next) => {
 
   const token = localStorage.getItem('token')
   if (token) {
-    if (!userStore.validateToken(token)) {
-      userStore.logout()
+    if (!useUserStore().validateToken(token)) {
+      useUserStore().logout()
       next({ path: '/login' })
     } else if (to.path === '/login') {
       next({ path: '/' })

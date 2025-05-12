@@ -2,6 +2,21 @@
 defineOptions({ name: 'Error404' })
 
 const router = useRouter()
+const countdown = ref(6)
+let interval = null
+
+onMounted(() => {
+  interval = setInterval(() => {
+    countdown.value--
+    if (countdown.value <= 0) {
+      clearInterval(interval)
+      goHome()
+    }
+  }, 1000)
+})
+onBeforeUnmount(() => {
+  clearInterval(interval)
+})
 
 function goHome() {
   router.push({ path: '/home', name: 'Home' })
@@ -16,6 +31,7 @@ function goHome() {
     <div class="right-section">
       <p>抱歉，您访问的页面不存在。</p>
       <el-button @click="goHome">返回首页</el-button>
+      <p style="font-size: 14px; color: #999; margin-top: 10px">{{ countdown }} 秒后将自动返回首页</p>
     </div>
   </div>
 </template>
