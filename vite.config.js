@@ -74,8 +74,8 @@ export default ({ mode }) => {
         // 分析打包大小
         // plugins: [visualizer()],
         output: {
-          chunkFileNames: 'assets/js/[hash].js',
-          entryFileNames: 'assets/js/[hash].js',
+          chunkFileNames: `assets/js/[hash]-${new Date().getTime()}.js`,
+          entryFileNames: `assets/js/[hash]-${new Date().getTime()}.js`,
           // assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
           // 用于输出静态资源的命名，[ext]表示文件扩展名
           assetFileNames: assetInfo => {
@@ -88,7 +88,7 @@ export default ({ mode }) => {
             } else if (/\.(woff2?|eot|ttf|otf)(\?.*)?$/i.test(assetInfo.names[0])) {
               extType = 'fonts'
             }
-            return `assets/${extType}/[hash].[ext]`
+            return `assets/${extType}/[hash]-${new Date().getTime()}.[ext]`
           },
           // 打包文件拆分
           manualChunks(id) {
@@ -100,18 +100,22 @@ export default ({ mode }) => {
       },
       minify: 'terser',
       terserOptions: {
-        // 生产环境构建移除 console debugger
         compress: {
+          // 生产环境构建移除 console debugger
           /* eslint-disable */
           drop_console: env.VITE_NODE_ENV === 'production',
           drop_debugger: env.VITE_NODE_ENV === 'production',
           /* eslint-enable */
         },
+        format: {
+          // 删除注释
+          comments: false,
+        },
       },
       // 启用/禁用 gzip 压缩大小报告
       reportCompressedSize: true,
       // chunk 大小警告的限制（以 kbs 为单位）
-      chunkSizeWarningLimit: 1024,
+      chunkSizeWarningLimit: 2048,
     },
   })
 }
