@@ -4,15 +4,22 @@ import { Icon } from '@iconify/vue'
 defineOptions({ name: 'Iconify' })
 
 const props = defineProps({
-  icon: { type: String, default: '' },
-  size: { type: Number, default: 16 },
-  color: { type: String, default: '' },
+  icon: { type: String, default: '' }, // 必传图标名称（如 "carbon:settings"）
+  size: { type: Number, default: 16 }, // 图标尺寸（单位px）
+  color: { type: String, default: '' }, // 图标颜色（支持hex/rgb/颜色名）
 })
-const emit = defineEmits([])
 </script>
 
 <template>
-  <Icon icon="carbon:settings" :inline="true" style="color: #f00; font-size: 24px" />
+  <Icon
+    :icon="icon"
+    :inline="true"
+    :style="{
+      fontSize: `${size}px`,
+      color: color || 'currentColor',
+      verticalAlign: 'middle',
+    }"
+  />
 </template>
 
 <style lang="less" scoped></style>

@@ -23,6 +23,7 @@
     "@antv/g6": "^5.0.45",
     "@antv/g6-extension-3d": "^0.1.19",
     "@element-plus/icons-vue": "^2.3.1",
+    "@iconify/json": "^2.2.337",
     "@iconify/vue": "^5.0.0",
     "@vueuse/core": "^13.1.0",
     "@wangeditor/editor": "^5.1.23",
@@ -47,7 +48,6 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.337",
     "@vitejs/plugin-legacy": "^6.1.1",
     "@vitejs/plugin-vue": "^5.2.4",
     "@vitejs/plugin-vue-jsx": "^4.1.2",

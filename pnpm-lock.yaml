@@ -17,6 +17,9 @@ importers:
       '@element-plus/icons-vue':
         specifier: ^2.3.1
         version: 2.3.1(vue@3.5.13)
+      '@iconify/json':
+        specifier: ^2.2.337
+        version: 2.2.337
       '@iconify/vue':
         specifier: ^5.0.0
         version: 5.0.0(vue@3.5.13)
@@ -84,9 +87,6 @@ importers:
         specifier: ^0.18.5
         version: 0.18.5
     devDependencies:
-      '@iconify/json':
-        specifier: ^2.2.337
-        version: 2.2.337
       '@vitejs/plugin-legacy':
         specifier: ^6.1.1
         version: 6.1.1(terser@5.39.0)(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(less@4.3.0)(sass@1.88.0)(terser@5.39.0))

@@ -31,6 +31,9 @@ function handleUploadDialogClose() {
   <div class="g-container">
     <el-card>
       <div class="mb-4">
+        <icon-mdi-home />
+        <icon-mingcute:hours-line />
+        <mdi-home />
         <el-button @click="handleUploadDialog">dialogVisible</el-button>
         <el-button @click="goExample">Example</el-button>
         <el-button type="primary">{{ $t('common.add') }}</el-button>
