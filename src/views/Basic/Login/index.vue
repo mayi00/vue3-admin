@@ -1,6 +1,5 @@
 <script setup>
 import { User, Lock } from '@element-plus/icons-vue'
-import dayjs from 'dayjs'
 import { useUserStore } from '@/store'
 import { useI18n } from 'vue-i18n'
 
