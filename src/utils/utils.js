@@ -1,11 +1,11 @@
 /**
  * @description : 获取随机字符串
- *                传入的 length 为空时，则返回 ''
- *                若 uppercase , lowercase, num 均不传，则默认全部包含
- * @param         {Number|String} length 字符串长度，如不传则默认生成32位
- * @param         {Boolean} uppercase  是否包含大写字母
- * @param         {Boolean} lowercase 是否包含小写字母
- * @param         {Boolean} num 是否包含数字
+ *                - 传入的 length 为空时，则返回 ''
+ *                - 若 uppercase , lowercase, num 均不传，则默认全部包含
+ * @param         {Number|String} length 字符串长度，默认32位
+ * @param         {Boolean} uppercase  是否包含大写字母（默认true）
+ * @param         {Boolean} lowercase 是否包含小写字母（默认true）
+ * @param         {Boolean} num 是否包含数字（默认true）
  * @return        {String} 生成的字符串
  * @Author      : MDT
  */
@@ -19,6 +19,7 @@ export function getRandomString(obj) {
   const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz'
   const numChars = '0123456789'
+  const symbols = '!@#$%^&*()_+[]{}|;:,.<>?'
   let chars = ''
   if (uppercase) chars += uppercaseChars
   if (lowercase) chars += lowercaseChars
@@ -28,22 +29,20 @@ export function getRandomString(obj) {
   const array = new Uint32Array(lengthNo)
   crypto.getRandomValues(array)
 
-  let str = ''
+  const arr = []
   for (let i = 0; i < lengthNo; i++) {
     const randomIndex = Math.floor((array[i] / 4294967296) * maxLength)
-    str += chars.charAt(randomIndex)
-    // str += chars.charAt(array[i] % maxLength)
-    // str = str + chars.charAt(Math.floor(Math.random() * maxLength))
+    arr.push(chars.charAt(randomIndex))
   }
 
-  return str
+  return arr.join('')
 }
 
 /**
  * @description  : 判断是否为外部链接
  * @param         {String} path
  * @return        {Boolean}
- * @Author       : hzf
+ * @Author       : MDT
  */
 export function isExternalLink(path) {
   return /^(https?:|mailto:|tel:)/.test(path)
@@ -204,4 +203,162 @@ export function base64ToBlob(base64Content) {
     // 处理解码过程中可能出现的错误
     throw new Error('无法解码 base64 数据: ' + error.message)
   }
+}
+
+/**
+ * @description : 检测浏览器类型
+ * @return       {String} 返回浏览器标识（Chrome/Firefox/Safari/Edge/Opera/IE/Other）
+ * @example     :
+ *               detectBrowser() => 'Chrome' // 谷歌浏览器
+ *               detectBrowser() => 'Firefox' // 火狐浏览器
+ *               detectBrowser() => 'Safari' // 苹果浏览器
+ *               detectBrowser() => 'Edge' // 微软Edge浏览器
+ *               detectBrowser() => 'Opera' // Opera浏览器
+ *               detectBrowser() => 'IE' // IE浏览器
+ * @Author      : MDT
+ */
+export function detectBrowser() {
+  const userAgent = navigator.userAgent
+  if (userAgent.includes('Edg') || userAgent.includes('Edge')) {
+    return 'Edge'
+  } else if (userAgent.includes('OPR')) {
+    return 'Opera'
+  } else if (userAgent.includes('Firefox')) {
+    return 'Firefox'
+  } else if (userAgent.includes('Trident') || userAgent.includes('MSIE')) {
+    return 'IE'
+  } else if (userAgent.includes('Chrome') && !userAgent.includes('Chromium')) {
+    return 'Chrome'
+  } else if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) {
+    return 'Safari'
+  }
+  return 'Other'
+}
+
+/**
+ * @description : 检测是否为移动端设备
+ * @return       {Boolean} 移动端返回true，否则返回false
+ * @example     :
+ *               isMobile() => true  // 移动设备
+ *               isMobile() => false // 非移动设备
+ * @Author      : MDT
+ */
+export function isMobile() {
+  const userAgent = navigator.userAgent
+  const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i
+  const tabletRegex =
+    /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/i
+
+  // 优先检测移动设备
+  if (mobileRegex.test(userAgent)) {
+    return true
+  }
+
+  // 检测平板设备（根据需求可选择是否归类为移动端）
+  return tabletRegex.test(userAgent)
+}
+
+/**
+ * @description : 检测iOS设备
+ * @return       {Boolean} iOS设备返回true，否则返回false
+ * @example     : isIOS() => true
+ * @Author      : MDT
+ */
+export function isIOS() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+}
+
+/**
+ * @description : 检测Android设备
+ * @return       {Boolean} Android设备返回true，否则返回false
+ * @example     : isAndroid() => true
+ * @Author      : MDT
+ */
+export function isAndroid() {
+  return /Android/.test(navigator.userAgent) && !window.MSStream
+}
+
+/**
+ * @description : 获取操作系统类型
+ * @return       {String} 操作系统标识（Windows/Mac/Linux/Android/iOS/Other）
+ * @example     : getOS() => 'Windows'
+ * @Author      : MDT
+ */
+export function getOS() {
+  const ua = navigator.userAgent
+  if (isIOS()) return 'iOS'
+  if (isAndroid()) return 'Android'
+  if (ua.includes('Win')) return 'Windows'
+  if (ua.includes('Mac')) return 'Mac'
+  if (ua.includes('Linux')) return 'Linux'
+  return 'Other'
+}
+
+/**
+ * @description : 解析URL参数为对象
+ * @return       {Object} 参数键值对对象
+ * @example     : getUrlParams() => { id: '123' }
+ * @Author      : MDT
+ */
+export function getUrlParams() {
+  return Object.fromEntries(new URLSearchParams(window.location.search))
+}
+
+/**
+ * @description : 对象转URL查询字符串
+ * @param        {Object} params - 需要转换的对象
+ * @return       {String} 查询字符串
+ * @example     : objectToQuery({a:1}) => 'a=1'
+ * @Author      : MDT
+ */
+export function objectToQuery(params) {
+  return new URLSearchParams(params).toString()
+}
+
+/**
+ * @description : 深拷贝对象（增强版）
+ * @param        {Any} source - 需要拷贝的数据
+ * @return       {Any} 拷贝后的数据
+ * @example     :
+ *               deepClone({a: new Date()}) => 拷贝后的日期对象
+ *               deepClone([{b: new Set([1])}]) => 拷贝后的集合对象
+ * @Author      : MDT
+ */
+export function deepClone(source, hash = new WeakMap()) {
+  // 处理非对象类型
+  if (source === null || typeof source !== 'object') return source
+
+  // 处理循环引用
+  if (hash.has(source)) return hash.get(source)
+
+  // 处理特殊对象类型
+  const Constructor = source.constructor
+  switch (Constructor) {
+    case Date:
+      return new Constructor(source.getTime())
+    case RegExp:
+      return new Constructor(source)
+    case Map:
+      return new Map(Array.from(source, ([k, v]) => [deepClone(k), deepClone(v)]))
+    case Set:
+      return new Set(Array.from(source, v => deepClone(v)))
+  }
+
+  // 处理普通对象/数组
+  const cloneObj = new Constructor()
+  hash.set(source, cloneObj)
+
+  for (const key in source) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      cloneObj[key] = deepClone(source[key], hash)
+    }
+  }
+
+  // 处理Symbol类型属性
+  const symbolKeys = Object.getOwnPropertySymbols(source)
+  for (const symKey of symbolKeys) {
+    cloneObj[symKey] = deepClone(source[symKey], hash)
+  }
+
+  return cloneObj
 }
