@@ -55,7 +55,9 @@ const handleClick = item => {
   height: 30px;
   display: flex;
   align-items: center;
-  background: var(--el-color-info-light-9);
+  background-color: #fff;
+  border: 1px solid var(--el-border-color-light);
+  box-shadow: 0 1px 1px var(--el-box-shadow-light);
 
   :deep(.el-breadcrumb) {
     font-size: 14px;
