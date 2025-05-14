@@ -1,8 +1,8 @@
 /**
  * 存储单位转换器
  * @param {number} value - 需要转换的数值
- * @param {string} fromUnit - 原始单位 (KB/MB/GB)
- * @param {string} toUnit - 目标单位 (KB/MB/GB)
+ * @param {string} fromUnit - 原始单位 (KB/MB/GB...)
+ * @param {string} toUnit - 目标单位 (KB/MB/GB...)
  * @param {number} [precision=2] - 保留小数位数
  * @returns {Object} 包含转换后数值和单位的对象
  */
@@ -40,11 +40,11 @@ export function convertStorageUnits(value, fromUnit, toUnit, precision = 2) {
 /**
  * 存储单位转换器，自动选择相匹配的单位
  * @param {number} value - 需要转换的数值
- * @param {string} fromUnit - 原始单位 (KB/MB/GB)
+ * @param {string} fromUnit - 原始单位 (KB/MB/GB...)
  * @param {number} [precision=2] - 保留小数位数
  * @returns
  */
-export function autoConvertUnits(value, fromUnit, precision = 2) {
+export function autoConvertStorageUnits(value, fromUnit, precision = 2) {
   const units = ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB', 'BB']
   const initialIndex = units.indexOf(fromUnit)
 

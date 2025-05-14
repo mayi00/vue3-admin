@@ -1,6 +1,6 @@
 <script setup>
 import { ElMessage } from 'element-plus'
-import { autoConvertUnits } from '@/utils/unitConversion.js'
+import { autoConvertStorageUnits } from '@/utils/unitConversion.js'
 
 defineOptions({ name: 'FileUpload' })
 
@@ -72,7 +72,7 @@ function beforeUpload(file) {
   // 文件大小限制
   const maxSize = parseInt(props.maxSize)
   if (file.size / 1024 > maxSize) {
-    const max = autoConvertUnits(maxSize, 'KB')
+    const max = autoConvertStorageUnits(maxSize, 'KB')
     ElMessage.error(`文件大小不能超过 ${max.value} ${max.unit}`)
     return false
   }
