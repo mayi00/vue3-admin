@@ -3,12 +3,16 @@ import { elLocale } from '@/plugins/i18n.js'
 import { useUserStore } from '@/store'
 
 const { userInfo } = storeToRefs(useUserStore())
+
+const waterContent = computed(() => {
+  return userInfo.value.username || ''
+})
 </script>
 
 <template>
   <el-config-provider :locale="elLocale">
-    <el-watermark :content="userInfo.username">
-      <RouterView />
-    </el-watermark>
+    <!-- <el-watermark :content="waterContent"> -->
+    <RouterView />
+    <!-- </el-watermark> -->
   </el-config-provider>
 </template>

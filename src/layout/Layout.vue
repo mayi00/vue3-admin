@@ -1,9 +1,9 @@
 <script setup>
-import Sidebar from './Sidebar/Sidebar.vue'
-import NavBar from './NavBar/NavBar.vue'
-import TagsBar from './TagsBar/TagsBar.vue'
-import Breadcrumb from './Breadcrumb/Breadcrumb.vue'
-import AppMain from './AppMain/AppMain.vue'
+import AppMain from './AppMain/Index.vue'
+import Breadcrumb from './Breadcrumb/Index.vue'
+import NavBar from './NavBar/Index.vue'
+import Sidebar from './Sidebar/Index.vue'
+import TagsBar from './TagsBar/Index.vue'
 import { useAppStore } from '@/store'
 
 defineOptions({ name: 'Layout' })

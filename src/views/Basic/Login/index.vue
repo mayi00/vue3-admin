@@ -28,12 +28,12 @@ function handleLogin() {
     if (valid) {
       loading.value = true
       setTimeout(() => {
+        ElMessage({ type: 'success', message: '登录成功' })
         const token = userStore.generateToken(loginForm.value.username)
         localStorage.setItem('token', token)
         userStore.setUserInfo({ username: loginForm.value.username })
-        ElMessage({ type: 'success', message: '登录成功' })
-        loading.value = false
         router.push('/home')
+        loading.value = false
       }, 1000)
     }
   })
