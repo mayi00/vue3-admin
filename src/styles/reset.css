@@ -15,10 +15,8 @@
   padding: 0;
   border: 0;
   box-sizing: border-box;
-  line-height: inherit;
   border-color: currentcolor;
   word-break: break-all;
-  vertical-align: baseline;
 }
 
 html,
@@ -26,14 +24,16 @@ body {
   width: 100%;
   height: 100%;
   font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', '微软雅黑', sans-serif;
+    Inter, 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial,
+    sans-serif;
   line-height: 1.5;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
   text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
 ol,
