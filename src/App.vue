@@ -5,7 +5,7 @@ import { useUserStore } from '@/store'
 const { userInfo } = storeToRefs(useUserStore())
 
 const waterContent = computed(() => {
-  return userInfo.value.username || ''
+  return userInfo.value.name || ''
 })
 </script>
 

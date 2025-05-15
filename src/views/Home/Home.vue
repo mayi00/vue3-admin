@@ -1,80 +1,135 @@
 <script setup>
+import { useUserStore } from '@/store'
+import imgLogo from '@/assets/icons/vue.svg'
+
 defineOptions({ name: 'Home' })
 
+const { userInfo } = storeToRefs(useUserStore())
+
+const avatar = ref(imgLogo)
 const router = useRouter()
+// 当前时间
+const currentTime = ref('')
+const timer = ref(null)
 
-function goExample() {
-  router.push({ name: 'Example' })
+// 问候语计算属性
+const greeting = computed(() => {
+  const hours = new Date().getHours()
+  if (hours < 6) return '凌晨好'
+  if (hours < 9) return '早上好'
+  if (hours < 12) return '上午好'
+  if (hours < 14) return '中午好'
+  if (hours < 18) return '下午好'
+  return '晚上好'
+})
+// 更新时间
+const updateTime = () => {
+  const now = new Date()
+  currentTime.value = now
+    .toLocaleString('zh-CN', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    })
+    .replace(/\//g, '-')
 }
 
-const value = ref(new Date())
+onMounted(() => {
+  updateTime()
+  timer.value = setInterval(updateTime, 1000)
+})
 
-// 控制上传弹框的显示/隐藏
-const dialogVisible = ref(false)
-// 上传文件时的loading
-const loading = ref(false)
-
-function handleUploadDialog() {
-  dialogVisible.value = true
-}
-function handleUploadConfirm(fileList) {
-  console.log('fileList', fileList)
-
-  dialogVisible.value = false
-}
-function handleUploadDialogClose() {
-  dialogVisible.value = false
-}
+onBeforeUnmount(() => {
+  clearInterval(timer.value)
+})
 </script>
 
 <template>
-  <div class="g-container">
-    <el-card>
-      <div class="mb-4">
-        <icon-mdi-home />
-        <icon-mingcute:hours-line />
-        <mdi-home />
-        <el-button @click="handleUploadDialog">dialogVisible</el-button>
-        <el-button @click="goExample">Example</el-button>
-        <el-button type="primary">{{ $t('common.add') }}</el-button>
-        <el-button type="success">Success</el-button>
-        <el-button type="info">Info</el-button>
-        <el-button type="warning">Warning</el-button>
-        <el-button type="danger">Danger</el-button>
-      </div>
-      <div style="font-size: 20px">
-        <Edit style="width: 1em; height: 1em; margin-right: 8px" />
-        <Share style="width: 1em; height: 1em; margin-right: 8px" />
-        <Delete style="width: 1em; height: 1em; margin-right: 8px" />
-        <Search style="width: 1em; height: 1em; margin-right: 8px" />
+  <div class="g-container home-container">
+    <el-row :gutter="8">
+      <el-col :span="16">
+        <el-card class="user-card">
+          <div class="user-info">
+            <el-avatar :size="48" :src="userInfo.avatar" />
+            <div class="user-details">
+              <h2>{{ greeting }}，{{ userInfo.name }}</h2>
+              <p class="time">{{ currentTime }}</p>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card>
+          <el-avatar :size="48" :src="userInfo.avatar" />
+        </el-card>
+      </el-col>
+    </el-row>
 
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1024 1024"
-          style="width: 1em; height: 1em; margin-right: 8px"
-        >
-          <path
-            fill="currentColor"
-            d="M480 480V128a32 32 0 0 1 64 0v352h352a32 32 0 1 1 0 64H544v352a32 32 0 1 1-64 0V544H128a32 32 0 0 1 0-64z"
-          ></path>
-        </svg>
-      </div>
+    <el-row :gutter="8">
+      <el-col :span="8">
+        <el-card>
+          <el-avatar :size="48" :src="userInfo.avatar" />
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card>
+          <el-avatar :size="48" :src="userInfo.avatar" />
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card>
+          <el-avatar :size="48" :src="userInfo.avatar" />
+        </el-card>
+      </el-col>
+    </el-row>
 
-      <el-calendar v-model="value" />
-      <p v-for="i in 10" :key="i">Home{{ i }}</p>
-    </el-card>
-
-    <FileUpload
-      :dialog-visible="dialogVisible"
-      accept=".xls,.xlsx"
-      :multiple="true"
-      limit="2"
-      :maxSize="1024 * 4"
-      :loading="loading"
-      @on-confirm="handleUploadConfirm"
-      @on-cancel="handleUploadDialogClose"
-    />
+    <el-row :gutter="8">
+      <el-col :span="8">
+        <el-card>
+          <el-avatar :size="48" :src="userInfo.avatar" />
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card>
+          <el-avatar :size="48" :src="userInfo.avatar" />
+        </el-card>
+      </el-col>
+      <el-col :span="8">
+        <el-card>
+          <el-avatar :size="48" :src="userInfo.avatar" />
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.home-container {
+  gap: 8px 8px;
+}
+
+.user-card {
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .user-details {
+      h2 {
+        margin: 0;
+        font-size: 18px;
+        color: #333;
+      }
+
+      .time {
+        margin: 5px 0 0;
+        color: #666;
+        font-size: 0.9em;
+      }
+    }
+  }
+}
+</style>

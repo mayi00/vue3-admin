@@ -2,6 +2,7 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import { useUserStore } from '@/store'
 import { useI18n } from 'vue-i18n'
+import { userinfo } from './login'
 
 defineOptions({ name: 'Login' })
 
@@ -31,7 +32,7 @@ function handleLogin() {
         ElMessage({ type: 'success', message: '登录成功' })
         const token = userStore.generateToken(loginForm.value.username)
         localStorage.setItem('token', token)
-        userStore.setUserInfo({ username: loginForm.value.username })
+        userStore.setUserInfo({ ...userinfo })
         router.push('/home')
         loading.value = false
       }, 1000)

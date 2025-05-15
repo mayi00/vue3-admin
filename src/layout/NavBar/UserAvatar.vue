@@ -7,7 +7,7 @@ defineOptions({ name: 'UserAvatar' })
 const router = useRouter()
 const { userInfo } = storeToRefs(useUserStore())
 
-const logo = ref(imgLogo)
+const avatar = ref(imgLogo)
 
 function logout() {
   ElMessageBox.confirm('请确认是否退出登录？', '提示', {
@@ -30,8 +30,8 @@ function logout() {
 <template>
   <el-dropdown trigger="hover">
     <div class="user-avatar">
-      <el-avatar :size="24" :src="logo" />
-      <span class="username g-unselectable g-single-ellipsis">{{ userInfo.username }}</span>
+      <el-avatar :size="24" :src="userInfo.avatar" />
+      <span class="name g-unselectable g-single-ellipsis">{{ userInfo.name }}</span>
     </div>
     <template #dropdown>
       <el-dropdown-menu>
@@ -49,7 +49,7 @@ function logout() {
   cursor: pointer;
   margin: 0 8px;
 
-  .username {
+  .name {
     margin-left: 4px;
     max-width: 100px;
   }
