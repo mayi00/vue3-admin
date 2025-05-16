@@ -41,22 +41,24 @@ function goHome() {
   display: flex;
   align-items: center;
   justify-content: center;
+
   .left-section {
-    flex: 1; /* 占据左侧空间 */
+    flex: 1;
     display: flex;
-    justify-content: flex-end; /* 图片靠右对齐 */
+    justify-content: flex-end;
     .error-image {
       max-width: 100%;
-      max-height: 80vh; /* 限制图片最大高度为视口的 80% */
-      object-fit: contain; /* 保持图片比例 */
+      max-height: 80vh;
+      object-fit: contain;
     }
   }
+
   .right-section {
-    flex: 1; /* 占据右侧空间 */
+    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* 内容左对齐 */
-    padding-left: 20px; /* 内容与左侧图片的间距 */
+    align-items: flex-start;
+    padding-left: 20px;
     p {
       font-size: 18px;
       color: #666;

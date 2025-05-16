@@ -9,7 +9,7 @@ export default [
   },
   {
     path: '/:all(.*)*',
-    name: 'NotFound',
+    name: '404',
     component: () => import('@/views/Basic/Error/404.vue'),
     meta: { title: '404', hidden: true },
   },

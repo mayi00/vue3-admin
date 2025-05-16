@@ -30,16 +30,6 @@ function handleClickMenuItem(menuItem, item) {
     router.push(menuItem.index)
   }
 }
-
-// 根据图标名称获取图标组件
-function getIcon4Menu(iconName) {
-  return ElementPlusIconsVue[iconName] || ElementPlusIconsVue.Document
-}
-
-// 根据图标名称获取图标组件
-function getIcon4Sub(iconName) {
-  return ElementPlusIconsVue[iconName] || ElementPlusIconsVue.Folder
-}
 </script>
 
 <template>
