@@ -2,7 +2,7 @@ import { createI18n } from 'vue-i18n'
 import { ref } from 'vue'
 
 // 引入语言文件
-import zhCn from '../language/zh-cn.js'
+import zhCn from '../language/zh-CN.js'
 import en from '../language/en.js'
 
 /**
