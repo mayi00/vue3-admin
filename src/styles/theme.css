@@ -1,8 +1,22 @@
+/* 暗黑模式 */
+[data-theme='dark'] {
+  filter: invert(0.9) hue-rotate(180deg);
+
+  /* 图片、视频等元素不需要处理 */
+  img,
+  video,
+  .logo,
+  .icon {
+    filter: invert(1) hue-rotate(180deg);
+  }
+}
+
 /* 灰色模式 */
-html.gray {
+[data-theme='gray'] {
   filter: grayscale(100%);
   -moz-filter: grayscale(100%);
   -o-filter: grayscale(100%);
+
   /* IE10-IE11 */
   -ms-filter: grayscale(100%);
   /* IE6-IE9 */

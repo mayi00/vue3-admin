@@ -10,6 +10,8 @@ export const useAppStore = defineStore('app', {
     sidebarIsCollapse: false,
     // 当前激活的模块名称（用于导航高亮）
     activeModule: '',
+    // 主题模式（'light' 或 'dark'）
+    theme: 'light',
   }),
   actions: {},
 })
