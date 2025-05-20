@@ -8,25 +8,34 @@ const tagsContainerRef = ref(null)
 const tagsWrapperRef = ref(null)
 const left = ref(0)
 
+const currentPath = computed(() => router.currentRoute.value.path)
+
+// 标签激活
+function handleTagActive(tagItem) {
+  console.log(tagItem)
+
+  router.push(tagItem.path)
+}
+
 // 滚动处理
 const handleScroll = scrollDirection => {
-  const currentLeft = tagsWrapperRef.value.getBoundingClientRect().left
-  let tempLeft
+  // 获取容器尺寸、位置
+  const containerWidth = tagsContainerRef.value.offsetWidth
+  const wrapperWidth = tagsWrapperRef.value.offsetWidth
+  const wrapperLeft = tagsWrapperRef.value.getBoundingClientRect().left
+
+  // 计算目标位置
+  let targetLeft = wrapperLeft
+  const scrollStep = containerWidth
+
   if (scrollDirection === 'left') {
-    tempLeft = currentLeft + tagsContainerRef.value.offsetWidth
+    targetLeft = Math.min(wrapperLeft + scrollStep, 0)
   } else if (scrollDirection === 'right') {
-    tempLeft = currentLeft - tagsContainerRef.value.offsetWidth
+    targetLeft = Math.max(wrapperLeft - scrollStep, containerWidth - wrapperWidth)
   }
 
-  if (tempLeft < 0) {
-    if (tempLeft < tagsContainerRef.value.offsetWidth - tagsWrapperRef.value.offsetWidth) {
-      left.value = tagsContainerRef.value.offsetWidth - tagsWrapperRef.value.offsetWidth
-    } else {
-      left.value = tempLeft
-    }
-  } else {
-    left.value = 0
-  }
+  // 边界限制
+  left.value = Math.max(containerWidth - wrapperWidth, Math.min(targetLeft, 0))
 }
 
 const closeTag = tagItem => {
@@ -37,8 +46,7 @@ const closeAll = () => {
   router.push('/')
 }
 const closeOthers = () => {
-  const currentPath = router.currentRoute.value.path
-  tags.value = tags.value.filter(item => item.path === currentPath)
+  tags.value = tags.value.filter(item => item.path === currentPath.value)
 }
 </script>
 
@@ -49,8 +57,14 @@ const closeOthers = () => {
     </em>
 
     <div ref="tagsContainerRef" class="tags-container">
-      <ul ref="tagsWrapperRef" class="tags-wrapper" :style="{ left: left + 'px' }" @scroll="updateArrowVisibility">
-        <li class="tag-item" v-for="tagItem in tags" :key="tagItem.path">
+      <ul ref="tagsWrapperRef" class="tags-wrapper" :style="{ left: left + 'px' }">
+        <li
+          class="g-unselectable tag-item"
+          :class="{ 'tag-item-active': tagItem.path === currentPath }"
+          v-for="tagItem in tags"
+          :key="tagItem.path"
+          @click.stop="handleTagActive(tagItem)"
+        >
           <span>{{ tagItem.title }}</span>
           <em class="close-icon" @click="closeTag(tagItem)">
             <icon-mingcute:close-fill />
@@ -63,7 +77,7 @@ const closeOthers = () => {
       <icon-mingcute:right-fill />
     </em>
 
-    <el-dropdown class="dropdown-menu">
+    <el-dropdown class="close-wrapper">
       <icon-mingcute:close-fill />
       <template #dropdown>
         <el-dropdown-menu>
@@ -82,35 +96,19 @@ const closeOthers = () => {
   height: 36px;
   border: 1px solid var(--gray-4);
   background-color: #fff;
+}
 
-  .arrow {
-    position: absolute;
-    top: 0;
-    cursor: pointer;
-    width: 30px;
-    height: 100%;
-    background-color: #999;
-
-    &:left {
-      left: 0;
-    }
-    &.right {
-      right: 30px;
-    }
-  }
-
-  .tags-container {
-    position: absolute;
-    top: 0;
-    left: 30px;
-    padding: 0 4px;
-    width: calc(100% - 90px);
-    height: 100%;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+.tags-container {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  padding: 0 4px;
+  width: calc(100% - 90px);
+  height: 100%;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  &::-webkit-scrollbar {
+    display: none;
   }
 
   .tags-wrapper {
@@ -139,6 +137,11 @@ const closeOthers = () => {
         background-color: var(--gray-4);
       }
 
+      &.tag-item-active {
+        background-color: var(--color-primary);
+        color: #fff;
+      }
+
       .close-icon {
         display: inline-block;
         width: 20px;
@@ -158,18 +161,47 @@ const closeOthers = () => {
       }
     }
   }
+}
 
-  .dropdown-menu {
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    width: 30px;
-    height: 100%;
-    background-color: #555;
-    &:hover {
-      background-color: var(--gray-3);
-    }
+.arrow {
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 100%;
+  color: var(--gray-9);
+  font-size: 16px;
+  background-color: #fff;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--gray-4);
+  }
+
+  &:left {
+    left: 0;
+  }
+  &.right {
+    right: 30px;
+  }
+}
+
+.close-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 100%;
+  color: var(--gray-9);
+  font-size: 14px;
+  background-color: #fff;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--gray-4);
   }
 }
 </style>
