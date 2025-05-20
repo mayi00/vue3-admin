@@ -32,7 +32,7 @@ export function createVitePlugins() {
           // 图标集别名（可选），例如将 `mdi` 图标集组件名前缀设为 `icon`
           prefix: 'icon',
           // 允许不带前缀直接使用图标（如 <i-mdi-home /> 或 <mdi-home />）
-          enabledCollections: ['mdi', 'carbon', 'ant-design'], // 常用图标集
+          enabledCollections: ['mingcute', 'mdi', 'carbon', 'ant-design'], // 常用图标集
         }),
       ],
     }),

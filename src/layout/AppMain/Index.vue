@@ -9,7 +9,7 @@ const keepAliveRoutes = computed(() => {
 </script>
 
 <template>
-  <div class="app-main">
+  <main class="app-main">
     <RouterView v-slot="{ Component, route }">
       <Transition name="el-fade-in-linear" mode="out-in">
         <KeepAlive :include="keepAliveRoutes">
@@ -17,7 +17,7 @@ const keepAliveRoutes = computed(() => {
         </KeepAlive>
       </Transition>
     </RouterView>
-  </div>
+  </main>
 </template>
 
 <style lang="less" scoped>

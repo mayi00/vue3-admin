@@ -16,12 +16,12 @@ const { sidebarIsCollapse } = storeToRefs(useAppStore())
     <aside class="layout-sidebar" :style="{ width: sidebarIsCollapse ? '64px' : '220px' }">
       <Sidebar />
     </aside>
-    <article class="layout-main">
+    <main class="layout-main">
       <NavBar />
       <TagsBar />
       <Breadcrumb />
       <AppMain />
-    </article>
+    </main>
   </div>
 </template>
 
