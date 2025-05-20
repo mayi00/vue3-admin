@@ -39,7 +39,31 @@ const handleScroll = scrollDirection => {
 }
 
 const closeTag = tagItem => {
+  const currentPath = router.currentRoute.value.path
+  const isActive = tagItem.path === currentPath
+
+  // 过滤掉要关闭的标签
   tags.value = tags.value.filter(item => item.path !== tagItem.path)
+
+  if (isActive) {
+    // 寻找下一个或上一个标签
+    const remainingTags = tags.value
+    const currentIndex = remainingTags.findIndex(t => t.path === currentPath)
+
+    let targetTag
+    if (currentIndex === -1) { // 当前标签被关闭的情况
+      const closedIndex = tags.value.findIndex(t => t === tagItem)
+      targetTag = remainingTags[closedIndex] || remainingTags[closedIndex - 1]
+    } else {
+      targetTag = remainingTags[currentIndex] || remainingTags[currentIndex - 1]
+    }
+
+    if (targetTag) {
+      router.push(targetTag.path)
+    } else {
+      router.push('/') // 没有剩余标签时回到首页
+    }
+  }
 }
 const closeAll = () => {
   tags.value = []
