@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import NProgress from '@/plugins/nprogress'
-import { useUserStore } from '@/store'
+import { useUserStore, useAppStore } from '@/store'
 import routes from './modules'
 
 const router = createRouter({
@@ -23,13 +23,15 @@ router.beforeEach((to, from, next) => {
   }
 
   const token = localStorage.getItem('token')
+  const userStore = useUserStore()
   if (token) {
-    if (!useUserStore().validateToken(token)) {
-      useUserStore().logout()
+    if (!userStore.validateToken(token)) {
+      userStore.logout()
       next({ path: '/login' })
     } else if (to.path === '/login') {
       next({ path: '/' })
     } else {
+      useAppStore().addTag(to)
       next()
     }
   } else {
