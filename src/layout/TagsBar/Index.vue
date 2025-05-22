@@ -51,7 +51,8 @@ const closeTag = tagItem => {
     const currentIndex = remainingTags.findIndex(t => t.path === currentPath)
 
     let targetTag
-    if (currentIndex === -1) { // 当前标签被关闭的情况
+    if (currentIndex === -1) {
+      // 当前标签被关闭的情况
       const closedIndex = tags.value.findIndex(t => t === tagItem)
       targetTag = remainingTags[closedIndex] || remainingTags[closedIndex - 1]
     } else {
@@ -77,7 +78,7 @@ const closeOthers = () => {
 <template>
   <div class="tags-bar">
     <em class="arrow left" @click.stop="handleScroll('left')">
-      <icon-mingcute:left-fill />
+      <BaseIcon name="mingcute:left-fill" />
     </em>
 
     <div ref="tagsContainerRef" class="tags-container">
@@ -91,18 +92,18 @@ const closeOthers = () => {
         >
           <span>{{ tagItem.title }}</span>
           <em class="close-icon" @click="closeTag(tagItem)">
-            <icon-mingcute:close-fill />
+            <BaseIcon name="mingcute:close-fill" />
           </em>
         </li>
       </ul>
     </div>
 
     <em class="arrow right" @click.stop="handleScroll('right')">
-      <icon-mingcute:right-fill />
+      <BaseIcon name="mingcute:right-fill" />
     </em>
 
     <el-dropdown class="close-wrapper">
-      <icon-mingcute:close-fill />
+      <BaseIcon name="mingcute:close-fill" />
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item @click="closeAll">关闭所有</el-dropdown-item>
@@ -149,11 +150,14 @@ const closeOthers = () => {
     }
 
     .tag-item {
-      display: inline-block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 0 120px;
       margin: 0 4px;
+      height: 24px;
       background-color: var(--gray-3);
-      border-radius: 3px;
+      border-radius: 4px;
       cursor: pointer;
       transition: all 0.3s;
 
@@ -173,7 +177,7 @@ const closeOthers = () => {
         padding: 4px;
         margin-left: 6px;
         font-size: 12px;
-        color: var(--gray-5);
+        color: var(--gray-12);
         line-height: 20px;
         text-align: center;
         cursor: pointer;
