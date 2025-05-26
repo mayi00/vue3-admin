@@ -5,6 +5,7 @@ import '@/styles/theme.css'
 import '@/styles/globals.css'
 import '@/styles/style.css'
 import '@/plugins/element-plus.js'
+import '/node_modules/flag-icons/css/flag-icons.min.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
