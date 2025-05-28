@@ -16,10 +16,14 @@ const authorRange = ref([])
 const table = ref({
   data: [],
   loading: false,
+  currentPage: 1,
+  pageSize: 20,
+  pageCount: 0,
 })
 
 getRange()
 
+// 获取名言类型和作者的值域
 function getRange() {
   Promise.all([jisuAPI.yiju.class(appKeyParam), jisuAPI.yiju.author(appKeyParam)])
     .then(res => {
@@ -32,7 +36,6 @@ function getRange() {
 }
 
 function handleSearch() {
-  console.log('handleSearch', searchForm.value)
   getList()
 }
 function handleReset() {
@@ -42,22 +45,47 @@ function handleReset() {
 async function getList() {
   const params = {
     ...appKeyParam,
-    num: 20,
-    page: 1,
-    classid: searchForm.value.classid,
-    authorid: searchForm.value.authorid,
+    ...searchForm.value,
+    page: table.value.currentPage,
+    num: table.value.pageSize,
   }
-  try {
-    table.value.loading = true
-    const res = await jisuAPI.yiju.query(params)
-    console.log(res)
-    table.value.data = res
-    table.value.loading = false
-  } catch (err) {
-    console.error(err)
-    ElMessage.error(err.msg || '请求失败')
-    throw err
-  }
+
+  table.value.loading = true
+  console.log(params)
+
+  // return
+  jisuAPI.yiju
+    .query(params)
+    .then(res => {
+      if (res.length === 0) {
+        ElMessage.warning('没有查询到数据')
+        table.value.currentPage = 1
+        getList()
+      } else if (res.length === table.value.pageSize) {
+        table.value.pageCount = Math.max(table.value.currentPage + 1, table.value.pageCount)
+      } else {
+        table.value.pageCount = table.value.currentPage
+      }
+      table.value.data = res
+    })
+    .catch(err => {
+      console.error(err)
+      ElMessage.error(err.msg || '请求失败')
+    })
+    .finally(() => {
+      table.value.loading = false
+    })
+}
+
+function getIndex(index) {
+  return table.value.pageSize * (currentPage - 1) + index + 1
+}
+
+function handlePageChange({ currentPage, pageSize }) {
+  console.log('currentPage:', currentPage)
+  console.log('pageSize:', pageSize)
+
+  getList()
 }
 </script>
 
@@ -94,10 +122,18 @@ async function getList() {
     </el-card>
     <el-card shadow="never" style="margin-top: 10px">
       <el-table :data="table.data" :loading="table.loading" border stripe>
+        <el-table-column type="index" :index="getIndex" />
         <el-table-column prop="content" label="名言"></el-table-column>
         <el-table-column prop="author" label="作者" width="180"></el-table-column>
       </el-table>
-      <el-pagination background layout="prev, pager, next" :total="1000" />
+      <el-pagination
+        v-model:current-page="table.currentPage"
+        :page-size="table.pageSize"
+        :page-count="table.pageCount"
+        background
+        layout="prev, pager, next"
+        @change="handlePageChange"
+      />
     </el-card>
   </div>
 </template>
