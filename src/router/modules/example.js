@@ -80,10 +80,10 @@ export const exampleRoutes = [
         meta: { title: '表格', icon: 'material-symbols:table-outline' },
         children: [
           {
-            path: 'table-a',
-            name: 'TableA',
-            component: () => import('@/views/Example/Table/TableA/index.vue'),
-            meta: { title: 'TableA', icon: '' },
+            path: 'famous-aphorism',
+            name: 'FamousAaphorism',
+            component: () => import('@/views/Example/Table/FamousAaphorism/index.vue'),
+            meta: { title: '名人名言', icon: '' },
           },
           {
             path: 'table-b',

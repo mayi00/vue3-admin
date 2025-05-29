@@ -1,7 +1,7 @@
 <script setup>
 import jisuAPI from '@/api/jisuapi'
 
-defineOptions({ name: 'TableA' })
+defineOptions({ name: 'FamousAaphorism' })
 
 const appKeyParam = { appkey: import.meta.env.VITE_JISUAPI_APPKEY }
 const searchFormRef = ref(null)
@@ -36,6 +36,8 @@ function getRange() {
 }
 
 function handleSearch() {
+  table.value.currentPage = 1
+  table.value.pageCount = table.value.currentPage
   getList()
 }
 function handleReset() {
@@ -77,8 +79,9 @@ async function getList() {
     })
 }
 
+// 获取表格序号
 function getIndex(index) {
-  return table.value.pageSize * (currentPage - 1) + index + 1
+  return table.value.pageSize * (table.value.currentPage - 1) + index + 1
 }
 
 function handlePageChange({ currentPage, pageSize }) {
@@ -121,10 +124,15 @@ function handlePageChange({ currentPage, pageSize }) {
       </el-form>
     </el-card>
     <el-card shadow="never" style="margin-top: 10px">
-      <el-table :data="table.data" :loading="table.loading" border stripe>
-        <el-table-column type="index" :index="getIndex" />
-        <el-table-column prop="content" label="名言"></el-table-column>
+      <el-table :data="table.data" :loading="table.loading" stripe>
+        <el-table-column type="index" label="序号" :index="getIndex" width="80" />
+        <el-table-column prop="content" label="名言" min-width="300"></el-table-column>
         <el-table-column prop="author" label="作者" width="180"></el-table-column>
+        <el-table-column prop="classid" label="名言类型" width="180">
+          <template #default="scope">
+            <span>{{ classRange.find(item => item.classid === scope.row.classid)?.class }}</span>
+          </template>
+        </el-table-column>
       </el-table>
       <el-pagination
         v-model:current-page="table.currentPage"
