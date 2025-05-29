@@ -54,7 +54,7 @@ export function isExternalLink(path) {
  * @return       {Boolean} 如果身份证号合法，返回true；否则返回false
  * @Author      : huazf
  */
-export function checkPsidno(value) {
+export function checkIDCardNo(value) {
   const psidno = String(value)
   // 1.校验身份证号格式和长度
   const regPsidno =

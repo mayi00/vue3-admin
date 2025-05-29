@@ -22,6 +22,15 @@ export default {
       method: 'get',
     })
   },
+  // 获取用户列表
+  queryPage(params, data) {
+    return request({
+      url: `${sys}/user/queryPage`,
+      method: 'post',
+      params,
+      data,
+    })
+  },
   // 下载人员管理模板
   download() {
     return request({
