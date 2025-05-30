@@ -3,7 +3,7 @@
  * @Author      : MDT
  * @Date        : 2025-01-06
  * @LastEditors : MDT
- * @LastEditTime: 2025-05-29
+ * @LastEditTime: 2025-05-30
  * @FilePath    : \vue3-admin\src\styles\reset.css
  * 代码是写出来给人看的，附带能在机器上运行。
  * Copyright (c) 2025 by MDT, All Rights Reserved.
@@ -24,8 +24,8 @@ body {
   width: 100%;
   height: 100%;
   font-family:
-    Inter, 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial,
-    sans-serif;
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   line-height: 1.5;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
