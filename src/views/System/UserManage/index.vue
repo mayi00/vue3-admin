@@ -120,6 +120,7 @@ onMounted(() => {
 <style lang="less" scoped>
 .search-form {
   margin-bottom: 20px;
+
   :deep(.el-form-item) {
     margin-right: 20px;
     margin-bottom: 0;
@@ -127,8 +128,8 @@ onMounted(() => {
 }
 
 .pagination-container {
-  margin-top: 20px;
   display: flex;
   justify-content: flex-end;
+  margin-top: 20px;
 }
 </style>

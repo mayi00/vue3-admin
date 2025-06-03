@@ -37,7 +37,7 @@ defineOptions({ name: 'Iconify' })
 
 <style lang="less" scoped>
 .icon-box {
-  border: 1px solid #000;
   margin: 10px;
+  border: 1px solid #000;
 }
 </style>

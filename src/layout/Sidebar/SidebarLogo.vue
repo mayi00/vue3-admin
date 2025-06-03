@@ -24,9 +24,9 @@ const logo = ref(imgLogo)
   justify-content: center;
   align-items: center;
   height: 50px;
+  background-color: var(--white);
   text-align: center;
   cursor: pointer;
-  background-color: var(--white);
 
   .logo {
     width: 24px;
@@ -35,8 +35,8 @@ const logo = ref(imgLogo)
 
   .title {
     margin-left: 12px;
-    font-size: 18px;
     color: var(--black);
+    font-size: 18px;
     transition: all 0.3s ease;
   }
 }

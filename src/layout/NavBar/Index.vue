@@ -33,16 +33,16 @@ defineOptions({ name: 'NavBar' })
 }
 
 .navbar__left {
-  flex: 1;
   display: flex;
+  flex: 1;
   align-items: center;
 }
 
 .navbar__right {
-  flex-shrink: 0;
-  min-width: 100px;
   display: flex;
-  align-items: center;
+  flex-shrink: 0;
   justify-content: flex-end;
+  align-items: center;
+  min-width: 100px;
 }
 </style>

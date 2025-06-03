@@ -167,8 +167,8 @@ function handleConfirm() {
 
   .file-box {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     line-height: 24px;
 
     .file-name {
@@ -180,6 +180,7 @@ function handleConfirm() {
     .file-del {
       color: #999;
       cursor: pointer;
+
       &:hover {
         color: #f00;
       }

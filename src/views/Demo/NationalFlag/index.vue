@@ -260,13 +260,15 @@ const nationalFlags = [
 <style lang="less" scoped>
 .flags-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+
   .flag-item {
-    padding: 8px;
     height: 80px;
+    padding: 8px;
     background-color: #efefef;
     border-radius: 8px;
+
     .fi {
       margin: 4px;
     }

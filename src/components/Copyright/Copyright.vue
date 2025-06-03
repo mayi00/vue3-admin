@@ -11,7 +11,7 @@ const copyrightYear = new Date().getFullYear()
 
 <style lang="less" scoped>
 .copyright {
-  font-size: 12px;
   color: var(--gray-7);
+  font-size: 12px;
 }
 </style>

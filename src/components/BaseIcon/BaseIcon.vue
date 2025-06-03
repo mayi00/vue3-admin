@@ -51,10 +51,10 @@ const outputType = computed(() => {
 .base-icon {
   position: relative;
   display: inline-flex;
-  align-items: center;
   justify-content: center;
-  fill: currentColor;
+  align-items: center;
   line-height: 1em;
+  fill: currentcolor;
 }
 
 .base-icon__iconify,
@@ -66,23 +66,26 @@ const outputType = computed(() => {
 }
 
 .base-icon__loading {
-  /* 自定义加载动画样式 */
-  animation: rotate 1s linear infinite;
   width: 100%;
   height: 100%;
+
+  /* 自定义加载动画样式 */
+  animation: rotate 1s linear infinite;
 }
 
 .base-icon__error {
-  /* 自定义错误图标样式 */
-  background: #ff4d4f;
   width: 100%;
   height: 100%;
+
+  /* 自定义错误图标样式 */
+  background: #ff4d4f;
 }
 
 @keyframes rotate {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

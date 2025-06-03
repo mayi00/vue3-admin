@@ -183,23 +183,23 @@ function downloadExcel(val, name) {
 
   .sheet-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     padding: 0;
     list-style: none;
 
     .sheet-item {
       padding: 8px 12px;
+      color: #409eff;
       background-color: #f5f7fa;
       border-radius: 4px;
-      cursor: pointer;
       transition: all 0.3s;
-      color: #409eff;
+      cursor: pointer;
 
       &:hover {
         background-color: #ecf5ff;
+        box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
         transform: translateY(-2px);
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       }
     }
   }

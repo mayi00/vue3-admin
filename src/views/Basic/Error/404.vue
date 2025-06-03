@@ -31,7 +31,7 @@ function goHome() {
     <div class="right-section">
       <p>抱歉，您访问的页面不存在。</p>
       <el-button @click="goHome">返回首页</el-button>
-      <p style="font-size: 14px; color: #999; margin-top: 10px">{{ countdown }} 秒后将自动返回首页</p>
+      <p style=" margin-top: 10px; color: #999;font-size: 14px">{{ countdown }} 秒后将自动返回首页</p>
     </div>
   </div>
 </template>
@@ -39,13 +39,14 @@ function goHome() {
 <style lang="less" scoped>
 .error-container {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   .left-section {
-    flex: 1;
     display: flex;
+    flex: 1;
     justify-content: flex-end;
+
     .error-image {
       max-width: 100%;
       max-height: 80vh;
@@ -54,15 +55,16 @@ function goHome() {
   }
 
   .right-section {
-    flex: 1;
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: flex-start;
     padding-left: 20px;
+
     p {
-      font-size: 18px;
-      color: #666;
       margin: 20px 0;
+      color: #666;
+      font-size: 18px;
     }
   }
 }

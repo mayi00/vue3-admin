@@ -51,10 +51,10 @@ const handleClick = item => {
 
 <style lang="less" scoped>
 .breadcrumb {
-  padding: 0 16px;
-  height: 30px;
   display: flex;
   align-items: center;
+  height: 30px;
+  padding: 0 16px;
   background-color: #fff;
   border: 1px solid var(--el-border-color-light);
   box-shadow: 0 1px 1px var(--el-box-shadow-light);
@@ -74,8 +74,8 @@ const handleClick = item => {
       gap: 4px;
 
       &.is-link {
-        font-weight: normal;
         color: var(--el-text-color-regular);
+        font-weight: normal;
 
         &:hover {
           color: var(--el-color-primary);
@@ -84,8 +84,8 @@ const handleClick = item => {
     }
 
     .external-icon {
-      font-size: 0.8em;
       margin-left: 2px;
+      font-size: 0.8em;
     }
   }
 }

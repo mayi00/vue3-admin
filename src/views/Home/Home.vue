@@ -108,7 +108,7 @@ onBeforeUnmount(() => {
 
 <style lang="less" scoped>
 .home-container {
-  gap: 8px 8px;
+  gap: 8px;
 }
 
 .user-card {
@@ -120,8 +120,8 @@ onBeforeUnmount(() => {
     .user-details {
       h2 {
         margin: 0;
-        font-size: 18px;
         color: #333;
+        font-size: 18px;
       }
 
       .time {

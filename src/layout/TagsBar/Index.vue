@@ -119,19 +119,20 @@ const closeOthers = () => {
   position: relative;
   width: 100%;
   height: 36px;
-  border: 1px solid var(--gray-4);
   background-color: #fff;
+  border: 1px solid var(--gray-4);
 }
 
 .tags-container {
   position: absolute;
   top: 0;
   left: 30px;
-  padding: 0 4px;
   width: calc(100% - 90px);
   height: 100%;
+  padding: 0 4px;
   overflow-x: scroll;
   scroll-behavior: smooth;
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -145,6 +146,7 @@ const closeOthers = () => {
     height: 100%;
     white-space: nowrap;
     scroll-behavior: smooth;
+
     &::-webkit-scrollbar {
       display: none;
     }
@@ -153,35 +155,36 @@ const closeOthers = () => {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0 120px;
-      margin: 0 4px;
       height: 24px;
+      margin: 0 4px;
+      padding: 0 120px;
       background-color: var(--gray-3);
       border-radius: 4px;
-      cursor: pointer;
       transition: all 0.3s;
+      cursor: pointer;
 
       &:hover {
         background-color: var(--gray-4);
       }
 
       &.tag-item-active {
-        background-color: var(--color-primary);
         color: #fff;
+        background-color: var(--color-primary);
       }
 
       .close-icon {
         display: inline-block;
         width: 20px;
         height: 20px;
-        padding: 4px;
         margin-left: 6px;
-        font-size: 12px;
+        padding: 4px;
         color: var(--gray-12);
+        border-radius: 50%;
+        font-size: 12px;
         line-height: 20px;
         text-align: center;
         cursor: pointer;
-        border-radius: 50%;
+
         &:hover {
           color: #fff;
           background-color: var(--el-color-danger);
@@ -195,21 +198,23 @@ const closeOthers = () => {
   position: absolute;
   top: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 30px;
   height: 100%;
   color: var(--gray-9);
-  font-size: 16px;
   background-color: #fff;
+  font-size: 16px;
   cursor: pointer;
+
   &:hover {
     background-color: var(--gray-4);
   }
 
-  &:left {
+  &.left {
     left: 0;
   }
+
   &.right {
     right: 30px;
   }
@@ -220,14 +225,15 @@ const closeOthers = () => {
   top: 0;
   right: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 30px;
   height: 100%;
   color: var(--gray-9);
-  font-size: 14px;
   background-color: #fff;
+  font-size: 14px;
   cursor: pointer;
+
   &:hover {
     background-color: var(--gray-4);
   }

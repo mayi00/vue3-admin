@@ -50,6 +50,7 @@ function handleReset() {
 .esign-btn {
   margin-bottom: 10px;
 }
+
 .esign-container {
   display: inline-block;
   border: 1px solid var(--gray-9);

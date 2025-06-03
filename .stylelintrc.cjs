@@ -19,42 +19,31 @@ module.exports = {
   ],
   ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts', '**/*.json', '**/*.md', '**/*.yaml'],
   rules: {
+    // 禁止在一个块中出现重复的属性
     'plugin/declaration-block-no-ignored-properties': true,
-    // 禁止在具有较高优先级的选择器后出现被其覆盖的较低优先级的选择器
-    'no-descending-specificity': null,
-    'selector-pseudo-element-no-unknown': [
-      true,
-      {
-        ignorePseudoElements: ['v-deep'],
-      },
-    ],
-    // 允许 global 、export 、deep伪类
+    // 禁止高优先级选择器后出现低优先级选择器（避免样式覆盖问题）
+    'no-descending-specificity': true,
+    // 允许使用某些特定伪元素
+    'selector-pseudo-element-no-unknown': [true, { ignorePseudoElements: ['v-deep'] }],
+    // 允许使用 Vue 中的特殊伪类（如 global, deep, export）
     'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['global', 'export', 'deep'] }],
 
-    // 允许未知属性
-    'property-no-unknown': [
-      true,
-      {
-        ignoreProperties: ['backdrop-filter', 'scroll-margin'],
-      },
-    ],
-    //
+    // 允许使用尚未完全标准化但常用的属性
+    'property-no-unknown': [true, { ignoreProperties: ['backdrop-filter', 'scroll-margin'] }],
+    // 十六进制颜色推荐简写
     'color-hex-length': 'short',
-    // 颜色小写
-    'color-hex-case': 'lower',
-    // 禁止在一个块中出现重复的属性
+    // 防止同一个 CSS 块内重复声明属性
     'declaration-block-no-duplicate-properties': true,
     // 禁止重复选择器
     'no-duplicate-selectors': true,
-
+    // 禁止空的源代码
+    'no-empty-source': null,
+    // 属性前缀检查
     'property-no-vendor-prefix': null,
-    // 允许未知规则
-    'at-rule-no-unknown': [
-      true,
-      {
-        ignoreAtRules: ['apply', 'use'],
-      },
-    ],
+    // 允许使用未识别的 @ 规则（如 Tailwind 的 @apply）
+    'at-rule-no-unknown': [true, { ignoreAtRules: ['apply', 'use'] }],
+    // 关闭类名命名规则检查
+    'selector-class-pattern': null,
     // CSS属性排序
     'order/properties-order': [
       // 定位属性

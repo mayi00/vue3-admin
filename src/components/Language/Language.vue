@@ -47,9 +47,9 @@ function changeLanguage(lang) {
   display: flex;
   align-items: center;
   padding: 8px;
-  cursor: pointer;
-  border-radius: 4px;
   color: var(--gray-10);
+  border-radius: 4px;
+  cursor: pointer;
 
   &:hover {
     background-color: var(--gray-4);

@@ -50,8 +50,8 @@ function logout() {
   margin: 0 8px;
 
   .name {
-    margin-left: 4px;
     max-width: 100px;
+    margin-left: 4px;
   }
 }
 </style>

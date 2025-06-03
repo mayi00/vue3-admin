@@ -19,9 +19,9 @@ const { isFullscreen, toggle } = useFullscreen()
   display: flex;
   align-items: center;
   padding: 8px;
-  cursor: pointer;
-  border-radius: 4px;
   color: var(--gray-12);
+  border-radius: 4px;
+  cursor: pointer;
 
   &:hover {
     background-color: var(--gray-4);

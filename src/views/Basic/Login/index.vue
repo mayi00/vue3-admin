@@ -100,13 +100,13 @@ function handleLogin() {
 
 .login-wrapper {
   position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
 }
 
 .language-switcher {
@@ -116,18 +116,18 @@ function handleLogin() {
 }
 
 .login-form {
-  padding: 32px;
   width: 400px;
+  padding: 32px;
   background-color: var(--gray-1);
   border-radius: 4px;
   box-shadow: var(--el-box-shadow-light);
 
   .login-title {
     margin: 0 0 32px;
-    text-align: center;
+    color: var(--gray-13);
     font-size: 24px;
     line-height: 32px;
-    color: var(--gray-13);
+    text-align: center;
     letter-spacing: 2px;
   }
 
