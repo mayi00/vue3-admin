@@ -17,7 +17,6 @@ export default [
     },
     rules: {
       ...configPrettier.rules,
-      ...pluginPrettier.configs.recommended.rules,
       'prettier/prettier': [1],
       // 文件末尾加一个空行
       'eol-last': 1,
