@@ -1,6 +1,5 @@
 <script setup>
 defineOptions({ name: 'About' })
-
 </script>
 
 <template>

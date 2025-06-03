@@ -7,7 +7,6 @@ const { theme } = storeToRefs(useAppStore())
 const isDark = ref(false)
 
 function toggleTheme() {
-  
   theme.value = theme.value === 'light' ? 'dark' : 'light'
   if (theme.value === 'light') {
     document.documentElement.removeAttribute('data-theme')

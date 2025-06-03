@@ -1,7 +1,6 @@
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
-
 NProgress.configure({
   // 缓冲动画类型，可选值 'ease'、'linear'等
   easing: 'ease',

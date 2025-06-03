@@ -250,7 +250,7 @@ function initGraph() {
 <template>
   <div class="g-container">
     <el-card>
-      <div style=" width: 100%; height: 600px;border: #efefef solid 1px">
+      <div style="width: 100%; height: 600px; border: #efefef solid 1px">
         <relation-graph ref="graphRef" :options="options" />
       </div>
     </el-card>

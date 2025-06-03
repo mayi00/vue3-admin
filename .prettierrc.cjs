@@ -30,7 +30,7 @@ module.exports = {
   insertPragma: false,
   // 使用默认的折行标准
   proseWrap: 'preserve',
-  // 根据显示样式决定 html 要不要折行
+  // HTML/Vue 文件中空白处理遵循 CSS 规则
   htmlWhitespaceSensitivity: 'css',
   // Vue文件中script和style标签是否缩进
   vueIndentScriptAndStyle: false,
@@ -39,5 +39,5 @@ module.exports = {
   // 控制如何格式化嵌入在其他语言
   embeddedLanguageFormatting: 'auto',
   // 在HTML、Vue和JSX中每行强制执行一个属性。
-  singleAttributePerLine: false
+  singleAttributePerLine: false,
 }

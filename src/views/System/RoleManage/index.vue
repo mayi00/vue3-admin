@@ -1,6 +1,5 @@
 <script setup>
 defineOptions({ name: 'RoleManage' })
-
 </script>
 
 <template>

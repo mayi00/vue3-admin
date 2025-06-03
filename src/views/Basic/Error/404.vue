@@ -31,7 +31,7 @@ function goHome() {
     <div class="right-section">
       <p>抱歉，您访问的页面不存在。</p>
       <el-button @click="goHome">返回首页</el-button>
-      <p style=" margin-top: 10px; color: #999;font-size: 14px">{{ countdown }} 秒后将自动返回首页</p>
+      <p style="margin-top: 10px; color: #999; font-size: 14px">{{ countdown }} 秒后将自动返回首页</p>
     </div>
   </div>
 </template>

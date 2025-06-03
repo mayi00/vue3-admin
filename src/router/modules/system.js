@@ -36,7 +36,7 @@ export const routes = [
         name: 'About',
         component: () => import('@/views/System/About/index.vue'),
         meta: { title: '关于', icon: 'mdi:information-outline' },
-      }
+      },
     ],
   },
 ]

@@ -1,6 +1,5 @@
 <script setup>
 defineOptions({ name: 'SvgIcons' })
-
 </script>
 
 <template>
