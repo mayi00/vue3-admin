@@ -17,7 +17,7 @@
     "preview": "vite preview",
     "lint:eslint": "eslint --ext .vue,.js,.ts,.jsx,.tsx ./src --fix",
     "lint:stylelint": "stylelint \"./**/*.{css,less,vue,html}\" --fix",
-    "lint:prettier": "prettier --write \"./**/*.{html,vue,ts,tsx,js,cjs,json,css,less}\""
+    "lint:prettier": "prettier --write \"./**/*.{vue,ts,tsx,js,cjs,json,css,less}\""
   },
   "dependencies": {
     "@antv/g6": "^5.0.48",

@@ -62,12 +62,6 @@ const handleClick = item => {
   :deep(.el-breadcrumb) {
     font-size: 14px;
 
-    .is-external {
-      .el-breadcrumb__inner {
-        cursor: pointer;
-      }
-    }
-
     .el-breadcrumb__inner {
       display: inline-flex;
       align-items: center;
@@ -80,6 +74,12 @@ const handleClick = item => {
         &:hover {
           color: var(--el-color-primary);
         }
+      }
+    }
+
+    .is-external {
+      .el-breadcrumb__inner {
+        cursor: pointer;
       }
     }
 
