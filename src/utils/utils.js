@@ -109,7 +109,7 @@ export function checkIDCardNo(value) {
     const reg = new RegExp(/^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/)
     const arrSplit = psidno.match(reg)
     // 15位号码在年份前补 19 或 20
-    const year = Number(arrSplit[2].charAt(0)) > 0 ? '19' + arrSplit[2] : '20' + arrSplit[2]
+    const year = Number(arrSplit[2].charAt(0)) > 0 ? `19${arrSplit[2]}` : `20${arrSplit[2]}`
     const month = arrSplit[3]
     const day = arrSplit[4]
     if (!validateBirthday(year, month, day)) {
@@ -201,7 +201,7 @@ export function base64ToBlob(base64Content) {
     return new Blob([uint8Array], { type: contentType })
   } catch (error) {
     // 处理解码过程中可能出现的错误
-    throw new Error('无法解码 base64 数据: ' + error.message)
+    throw new Error(`无法解码 base64 数据: ${error.message}`)
   }
 }
 

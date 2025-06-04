@@ -1,3 +1,4 @@
+import fs from 'node:fs'
 import globals from 'globals'
 import js from '@eslint/js'
 import pluginVue from 'eslint-plugin-vue'
@@ -5,12 +6,21 @@ import pluginPrettier from 'eslint-plugin-prettier'
 import configPrettier from 'eslint-config-prettier'
 import * as parserVue from 'vue-eslint-parser'
 
+// 解析自动导入配置
+let autoImportGlobals = {}
+try {
+  autoImportGlobals = JSON.parse(fs.readFileSync('./vite/.eslintrc-auto-import.json', 'utf-8')).globals || {}
+} catch (error) {
+  // 文件不存在或解析错误时使用空对象
+  console.warn('Could not load auto-import globals', error)
+}
+
 export default [
   {
     ...js.configs.recommended,
     ignores: ['node_modules', 'dist', 'public', 'src/assets/**', '*.config.js'],
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node },
+      globals: { ...globals.browser, ...globals.node, ...autoImportGlobals },
     },
     plugins: {
       prettier: pluginPrettier,
@@ -68,6 +78,11 @@ export default [
       parser: parserVue,
       parserOptions: {
         sourceType: 'module',
+        ecmaVersion: 2021,
+        // 启用 Vue 的自动全局变量识别
+        ecmaFeatures: {
+          jsx: false,
+        },
       },
     },
     plugins: {
@@ -75,9 +90,6 @@ export default [
     },
     processor: pluginVue.processors['.vue'],
     rules: {
-      ...pluginVue.configs['vue3-essential'].rules,
-      ...pluginVue.configs['vue3-recommended'].rules,
-
       // 关闭组件名称多词要求
       'vue/multi-word-component-names': 0,
       // 允许 v-html
