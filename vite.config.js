@@ -9,6 +9,8 @@ export default ({ mode }) => {
   console.log('>>> 当前环境==>', mode)
   console.log('>>> 环境变量==>', env)
 
+  const isProduction = env.VITE_NODE_ENV === 'production'
+
   return defineConfig({
     // 公共基础路径
     base: '/vue3-admin/',
@@ -36,7 +38,7 @@ export default ({ mode }) => {
       preprocessorOptions: {
         less: {
           math: 'always',
-          avascriptEnabled: true,
+          javascriptEnabled: true,
         },
       },
       // 在开发过程中是否启用 sourcemap
@@ -102,10 +104,14 @@ export default ({ mode }) => {
       terserOptions: {
         compress: {
           // 生产环境构建移除 console debugger
-          /* eslint-disable */
-          drop_console: env.VITE_NODE_ENV === 'production',
-          drop_debugger: env.VITE_NODE_ENV === 'production',
-          /* eslint-enable */
+          drop_console: isProduction,
+          drop_debugger: isProduction,
+          // 明确指定要移除的console方法
+          pure_funcs: isProduction ? ['console.log'] : [],
+          // 删除不可达代码
+          dead_code: true,
+          // 删除未使用的变量和函数
+          unused: true,
         },
         format: {
           // 删除注释
@@ -115,7 +121,11 @@ export default ({ mode }) => {
       // 启用/禁用 gzip 压缩大小报告
       reportCompressedSize: true,
       // chunk 大小警告的限制（以 kbs 为单位）
-      chunkSizeWarningLimit: 2048,
+      chunkSizeWarningLimit: 1024,
+      sourcemap: !isProduction,
+      css: {
+        minify: isProduction ? 'esbuild' : false,
+      },
     },
   })
 }
