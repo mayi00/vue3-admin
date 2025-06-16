@@ -7,6 +7,12 @@ export const demoRoutes = [
     meta: { title: 'DEMO', icon: '' },
     children: [
       {
+        path: 'black-button',
+        name: 'BlackButton',
+        component: () => import('@/views/Demo/BlackButton/index.vue'),
+        meta: { title: 'BlackButton', icon: 'carbon:user' },
+      },
+      {
         path: 'national-flag',
         name: 'NationalFlag',
         component: () => import('@/views/Demo/NationalFlag/index.vue'),
