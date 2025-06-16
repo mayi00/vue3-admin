@@ -2,7 +2,7 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import { useUserStore } from '@/store'
 import { useI18n } from 'vue-i18n'
-import { userinfo } from './login'
+import { userinfo } from '../login'
 
 defineOptions({ name: 'Login' })
 

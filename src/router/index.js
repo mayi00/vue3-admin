@@ -12,6 +12,8 @@ const router = createRouter({
   },
 })
 
+const whiteList = ['/login', '/login1']
+
 router.beforeEach((to, from, next) => {
   NProgress.start()
 
@@ -35,7 +37,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
-    if (to.path === '/login') {
+    if (whiteList.includes(to.path)) {
       next()
     } else {
       next({ path: '/login' })

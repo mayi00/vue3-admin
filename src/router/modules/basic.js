@@ -4,8 +4,14 @@ export default [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/Basic/Login/index.vue'),
+    component: () => import('@/views/Basic/Login/Login0/index.vue'),
     meta: { title: '登录', hidden: true },
+  },
+  {
+    path: '/login1',
+    name: 'Login1',
+    component: () => import('@/views/Basic/Login/Login1/index.vue'),
+    meta: { title: '登录1', hidden: true },
   },
   {
     path: '/:all(.*)*',
