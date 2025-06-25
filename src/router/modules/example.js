@@ -86,6 +86,12 @@ export const exampleRoutes = [
             meta: { title: '名人名言', icon: '' },
           },
           {
+            path: 'payables-report-self',
+            name: 'PayablesReportSelf',
+            component: () => import('@/views/Example/Table/PayablesReportSelf/index.vue'),
+            meta: { title: '名人名言', icon: '' },
+          },
+          {
             path: 'table-b',
             name: 'TableB',
             component: () => import('@/views/Example/Table/TableB/index.vue'),

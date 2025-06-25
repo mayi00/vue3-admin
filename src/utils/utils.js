@@ -362,3 +362,29 @@ export function deepClone(source, hash = new WeakMap()) {
 
   return cloneObj
 }
+
+/**
+ * 按指定字段配置对数组对象进行排序
+ * @param {Array} array 待排序的对象数组
+ * @param {Array} fields 排序字段配置数组，每个配置包含：
+ * - field: 需要排序的字段名
+ * - order?: 排序方向（'asc'升序/'desc'降序，默认为'asc'）
+ * @returns {Array} 返回排序后的新数组（原数组不会被修改）
+ */
+export function sortByFields(array, fields) {
+  return array.sort((a, b) => {
+    for (const { field, order = 'asc' } of fields) {
+      const valA = a[field]
+      const valB = b[field]
+
+      // 自动处理数字/字符串比较
+      const compareResult = typeof valA === 'number' ? valA - valB : String(valA).localeCompare(String(valB))
+
+      // 调整排序方向
+      const adjustedResult = order === 'desc' ? -compareResult : compareResult
+
+      if (adjustedResult !== 0) return adjustedResult
+    }
+    return 0
+  })
+}
