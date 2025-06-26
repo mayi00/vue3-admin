@@ -2,7 +2,8 @@
   <div class="custom-column-wrapper">
     <el-button ref="triggerBtnRef" @click.stop="toggleVisible">自定义列</el-button>
 
-    <div v-show="visible" v-click-outside="toggleVisible" class="custom-column-panel">
+    <!-- <div v-show="visible" v-click-outside="toggleVisible" class="custom-column-panel"> -->
+    <div v-show="visible" ref="panelRef" class="custom-column-panel">
       <el-checkbox-group v-model="selectedColumns">
         <el-checkbox
           v-for="item in columns"
@@ -22,6 +23,7 @@
 
 <script setup>
 import { ref, defineProps, defineEmits, onMounted } from 'vue'
+import { useClickOutside } from '@/hooks/useClickOutside'
 
 // 定义props
 const props = defineProps({
@@ -36,9 +38,16 @@ const emit = defineEmits(['on-confirm', 'on-cancel'])
 // 响应式数据
 const visible = ref(false)
 const selectedColumns = ref([])
+const panelRef = ref(null)
+
+useClickOutside(panelRef, () => {
+  if (visible.value) {
+    visible.value = false
+  }
+})
 
 // 从缓存或默认值恢复选中状态
-const restoreFromCacheOrDefault = () => {
+function restoreFromCacheOrDefault() {
   if (props.cacheKey) {
     const cached = localStorage.getItem(props.cacheKey)
     if (cached) {
@@ -55,28 +64,26 @@ const restoreFromCacheOrDefault = () => {
 }
 
 // 保存到缓存
-const saveToCache = () => {
+function saveToCache() {
   if (props.cacheKey) {
     localStorage.setItem(props.cacheKey, JSON.stringify(selectedColumns.value))
   }
 }
 
 // 切换面板可见性
-const toggleVisible = () => {
-  console.log(9999)
-
+function toggleVisible() {
   visible.value = !visible.value
 }
 
 // 处理确认操作
-const handleConfirm = () => {
+function handleConfirm() {
   emit('on-confirm', [...selectedColumns.value])
   saveToCache()
   visible.value = false
 }
 
 // 处理取消操作
-const handleCancel = () => {
+function handleCancel() {
   selectedColumns.value = [...props.selected]
   visible.value = false
   emit('on-cancel')
