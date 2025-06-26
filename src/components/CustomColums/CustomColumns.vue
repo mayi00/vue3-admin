@@ -2,7 +2,7 @@
   <div class="custom-column-wrapper">
     <el-button ref="triggerBtnRef" @click.stop="toggleVisible">自定义列</el-button>
 
-    <div v-show="visible" vClickOutside class="custom-column-panel">
+    <div v-show="visible" v-click-outside="toggleVisible" class="custom-column-panel">
       <el-checkbox-group v-model="selectedColumns">
         <el-checkbox
           v-for="item in columns"
@@ -22,7 +22,6 @@
 
 <script setup>
 import { ref, defineProps, defineEmits, onMounted } from 'vue'
-import { useClickOutside } from '@/hooks/useClickOutside'
 
 // 定义props
 const props = defineProps({
@@ -37,11 +36,6 @@ const emit = defineEmits(['on-confirm', 'on-cancel'])
 // 响应式数据
 const visible = ref(false)
 const selectedColumns = ref([])
-
-// 自定义点击外部区域钩子
-const { vClickOutside } = useClickOutside(() => {
-  if (visible.value) handleCancel()
-})
 
 // 从缓存或默认值恢复选中状态
 const restoreFromCacheOrDefault = () => {
@@ -69,6 +63,8 @@ const saveToCache = () => {
 
 // 切换面板可见性
 const toggleVisible = () => {
+  console.log(9999)
+
   visible.value = !visible.value
 }
 
