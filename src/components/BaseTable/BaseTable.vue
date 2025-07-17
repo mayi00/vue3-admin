@@ -7,6 +7,19 @@ const props = defineProps({
   maxHeight: { type: String | Number },
   stripe: { type: Boolean, default: false },
   border: { type: Boolean, default: false },
+  size: { type: String, default: '', validator: val => ['', 'large', 'default', 'small'].includes(val) },
+  showHeader: { type: Boolean, default: true },
+  highlightCurrentRow: { type: Boolean, default: false },
+  currentRowKey: { type: String | Number },
+  rowClassName: { type: Function | String },
+  rowStyle: { type: Function },
+  cellClassName: { type: Function | String },
+  cellStyle: { type: Function },
+  headerRowClassName: { type: Function | String },
+  headerRowStyle: { type: Function },
+  headerCellClassName: { type: Function | String },
+  headerCellStyle: { type: Function },
+  rowKey: { type: Function | String },
   columns: { type: Array, default: () => [] },
 })
 const emit = defineEmits([])
@@ -14,7 +27,26 @@ const emit = defineEmits([])
 
 <template>
   <div class="base-table">
-    <el-table :data="data" :height="height" :max-height="maxHeight" :border="border" style="width: 100%">
+    <el-table
+      style="width: 100%"
+      :data="data"
+      :height="height"
+      :max-height="maxHeight"
+      :stripe="stripe"
+      :border="border"
+      :size="size"
+      :show-header="showHeader"
+      :highlight-current-row="highlightCurrentRow"
+      :row-class-name="rowClassName"
+      :row-style="rowStyle"
+      :cell-class-name="cellClassName"
+      :cell-style="cellStyle"
+      :header-row-class-name="headerRowClassName"
+      :header-row-style="headerRowStyle"
+      :header-cell-class-name="headerCellClassName"
+      :header-cell-style="headerCellStyle"
+      :row-key="rowKey"
+    >
       <el-table-column
         v-for="(column, i) in columns"
         :key="`${column.prop}-${i}`"
