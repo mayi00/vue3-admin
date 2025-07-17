@@ -44,6 +44,7 @@ const { sidebarIsCollapse } = storeToRefs(useAppStore())
   position: relative;
   display: flex;
   flex: 1;
+  min-width: 0;
   flex-direction: column;
   height: 100%;
 }

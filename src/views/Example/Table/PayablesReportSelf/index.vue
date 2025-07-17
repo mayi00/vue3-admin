@@ -6,6 +6,20 @@ import data from './data.json'
 
 defineOptions({ name: 'PayablesReportSelf' })
 
+const columns = [
+  { label: '账期', prop: 'billMonth', minWidth: 100, slot: 'billMonth', headerSlot: 'billMonthHeader' },
+  { label: '结算商', prop: 'settlementSupplier', minWidth: 100, headerSlot: 'settlementSupplierHeader' },
+  { label: '出账租户', prop: 'tenantName', minWidth: 100 },
+  { label: '应用基线', prop: 'appBaseline', minWidth: 100 },
+  { label: '是否含税', prop: 'isTaxIncluded', minWidth: 100 },
+  { label: '税率', prop: 'taxRate', minWidth: 100 },
+  { label: '当月应付', prop: 'currentPayable', minWidth: 140, align: 'right' },
+  { label: '预付转回', prop: 'prepaymentReversed', minWidth: 160, align: 'right' },
+  { label: '应付总计', prop: 'totalReceivable', minWidth: 160, align: 'right' },
+  { label: '应付总计(不含税)', prop: 'payableWithoutTax', minWidth: 160, align: 'right' },
+  { label: '当月预付', prop: 'currentPrepaid', minWidth: 160, align: 'right' },
+]
+
 const REPORT_TYPE_MAP = {
   estimate: '预估',
   difference: '调整',
@@ -334,6 +348,17 @@ function getLittleNum(x, y) {
   <div class="g-container">
     <el-card>
       <el-button @click="handleDownload">下载</el-button>
+      <BaseTable :data="data" :columns="columns">
+        <template #billMonthHeader="{ column, index }"> {{ column.label }}, {{ index }}</template>
+        <template #billMonth="{ scope, row, index }">
+          {{ scope.row.billMonth }} {{ row.billMonth }}, {{ index }}
+        </template>
+        <template #settlementSupplierHeader="{ column, index }"> {{ column.label }}, {{ index }} </template>
+
+        <!-- <template #append="{ scope }">
+          <div>#append {{ scope }}</div>
+        </template> -->
+      </BaseTable>
     </el-card>
   </div>
 </template>
