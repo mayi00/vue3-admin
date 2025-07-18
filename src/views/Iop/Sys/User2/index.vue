@@ -6,6 +6,7 @@ defineOptions({ name: 'User2' })
 
 const searchFormRef = ref(null)
 const searchForm = ref({ name: '', loginId: '', status: '', roleName: '', orgCodes: [] })
+const baseTableRef = ref(null)
 const table = ref({
   data: [],
   loading: false,
@@ -15,6 +16,7 @@ const table = ref({
   total: 0,
 })
 const columns = ref([
+  { label: '', type: 'selection', width: 50 },
   { label: '序号', type: 'index', width: 100, slot: 'index' },
   { label: '用户名', prop: 'name', minWidth: 100 },
   { label: '登录账号', prop: 'loginId', minWidth: 100 },
@@ -33,6 +35,20 @@ function handleSearch() {
 function handleReset() {
   searchFormRef.value.resetFields()
 }
+
+function handleSelect(select) {
+  console.log('handleSelect', select)
+}
+function handleSelectAll(selects) {
+  console.log('handleSelectAll', selects)
+}
+function handleSelectionChange(selections) {
+  console.log('handleSelectionChange', selections)
+}
+function toggleAllSelection() {
+  baseTableRef.value.toggleAllSelection()
+}
+
 function handlePageChange(page) {
   table.value.currentPage = page
   getList()
@@ -122,13 +138,19 @@ function handleDownloadTemplate() {
     </el-card>
     <el-card shadow="never" style="margin-top: 10px">
       <el-button @click="handleDownloadTemplate">模板下载</el-button>
+      <el-button @click="toggleAllSelection">toggleAllSelection</el-button>
       <BaseTable
+        ref="baseTableRef"
+        :height="table.height"
         :loading="table.loading"
         :data="table.data"
         :columns="columns"
         :defaultPageSize="20"
         :total="table.total"
         :page-count="table.pageCount"
+        @select="handleSelect"
+        @select-all="handleSelectAll"
+        @selection-change="handleSelectionChange"
         @update:currentPage="handlePageChange"
         @update:pageSize="handlePageSizeChange"
       >
