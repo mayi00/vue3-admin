@@ -316,7 +316,7 @@ export function objectToQuery(params) {
 }
 
 /**
- * @description : 深拷贝对象（增强版）
+ * @description : 深拷贝对象
  * @param        {Any} source - 需要拷贝的数据
  * @return       {Any} 拷贝后的数据
  * @example     :
