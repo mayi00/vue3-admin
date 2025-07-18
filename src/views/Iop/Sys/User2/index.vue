@@ -16,7 +16,7 @@ const table = ref({
   total: 0,
 })
 const columns = ref([
-  { label: '', type: 'selection', width: 50 },
+  { type: 'selection', width: 50 },
   { label: '序号', type: 'index', width: 100, slot: 'index' },
   { label: '用户名', prop: 'name', minWidth: 100 },
   { label: '登录账号', prop: 'loginId', minWidth: 100 },
@@ -47,6 +47,9 @@ function handleSelectionChange(selections) {
 }
 function toggleAllSelection() {
   baseTableRef.value.toggleAllSelection()
+}
+function getColumns() {
+  console.log(baseTableRef.value.getColumns())
 }
 
 function handlePageChange(page) {
@@ -139,6 +142,7 @@ function handleDownloadTemplate() {
     <el-card shadow="never" style="margin-top: 10px">
       <el-button @click="handleDownloadTemplate">模板下载</el-button>
       <el-button @click="toggleAllSelection">toggleAllSelection</el-button>
+      <el-button @click="getColumns">getColumns</el-button>
       <BaseTable
         ref="baseTableRef"
         :height="table.height"

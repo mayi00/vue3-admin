@@ -41,7 +41,7 @@ const props = defineProps({
 // 定义可触发的事件（供父组件监听）
 const emit = defineEmits(['select', 'select-all', 'selection-change', 'update:currentPage', 'update:pageSize'])
 // 暴露方法给父组件
-defineExpose({ toggleAllSelection })
+defineExpose({ toggleAllSelection, getColumns })
 
 const tableRef = ref(null)
 
@@ -58,6 +58,10 @@ function selectionChange(selections) {
 // 【表格】用于多选表格，切换全选和全不选
 function toggleAllSelection(page) {
   tableRef.value.toggleAllSelection()
+}
+// 【表格】获取表列的 context
+function getColumns() {
+  return tableRef.value.columns
 }
 
 const currentPage = ref(props.defaultCurrentPage)
