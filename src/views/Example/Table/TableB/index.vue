@@ -20,14 +20,34 @@ function handleSelected(selected) {
   selectedProps.value = selected
   console.log('Selected columns:', selected)
 }
+
+const confirmDialogVisible = ref(false)
+const confirmDialogLoading = ref(false)
+function handleConfirm() {
+  confirmDialogLoading.value = true
+  setTimeout(() => {
+    confirmDialogVisible.value = false
+    confirmDialogLoading.value = false
+  }, 1000)
+}
+function handleCancel() {
+  confirmDialogVisible.value = false
+}
 </script>
 
 <template>
   <div class="g-container">
     <el-card style="min-height: 300px">
+      <el-button @click="confirmDialogVisible = true">删除</el-button>
       <CustomColumns :columns="columns" :selected="selectedProps" cacheKey="tableB" @on-confirm="handleSelected" />
       <div style="height: 200px"></div>
       <p v-for="item in selectedColumns" :key="item.prop">{{ item.label }}</p>
     </el-card>
+    <ConfirmDialog
+      :visible="confirmDialogVisible"
+      :loading="confirmDialogLoading"
+      @on-confirm="handleConfirm"
+      @on-cancel="handleCancel"
+    />
   </div>
 </template>
