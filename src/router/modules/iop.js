@@ -23,6 +23,12 @@ export const iopRoutes = [
             component: () => import('@/views/Iop/Sys/User/index.vue'),
             meta: { title: '人员管理', icon: 'mdi:user' },
           },
+          {
+            path: 'user2',
+            name: 'User2',
+            component: () => import('@/views/Iop/Sys/User2/index.vue'),
+            meta: { title: '人员管理2', icon: 'mdi:user' },
+          },
         ],
       },
       {
