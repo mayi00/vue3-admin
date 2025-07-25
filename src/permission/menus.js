@@ -6,6 +6,7 @@ export const menus = [
     visible: 1,
     name: 'System',
     path: '/system',
+    component: 'Layout',
     meta: { title: '系统管理', icon: '' },
     children: [
       {
@@ -37,8 +38,8 @@ export const menus = [
     visible: 1,
     name: 'Example',
     path: '/example',
+    component: 'Layout',
     meta: { title: '示例', icon: '' },
-    children: [
-    ]
+    children: [],
   },
 ]

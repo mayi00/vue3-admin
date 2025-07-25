@@ -1,12 +1,16 @@
 <script setup>
 import { usePermissionStore } from '@/store'
+import router from '@/router'
 
 defineOptions({ name: 'TopBar' })
 
 const { projectList, activeProject } = storeToRefs(usePermissionStore())
 
-function handleClickMenuItem(item) {
-  usePermissionStore().getMenus(item.id)
+async function handleClickMenuItem(item) {
+  const dynamicRoutes = await usePermissionStore().getMenus(item.id)
+  dynamicRoutes.forEach(route => {
+    router.addRoute(route)
+  })
 }
 </script>
 
