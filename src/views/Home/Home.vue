@@ -49,7 +49,8 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="g-container home-container">
-    <el-row :gutter="8">
+    home-container
+    <!-- <el-row :gutter="8">
       <el-col :span="16">
         <el-card class="user-card">
           <div class="user-info">
@@ -66,9 +67,9 @@ onBeforeUnmount(() => {
           <el-avatar :size="48" :src="userInfo.avatar" />
         </el-card>
       </el-col>
-    </el-row>
+    </el-row> -->
 
-    <el-row :gutter="8">
+    <!-- <el-row :gutter="8">
       <el-col :span="8">
         <el-card>
           <el-avatar :size="48" :src="userInfo.avatar" />
@@ -84,9 +85,9 @@ onBeforeUnmount(() => {
           <el-avatar :size="48" :src="userInfo.avatar" />
         </el-card>
       </el-col>
-    </el-row>
+    </el-row> -->
 
-    <el-row :gutter="8">
+    <!-- <el-row :gutter="8">
       <el-col :span="8">
         <el-card>
           <el-avatar :size="48" :src="userInfo.avatar" />
@@ -102,7 +103,7 @@ onBeforeUnmount(() => {
           <el-avatar :size="48" :src="userInfo.avatar" />
         </el-card>
       </el-col>
-    </el-row>
+    </el-row> -->
   </div>
 </template>
 

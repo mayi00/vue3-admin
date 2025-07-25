@@ -4,7 +4,7 @@ import { useAppStore } from '@/store'
 
 defineOptions({ name: 'SidebarLogo' })
 
-const { sidebarIsCollapse } = storeToRefs(useAppStore())
+const { sidebarCollapsed } = storeToRefs(useAppStore())
 
 const logo = ref(imgLogo)
 </script>
@@ -13,7 +13,7 @@ const logo = ref(imgLogo)
   <Transition name="el-fade-in-linear" mode="out-in">
     <RouterLink to="/" class="sidebar-logo">
       <img :src="logo" alt="" class="logo" />
-      <h2 v-if="!sidebarIsCollapse" class="title">Vue3-admin</h2>
+      <h2 v-if="!sidebarCollapsed" class="title">Vue3-admin</h2>
     </RouterLink>
   </Transition>
 </template>

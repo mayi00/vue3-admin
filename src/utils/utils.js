@@ -39,6 +39,19 @@ export function getRandomString(obj) {
 }
 
 /**
+ * 获取一个随机数
+ * @param {number} min - 最小值
+ * @param {number} max - 最大值
+ * @returns {number} 随机数
+ */
+export function getRandomNumber(min, max) {
+  if (min > max) {
+    throw new Error('Minimum value must be less than or equal to maximum value')
+  }
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+/**
  * @description  : 判断是否为外部链接
  * @param         {String} path
  * @return        {Boolean}

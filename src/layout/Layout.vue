@@ -8,12 +8,12 @@ import { useAppStore } from '@/store'
 
 defineOptions({ name: 'Layout' })
 
-const { sidebarIsCollapse } = storeToRefs(useAppStore())
+const { sidebarCollapsed } = storeToRefs(useAppStore())
 </script>
 
 <template>
   <div class="layout">
-    <aside class="layout-sidebar" :style="{ width: sidebarIsCollapse ? '64px' : '220px' }">
+    <aside class="layout-sidebar" :style="{ width: sidebarCollapsed ? '64px' : '220px' }">
       <Sidebar />
     </aside>
     <main class="layout-main">
