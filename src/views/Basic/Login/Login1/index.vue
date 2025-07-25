@@ -94,9 +94,7 @@ function handleMouseLeave() {
   position: relative;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow:
-    0 4px 24px 0 rgba(0, 0, 0, 0.1),
-    0 1.5px 6px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.1), 0 1.5px 6px 0 rgba(0, 0, 0, 0.08);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.6);
   cursor: pointer;
   background: transparent;
