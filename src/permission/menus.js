@@ -42,4 +42,15 @@ export const menus = [
     meta: { title: '示例', icon: '' },
     children: [],
   },
+  {
+    id: '3',
+    type: 0,
+    sort: 3,
+    visible: 0,
+    name: 'Example2',
+    path: '/example2',
+    component: 'Layout',
+    meta: { title: '示例2', icon: '' },
+    children: [],
+  },
 ]

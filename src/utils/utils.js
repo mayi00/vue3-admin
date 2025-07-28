@@ -377,7 +377,7 @@ export function deepClone(source, hash = new WeakMap()) {
 }
 
 /**
- * 按指定字段配置对数组对象进行排序
+ * 按指定字段配置对对象数组进行排序
  * @param {Array} array 待排序的对象数组
  * @param {Array} fields 排序字段配置数组，每个配置包含：
  * - field: 需要排序的字段名

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { menus } from '@/permission/menus'
-import { getRandomNumber } from '@/utils/utils'
+import { getRandomNumber, sortByFields } from '@/utils/utils'
 
 const modules = import.meta.glob('../../views/**/**.vue')
 const Layout = () => import('@/layouts/index.vue')
@@ -21,9 +21,10 @@ export const usePermissionStore = defineStore('permission', {
     initProject() {
       setTimeout(
         () => {
-          this.projectList = menus.filter(item => item.type === 0)
+          const menuList = menus.filter(item => item.type === 0 && item.visible === 1)
+          this.projectList = sortByFields(menuList, [{ field: 'sort', order: 'asc' }])
         },
-        getRandomNumber(100, 1000)
+        getRandomNumber(50, 500)
       )
     },
     getMenus(projectId) {
@@ -33,10 +34,10 @@ export const usePermissionStore = defineStore('permission', {
           () => {
             const project = this.projectList.find(item => item.id === projectId)
             const dynamicRoutes = this.parseDynamicRoutes([project])
-            console.log(dynamicRoutes)
-            resolve(dynamicRoutes)
+            this.routes = [...this.routes, ...dynamicRoutes]
+            resolve(this.routes)
           },
-          getRandomNumber(100, 1000)
+          getRandomNumber(50, 500)
         )
       })
     },
