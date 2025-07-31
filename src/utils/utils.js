@@ -39,6 +39,19 @@ export function getRandomString(obj) {
 }
 
 /**
+ * 获取一个随机数
+ * @param {number} min - 最小值
+ * @param {number} max - 最大值
+ * @returns {number} 随机数
+ */
+export function getRandomNumber(min, max) {
+  if (min > max) {
+    throw new Error('Minimum value must be less than or equal to maximum value')
+  }
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+/**
  * @description  : 判断是否为外部链接
  * @param         {String} path
  * @return        {Boolean}
@@ -54,7 +67,7 @@ export function isExternalLink(path) {
  * @return       {Boolean} 如果身份证号合法，返回true；否则返回false
  * @Author      : huazf
  */
-export function checkPsidno(value) {
+export function checkIDCardNo(value) {
   const psidno = String(value)
   // 1.校验身份证号格式和长度
   const regPsidno =
@@ -109,7 +122,7 @@ export function checkPsidno(value) {
     const reg = new RegExp(/^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/)
     const arrSplit = psidno.match(reg)
     // 15位号码在年份前补 19 或 20
-    const year = Number(arrSplit[2].charAt(0)) > 0 ? '19' + arrSplit[2] : '20' + arrSplit[2]
+    const year = Number(arrSplit[2].charAt(0)) > 0 ? `19${arrSplit[2]}` : `20${arrSplit[2]}`
     const month = arrSplit[3]
     const day = arrSplit[4]
     if (!validateBirthday(year, month, day)) {
@@ -201,7 +214,7 @@ export function base64ToBlob(base64Content) {
     return new Blob([uint8Array], { type: contentType })
   } catch (error) {
     // 处理解码过程中可能出现的错误
-    throw new Error('无法解码 base64 数据: ' + error.message)
+    throw new Error(`无法解码 base64 数据: ${error.message}`)
   }
 }
 
@@ -316,7 +329,7 @@ export function objectToQuery(params) {
 }
 
 /**
- * @description : 深拷贝对象（增强版）
+ * @description : 深拷贝对象
  * @param        {Any} source - 需要拷贝的数据
  * @return       {Any} 拷贝后的数据
  * @example     :
@@ -361,4 +374,30 @@ export function deepClone(source, hash = new WeakMap()) {
   }
 
   return cloneObj
+}
+
+/**
+ * 按指定字段配置对对象数组进行排序
+ * @param {Array} array 待排序的对象数组
+ * @param {Array} fields 排序字段配置数组，每个配置包含：
+ * - field: 需要排序的字段名
+ * - order?: 排序方向（'asc'升序/'desc'降序，默认为'asc'）
+ * @returns {Array} 返回排序后的新数组（原数组不会被修改）
+ */
+export function sortByFields(array, fields) {
+  return array.sort((a, b) => {
+    for (const { field, order = 'asc' } of fields) {
+      const valA = a[field]
+      const valB = b[field]
+
+      // 自动处理数字/字符串比较
+      const compareResult = typeof valA === 'number' ? valA - valB : String(valA).localeCompare(String(valB))
+
+      // 调整排序方向
+      const adjustedResult = order === 'desc' ? -compareResult : compareResult
+
+      if (adjustedResult !== 0) return adjustedResult
+    }
+    return 0
+  })
 }

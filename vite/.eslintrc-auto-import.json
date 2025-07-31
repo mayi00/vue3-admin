@@ -5,8 +5,6 @@
     "ComputedRef": true,
     "DirectiveBinding": true,
     "EffectScope": true,
-    "ElMessage": true,
-    "ElMessageBox": true,
     "ExtractDefaultPropTypes": true,
     "ExtractPropTypes": true,
     "ExtractPublicPropTypes": true,
@@ -15,6 +13,8 @@
     "MaybeRefOrGetter": true,
     "PropType": true,
     "Ref": true,
+    "Slot": true,
+    "Slots": true,
     "VNode": true,
     "WritableComputedRef": true,
     "acceptHMRUpdate": true,
@@ -88,9 +88,6 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true,
-    "Slot": true,
-    "Slots": true,
-    "ElMess": true
+    "watchSyncEffect": true
   }
 }

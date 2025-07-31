@@ -1,21 +1,12 @@
 <script setup>
-import SidebarLogo from './SidebarLogo.vue'
-import SidebarMenu from './SidebarMenu.vue'
+import { useAppStore, usePermissionStore } from '@/store'
 
-defineOptions({ name: 'Sidebar' })
+defineOptions({ name: 'SideBar' })
+
 </script>
 
 <template>
-  <div class="sidebar-container">
-    <SidebarLogo />
-    <SidebarMenu />
-  </div>
+  <div class="side-bar"></div>
 </template>
 
-<style lang="less" scoped>
-.sidebar-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style lang="less" scoped></style>

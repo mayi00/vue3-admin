@@ -1,11 +1,13 @@
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-
 import { useAppStore } from './modules/app'
-import { useUserStore } from './modules/user'
+import { usePermissionStore } from './modules/permission'
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
-export default pinia
-export { useAppStore, useUserStore }
+// 全局注册 pinia
+export function setupStore(app) {
+  app.use(pinia)
+}
+export { pinia, useAppStore, usePermissionStore }

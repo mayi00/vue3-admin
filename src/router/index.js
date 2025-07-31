@@ -1,7 +1,28 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import NProgress from '@/plugins/nprogress'
-import { useUserStore, useAppStore } from '@/store'
-import routes from './modules'
+import Layout from '@/layout/index.vue'
+
+const routes = [
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/login/index.vue'),
+    meta: { title: '登录', hidden: true },
+  },
+  {
+    path: '/',
+    redirect: '/home',
+    component: Layout,
+    meta: { title: '首页' },
+    children: [
+      {
+        path: 'home',
+        name: 'Home',
+        component: () => import('@/views/home/index.vue'),
+        meta: { title: '首页' },
+      },
+    ],
+  },
+]
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -12,30 +33,25 @@ const router = createRouter({
   },
 })
 
-router.beforeEach((to, from, next) => {
-  NProgress.start()
+const whiteList = ['/login', '/login1']
 
+router.beforeEach((to, from, next) => {
   // 路由发生变化修改页面 title
   if (to.meta.title) {
-    document.title = `${to.meta.title} | Vue3-admin`
+    document.title = `${to.meta.title} | Vite`
   } else {
-    document.title = 'Vue3-admin'
+    document.title = 'Vite'
   }
 
   const token = localStorage.getItem('token')
-  const userStore = useUserStore()
   if (token) {
-    if (!userStore.validateToken(token)) {
-      userStore.logout()
-      next({ path: '/login' })
-    } else if (to.path === '/login') {
+    if (to.path === '/login') {
       next({ path: '/' })
     } else {
-      useAppStore().addTag(to)
       next()
     }
   } else {
-    if (to.path === '/login') {
+    if (whiteList.includes(to.path)) {
       next()
     } else {
       next({ path: '/login' })
@@ -43,9 +59,10 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-router.afterEach(() => {
-  NProgress.done()
-})
+router.afterEach(() => {})
 
+// 全局注册 router
+export function setupRouter(app) {
+  app.use(router)
+}
 export default router
-export { routes }
