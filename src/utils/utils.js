@@ -401,3 +401,19 @@ export function sortByFields(array, fields) {
     return 0
   })
 }
+
+/**
+ *
+ */
+export function uniqueByField(arr, field) {
+  const seen = new Set()
+  return arr.filter(item => {
+    const value = item[field]
+    if (seen.has(value)) {
+      return false
+    } else {
+      seen.add(value)
+      return true
+    }
+  })
+}

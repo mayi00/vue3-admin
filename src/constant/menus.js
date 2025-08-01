@@ -16,7 +16,7 @@ export const menus = [
         visible: 1,
         name: 'User',
         path: '/user',
-        component: 'System/UserManage/index',
+        component: 'system/userManage/index',
         meta: { title: '用户管理', icon: '' },
       },
       {
@@ -26,7 +26,7 @@ export const menus = [
         visible: 1,
         name: 'Role',
         path: '/role',
-        component: 'System/RoleManage/index',
+        component: 'system/roleManage/index',
         meta: { title: '角色管理', icon: '' },
       },
     ],

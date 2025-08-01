@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getRandomNumber, sortByFields } from '@/utils/utils'
+import { deepClone, getRandomNumber, sortByFields, uniqueByField } from '@/utils/utils'
 
 const modules = import.meta.glob('../../views/**/**.vue')
 const Layout = () => import('@/layout/index.vue')
@@ -10,27 +10,30 @@ export const usePermissionStore = defineStore('permission', {
     storage: window.localStorage,
   },
   state: () => ({
+    // 项目列表
     projectList: [],
-    // 当前激活的项目
-    activeProject: '',
+    // 当前激活的项目id
+    projectId: '',
+    // 所有动态路由源数据，
+    allDynamicRoutes: [],
     // 当前侧边栏菜单
-    currentMenus: [],
-    routes: [],
+    sidebarRoutes: [],
   }),
   actions: {
+    // 保存访问过的路由源数据
     saveRoutes(route) {
-      const routes = [...this.routes, route]
-      
+      this.sidebarRoutes = deepClone(route)
+      const tempRoutes = [...this.allDynamicRoutes, route]
+      const nonrepetitiveRoutes = uniqueByField(tempRoutes, 'id')
+      this.allDynamicRoutes = sortByFields(nonrepetitiveRoutes, [{ field: 'sort', order: 'asc' }])
     },
-    getRoutes(project) {
-      const dynamicRoutes = this.parseDynamicRoutes([project])
-      this.currentMenus = [...dynamicRoutes]
-      this.routes = [...this.routes, ...dynamicRoutes]
-
-      console.log(this.routes, 'this.routes');
-
-      return this.routes
+    // 
+    getRoutes() {
+      const dynamicRoutes = this.parseDynamicRoutes(this.allDynamicRoutes)
+      return dynamicRoutes
     },
+    // 递归解析动态路由
+    // 将路由组件路径转换为实际的组件对象
     parseDynamicRoutes(rawRoutes) {
       const parsedRoutes = []
 

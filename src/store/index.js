@@ -4,6 +4,7 @@ import { useAppStore } from './modules/app'
 import { usePermissionStore } from './modules/permission'
 
 const pinia = createPinia()
+console.log('Pinia instance created')
 pinia.use(piniaPluginPersistedstate)
 
 // 全局注册 pinia
