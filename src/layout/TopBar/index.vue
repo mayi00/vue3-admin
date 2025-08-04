@@ -1,8 +1,7 @@
 <script setup>
 import { deepClone, getRandomNumber, sortByFields } from '@/utils/utils'
-import router from '@/router'
+import { initDynamicRoutes } from '@/tools/route'
 import { usePermissionStore } from '@/store'
-
 import { menus } from '@/constant/menus'
 
 defineOptions({ name: 'TopBar' })
@@ -10,7 +9,6 @@ defineOptions({ name: 'TopBar' })
 const { projectList, projectId } = storeToRefs(usePermissionStore())
 
 initProject()
-initDynamicRoutes()
 
 // 初始化项目列表（模拟异步）
 function initProject() {
@@ -48,13 +46,6 @@ function getMenus(projectId) {
     )
   })
 }
-function initDynamicRoutes() {
-  const dynamicRoutes = usePermissionStore().getRoutes()
-  dynamicRoutes.forEach(route => {
-    router.addRoute(route)
-  })
-  console.log(router.getRoutes())
-}
 </script>
 
 <template>
@@ -72,5 +63,9 @@ function initDynamicRoutes() {
 <style lang="less" scoped>
 .top-bar {
   height: 50px;
+}
+// 覆盖el-menu的默认高度
+.el-menu--horizontal {
+  --el-menu-horizontal-height: 50px;
 }
 </style>

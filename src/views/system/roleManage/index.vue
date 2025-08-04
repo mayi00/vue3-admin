@@ -1,5 +1,5 @@
 <script setup>
-defineOptions({ name: '' })
+defineOptions({ name: 'RoleManage' })
 
 </script>
 

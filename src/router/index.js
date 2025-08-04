@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '@/layout/index.vue'
+import { initDynamicRoutes } from '@/tools/route'
 
 const routes = [
   {
@@ -66,3 +67,5 @@ export function setupRouter(app) {
   app.use(router)
 }
 export default router
+
+initDynamicRoutes(router)

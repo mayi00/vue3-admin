@@ -1,10 +1,10 @@
 <script setup>
-defineOptions({ name: 'UserManage' })
+defineOptions({ name: 'WhiteList7' })
 
 </script>
 
 <template>
-  <div class="">user</div>
+  <div class="">WhiteList7</div>
 </template>
 
 <style lang="less" scoped></style>

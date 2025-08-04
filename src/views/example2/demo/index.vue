@@ -1,10 +1,10 @@
 <script setup>
-defineOptions({ name: 'UserManage' })
+defineOptions({ name: 'Demo' })
 
 </script>
 
 <template>
-  <div class="">user</div>
+  <div class="">Demo</div>
 </template>
 
 <style lang="less" scoped></style>
