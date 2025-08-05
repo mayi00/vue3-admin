@@ -109,16 +109,6 @@ export function getRandomFloat(min, max, decimalPlaces = 0) {
 }
 
 /**
- * @description  : 判断是否为外部链接
- * @param         {String} path
- * @return        {Boolean}
- * @Author       : MDT
- */
-export function isExternalLink(path) {
-  return /^(https?:|mailto:|tel:)/.test(path)
-}
-
-/**
  * @description : 校验身份证号是否合法
  * @param        {String|Number} value
  * @return       {Boolean} 如果身份证号合法，返回true；否则返回false

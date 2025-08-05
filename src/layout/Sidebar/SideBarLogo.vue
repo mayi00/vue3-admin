@@ -2,7 +2,7 @@
 import { useAppStore } from '@/store'
 import imgLogo from '@/assets/svg/vue.svg'
 
-defineOptions({ name: 'SideBarLogo' })
+defineOptions({ name: 'SidebarLogo' })
 
 const { sidebarCollapsed } = storeToRefs(useAppStore())
 const logo = ref(imgLogo)
@@ -28,7 +28,7 @@ const logo = ref(imgLogo)
   background-color: #fff;
   text-align: center;
   cursor: pointer;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid #efefef;
 }
 
 .logo {

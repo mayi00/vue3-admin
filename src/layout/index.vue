@@ -1,6 +1,6 @@
 <script setup>
 import AppMain from './AppMain/index.vue'
-import SideBar from './SideBar/index.vue'
+import Sidebar from './SideBar/index.vue'
 import TopBar from './TopBar/index.vue'
 import { useAppStore } from '@/store'
 
@@ -13,7 +13,7 @@ const { sidebarCollapsed } = storeToRefs(useAppStore())
 <template>
   <div class="layout">
     <aside class="layout-aside" :style="{ width: sidebarCollapsed ? '64px' : '240px' }">
-      <SideBar/>
+      <Sidebar/>
     </aside>
     <section class="layout-section">
       <TopBar />

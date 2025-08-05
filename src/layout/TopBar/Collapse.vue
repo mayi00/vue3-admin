@@ -22,12 +22,13 @@ function toggleCollapsed() {
 <style lang="less" scoped>
 .collapse {
   flex-shrink: 0;
-  width: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 8px;
   cursor: pointer;
   border-radius: 4px;
+  aspect-ratio: 1 / 1;
 
   &:hover {
     background-color: #f0f0f0;

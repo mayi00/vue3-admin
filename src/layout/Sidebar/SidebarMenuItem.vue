@@ -1,5 +1,6 @@
 <script setup>
 import { isExternalLink } from '@/utils/utils'
+
 defineOptions({ name: 'SidebarMenuItem' })
 
 const props = defineProps({

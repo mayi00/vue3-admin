@@ -25,6 +25,7 @@ function initProject() {
 
 // 点击导航栏的项目，获取项目下的菜单
 function handleClickMenuItem(item) {
+  if (projectId.value === item.id) return
   projectId.value = item.id
   getMenus(item.id).then(res => {
     usePermissionStore().saveRoutes(res)
