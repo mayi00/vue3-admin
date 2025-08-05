@@ -1,9 +1,5 @@
 import { defineStore } from 'pinia'
-import { deepClone, getRandomNumber, sortByFields, uniqueByField } from '@/utils/utils'
-import { parseDynamicRoutes } from '@/tools/route'
-
-const modules = import.meta.glob('../../views/**/**.vue')
-const Layout = () => import('@/layout/index.vue')
+import { deepClone, sortByFields, uniqueByField } from '@/utils/utils'
 
 export const usePermissionStore = defineStore('permission', {
   persist: {

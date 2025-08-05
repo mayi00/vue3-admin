@@ -39,16 +39,63 @@ export function getRandomString(obj) {
 }
 
 /**
- * 获取一个随机数
- * @param {number} min - 最小值
- * @param {number} max - 最大值
- * @returns {number} 随机数
+ * 生成指定范围内的随机整数
+ * @param {number} min 最小值（包含）
+ * @param {number} max 最大值（包含）
+ * @returns {number} 返回一个介于min和max之间的随机整数
+ * @throws {TypeError} 当min或max参数类型不为数字时抛出异常
  */
-export function getRandomNumber(min, max) {
-  if (min > max) {
-    throw new Error('Minimum value must be less than or equal to maximum value')
+export function getRandomInt(min, max) {
+  // 参数类型检查
+  if (typeof min !== 'number' || typeof max !== 'number') {
+    throw new TypeError('参数必须为数字')
   }
-  return Math.floor(Math.random() * (max - min + 1)) + min
+
+  if (min === max) return min
+
+  // 交换 min 和 max
+  if (min > max) [min, max] = [max, min]
+
+  const range = max - min + 1
+  return Math.floor(Math.random() * range) + min
+}
+
+/**
+ * 生成指定范围和小数位数的随机浮点数
+ * @param {number} min 最小值（包含）
+ * @param {number} max 最大值（包含）
+ * @param {number} [decimalPlaces=0] 小数位数，取值范围0-20
+ * @returns {number} 生成的随机浮点数，保留指定小数位数
+ * @throws {TypeError} 当 min 或 max 参数类型不为数字时抛出异常
+ * @throws {RangeError} 当 decimalPlaces 不是 0-20 的整数时抛出异常
+ */
+export function getRandomFloat(min, max, decimalPlaces = 0) {
+  // 参数类型检查
+  if (typeof min !== 'number' || typeof max !== 'number') {
+    throw new TypeError('参数必须为数字')
+  }
+
+  // 参数范围校验
+  if (!Number.isInteger(decimalPlaces) || decimalPlaces > 20) {
+    throw new RangeError('decimalPlaces必须是0~20之间的整数')
+  }
+
+  // 如果小数位数小于0，则默认为0
+  if (decimalPlaces < 0) decimalPlaces = 0
+
+  if (min === max) return min
+
+  // 交换 min 和 max
+  if (min > max) [min, max] = [max, min]
+
+  // 生成基础浮点数
+  let random = Math.random() * (max - min) + min
+
+  // 处理小数位数
+  const factor = Math.pow(10, decimalPlaces)
+  random = Math.round(random * factor) / factor
+
+  return random
 }
 
 /**
