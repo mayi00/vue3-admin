@@ -13,13 +13,12 @@ initProject()
 // 初始化项目列表（模拟异步）
 function initProject() {
   const delayed = getRandomInt(1, 200)
-  console.log('初始化项目列表，延迟：', delayed)
   setTimeout(() => {
     const tempMenus = deepClone(menus)
     tempMenus.forEach(item => {
       delete item.children
     })
-    const menuList = tempMenus.filter(item => item.type === 0 && item.visible === 1)
+    const menuList = tempMenus.filter(item => item.type === 0)
     projectList.value = sortByFields(menuList, [{ field: 'sort', order: 'asc' }])
   }, delayed)
 }
@@ -35,7 +34,6 @@ function handleClickMenuItem(item) {
 // 获取项目下的菜单（模拟异步请求）
 function getMenus(projectId) {
   const delayed = getRandomFloat(1, 300, 2)
-  console.log('获取项目下的菜单，延迟：', delayed)
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const tempMenus = deepClone(menus)

@@ -16,7 +16,7 @@ export const system = {
       name: 'UserManage',
       path: '/userManage',
       component: 'system/userManage/index',
-      meta: { title: '用户管理', icon: '' },
+      meta: { title: '用户管理', icon: '', keepAlive: true },
     },
     {
       id: '1-2',
@@ -26,7 +26,7 @@ export const system = {
       name: 'RoleManage',
       path: '/roleManage',
       component: 'system/roleManage/index',
-      meta: { title: '角色管理', icon: '' },
+      meta: { title: '角色管理', icon: '', keepAlive: true },
     },
   ],
 }

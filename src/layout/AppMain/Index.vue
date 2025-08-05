@@ -2,20 +2,24 @@
 defineOptions({ name: 'AppMain' })
 
 const router = useRouter()
-const allRoutes = router.getRoutes()
 const keepAliveRoutes = computed(() => {
-  return allRoutes.filter(route => route.meta?.keepAlive).map(route => route.name)
+  const allDynamicRoutes = router
+    .getRoutes()
+    .filter(route => route.meta?.keepAlive)
+    .map(route => route.name)
+
+  return [...allDynamicRoutes, 'Home']
 })
 </script>
 
 <template>
   <main class="app-main">
     <router-view v-slot="{ Component, route }">
-      <Transition name="el-fade-in-linear" mode="out-in">
+      <transition name="el-fade-in-linear" mode="out-in">
         <keep-alive :include="keepAliveRoutes">
           <component :is="Component" :key="route.path" />
         </keep-alive>
-      </Transition>
+      </transition>
     </router-view>
   </main>
 </template>
