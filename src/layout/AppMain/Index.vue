@@ -10,13 +10,13 @@ const keepAliveRoutes = computed(() => {
 
 <template>
   <main class="app-main">
-    <RouterView v-slot="{ Component, route }">
+    <router-view v-slot="{ Component, route }">
       <Transition name="el-fade-in-linear" mode="out-in">
-        <KeepAlive :include="keepAliveRoutes">
+        <keep-alive :include="keepAliveRoutes">
           <component :is="Component" :key="route.path" />
-        </KeepAlive>
+        </keep-alive>
       </Transition>
-    </RouterView>
+    </router-view>
   </main>
 </template>
 

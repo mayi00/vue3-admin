@@ -1,4 +1,5 @@
 <script setup>
+import SideBarLogo from './SideBarLogo.vue'
 import SidebarMenuItem from './SidebarMenuItem.vue'
 import { useAppStore, usePermissionStore } from '@/store'
 
@@ -12,11 +13,12 @@ const menuList = computed(() => sidebarRoutes.value.children || [])
 
 <template>
   <div class="sidebar">
+    <SideBarLogo />
     <el-menu
       :default-active="currentRoute.path"
       unique-opened
       :collapse="sidebarCollapsed"
-      style="height: 100%; overflow: auto"
+      style="flex: 1; height: 100%; overflow: auto"
     >
       <template v-for="(item, i) in menuList" :key="item.path">
         <SidebarMenuItem v-if="item.visible" :item="item" />
@@ -29,5 +31,7 @@ const menuList = computed(() => sidebarRoutes.value.children || [])
 .sidebar {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>
