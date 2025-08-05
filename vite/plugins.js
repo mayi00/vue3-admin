@@ -14,15 +14,20 @@ export function createVitePlugins() {
         globalsPropValue: true,
       },
       dts: false,
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        // 自动导入 Element Plus
+        ElementPlusResolver(),
+      ],
       // 是否在 vue 模板中自动导入
       vueTemplate: true,
     }),
     Components({
       // 默认导入组件文件夹，组件会自动引入
       dirs: ['src/components'],
-      // ElementPlus 组件自动按需引入
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        // ElementPlus 组件自动按需引入
+        ElementPlusResolver(),
+      ],
     }),
     vue(),
     vueDevTools(),
