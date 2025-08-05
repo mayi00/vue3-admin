@@ -9,16 +9,6 @@ export const example2 = {
   meta: { title: '示例2', icon: '' },
   children: [
     {
-      id: '3-2',
-      type: 1,
-      sort: 0,
-      visible: 1,
-      name: 'Demo',
-      path: '/demo',
-      component: 'example2/demo/index',
-      meta: { title: 'Demo', icon: '', keepAlive: true },
-    },
-    {
       id: '3-1',
       type: 1,
       sort: 2,
@@ -129,6 +119,26 @@ export const example2 = {
           meta: { title: 'WhiteList10', icon: '', keepAlive: true },
         },
       ],
+    },
+    {
+      id: '3-2',
+      type: 1,
+      sort: 0,
+      visible: 1,
+      name: 'Demo',
+      path: '/demo',
+      component: 'example2/demo/index',
+      meta: { title: 'Demo', icon: '', keepAlive: true },
+    },
+    {
+      id: '3-3',
+      type: 1,
+      sort: 2,
+      visible: 1,
+      name: 'Baidu',
+      path: 'https://www.baidu.com',
+      component: 'Layout',
+      meta: { title: 'Baidu', icon: '' },
     },
   ],
 }

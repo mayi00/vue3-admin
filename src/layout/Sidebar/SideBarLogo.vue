@@ -9,12 +9,12 @@ const logo = ref(imgLogo)
 </script>
 
 <template>
-  <Transition name="el-fade-in-linear" mode="out-in">
+  <transition name="el-fade-in-linear" mode="out-in">
     <router-link to="/" class="sidebar-logo">
       <img :src="logo" alt="" class="logo" />
       <h1 v-if="!sidebarCollapsed" class="title">Vue</h1>
     </router-link>
-  </Transition>
+  </transition>
 </template>
 
 <style lang="less" scoped>
@@ -28,6 +28,7 @@ const logo = ref(imgLogo)
   background-color: #fff;
   text-align: center;
   cursor: pointer;
+  border-bottom: 1px solid #eaeaea;
 }
 
 .logo {

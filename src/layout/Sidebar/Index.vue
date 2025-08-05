@@ -14,12 +14,7 @@ const menuList = computed(() => sidebarRoutes.value.children || [])
 <template>
   <div class="sidebar">
     <SideBarLogo />
-    <el-menu
-      :default-active="currentRoute.path"
-      unique-opened
-      :collapse="sidebarCollapsed"
-      style="flex: 1; height: 100%; overflow: auto"
-    >
+    <el-menu :default-active="currentRoute.path" unique-opened :collapse="sidebarCollapsed">
       <template v-for="(item, i) in menuList" :key="item.path">
         <SidebarMenuItem v-if="item.visible" :item="item" />
       </template>
@@ -33,5 +28,18 @@ const menuList = computed(() => sidebarRoutes.value.children || [])
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.el-menu {
+  flex: 1;
+  height: 100%;
+  overflow: auto;
+  // border-right: 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 }
 </style>

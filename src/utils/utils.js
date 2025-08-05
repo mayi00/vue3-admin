@@ -1,4 +1,14 @@
 /**
+ * 判断是否为外部链接（http:// 或 https:// 开头）
+ * @param {any} path 路径
+ * @returns {boolean}
+ */
+export function isExternalLink(path) {
+  if (typeof path !== 'string') return false
+  return /^https?:\/\//.test(path)
+}
+
+/**
  * @description : 获取随机字符串
  *                - 传入的 length 为空时，则返回 ''
  *                - 若 uppercase , lowercase, num 均不传，则默认全部包含

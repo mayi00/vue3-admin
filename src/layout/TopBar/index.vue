@@ -18,5 +18,6 @@ defineOptions({ name: 'TopBar' })
 .top-bar {
   height: 50px;
   display: flex;
+  border-bottom: 1px solid #eaeaea;
 }
 </style>
