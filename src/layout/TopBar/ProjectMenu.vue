@@ -47,7 +47,7 @@ function getMenus(projectId) {
 
 <template>
   <div class="project-menu">
-    <el-menu mode="horizontal" :default-active="projectId">
+    <el-menu mode="horizontal" :default-active="projectId" :ellipsis="true">
       <template v-for="item in projectList" :key="item.id">
         <el-menu-item v-if="item.visible === 1" :index="item.id" @click="handleClickMenuItem(item)">
           {{ item.meta.title }}
