@@ -1,40 +1,15 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Layout from '@/layout/index.vue'
+import { constantRoutes } from './constantRoutes'
 import { initDynamicRoutes } from '@/tools/route'
-
-const routes = [
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/login/index.vue'),
-    meta: { title: '登录', hidden: true },
-  },
-  {
-    path: '/',
-    redirect: '/home',
-    component: Layout,
-    meta: { title: '首页' },
-    children: [
-      {
-        path: 'home',
-        name: 'Home',
-        component: () => import('@/views/home/index.vue'),
-        meta: { title: '首页' },
-      },
-    ],
-  },
-]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes,
+  routes: constantRoutes,
   // 每次切换路由的时候滚动到页面顶部
   scrollBehavior() {
     return { left: 0, top: 0 }
-  },
+  }
 })
-
-const whiteList = ['/login', '/login1']
 
 router.beforeEach((to, from, next) => {
   // 路由发生变化修改页面 title
@@ -52,7 +27,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
-    if (whiteList.includes(to.path)) {
+    if (to.path.includes('/login')) {
       next()
     } else {
       next({ path: '/login' })

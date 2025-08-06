@@ -1,7 +1,7 @@
 <script setup>
-import AppMain from './AppMain/index.vue'
-import Sidebar from './SideBar/index.vue'
-import TopBar from './TopBar/index.vue'
+import AppMain from './AppMain/AppMain.vue'
+import Sidebar from './Sidebar/Sidebar.vue'
+import TopBar from './TopBar/TopBar.vue'
 import { useAppStore } from '@/store'
 
 defineOptions({ name: 'Layout' })

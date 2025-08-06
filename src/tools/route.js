@@ -1,7 +1,7 @@
 import router from '../router'
 
 const modules = import.meta.glob('../views/**/**.vue')
-const Layout = () => import('@/layout/index.vue')
+const Layout = () => import('@/layout/Layout.vue')
 
 // 初始化动态路由
 export function initDynamicRoutes() {

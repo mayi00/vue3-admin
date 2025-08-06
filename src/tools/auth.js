@@ -1,0 +1,51 @@
+import dayjs from 'dayjs'
+import { getRandomString, getRandomInt } from '@/utils/utils'
+import { encryptCBC, decryptCBC } from '@/utils/aesUtils'
+import { userinfo } from '@/constant/user/user.js'
+
+/**
+ * 登录生成用户信息和token
+ * 模拟登录接口
+ * @param {*} loginForm
+ * @returns
+ */
+export function login(loginForm) {
+  return new Promise((resolve, reject) => {
+    setTimeout(
+      () => {
+        const token = generateToken(loginForm.username)
+        const userInfo = { ...userinfo, token }
+        resolve(userInfo)
+      },
+      getRandomInt(100, 1000)
+    )
+  })
+}
+/**
+ * 生成token
+ * @param {String} username
+ * @param {Number} effectiveDuration
+ * @returns
+ */
+export function generateToken(username, effectiveDuration = 12) {
+  const randomStr = getRandomString()
+  const expirationTime = dayjs().add(effectiveDuration, 'hour').valueOf()
+  const tempToken = `${username}-${randomStr}-${expirationTime}`
+  return encryptCBC(tempToken, process.env.VITE_AES_SECRET_KEY, process.env.VITE_AES_SECRET_IV)
+}
+
+// 验证token
+export function validateToken(token) {
+  const plaintext = decryptCBC(token, process.env.VITE_AES_SECRET_KEY, process.env.VITE_AES_SECRET_IV)
+  const currentTime = new Date().getTime()
+  const expirationTime = plaintext.split('-')[2]
+  if (currentTime > expirationTime) {
+    return false
+  } else {
+    // 在过期时间剩余10分钟内时刷新token
+    if (expirationTime - currentTime <= 10 * 60 * 1000) {
+      generateToken(userInfo.value.username)
+    }
+    return true
+  }
+}

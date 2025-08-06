@@ -1,5 +1,6 @@
 // 重置样式
 import './reset.css'
+// 全局样式
 import './globals.less'
 
 // 全局引入 elementplus 的暗黑模式
