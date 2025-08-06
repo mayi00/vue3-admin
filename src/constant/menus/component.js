@@ -16,7 +16,7 @@ export const component = {
       name: 'Curd',
       path: '/curd',
       component: 'component/curd/index',
-      meta: { title: '增删改查', icon: '', keepAlive: true },
-    },
-  ],
+      meta: { title: '增删改查', icon: '', keepAlive: true }
+    }
+  ]
 }

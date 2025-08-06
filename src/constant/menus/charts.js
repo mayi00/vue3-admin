@@ -7,5 +7,5 @@ export const charts = {
   path: '/charts',
   component: 'Layout',
   meta: { title: 'Charts charts', icon: '' },
-  children: [],
+  children: []
 }
