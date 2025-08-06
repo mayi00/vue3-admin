@@ -158,7 +158,7 @@ export function checkIDCardNo(value) {
     71: '台湾',
     81: '香港',
     82: '澳门',
-    91: '国外',
+    91: '国外'
   }
   if (!province[Number(psidno.slice(0, 2))]) {
     return false
