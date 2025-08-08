@@ -2,7 +2,7 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
 const service = axios.create({
-  baseURL: 'https://mock.presstime.cn/mock/68931b87f9550db92fdb811c',
+  baseURL: 'https://m1.apifoxmock.com/m1/6904550-6620381-default',
   timeout: 1000 * 10
 })
 
@@ -21,6 +21,7 @@ service.interceptors.request.use(
     if (token) {
       config.headers['Authorization'] = token
     }
+    config.headers['apifoxToken'] = 'zl1jTObxQdZfgfBa466PA'
     return config
   },
   error => {

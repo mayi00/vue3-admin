@@ -1,5 +1,5 @@
 <script setup>
-import api from '@/api/easymock/system.js'
+import api from '@/api/apifox/system.js'
 defineOptions({ name: 'UserManage' })
 
 getUserList()
