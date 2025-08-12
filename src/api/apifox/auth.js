@@ -1,11 +1,12 @@
 import request from './request'
 
 export default {
-  userlist(params) {
+  // 登录
+  login(data) {
     return request({
-      url: '/user/list',
+      url: '/auth/login',
       method: 'post',
-      params
+      data
     })
   }
 }

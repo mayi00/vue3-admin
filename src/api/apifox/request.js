@@ -2,7 +2,7 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
 const service = axios.create({
-  baseURL: 'https://m1.apifoxmock.com/m1/6904550-6620381-default',
+  baseURL: 'https://m1.apifoxmock.com/m1/6904608-6620440-default',
   timeout: 1000 * 10
 })
 
@@ -21,7 +21,7 @@ service.interceptors.request.use(
     if (token) {
       config.headers['Authorization'] = token
     }
-    config.headers['apifoxToken'] = 'zl1jTObxQdZfgfBa466PA'
+    config.headers['apifoxToken'] = ''
     return config
   },
   error => {
@@ -44,17 +44,17 @@ service.interceptors.response.use(
           resolve(response.data)
         }
         // 处理普通数据
-        switch (response.data.status) {
+        switch (response.data.code) {
           // 成功
           case 0:
             resolve(response.data)
             break
           // 失败
-          case '1':
+          case 1:
             ElMessage.error(response.data.message)
             reject(response.data)
             break
-          // 错误-需要特殊处理
+          // 成功-但需要特殊处理
           default:
             resolve(response.data)
             break
