@@ -158,10 +158,20 @@ export const example2 = {
       menuType: 'IFRAME_LINK',
       sort: 3,
       visible: 1,
-      name: 'juejin',
-      path: 'https://juejin.cn/',
+      name: 'Juejin',
+      path: '/juejin',
       component: '',
-      meta: { title: 'juejin', icon: '' }
+      meta: { title: '掘金', icon: '', keepAlive: true, link: 'https://juejin.cn/' }
+    },
+    {
+      id: '3-5',
+      menuType: 'IFRAME_LINK',
+      sort: 5,
+      visible: 1,
+      name: 'CSDN',
+      path: '/csdn',
+      component: '',
+      meta: { title: 'CSDN', icon: '', keepAlive: true, link: 'https://www.csdn.net/' }
     }
   ]
 }

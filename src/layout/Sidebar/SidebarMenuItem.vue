@@ -1,6 +1,5 @@
 <script setup>
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import { isExternalLink } from '@/utils/utils'
 
 defineOptions({ name: 'SidebarMenuItem' })
 
@@ -17,7 +16,7 @@ function handleClickMenuItem(menuInfo) {
     window.open(menuInfo.path, '_blank')
   } else if (menuInfo.menuType === 'IFRAME_LINK') {
     // iframe 链接：使用 iframe 嵌入页面
-    router.push({ name: menuInfo.name })
+    router.push({ path: menuInfo.path })
   }
 }
 // 根据图标名称获取图标组件
