@@ -9,12 +9,15 @@ const props = defineProps({
 })
 const router = useRouter()
 
-function handleClickMenuItem(menuItem) {
-  if (isExternalLink(menuItem.index)) {
+function handleClickMenuItem(menuInfo) {
+  if (menuInfo.menuType === 'MENU') {
+    router.push(menuInfo.path)
+  } else if (menuInfo.menuType === 'EXT_LINK') {
     // 外部链接：使用 window.open 打开新页面
-    window.open(menuItem.index, '_blank')
-  } else {
-    router.push(menuItem.index)
+    window.open(menuInfo.path, '_blank')
+  } else if (menuInfo.menuType === 'IFRAME_LINK') {
+    // iframe 链接：使用 iframe 嵌入页面
+    router.push({ name: menuInfo.name })
   }
 }
 // 根据图标名称获取图标组件
@@ -28,7 +31,12 @@ function getIcon4SubMenu(iconName) {
 </script>
 
 <template>
-  <el-menu-item v-if="!item.children || item.children.length === 0" :index="item.path" @click="handleClickMenuItem">
+  <el-menu-item
+    v-if="!item.children || item.children.length === 0"
+    :index="item.path"
+    :route="item"
+    @click="() => handleClickMenuItem(item)"
+  >
     <el-icon>
       <component :is="getIcon4MenuItem(item.meta.icon)" />
     </el-icon>

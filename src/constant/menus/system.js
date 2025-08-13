@@ -1,16 +1,16 @@
 export const system = {
   id: '1',
-  type: 0,
+  menuType: 'MODULE',
   sort: 1,
   visible: 1,
   name: 'System',
   path: '/system',
-  component: 'Layout',
+  component: '',
   meta: { title: '系统管理', icon: '' },
   children: [
     {
       id: '1-1',
-      type: 1,
+      menuType: 'MENU',
       sort: 1,
       visible: 1,
       name: 'UserManage',
@@ -20,7 +20,7 @@ export const system = {
     },
     {
       id: '1-2',
-      type: 1,
+      menuType: 'MENU',
       sort: 2,
       visible: 1,
       name: 'RoleManage',

@@ -4,51 +4,51 @@ import { initDynamicRoutes } from '@/tools/route'
 import { usePermissionStore } from '@/store'
 import { menus } from '@/constant/menus/index.js'
 
-defineOptions({ name: 'ProjectMenu' })
+defineOptions({ name: 'Module' })
 
-const { projectList, projectId } = storeToRefs(usePermissionStore())
+const { moduleList, moduleId } = storeToRefs(usePermissionStore())
 
-initProject()
+initModule()
 
 // 初始化项目列表（模拟异步）
-function initProject() {
+function initModule() {
   const delayed = getRandomInt(1, 200)
   setTimeout(() => {
     const tempMenus = deepClone(menus)
     tempMenus.forEach(item => {
       delete item.children
     })
-    const menuList = tempMenus.filter(item => item.type === 0)
-    projectList.value = sortByFields(menuList, [{ field: 'sort', order: 'asc' }])
+    const menuList = tempMenus.filter(item => item.menuType === 'MODULE')
+    moduleList.value = sortByFields(menuList, [{ field: 'sort', order: 'asc' }])
   }, delayed)
 }
 
-// 点击导航栏的项目，获取项目下的菜单
+// 点击导航栏的模块，获取模块下的菜单
 function handleClickMenuItem(item) {
-  if (projectId.value === item.id) return
-  projectId.value = item.id
+  if (moduleId.value === item.id) return
+  moduleId.value = item.id
   getMenus(item.id).then(res => {
     usePermissionStore().saveRoutes(res)
     initDynamicRoutes()
   })
 }
-// 获取项目下的菜单（模拟异步请求）
-function getMenus(projectId) {
+// 获取模块下的菜单（模拟异步请求）
+function getMenus(moduleId) {
   const delayed = getRandomFloat(1, 300, 2)
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const tempMenus = deepClone(menus)
-      const project = tempMenus.find(item => item.id === projectId)
-      resolve(project)
+      const module = tempMenus.find(item => item.id === moduleId)
+      resolve(module)
     }, delayed)
   })
 }
 </script>
 
 <template>
-  <div class="project-menu">
-    <el-menu mode="horizontal" :default-active="projectId" :ellipsis="true">
-      <template v-for="item in projectList" :key="item.id">
+  <div class="module-menu">
+    <el-menu mode="horizontal" :default-active="moduleId" :ellipsis="true">
+      <template v-for="item in moduleList" :key="item.id">
         <el-menu-item v-if="item.visible === 1" :index="item.id" @click="handleClickMenuItem(item)">
           {{ item.meta.title }}
         </el-menu-item>
@@ -58,7 +58,7 @@ function getMenus(projectId) {
 </template>
 
 <style lang="scss" scoped>
-.project-menu {
+.module-menu {
   flex: 1;
   min-width: 0;
   height: 100%;

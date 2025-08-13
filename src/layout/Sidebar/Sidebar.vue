@@ -9,12 +9,16 @@ const currentRoute = useRoute()
 const { sidebarCollapsed } = storeToRefs(useAppStore())
 const { sidebarRoutes } = storeToRefs(usePermissionStore())
 const menuList = computed(() => sidebarRoutes.value.children || [])
+
+function handleSelect(menuItem) {
+  console.log('menuItem', menuItem);
+}
 </script>
 
 <template>
   <div class="sidebar">
     <SidebarLogo />
-    <el-menu :default-active="currentRoute.path" unique-opened :collapse="sidebarCollapsed">
+    <el-menu :default-active="currentRoute.path" unique-opened :collapse="sidebarCollapsed" @select="handleSelect">
       <template v-for="(item, i) in menuList" :key="item.path">
         <SidebarMenuItem v-if="item.visible" :item="item" />
       </template>

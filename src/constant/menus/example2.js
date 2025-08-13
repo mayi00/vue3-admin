@@ -1,6 +1,6 @@
 export const example2 = {
   id: '3',
-  type: 0,
+  menuType: 'MODULE',
   sort: 3,
   visible: 1,
   name: 'Example2',
@@ -10,27 +10,27 @@ export const example2 = {
   children: [
     {
       id: '3-1',
-      type: 1,
+      menuType: 'CATALOG',
       sort: 2,
       visible: 1,
       name: 'WhiteManage',
       path: '/whiteManage',
-      component: 'subLayout',
+      component: '',
       meta: { title: 'WhiteManage', icon: '', keepAlive: true },
       children: [
         {
           id: '3-1-1',
-          type: 1,
+          menuType: 'CATALOG',
           sort: 2,
           visible: 1,
           name: 'WhiteList1',
           path: '/whiteList1',
-          component: 'subLayout',
+          component: '',
           meta: { title: 'WhiteList', icon: '', keepAlive: true },
           children: [
             {
               id: '3-1-1-1',
-              type: 1,
+              menuType: 'MENU',
               sort: 1,
               visible: 1,
               name: 'WhiteList',
@@ -43,7 +43,7 @@ export const example2 = {
         },
         {
           id: '3-1-2',
-          type: 1,
+          menuType: 'MENU',
           sort: 1,
           visible: 1,
           name: 'WhiteList2',
@@ -53,7 +53,7 @@ export const example2 = {
         },
         {
           id: '3-1-3',
-          type: 1,
+          menuType: 'MENU',
           sort: 3,
           visible: 1,
           name: 'WhiteList3',
@@ -63,7 +63,7 @@ export const example2 = {
         },
         {
           id: '3-1-4',
-          type: 1,
+          menuType: 'MENU',
           sort: 1,
           visible: 4,
           name: 'WhiteList4',
@@ -73,7 +73,7 @@ export const example2 = {
         },
         {
           id: '3-1-5',
-          type: 1,
+          menuType: 'MENU',
           sort: 5,
           visible: 1,
           name: 'WhiteList5',
@@ -83,7 +83,7 @@ export const example2 = {
         },
         {
           id: '3-1-6',
-          type: 1,
+          menuType: 'MENU',
           sort: 6,
           visible: 1,
           name: 'WhiteList6',
@@ -93,7 +93,7 @@ export const example2 = {
         },
         {
           id: '3-1-7',
-          type: 1,
+          menuType: 'MENU',
           sort: 7,
           visible: 1,
           name: 'WhiteList7',
@@ -103,7 +103,7 @@ export const example2 = {
         },
         {
           id: '3-1-8',
-          type: 1,
+          menuType: 'MENU',
           sort: 8,
           visible: 1,
           name: 'WhiteList8',
@@ -113,7 +113,7 @@ export const example2 = {
         },
         {
           id: '3-1-9',
-          type: 1,
+          menuType: 'MENU',
           sort: 9,
           visible: 1,
           name: 'WhiteList9',
@@ -123,7 +123,7 @@ export const example2 = {
         },
         {
           id: '3-1-10',
-          type: 1,
+          menuType: 'MENU',
           sort: 1,
           visible: 1,
           name: 'WhiteList10',
@@ -135,7 +135,7 @@ export const example2 = {
     },
     {
       id: '3-2',
-      type: 1,
+      menuType: 'MENU',
       sort: 0,
       visible: 1,
       name: 'Demo',
@@ -145,13 +145,23 @@ export const example2 = {
     },
     {
       id: '3-3',
-      type: 1,
+      menuType: 'EXT_LINK',
       sort: 2,
       visible: 1,
       name: 'Baidu',
       path: 'https://www.baidu.com',
-      component: 'Layout',
+      component: '',
       meta: { title: 'Baidu', icon: '' }
+    },
+    {
+      id: '3-4',
+      menuType: 'IFRAME_LINK',
+      sort: 3,
+      visible: 1,
+      name: 'juejin',
+      path: 'https://juejin.cn/',
+      component: '',
+      meta: { title: 'juejin', icon: '' }
     }
   ]
 }

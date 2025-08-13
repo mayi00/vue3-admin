@@ -1,16 +1,16 @@
 export const component = {
   id: '2',
-  type: 0,
+  menuType: 'MODULE',
   sort: 2,
   visible: 1,
   name: 'Component',
   path: '/component',
-  component: 'Layout',
+  component: '',
   meta: { title: '组件', icon: '' },
   children: [
     {
       id: '2-1',
-      type: 1,
+      menuType: 'MENU',
       sort: 0,
       visible: 1,
       name: 'Curd',

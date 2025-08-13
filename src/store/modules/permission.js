@@ -7,10 +7,10 @@ export const usePermissionStore = defineStore('permission', {
     storage: window.localStorage,
   },
   state: () => ({
-    // 项目列表
-    projectList: [],
-    // 当前激活的项目id
-    projectId: '',
+    // 模块列表
+    moduleList: [],
+    // 当前激活的模块 id
+    moduleId: '',
     // 所有动态路由源数据，
     allDynamicRoutes: [],
     // 当前侧边栏菜单

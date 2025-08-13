@@ -1,6 +1,6 @@
 <script setup>
 import Collapse from './Collapse.vue'
-import ProjectMenu from './ProjectMenu.vue'
+import Module from './Module.vue'
 import Fullscreen from './Fullscreen.vue'
 import UserAvatar from './UserAvatar.vue'
 
@@ -10,7 +10,7 @@ defineOptions({ name: 'TopBar' })
 <template>
   <div class="top-bar">
     <Collapse />
-    <ProjectMenu />
+    <Module />
     <Fullscreen />
     <UserAvatar />
   </div>
