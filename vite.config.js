@@ -1,6 +1,9 @@
 import { defineConfig, loadEnv } from 'vite'
 import { createVitePlugins } from './vite/plugins.js'
 import * as path from 'path'
+import refreshPlugin from './src/plugins/refreshPlugin.js'
+
+const now = new Date().getTime() // 定义一个时间戳
 
 export default ({ mode }) => {
   // 获取当前环境变量
@@ -12,9 +15,10 @@ export default ({ mode }) => {
     // 环境配置
     mode,
     define: {
-      'process.env': env
+      'process.env': env,
+      __APP_VERSION__: now
     },
-    plugins: [...createVitePlugins()],
+    plugins: [...createVitePlugins(), refreshPlugin({ version: now })],
     resolve: {
       // 配置路径别名
       alias: {

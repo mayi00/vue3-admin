@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { constantRoutes } from './constantRoutes'
 import { initDynamicRoutes } from '@/tools/route'
+import { versionCheck } from '@/tools/tools'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -11,7 +12,8 @@ const router = createRouter({
   }
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+  await versionCheck()
   // 路由发生变化修改页面 title
   if (to.meta.title) {
     document.title = `${to.meta.title} | Vue`
