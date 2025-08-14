@@ -22,6 +22,7 @@ export function parseDynamicRoutes(rawRoutes) {
   rawRoutes.forEach(route => {
     const normalizedRoute = { ...route }
 
+    // 处理组件路径
     switch (normalizedRoute.menuType) {
       case 'MODULE':
         normalizedRoute.component = Layout
@@ -36,23 +37,7 @@ export function parseDynamicRoutes(rawRoutes) {
       case 'MENU':
         normalizedRoute.component = modules[`../views/${normalizedRoute.component}.vue`]
         break
-      default:
-        normalizedRoute.component = modules[`../views/${normalizedRoute.component}.vue`]
-        break
     }
-
-    // 处理组件路径
-    // switch (normalizedRoute.component) {
-    //   case 'Layout':
-    //     normalizedRoute.component = Layout
-    //     break
-    //   case 'subLayout':
-    //     normalizedRoute.component = ''
-    //     break
-    //   default:
-    //     normalizedRoute.component = modules[`../views/${normalizedRoute.component}.vue`]
-    //     break
-    // }
 
     // 递归解析子路由
     if (normalizedRoute.children && normalizedRoute.children.length > 0) {

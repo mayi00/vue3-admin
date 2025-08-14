@@ -4,7 +4,7 @@ import { deepClone, sortByFields, uniqueByField } from '@/utils/utils'
 export const usePermissionStore = defineStore('permission', {
   persist: {
     key: 'permission',
-    storage: window.localStorage,
+    storage: window.localStorage
   },
   state: () => ({
     // 模块列表
@@ -14,16 +14,26 @@ export const usePermissionStore = defineStore('permission', {
     // 所有动态路由源数据，
     allDynamicRoutes: [],
     // 当前侧边栏菜单
-    sidebarRoutes: {},
+    sidebarRoutes: {}
   }),
   actions: {
     // 保存访问过的路由源数据
-    saveRoutes(route) {
-      this.sidebarRoutes = deepClone(route)
-      const tempRoutes = [...this.allDynamicRoutes, route]
+    saveRoutes(sourceRoute) {
+      // this.saveSidebarRoutes(sourceRoute)
+      // const filteredRoutes = this.allDynamicRoutes.filter(r => r.id !== sourceRoute.id)
+      // const tempRoutes = [...filteredRoutes, sourceRoute]
+      // this.allDynamicRoutes = sortByFields(tempRoutes, [{ field: 'sort', order: 'asc' }])
+      // localStorage.setItem('allDynamicRoutes', JSON.stringify(this.allDynamicRoutes))
+
+      this.saveSidebarRoutes(sourceRoute)
+      const tempRoutes = [...this.allDynamicRoutes, sourceRoute]
       const nonrepetitiveRoutes = uniqueByField(tempRoutes, 'id')
       this.allDynamicRoutes = sortByFields(nonrepetitiveRoutes, [{ field: 'sort', order: 'asc' }])
       localStorage.setItem('allDynamicRoutes', JSON.stringify(this.allDynamicRoutes))
     },
-  },
+    // 保存侧边栏路由源数据
+    saveSidebarRoutes(sourceRoute) {
+      this.sidebarRoutes = deepClone(sourceRoute)
+    }
+  }
 })

@@ -15,7 +15,7 @@ function handleClickMenuItem(menuInfo) {
     // 外部链接：使用 window.open 打开新页面
     window.open(menuInfo.path, '_blank')
   } else if (menuInfo.menuType === 'IFRAME_LINK') {
-    // iframe 链接：使用 iframe 嵌入页面
+    // iframe 内嵌链接：使用 iframe 嵌入页面
     router.push({ path: menuInfo.path })
   }
 }

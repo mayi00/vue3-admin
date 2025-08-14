@@ -6,7 +6,7 @@ import { menus } from '@/constant/menus/index.js'
 
 defineOptions({ name: 'Module' })
 
-const { moduleList, moduleId } = storeToRefs(usePermissionStore())
+const { moduleList, moduleId, allDynamicRoutes } = storeToRefs(usePermissionStore())
 
 initModule()
 
@@ -24,13 +24,26 @@ function initModule() {
 }
 
 // 点击导航栏的模块，获取模块下的菜单
-function handleClickMenuItem(item) {
-  if (moduleId.value === item.id) return
-  moduleId.value = item.id
-  getMenus(item.id).then(res => {
-    usePermissionStore().saveRoutes(res)
+/**
+ * 点击导航栏的模块，获取模块下的菜单
+ * @param moduleInfo  被点击的模块
+ */
+function handleClickMenuItem(moduleInfo) {
+  if (moduleId.value === moduleInfo.id) return
+  moduleId.value = moduleInfo.id
+  const tempModule = allDynamicRoutes.value.find(item => item.id === moduleId.value)
+
+  // 处理已缓存模块的情况
+  if (tempModule) {
+    usePermissionStore().saveSidebarRoutes(tempModule)
     initDynamicRoutes()
-  })
+  } else {
+    // 首次加载模块时获取菜单数据并初始化路由
+    getMenus(moduleInfo.id).then(res => {
+      usePermissionStore().saveRoutes(res)
+      initDynamicRoutes()
+    })
+  }
 }
 // 获取模块下的菜单（模拟异步请求）
 function getMenus(moduleId) {

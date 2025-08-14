@@ -161,7 +161,7 @@ export const example2 = {
       name: 'Juejin',
       path: '/juejin',
       component: '',
-      meta: { title: '掘金', icon: '', keepAlive: true, link: 'https://juejin.cn/' }
+      meta: { title: '掘金', icon: '', link: 'https://juejin.cn/' }
     },
     {
       id: '3-5',
@@ -171,7 +171,7 @@ export const example2 = {
       name: 'CSDN',
       path: '/csdn',
       component: '',
-      meta: { title: 'CSDN', icon: '', keepAlive: true, link: 'https://www.csdn.net/' }
+      meta: { title: 'CSDN', icon: '', link: 'https://www.csdn.net/' }
     }
   ]
 }

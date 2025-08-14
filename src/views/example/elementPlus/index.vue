@@ -1,9 +1,7 @@
 <script setup>
-defineOptions({ name: 'IframeView' })
+defineOptions({ name: 'ElementPlus' })
 
-const route = useRoute()
-
-const url = computed(() => route.meta.link)
+const url = ref('https://element-plus.org')
 </script>
 
 <template>

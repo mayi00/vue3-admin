@@ -1,10 +1,10 @@
-export const system = {
+export const sys = {
   id: '1',
   menuType: 'MODULE',
   sort: 1,
   visible: 1,
-  name: 'System',
-  path: '/system',
+  name: 'Sys',
+  path: '/sys',
   component: '',
   meta: { title: '系统管理', icon: '' },
   children: [
@@ -14,8 +14,8 @@ export const system = {
       sort: 1,
       visible: 1,
       name: 'UserManage',
-      path: '/userManage',
-      component: 'system/userManage/index',
+      path: '/sys/userManage',
+      component: 'sys/userManage/index',
       meta: { title: '用户管理', icon: '', keepAlive: true }
     },
     {
@@ -24,8 +24,8 @@ export const system = {
       sort: 2,
       visible: 1,
       name: 'RoleManage',
-      path: '/roleManage',
-      component: 'system/roleManage/index',
+      path: '/sys/roleManage',
+      component: 'sys/roleManage/index',
       meta: { title: '角色管理', icon: '', keepAlive: true }
     }
   ]
