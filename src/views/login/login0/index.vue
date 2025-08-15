@@ -31,7 +31,7 @@ function handleLogin() {
         userStore.saveUserInfo({ ...res })
         ElMessage({ type: 'success', message: '登录成功' })
         loading.value = false
-        router.push('/home')
+        router.push('/')
       })
     }
   })

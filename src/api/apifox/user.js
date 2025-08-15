@@ -1,11 +1,12 @@
 import request from './request'
 
 export default {
-  userlist(params) {
+  list(params, data) {
     return request({
       url: '/user/list',
       method: 'post',
-      params
+      params,
+      data
     })
   }
 }
