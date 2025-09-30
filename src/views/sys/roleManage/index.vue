@@ -4,7 +4,7 @@ defineOptions({ name: 'RoleManage' })
 </script>
 
 <template>
-  <div class="">role</div>
+  <div class="w-full">role</div>
 </template>
 
 <style lang="less" scoped></style>

@@ -10,7 +10,7 @@ const { sidebarCollapsed } = storeToRefs(useAppStore())
 </script>
 
 <template>
-  <div class="layout">
+  <div class="layout w-full h-full">
     <aside class="layout-aside" :style="{ width: sidebarCollapsed ? '64px' : '240px' }">
       <Sidebar />
     </aside>
@@ -24,8 +24,6 @@ const { sidebarCollapsed } = storeToRefs(useAppStore())
 <style lang="less" scoped>
 .layout {
   display: flex;
-  width: 100%;
-  height: 100%;
   border: 1px solid #fefefe;
 }
 

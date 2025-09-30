@@ -34,7 +34,7 @@ function getIcon4SubMenu(iconName) {
     v-if="!sidebarMenu.children || sidebarMenu.children.length === 0"
     :index="sidebarMenu.path"
     :route="sidebarMenu"
-    @click.stop="() => handleClickMenuItem(sidebarMenu)"
+    @click="() => handleClickMenuItem(sidebarMenu)"
   >
     <el-icon>
       <component :is="getIcon4MenuItem(sidebarMenu.meta.icon)" />
