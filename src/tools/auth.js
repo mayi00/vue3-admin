@@ -13,7 +13,7 @@ export function login(loginForm) {
   return new Promise((resolve, reject) => {
     setTimeout(
       () => {
-        const token = generateToken(loginForm.username)
+        const token = generateToken(loginForm.account)
         const userInfo = { ...userinfo, token }
         resolve(userInfo)
       },
@@ -23,14 +23,14 @@ export function login(loginForm) {
 }
 /**
  * 生成token
- * @param {String} username
+ * @param {String} account
  * @param {Number} effectiveDuration
  * @returns
  */
-export function generateToken(username, effectiveDuration = 12) {
+export function generateToken(account, effectiveDuration = 12) {
   const randomStr = getRandomString()
   const expirationTime = dayjs().add(effectiveDuration, 'hour').valueOf()
-  const tempToken = `${username}-${randomStr}-${expirationTime}`
+  const tempToken = `${account}-${randomStr}-${expirationTime}`
   return encryptCBC(tempToken, process.env.VITE_AES_SECRET_KEY, process.env.VITE_AES_SECRET_IV)
 }
 
@@ -44,7 +44,7 @@ export function validateToken(token) {
   } else {
     // 在过期时间剩余10分钟内时刷新token
     if (expirationTime - currentTime <= 10 * 60 * 1000) {
-      generateToken(userInfo.value.username)
+      generateToken(userInfo.value.account)
     }
     return true
   }

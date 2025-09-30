@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { constantRoutes } from './constantRoutes'
 import { initDynamicRoutes } from '@/tools/route'
-import { versionCheck } from '@/tools/tools'
+import { versionCheck } from '@/plugins/refreshPlugin'
 
 const router = createRouter({
   history: createWebHashHistory(),

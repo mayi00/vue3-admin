@@ -6,7 +6,7 @@ defineOptions({ name: 'Login1' })
 const router = useRouter()
 
 function handleLogin() {
-  api.auth.login({ username: 'admin', password: '123456' }).then(res => {
+  api.auth.login({ account: 'admin', password: '123456' }).then(res => {
     localStorage.setItem('token', res.data.token)
     router.push('/')
   })

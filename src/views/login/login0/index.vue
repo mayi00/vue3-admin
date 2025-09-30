@@ -10,11 +10,11 @@ const userStore = useUserStore()
 
 const loginFormRef = ref()
 const loginForm = ref({
-  username: 'admin',
+  account: 'admin',
   password: '123456'
 })
 const rules = reactive({
-  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  account: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
     { min: 6, max: 16, message: '长度6-16位', trigger: 'blur' }
@@ -48,9 +48,9 @@ function handleLogin() {
         <h2 class="login-title">Vue</h2>
 
         <el-form :model="loginForm" :rules="rules" ref="loginFormRef">
-          <el-form-item prop="username">
+          <el-form-item prop="account">
             <el-input
-              v-model.trim="loginForm.username"
+              v-model.trim="loginForm.account"
               placeholder="请输入用户名"
               size="large"
               :prefix-icon="User"

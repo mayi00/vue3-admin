@@ -16,7 +16,7 @@ const menuList = computed(() => sidebarRoutes.value.children || [])
     <SidebarLogo />
     <el-menu :default-active="currentRoute.path" unique-opened :collapse="sidebarCollapsed">
       <template v-for="(item, i) in menuList" :key="item.path">
-        <SidebarMenuItem v-if="item.visible" :item="item" />
+        <SidebarMenuItem v-if="item.visible" :sidebarMenu="item" />
       </template>
     </el-menu>
   </div>

@@ -11,7 +11,7 @@ const searchForm = ref({
 })
 const baseTableRef = ref(null)
 const table = ref({
-  height: null,
+  height: 300,
   loading: false,
   pageNum: 1,
   pageSize: 10,

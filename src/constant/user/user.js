@@ -4,7 +4,7 @@ export const userinfo = {
   gender: '男',
   address: '北京市',
   id: '1234567890',
-  username: 'admin',
+  account: 'admin',
   name: '超级管理员',
   avatar: 'https://p26-passport.byteacctimg.com/img/user-avatar/ee3cc057e6cee57a7dd88ec82606c35a~50x50.awebp',
   nation: '汉族',

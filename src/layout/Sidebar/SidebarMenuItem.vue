@@ -4,7 +4,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 defineOptions({ name: 'SidebarMenuItem' })
 
 const props = defineProps({
-  item: { type: Object, required: true }
+  sidebarMenu: { type: Object, required: true }
 })
 const router = useRouter()
 
@@ -31,27 +31,27 @@ function getIcon4SubMenu(iconName) {
 
 <template>
   <el-menu-item
-    v-if="!item.children || item.children.length === 0"
-    :index="item.path"
-    :route="item"
-    @click="() => handleClickMenuItem(item)"
+    v-if="!sidebarMenu.children || sidebarMenu.children.length === 0"
+    :index="sidebarMenu.path"
+    :route="sidebarMenu"
+    @click.stop="() => handleClickMenuItem(sidebarMenu)"
   >
     <el-icon>
-      <component :is="getIcon4MenuItem(item.meta.icon)" />
+      <component :is="getIcon4MenuItem(sidebarMenu.meta.icon)" />
     </el-icon>
-    <template #title>{{ item.meta.title }}</template>
+    <template #title>{{ sidebarMenu.meta.title }} </template>
   </el-menu-item>
 
-  <el-sub-menu v-else :index="item.path">
+  <el-sub-menu v-else :index="sidebarMenu.path">
     <template #title>
       <el-icon>
-        <component :is="getIcon4SubMenu(item.meta.icon)" />
+        <component :is="getIcon4SubMenu(sidebarMenu.meta.icon)" />
       </el-icon>
-      <span>{{ item.meta.title }}</span>
+      <span>{{ sidebarMenu.meta.title }}</span>
     </template>
 
-    <template v-for="childItem in item.children" :key="childItem.path">
-      <SidebarMenuItem v-if="childItem.visible" :item="childItem" />
+    <template v-for="childItem in sidebarMenu.children" :key="childItem.path">
+      <SidebarMenuItem v-if="childItem.visible" :sidebarMenu="childItem" />
     </template>
   </el-sub-menu>
 </template>
