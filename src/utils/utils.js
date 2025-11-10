@@ -464,3 +464,12 @@ export function uniqueByField(arr, field) {
     }
   })
 }
+
+/**
+ * 休眠
+ * @param {Number} ms
+ * @returns
+ */
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
