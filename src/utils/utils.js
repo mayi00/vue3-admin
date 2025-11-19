@@ -473,3 +473,50 @@ export function uniqueByField(arr, field) {
 export function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
+/**
+ * 生成一个 UUID (通用唯一识别码)
+ *
+ * 生成符合 RFC 4122 标准的 UUID v4：
+ * 1. 首先尝试使用现代浏览器提供的 crypto.randomUUID()
+ * 2. 如果不可用，则使用 crypto.getRandomValues() 手动生成
+ * 3. 如果仍不可用，最后基于时间戳和随机数的兼容生成
+ *
+ * @returns {string} 格式为 xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx 的 UUID 字符串
+ */
+export function generateUUID() {
+  // 优先使用现代浏览器原生的 UUID 生成方法
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID()
+  }
+
+  // 如果支持 crypto.getRandomValues，则使用它来生成符合规范的 UUID
+  if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
+    const bytes = new Uint8Array(16)
+    crypto.getRandomValues(bytes)
+
+    // 设置版本位：第 7 字节的高 4 位设为 0100（表示 UUID v4）
+    bytes[7] = (bytes[7] & 0x0f) | 0x40
+    // 设置变体位：第 8 字节的高 2 位设为 10（表示 RFC 4122 变体）
+    bytes[8] = (bytes[8] & 0x3f) | 0x80
+
+    // 将字节数组转换为十六进制字符串并按 UUID 格式分段
+    let hex = Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('')
+
+    return [hex.slice(0, 8), hex.slice(8, 12), hex.slice(12, 16), hex.slice(16, 20), hex.slice(20)].join('-')
+  }
+
+  // 最后的兼容方案：基于时间戳和随机数生成 UUID
+  let d = new Date().getTime()
+  let d2 = (typeof performance !== 'undefined' && performance.now && performance.now() * 1000) || 0
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    let r = Math.random() * 16
+    if (d > 0) {
+      r = (d + r) % 16 | 0
+      d = Math.floor(d / 16)
+    } else {
+      r = (d2 + r) % 16 | 0
+      d2 = Math.floor(d2 / 16)
+    }
+    return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16)
+  })
+}
