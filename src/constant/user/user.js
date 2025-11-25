@@ -1,4 +1,4 @@
-export const userinfo = {
+export const userInfo = {
   email: 'superAdmin@foxmail.com',
   enabled: true,
   gender: '男',

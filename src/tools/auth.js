@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
-import { getRandomString, getRandomInt } from '@/utils/utils'
+import { getRandomString, getRandomInt, sleep } from '@/utils/utils'
 import { encryptCBC, decryptCBC } from '@/utils/aesUtils'
-import { userinfo } from '@/constant/user/user.js'
+import { userInfo } from '@/constant/user/user.js'
 
 /**
  * 登录生成用户信息和token
@@ -11,14 +11,9 @@ import { userinfo } from '@/constant/user/user.js'
  */
 export function login(loginForm) {
   return new Promise((resolve, reject) => {
-    setTimeout(
-      () => {
-        const token = generateToken(loginForm.account)
-        const userInfo = { ...userinfo, token }
-        resolve(userInfo)
-      },
-      getRandomInt(100, 1000)
-    )
+    sleep(getRandomInt(10, 1000))
+    const token = generateToken(loginForm.account)
+    resolve({ ...userInfo, token })
   })
 }
 /**

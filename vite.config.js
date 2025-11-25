@@ -13,7 +13,7 @@ export default ({ mode }) => {
   const now = new Date().getTime()
   const versionInfo = {
     version: now,
-    'release time': dayjs(now).format('YYYY-MM-DD HH:mm:ss')
+    buildTime: dayjs(now).format('YYYY-MM-DD HH:mm:ss')
   }
 
   return defineConfig({

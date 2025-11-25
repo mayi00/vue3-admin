@@ -1,5 +1,5 @@
 import path from 'path'
-import fs from 'fs'
+import fs from 'fs/promises'
 import axios from 'axios'
 
 /**
@@ -8,46 +8,62 @@ import axios from 'axios'
  * 设置 5 秒后自动刷新页面
  */
 export const versionCheck = async () => {
-  // if (process.env.NODE_ENV === 'development') return
-  const response = await axios.get('version.json')
-  if (__APP_VERSION__ !== response.data.version) {
-    setTimeout(() => {
-      window.location.reload()
-    }, 5000)
+  if (process.env.NODE_ENV === 'development') return
+  try {
+    const response = await axios.get('version.json', {
+      timeout: 5000,
+      headers: {
+        'Cache-Control': 'no-cache'
+      }
+    })
+    if (__APP_VERSION__ !== response.data.version) {
+      setTimeout(() => {
+        window.location.reload()
+      }, 5000)
+    }
+  } catch (error) {
+    console.error('获取版本信息文件失败：', error)
   }
 }
 
-// 将文本内容写入指定文件中
-const writeVersion = async (versionFile, content) => {
-  fs.writeFile(versionFile, content, err => {
-    if (err) throw err
-  })
-}
-
 // 生成版本信息文件
-export const generateVersionFile = options => {
+export const generateVersionFile = (options = {}) => {
   // 声明配置文件路径
-  let configPath
+  let configPath = ''
+
   return {
     name: 'refreshVersion',
+
+    /**
+     * Vite 配置解析完成后的钩子
+     * @param {Object} resolvedConfig - 解析后的配置对象
+     */
     configResolved(resolvedConfig) {
-      // 保存配置文件的路径，后用
+      // 保存配置文件的路径，后续使用
       configPath = resolvedConfig.publicDir
     },
+
     async buildStart() {
       // 生成版本信息文件路径
-      const file = configPath + path.sep + 'version.json'
-      // 采用编译的当前时间作为每个版本的标识
-      const content = JSON.stringify(options)
-      if (fs.existsSync(configPath)) {
-        // 如果文件路径已存在，直接写入文件
-        writeVersion(file, content)
-      } else {
-        // 如果文件路径不存在，先创建文件夹，然后再写入文件
-        fs.mkdir(configPath, err => {
-          if (err) throw err
-          writeVersion(file, content)
-        })
+      // const file = path.join(configPath, 'version.json')
+      const file = path.resolve(configPath, 'version.json')
+      // 合并默认配置和传入的选项
+      const versionData = {
+        version: Date.now().toString(),
+        buildTime: new Date().toISOString(),
+        ...options
+      }
+      const content =
+        process.env.NODE_ENV !== 'production' ? JSON.stringify(versionData, null, 2) : JSON.stringify(versionData)
+
+      try {
+        // 确保 public 目录存在（mkdir -p 效果，递归创建）
+        await fs.mkdir(configPath, { recursive: true })
+        // 写入文件（覆盖旧文件）
+        await fs.writeFile(file, content, 'utf-8')
+      } catch (error) {
+        // 构建阶段错误，终止构建
+        throw new Error(`版本文件生成失败：${String(error)}`)
       }
     }
   }
