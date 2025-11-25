@@ -11,7 +11,7 @@ const logo = ref(imgLogo)
 <template>
   <transition name="el-fade-in-linear" mode="out-in">
     <router-link to="/" class="sidebar-logo">
-      <img :src="logo" alt="" class="logo" />
+      <img :src="logo" alt="Logo" class="logo" />
       <h1 v-if="!sidebarCollapsed" class="title">Vue</h1>
     </router-link>
   </transition>

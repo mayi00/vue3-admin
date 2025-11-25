@@ -11,7 +11,7 @@ const { sidebarWidth } = storeToRefs(appStore)
 </script>
 
 <template>
-  <div class="layout w-full h-full">
+  <div class="layout">
     <aside class="layout-aside" :style="{ width: sidebarWidth }">
       <Sidebar />
     </aside>
@@ -25,6 +25,9 @@ const { sidebarWidth } = storeToRefs(appStore)
 <style lang="less" scoped>
 .layout {
   display: flex;
+  width: 100%;
+  height: 100%;
+  min-width: 1000px;
   border: 1px solid #fefefe;
 }
 
