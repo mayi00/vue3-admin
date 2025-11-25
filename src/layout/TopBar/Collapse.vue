@@ -3,15 +3,17 @@ import { useAppStore } from '@/store'
 
 defineOptions({ name: 'Collapse' })
 
-const { sidebarCollapsed } = storeToRefs(useAppStore())
+const appStore = useAppStore()
+const { sidebarCollapsed } = storeToRefs(appStore)
+
 // 切换侧边栏显示/隐藏
 function toggleCollapsed() {
-  sidebarCollapsed.value = !sidebarCollapsed.value
+  appStore.toggleCollapsed()
 }
 </script>
 
 <template>
-  <div class="collapse" @click.stop="toggleCollapsed">
+  <div class="collapse" :aria-label="sidebarCollapsed ? '展开侧边栏' : '收起侧边栏'" @click.stop="toggleCollapsed">
     <el-icon :size="20">
       <Expand v-if="sidebarCollapsed" />
       <Fold v-else />

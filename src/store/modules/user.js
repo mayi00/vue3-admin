@@ -15,7 +15,7 @@ export const useUserStore = defineStore(
     // 退出登录
     function logout() {
       localStorage.removeItem('token')
-      localStorage.removeItem('allDynamicRoutes')
+      localStorage.removeItem('localAllDynamicRoutes')
       userInfo.value = {}
       usePermissionStore().$reset()
     }

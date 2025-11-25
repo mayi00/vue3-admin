@@ -3,12 +3,20 @@ import { defineStore } from 'pinia'
 export const useAppStore = defineStore('app', {
   persist: {
     key: 'app',
-    storage: window.localStorage,
+    storage: window.localStorage
   },
   state: () => ({
     // 侧边栏折叠状态（true: 折叠，false: 展开）
-    sidebarCollapsed: false,
+    sidebarCollapsed: false
   }),
-  actions: {},
+  getters: {
+    // 侧边栏宽度
+    sidebarWidth: state => (state.sidebarCollapsed ? '64px' : '200px')
+  },
+  actions: {
+    // 切换侧边栏显示/隐藏
+    toggleCollapsed() {
+      this.sidebarCollapsed = !this.sidebarCollapsed
+    }
+  }
 })
-
