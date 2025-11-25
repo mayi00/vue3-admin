@@ -15,7 +15,7 @@ export const example = {
       visible: 1,
       name: 'Curd',
       path: '/example/curd',
-      component: 'example/curd/index',
+      component: 'example/curd/curd',
       meta: { title: '增删改查', icon: '', keepAlive: true }
     },
     {
@@ -25,7 +25,7 @@ export const example = {
       visible: 1,
       name: 'ElementPlus',
       path: '/example/elementPlus',
-      component: 'example/elementPlus/index',
+      component: 'example/elementPlus/elementPlus',
       meta: { title: 'ElementPlus', icon: '', keepAlive: true }
     }
   ]

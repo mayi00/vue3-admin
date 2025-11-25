@@ -15,7 +15,7 @@ export const sys = {
       visible: 1,
       name: 'UserManage',
       path: '/sys/userManage',
-      component: 'sys/userManage/index',
+      component: 'sys/userManage/userManage',
       meta: { title: '用户管理', icon: '', keepAlive: true }
     },
     {
@@ -25,7 +25,7 @@ export const sys = {
       visible: 1,
       name: 'RoleManage',
       path: '/sys/roleManage',
-      component: 'sys/roleManage/index',
+      component: 'sys/roleManage/roleManage',
       meta: { title: '角色管理', icon: '', keepAlive: true }
     }
   ]

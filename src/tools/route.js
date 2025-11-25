@@ -2,7 +2,7 @@ import router from '../router'
 
 const modules = import.meta.glob('../views/**/**.vue')
 const Layout = () => import('@/layout/Layout.vue')
-const IframeView = () => import('@/views/basic/iframeView/index.vue')
+const IframeView = () => import('@/views/basic/iframeView/iframeView.vue')
 
 // 初始化动态路由
 export function initDynamicRoutes() {
