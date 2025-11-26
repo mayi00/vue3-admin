@@ -13,7 +13,7 @@ const baseTableRef = ref(null)
 const table = ref({
   height: 300,
   loading: false,
-  pageNum: 1,
+  currentPage: 1,
   pageSize: 10,
   // pageCount: 0,
   total: 0,
@@ -30,7 +30,7 @@ const table = ref({
 
 handleSearch()
 function handleSearch() {
-  table.value.pageNum = 1
+  table.value.currentPage = 1
   getList()
 }
 function handleSelect(select) {
@@ -50,7 +50,7 @@ function getColumns() {
 }
 
 function handlePageChange(page) {
-  table.value.pageNum = page
+  table.value.currentPage = page
   getList()
 }
 function handlePageSizeChange(size) {
@@ -59,15 +59,14 @@ function handlePageSizeChange(size) {
 }
 // 获取表格序号
 function getIndex(index) {
-  return table.value.pageSize * (table.value.pageNum - 1) + index + 1
+  return table.value.pageSize * (table.value.currentPage - 1) + index + 1
 }
 
 function getList() {
-  const params = { pageNum: table.value.pageNum, pageSize: table.value.pageSize }
+  const params = { currentPage: table.value.currentPage, pageSize: table.value.pageSize }
   api.user.list(params, { ...searchForm.value }).then(res => {
-    table.value.data = res.data.records
+    table.value.data = res.data.list
     table.value.total = res.data.total
-    // table.value.pageCount = res.data.totalPage
   })
 }
 </script>

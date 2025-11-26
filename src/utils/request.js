@@ -2,7 +2,7 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
 const service = axios.create({
-  baseURL: 'https://m1.apifoxmock.com/m1/6904608-6620440-default',
+  baseURL: process.env.VITE_BASE_URL,
   timeout: 1000 * 10
 })
 
@@ -21,7 +21,6 @@ service.interceptors.request.use(
     if (token) {
       config.headers['Authorization'] = token
     }
-    config.headers['apifoxToken'] = ''
     return config
   },
   error => {

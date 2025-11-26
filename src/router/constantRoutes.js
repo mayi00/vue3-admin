@@ -11,13 +11,13 @@ export const constantRoutes = [
     name: 'Login0',
     alias: '/login',
     component: () => import('@/views/login/login0/index.vue'),
-    meta: { title: '登录0' }
+    meta: { title: '登录' }
   },
   {
     path: '/login1',
     name: 'Login1',
     component: () => import('@/views/login/login1/index.vue'),
-    meta: { title: '登录1' }
+    meta: { title: '登录' }
   },
   {
     path: '/',

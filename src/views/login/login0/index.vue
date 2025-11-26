@@ -1,12 +1,12 @@
 <script setup>
 import { User, Lock } from '@element-plus/icons-vue'
 import { useUserStore } from '@/store'
-import { login } from '@/tools/auth.js'
 
 defineOptions({ name: 'Login0' })
 
 const router = useRouter()
 const userStore = useUserStore()
+const { login } = userStore
 
 const loginFormRef = ref()
 const loginForm = ref({
@@ -26,9 +26,7 @@ function handleLogin() {
   loginFormRef.value.validate(valid => {
     if (valid) {
       loading.value = true
-      login(loginForm.value).then(res => {
-        localStorage.setItem('token', res.token)
-        userStore.saveUserInfo({ ...res })
+      login(loginForm.value).then(() => {
         ElMessage({ type: 'success', message: '登录成功' })
         loading.value = false
         router.push('/')

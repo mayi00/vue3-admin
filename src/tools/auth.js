@@ -4,19 +4,6 @@ import { encryptCBC, decryptCBC } from '@/utils/aesUtils'
 import { userInfo } from '@/constant/user/user.js'
 
 /**
- * 登录生成用户信息和token
- * 模拟登录接口
- * @param {*} loginForm
- * @returns
- */
-export function login(loginForm) {
-  return new Promise((resolve, reject) => {
-    sleep(getRandomInt(10, 1000))
-    const token = generateToken(loginForm.account)
-    resolve({ ...userInfo, token })
-  })
-}
-/**
  * 生成token
  * @param {String} account
  * @param {Number} effectiveDuration
