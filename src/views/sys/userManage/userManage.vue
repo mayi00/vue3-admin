@@ -14,17 +14,21 @@ const table = ref({
   height: 300,
   loading: false,
   currentPage: 1,
-  pageSize: 10,
-  // pageCount: 0,
+  pageSize: 20,
   total: 0,
   data: [],
   columns: [
     { type: 'selection', width: 50 },
-    { label: '序号', type: 'index', width: 100, slot: 'index' },
-    { prop: 'account', label: '账户', minWidth: '120' },
-    { prop: 'name', label: '用户名', minWidth: '120' },
-    { prop: 'gender', label: '性别', minWidth: '120' },
-    { prop: 'status', label: '状态', minWidth: '120' }
+    { label: '序号', type: 'index', minWidth: 60, slot: 'index' },
+    { prop: 'avatar', label: 'avatar', slot: 'avatar' },
+    { prop: 'account', label: '账户', minWidth: 80 },
+    { prop: 'name', label: '用户名', minWidth: 100 },
+    { prop: 'gender', label: '性别', minWidth: 60 },
+    { prop: 'status', label: '状态', minWidth: 60 },
+    { prop: 'email', label: 'email', minWidth: 100 },
+    { prop: 'phone', label: 'phone', minWidth: 100 },
+    { prop: 'address', label: 'address', minWidth: 100 },
+    { prop: 'createdAt', label: 'createdAt', minWidth: 100, showOverflowTooltip: true }
   ]
 })
 
@@ -64,10 +68,16 @@ function getIndex(index) {
 
 function getList() {
   const params = { currentPage: table.value.currentPage, pageSize: table.value.pageSize }
-  api.user.list(params, { ...searchForm.value }).then(res => {
-    table.value.data = res.data.list
-    table.value.total = res.data.total
-  })
+  table.loading = true
+  api.user
+    .list(params, { ...searchForm.value })
+    .then(res => {
+      table.value.data = res.data.list
+      table.value.total = res.data.total
+    })
+    .finally(() => {
+      table.loading = false
+    })
 }
 </script>
 
@@ -90,6 +100,10 @@ function getList() {
         @update:pageSize="handlePageSizeChange"
       >
         <template #index="{ index }">{{ getIndex(index) }}</template>
+        <template #avatar="{ row }">
+          <el-avatar :src="row.avatar" style="width: 40px; height: 40px"></el-avatar>
+          <!-- <img :src="row.avatar" style="width: 50px; height: 50px" /> -->
+        </template>
       </BaseTable>
     </el-card>
   </div>

@@ -21,6 +21,9 @@ service.interceptors.request.use(
     if (token) {
       config.headers['Authorization'] = token
     }
+    config.params = config.params || {}
+    config.params.t = Date.now()
+
     return config
   },
   error => {
