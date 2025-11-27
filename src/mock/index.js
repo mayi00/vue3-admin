@@ -1,6 +1,6 @@
 import axiosInstance from '@/http/request'
 import MockAdapter from 'axios-mock-adapter'
-import { faker } from '@faker-js/faker'
+import { fakerZH_CN as faker } from '@faker-js/faker'
 import { getRandomInt, getRandomString, generateUUID } from '@/utils/utils'
 
 // 创建 mock 实例（参数为 axios 实例）
@@ -33,12 +33,9 @@ export function startMock() {
       age: faker.number.int({ min: 18, max: 65 }),
       status: faker.string.fromCharacters([0, 1]),
       email: faker.internet.email(),
-      phone: faker.phone.number(),
+      phone: faker.phone.number({ style: 'international' }),
       avatar: faker.image.avatar(),
-      address: faker.location.city(),
-      department: faker.commerce.department(),
-      jobTitle: faker.person.jobTitle(),
-      createdAt: faker.date.past().toISOString()
+      address: faker.location.city()
     }))
     return [
       200,

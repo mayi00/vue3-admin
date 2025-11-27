@@ -20,15 +20,14 @@ const table = ref({
   columns: [
     { type: 'selection', width: 50 },
     { label: '序号', type: 'index', minWidth: 60, slot: 'index' },
-    { prop: 'avatar', label: 'avatar', slot: 'avatar' },
+    { prop: 'avatar', label: '头像', slot: 'avatar' },
     { prop: 'account', label: '账户', minWidth: 80 },
     { prop: 'name', label: '用户名', minWidth: 100 },
     { prop: 'gender', label: '性别', minWidth: 60 },
     { prop: 'status', label: '状态', minWidth: 60 },
-    { prop: 'email', label: 'email', minWidth: 100 },
-    { prop: 'phone', label: 'phone', minWidth: 100 },
-    { prop: 'address', label: 'address', minWidth: 100 },
-    { prop: 'createdAt', label: 'createdAt', minWidth: 100, showOverflowTooltip: true }
+    { prop: 'email', label: '电子邮箱', minWidth: 100 },
+    { prop: 'phone', label: '联系方式', minWidth: 100 },
+    { prop: 'address', label: '地址', minWidth: 100, showOverflowTooltip: true }
   ]
 })
 
@@ -101,8 +100,7 @@ function getList() {
       >
         <template #index="{ index }">{{ getIndex(index) }}</template>
         <template #avatar="{ row }">
-          <el-avatar :src="row.avatar" style="width: 40px; height: 40px"></el-avatar>
-          <!-- <img :src="row.avatar" style="width: 50px; height: 50px" /> -->
+          <el-avatar :src="row.avatar" style="width: 32px; height: 32px"></el-avatar>
         </template>
       </BaseTable>
     </el-card>
