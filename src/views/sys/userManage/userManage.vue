@@ -26,7 +26,8 @@ const table = ref({
     { prop: 'gender', label: '性别', minWidth: 60 },
     { prop: 'status', label: '状态', minWidth: 60 },
     { prop: 'email', label: '电子邮箱', minWidth: 100 },
-    { prop: 'phone', label: '联系方式', minWidth: 100 },
+    { prop: 'phone', label: '电话', minWidth: 110 },
+    { prop: 'mobile', label: '手机', minWidth: 110 },
     { prop: 'address', label: '地址', minWidth: 100, showOverflowTooltip: true }
   ]
 })
@@ -67,7 +68,7 @@ function getIndex(index) {
 
 function getList() {
   const params = { currentPage: table.value.currentPage, pageSize: table.value.pageSize }
-  table.loading = true
+  table.value.loading = true
   api.user
     .list(params, { ...searchForm.value })
     .then(res => {
@@ -75,7 +76,7 @@ function getList() {
       table.value.total = res.data.total
     })
     .finally(() => {
-      table.loading = false
+      table.value.loading = false
     })
 }
 </script>

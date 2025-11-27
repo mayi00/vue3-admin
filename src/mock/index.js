@@ -33,7 +33,8 @@ export function startMock() {
       age: faker.number.int({ min: 18, max: 65 }),
       status: faker.string.fromCharacters([0, 1]),
       email: faker.internet.email(),
-      phone: faker.phone.number({ style: 'international' }),
+      phone: faker.phone.number({ style: 'national' }),
+      mobile: faker.helpers.fromRegExp(/[1][3-9][0-9]{9}/),
       avatar: faker.image.avatar(),
       address: faker.location.city()
     }))
