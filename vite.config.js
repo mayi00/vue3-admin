@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import { defineConfig, loadEnv } from 'vite'
 import { createVitePlugins } from './vite/plugins.js'
 import { generateVersionFile } from './src/plugins/refreshPlugin.js'
-import * as path from 'path'
+import { resolve } from 'path'
 
 export default ({ mode }) => {
   // 获取当前环境变量
@@ -27,7 +27,7 @@ export default ({ mode }) => {
     resolve: {
       // 配置路径别名
       alias: {
-        '@': path.join(__dirname, './src')
+        '@': resolve(__dirname, './src')
       }
     }
   })

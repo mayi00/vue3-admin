@@ -74,7 +74,7 @@ function getMenus(moduleId) {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .module-menu {
   flex: 1;
   min-width: 0;

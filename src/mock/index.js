@@ -1,7 +1,6 @@
-import axiosInstance from '@/utils/request'
+import axiosInstance from '@/http/request'
 import MockAdapter from 'axios-mock-adapter'
-import { getRandomInt } from '@/utils/utils'
-import { generateToken } from '@/tools/auth.js'
+import { getRandomInt, getRandomString } from '@/utils/utils'
 
 // 创建 mock 实例（参数为 axios 实例）
 const mock = new MockAdapter(axiosInstance, {
@@ -14,7 +13,7 @@ export function startMock() {
 
   mock.onPost('/auth/login').reply(config => {
     console.log('【Mock】/auth/login', config)
-    return [200, { token: generateToken(config.data.account) }]
+    return [200, { token: getRandomString() }]
   })
 
   mock.onPost('/user/list').reply(config => {
