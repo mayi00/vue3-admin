@@ -7,12 +7,16 @@ const props = defineProps({
   // 【表格】列配置，格式：{ prop: '字段名', label: '标题', width: '列宽' }
   columns: { type: Array, default: () => [] },
 
+  showPagination: { type: Boolean, default: true },
   // 【分页】
   defaultPageSize: { type: Number, default: 10 },
-  defaultCurrentPage: { type: Number, default: 1 }
+  defaultCurrentPage: { type: Number, default: 1 },
+  // total: { type: Number, default: 0 },
+  layout: { type: String, default: 'prev, pager, next, jumper, sizes, total, ' },
+  pageSizes: { type: Array, default: () => [10, 20, 50, 100] }
 })
 
-// 定义可触发的事件（供父组件监听）
+// 定义可触发的事件（供父组件使用）
 const emit = defineEmits(['select', 'select-all', 'selection-change', 'update:currentPage', 'update:pageSize'])
 const tableRef = ref(null)
 
@@ -48,11 +52,17 @@ const pageSize = ref(props.defaultPageSize)
 // 【分页】切换页码
 function updateCurrentPage(page) {
   emit('update:currentPage', page)
+
+  checkAndResetPage()
 }
 // 【分页】分页大小变更
 function updatePageSize() {
   emit('update:pageSize', pageSize.value)
+
+  checkAndResetPage()
 }
+
+function checkAndResetPage() {}
 </script>
 
 <template>
@@ -92,6 +102,7 @@ function updatePageSize() {
     </el-table>
 
     <el-pagination
+      v-if="showPagination"
       v-model:page-size="pageSize"
       v-model:current-page="currentPage"
       v-bind="$attrs"

@@ -91,7 +91,7 @@ function getList() {
         :loading="table.loading"
         :data="table.data"
         :columns="table.columns"
-        :defaultPageSize="20"
+        :defaultPageSize="5"
         :total="table.total"
         @select="handleSelect"
         @select-all="handleSelectAll"

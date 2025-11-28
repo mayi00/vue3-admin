@@ -46,7 +46,8 @@ export function startMock() {
         data: {
           currentPage,
           pageSize,
-          total: 100000,
+          pageCount: 0,
+          total: 101,
           list
         }
       }
