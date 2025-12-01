@@ -11,9 +11,9 @@ const props = defineProps({
   // 【分页】
   defaultPageSize: { type: Number, default: 10 },
   defaultCurrentPage: { type: Number, default: 1 },
-  // total: { type: Number, default: 0 },
-  layout: { type: String, default: 'prev, pager, next, jumper, sizes, total, ' },
-  pageSizes: { type: Array, default: () => [10, 20, 50, 100] }
+  total: { type: Number, default: 0 },
+  layout: { type: String, default: 'prev, pager, next, jumper, sizes, ->, total, slot' },
+  pageSizes: { type: Object, default: () => [10, 20, 50, 100] }
 })
 
 // 定义可触发的事件（供父组件使用）
@@ -103,9 +103,12 @@ function checkAndResetPage() {}
 
     <el-pagination
       v-if="showPagination"
-      v-model:page-size="pageSize"
       v-model:current-page="currentPage"
+      v-model:page-size="pageSize"
       v-bind="$attrs"
+      :page-sizes="pageSizes"
+      :total="total"
+      :layout="layout"
       style="margin-top: 10px"
       @update:current-page="updateCurrentPage"
       @update:page-size="updatePageSize"
