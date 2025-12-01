@@ -1,7 +1,6 @@
 <script setup>
 import { User, Lock } from '@element-plus/icons-vue'
 import { useUserStore } from '@/store'
-import apifox from '@/api/apifox/apifox.js'
 
 defineOptions({ name: 'Login0' })
 

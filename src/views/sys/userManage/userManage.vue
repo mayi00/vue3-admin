@@ -1,5 +1,5 @@
 <script setup>
-import api from '@/api/apifox/apifox.js'
+import api from '@/api'
 import { useElementHeight } from '@/hooks/useElement'
 
 defineOptions({ name: 'UserManage' })
@@ -47,7 +47,7 @@ function getList() {
   const params = { currentPage: table.value.currentPage, pageSize: table.value.pageSize }
   const data = { ...searchForm.value }
   table.value.loading = true
-  api.user
+  api.apifox.user
     .list(params, data)
     .then(res => {
       table.value.data = res.data.list

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { usePermissionStore } from '@/store'
-import apifox from '@/api/apifox/apifox.js'
+import api from '@/api'
 
 export const useUserStore = defineStore(
   'user',
@@ -15,11 +15,10 @@ export const useUserStore = defineStore(
     // 登录
     function login(arg) {
       return new Promise((resolve, reject) => {
-        apifox.auth
+        api.apifox.auth
           .login(arg)
           .then(res => {
-            console.log('登录成功', res)
-            localStorage.setItem('token', res.token)
+            localStorage.setItem('token', res.data)
             saveUserInfo({ ...res })
             resolve(res)
           })

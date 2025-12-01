@@ -1,9 +1,8 @@
 <script setup>
-import { cloneDeep, orderBy } from 'lodash-es'
-import { getRandomInt, getRandomFloat } from '@/utils/utils'
+import { orderBy } from 'lodash-es'
 import { initDynamicRoutes } from '@/tools/route'
 import { usePermissionStore } from '@/store'
-import { menus } from '@/constant/menus/index.js'
+import api from '@/api'
 
 defineOptions({ name: 'Module' })
 
@@ -13,15 +12,10 @@ initModule()
 
 // 初始化项目列表（模拟异步）
 function initModule() {
-  const delayed = getRandomInt(1, 200)
-  setTimeout(() => {
-    const tempMenus = cloneDeep(menus)
-    tempMenus.forEach(item => {
-      delete item.children
-    })
-    const menuList = tempMenus.filter(item => ['MODULE', 'MODULE_EXT_LINK'].includes(item.menuType))
+  api.apifox.menu.module().then(res => {
+    const menuList = res.data.filter(item => ['MODULE', 'MODULE_EXT_LINK'].includes(item.menuType))
     moduleList.value = orderBy(menuList, ['sort'], ['asc'])
-  }, delayed)
+  })
 }
 
 /**
@@ -42,23 +36,11 @@ function handleClickMenuItem(moduleInfo) {
     usePermissionStore().saveSidebarRoutes(tempModule)
     initDynamicRoutes()
   } else {
-    // 首次加载模块时获取菜单数据并初始化路由
-    getMenus(moduleInfo.id).then(res => {
-      usePermissionStore().saveRoutes(res)
+    api.apifox.menu.list({ moduleId: moduleInfo.id }).then(res => {
+      usePermissionStore().saveRoutes(res.data)
       initDynamicRoutes()
     })
   }
-}
-// 获取模块下的菜单（模拟异步请求）
-function getMenus(moduleId) {
-  const delayed = getRandomFloat(1, 300, 2)
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const tempMenus = cloneDeep(menus)
-      const module = tempMenus.find(item => item.id === moduleId)
-      resolve(module)
-    }, delayed)
-  })
 }
 </script>
 
