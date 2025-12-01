@@ -9,8 +9,8 @@ const props = defineProps({
 
   showPagination: { type: Boolean, default: true },
   // 【分页】
-  defaultPageSize: { type: Number, default: 10 },
   defaultCurrentPage: { type: Number, default: 1 },
+  defaultPageSize: { type: Number, default: 10 },
   total: { type: Number, default: 0 },
   layout: { type: String, default: 'prev, pager, next, jumper, sizes, ->, total, slot' },
   pageSizes: { type: Object, default: () => [10, 20, 50, 100] }
@@ -22,10 +22,12 @@ const tableRef = ref(null)
 
 // 暴露方法给父组件
 defineExpose({
+  // 【表格】获取多选表格选中的行数据
+  getSelectionRows: () => tableRef.value?.getSelectionRows(),
   // 【表格】用于多选表格，切换全选和全不选
   toggleAllSelection: () => tableRef.value?.toggleAllSelection(),
   // 【表格】获取表列的 context
-  getColumns: () => tableRef.value?.columns
+  columns: () => tableRef.value?.columns
 })
 
 // 【表格】过滤 el-table-column 列属性
@@ -33,16 +35,15 @@ function filterColumnProps(column) {
   const { headerSlot, slot, ...rest } = column
   return rest
 }
-
 // 【表格】 选中行处理函数
-function select(select) {
-  emit('select', select)
+function select(selection) {
+  emit('select', selection)
 }
-function selectAll(selects) {
-  emit('select-all', selects)
+function selectAll(selection) {
+  emit('select-all', selection)
 }
-function selectionChange(selections) {
-  emit('selection-change', selections)
+function selectionChange(newSelection) {
+  emit('selection-change', newSelection)
 }
 
 // 【分页】相关逻辑
@@ -52,17 +53,11 @@ const pageSize = ref(props.defaultPageSize)
 // 【分页】切换页码
 function updateCurrentPage(page) {
   emit('update:currentPage', page)
-
-  checkAndResetPage()
 }
 // 【分页】分页大小变更
 function updatePageSize() {
   emit('update:pageSize', pageSize.value)
-
-  checkAndResetPage()
 }
-
-function checkAndResetPage() {}
 </script>
 
 <template>

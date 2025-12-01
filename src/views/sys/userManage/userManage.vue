@@ -1,5 +1,6 @@
 <script setup>
 import api from '@/api/apifox/apifox.js'
+import { useElementHeight } from '@/hooks/useElement'
 
 defineOptions({ name: 'UserManage' })
 
@@ -9,9 +10,13 @@ const searchForm = ref({
   account: '',
   status: ''
 })
+
+// 动态设置表格高度
+const { elementHeight: tableHeight } = useElementHeight({
+  offsetTop: 193
+})
 const baseTableRef = ref(null)
 const table = ref({
-  height: 300,
   loading: false,
   currentPage: 1,
   pageSize: 20,
@@ -37,22 +42,21 @@ function handleSearch() {
   table.value.currentPage = 1
   getList()
 }
-function handleSelect(select) {
-  console.log('handleSelect', select)
+// 获取列表数据
+function getList() {
+  const params = { currentPage: table.value.currentPage, pageSize: table.value.pageSize }
+  const data = { ...searchForm.value }
+  table.value.loading = true
+  api.user
+    .list(params, data)
+    .then(res => {
+      table.value.data = res.data.list
+      table.value.total = res.data.total
+    })
+    .finally(() => {
+      table.value.loading = false
+    })
 }
-function handleSelectAll(selects) {
-  console.log('handleSelectAll', selects)
-}
-function handleSelectionChange(selections) {
-  console.log('handleSelectionChange', selections)
-}
-function toggleAllSelection() {
-  baseTableRef.value.toggleAllSelection()
-}
-function getColumns() {
-  console.log(baseTableRef.value.getColumns())
-}
-
 function handlePageChange(page) {
   table.value.currentPage = page
   getList()
@@ -66,28 +70,35 @@ function getIndex(index) {
   return table.value.pageSize * (table.value.currentPage - 1) + index + 1
 }
 
-function getList() {
-  const params = { currentPage: table.value.currentPage, pageSize: table.value.pageSize }
-  table.value.loading = true
-  api.user
-    .list(params, { ...searchForm.value })
-    .then(res => {
-      table.value.data = res.data.list
-      table.value.total = res.data.total
-    })
-    .finally(() => {
-      table.value.loading = false
-    })
+const selectedRows = ref([])
+// 选中单行
+function handleSelect(selection) {
+  selectedRows.value = selection
+}
+// 全选
+function handleSelectAll(selection) {
+  selectedRows.value = selection
+}
+function handleSelectionChange(selection) {
+  console.log('handleSelectionChange', selection)
+}
+function handleDownload() {
+  const rows = baseTableRef.value?.getSelectionRows()
+  console.log('tableRef.value?.getSelectionRows()', baseTableRef.value?.getSelectionRows())
+  console.log('handleDownload', selectedRows.value)
 }
 </script>
 
 <template>
   <div class="g-container">
-    <el-card> </el-card>
+    <!-- <el-card> </el-card> -->
     <el-card style="margin-top: 10px">
+      <div>
+        <el-button type="primary" @click="handleDownload">下载</el-button>
+      </div>
       <BaseTable
         ref="baseTableRef"
-        :height="table.height"
+        :height="tableHeight"
         :loading="table.loading"
         :data="table.data"
         :columns="table.columns"

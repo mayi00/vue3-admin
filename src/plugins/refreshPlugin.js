@@ -8,7 +8,7 @@ import axios from 'axios'
  * 设置 5 秒后自动刷新页面
  */
 export const versionCheck = async () => {
-  if (process.env.NODE_ENV === 'development') return
+  if (process.env.VITE_NODE_ENV === 'development') return
   try {
     const response = await axios.get('version.json', {
       timeout: 5000,

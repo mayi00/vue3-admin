@@ -42,7 +42,7 @@ export function createVitePlugins() {
     // 配置 Vue 官方插件
     vue(),
     // 配置 Vue 开发者工具插件
-    vueDevTools(),
+    // vueDevTools(),
     // 配置网页更新通知插件
     webUpdateNotice({
       // 可选配置项
