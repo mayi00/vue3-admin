@@ -298,30 +298,40 @@ export function detectBrowser() {
 /**
  * @description : 检测是否为移动端设备
  * @return       {Boolean} 移动端返回true，否则返回false
- * @example     :
- *               isMobile() => true  // 移动设备
- *               isMobile() => false // 非移动设备
  * @Author      : MDT
  */
 export function isMobile() {
   const userAgent = navigator.userAgent
   const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i
+  return mobileRegex.test(userAgent)
+}
+
+/**
+ * @description : 检测是否为平板设备
+ * @return       {Boolean} 平板设备返回true，否则返回false
+ * @Author      : MDT
+ */
+export function isTablet() {
+  const userAgent = navigator.userAgent
   const tabletRegex =
     /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/i
-
-  // 优先检测移动设备
-  if (mobileRegex.test(userAgent)) {
-    return true
-  }
-
-  // 检测平板设备（根据需求可选择是否归类为移动端）
   return tabletRegex.test(userAgent)
 }
 
 /**
- * @description : 检测iOS设备
+ * @description : 检测是否为 PC 端设备
+ * @return       {Boolean} PC端返回true，否则返回false
+ * @Author      : MDT
+ */
+export function isPC() {
+  const userAgent = navigator.userAgent
+  const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i
+  return !mobileRegex.test(userAgent)
+}
+
+/**
+ * @description : 检测是否为 iOS 设备
  * @return       {Boolean} iOS设备返回true，否则返回false
- * @example     : isIOS() => true
  * @Author      : MDT
  */
 export function isIOS() {
@@ -331,7 +341,6 @@ export function isIOS() {
 /**
  * @description : 检测Android设备
  * @return       {Boolean} Android设备返回true，否则返回false
- * @example     : isAndroid() => true
  * @Author      : MDT
  */
 export function isAndroid() {
@@ -341,7 +350,6 @@ export function isAndroid() {
 /**
  * @description : 获取操作系统类型
  * @return       {String} 操作系统标识（Windows/Mac/Linux/Android/iOS/Other）
- * @example     : getOS() => 'Windows'
  * @Author      : MDT
  */
 export function getOS() {
