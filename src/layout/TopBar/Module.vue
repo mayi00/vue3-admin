@@ -12,7 +12,7 @@ initModule()
 
 // 初始化项目列表（模拟异步）
 function initModule() {
-  api.apifox.menu.module().then(res => {
+  api.sys.menu.module().then(res => {
     const menuList = res.data.filter(item => ['MODULE', 'MODULE_EXT_LINK'].includes(item.menuType))
     moduleList.value = orderBy(menuList, ['sort'], ['asc'])
   })
@@ -36,7 +36,7 @@ function handleClickMenuItem(moduleInfo) {
     usePermissionStore().saveSidebarRoutes(tempModule)
     initDynamicRoutes()
   } else {
-    api.apifox.menu.list({ moduleId: moduleInfo.id }).then(res => {
+    api.sys.menu.list({ moduleId: moduleInfo.id }).then(res => {
       usePermissionStore().saveRoutes(res.data)
       initDynamicRoutes()
     })

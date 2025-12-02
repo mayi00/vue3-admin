@@ -15,12 +15,13 @@ export const useUserStore = defineStore(
     // 登录
     function login(arg) {
       return new Promise((resolve, reject) => {
-        api.apifox.auth
+        api.sys.auth
           .login(arg)
-          .then(res => {
+          .then(async res => {
             localStorage.setItem('token', res.data)
-            saveUserInfo({ ...res })
-            resolve(res)
+            const userInfo = await api.sys.auth.getUserInfo()
+            saveUserInfo({ ...userInfo })
+            resolve()
           })
           .catch(err => {
             console.log('登录失败', err)

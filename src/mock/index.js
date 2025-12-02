@@ -9,7 +9,7 @@ import { getRandomInt } from '@/utils/utils'
 // 创建 mock 实例（参数为 axios 实例）
 const mock = new MockAdapter(axiosInstance, {
   basePath: '/mock',
-  delayResponse: getRandomInt(1, 1000 * 2)
+  delayResponse: getRandomInt(1, 1000)
 })
 
 export function startMock() {

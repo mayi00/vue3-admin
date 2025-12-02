@@ -47,7 +47,7 @@ function getList() {
   const params = { currentPage: table.value.currentPage, pageSize: table.value.pageSize }
   const data = { ...searchForm.value }
   table.value.loading = true
-  api.apifox.user
+  api.sys.user
     .list(params, data)
     .then(res => {
       table.value.data = res.data.list

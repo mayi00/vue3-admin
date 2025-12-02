@@ -1,5 +1,5 @@
-import apifox from './apifox/index.js'
+import sys from './sys/index.js'
 
 export default {
-  apifox
+  sys
 }

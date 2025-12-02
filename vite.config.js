@@ -23,7 +23,7 @@ export default ({ mode }) => {
       'process.env': env,
       __APP_VERSION__: now
     },
-    plugins: [...createVitePlugins(), generateVersionFile(versionInfo)],
+    plugins: [...createVitePlugins(env), generateVersionFile(versionInfo)],
     resolve: {
       // 配置路径别名
       alias: {

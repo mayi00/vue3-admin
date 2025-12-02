@@ -1,12 +1,12 @@
 <script setup>
-import api from '@/api/apifox/apifox.js'
+import api from '@/api'
 
 defineOptions({ name: 'Login1' })
 
 const router = useRouter()
 
 function handleLogin() {
-  api.auth.login({ account: 'admin', password: '123456' }).then(res => {
+  api.sys.auth.login({ account: 'admin', password: '123456' }).then(res => {
     localStorage.setItem('token', res.data.token)
     router.push('/')
   })
