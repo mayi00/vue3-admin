@@ -27,7 +27,6 @@ const { sidebarWidth } = storeToRefs(appStore)
   display: flex;
   width: 100%;
   height: 100%;
-  min-width: 1000px;
   border: 1px solid #fefefe;
 }
 

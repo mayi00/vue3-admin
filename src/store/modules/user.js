@@ -19,8 +19,8 @@ export const useUserStore = defineStore(
           .login(arg)
           .then(async res => {
             localStorage.setItem('token', res.data)
-            const userInfo = await api.sys.auth.getUserInfo()
-            saveUserInfo({ ...userInfo })
+            const result = await api.sys.auth.getUserInfo()
+            saveUserInfo({ ...result.data, token: res.data })
             resolve()
           })
           .catch(err => {

@@ -18,7 +18,7 @@ export function setupStore(app) {
 export { pinia, useAppStore, usePermissionStore, useUserStore }
 
 // 导出所有 store 的组合函数，方便批量使用
-export function useAllStore() {
+export function useStore() {
   return {
     appStore: useAppStore(),
     permissionStore: usePermissionStore(),

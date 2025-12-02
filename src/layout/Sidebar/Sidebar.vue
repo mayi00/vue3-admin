@@ -1,13 +1,13 @@
 <script setup>
 import SidebarLogo from './SidebarLogo.vue'
 import SidebarMenuItem from './SidebarMenuItem.vue'
-import { useAllStore } from '@/store'
+import { useStore } from '@/store'
 
 defineOptions({ name: 'Sidebar' })
 
 const currentRoute = useRoute()
-const { sidebarCollapsed } = storeToRefs(useAllStore().appStore)
-const { sidebarRoutes } = storeToRefs(useAllStore().permissionStore)
+const { sidebarCollapsed } = storeToRefs(useStore().appStore)
+const { sidebarRoutes } = storeToRefs(useStore().permissionStore)
 const menuList = computed(() => sidebarRoutes.value.children || [])
 </script>
 

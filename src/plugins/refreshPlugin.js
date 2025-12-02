@@ -27,8 +27,8 @@ export const versionCheck = async () => {
 }
 
 // 生成版本信息文件
-export const generateVersionFile = (options = {}) => {
-  if (process.env.VITE_NODE_ENV === 'development') return
+export const generateVersionFile = (env, options = {}) => {
+  if (env.VITE_NODE_ENV === 'development') return
   // 声明配置文件路径
   let configPath = ''
 
