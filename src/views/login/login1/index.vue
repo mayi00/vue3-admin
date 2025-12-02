@@ -7,7 +7,7 @@ const router = useRouter()
 
 function handleLogin() {
   api.sys.auth.login({ account: 'admin', password: '123456' }).then(res => {
-    localStorage.setItem('token', res.data.token)
+    localStorage.setItem('TOKEN', res.data.token)
     router.push('/')
   })
 }

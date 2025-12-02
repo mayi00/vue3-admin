@@ -19,7 +19,7 @@ router.beforeEach(async (to, from, next) => {
     document.title = 'Vue'
   }
 
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('TOKEN')
   if (token) {
     if (to.path === '/login') {
       next({ path: '/' })

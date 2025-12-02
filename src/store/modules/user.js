@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import { usePermissionStore } from '@/store'
 import api from '@/api'
+import { initSystemInfo } from '@/tools/login'
 
 export const useUserStore = defineStore(
-  'user',
+  'USER',
   () => {
     // 用户信息
     const userInfo = ref({})
@@ -18,10 +18,9 @@ export const useUserStore = defineStore(
         api.sys.auth
           .login(arg)
           .then(async res => {
-            localStorage.setItem('token', res.data)
-            const result = await api.sys.auth.getUserInfo()
-            saveUserInfo({ ...result.data, token: res.data })
-            resolve()
+            localStorage.setItem('TOKEN', res.data)
+            await initSystemInfo()
+            resolve(res)
           })
           .catch(err => {
             console.log('登录失败', err)
@@ -33,9 +32,8 @@ export const useUserStore = defineStore(
     // 退出登录
     function logout() {
       localStorage.removeItem('token')
-      localStorage.removeItem('localAllDynamicRoutes')
+      localStorage.removeItem('LOCAL_ALL_DYNAMIC_ROUTES')
       userInfo.value = {}
-      usePermissionStore().$reset()
     }
 
     return {
@@ -47,7 +45,7 @@ export const useUserStore = defineStore(
   },
   {
     persist: {
-      key: 'user',
+      key: 'USER',
       storage: window.localStorage
     }
   }

@@ -1,4 +1,4 @@
-import { userInfo } from '../constant/user/user'
+import { userInfo } from '@/constant/user/user'
 
 export function setupAuthMock(mock, faker) {
   mock.onPost('/auth/login').reply(config => {

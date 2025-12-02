@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
-import { cloneDeep } from 'lodash-es'
+import { cloneDeep, orderBy } from 'lodash-es'
+import api from '@/api'
 import { sortByFields, uniqueByField } from '@/utils/utils'
 
 export const usePermissionStore = defineStore('permission', {
   persist: {
-    key: 'permission',
+    key: 'PERMISSION',
     storage: window.localStorage
   },
   state: () => ({
@@ -18,13 +19,17 @@ export const usePermissionStore = defineStore('permission', {
     sidebarRoutes: {}
   }),
   actions: {
+    // 设置项目列表
+    saveModuleList(val) {
+      this.moduleList = val
+    },
     // 保存访问过的路由源数据
     saveRoutes(sourceRoute) {
       this.saveSidebarRoutes(sourceRoute)
       const tempRoutes = [...this.allDynamicRoutes, sourceRoute]
       const nonrepetitiveRoutes = uniqueByField(tempRoutes, 'id')
       this.allDynamicRoutes = sortByFields(nonrepetitiveRoutes, [{ field: 'sort', order: 'asc' }])
-      localStorage.setItem('localAllDynamicRoutes', JSON.stringify(this.allDynamicRoutes))
+      localStorage.setItem('LOCAL_ALL_DYNAMIC_ROUTES', JSON.stringify(this.allDynamicRoutes))
     },
     // 保存侧边栏路由源数据
     saveSidebarRoutes(sourceRoute) {

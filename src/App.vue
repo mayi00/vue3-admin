@@ -29,7 +29,7 @@ onUnmounted(() => {
 
 <template>
   <el-config-provider :locale="zhCn">
-    <el-watermark v-if="isPCFlag" class="app-watermark" :font="{ color: '#efefef' }" :content="userInfo.account">
+    <el-watermark v-if="isPCFlag" class="app-watermark" :font="{ color: '#efefef' }" :content="userInfo.account || ''">
       <router-view />
     </el-watermark>
     <div v-else class="mobile-tip">

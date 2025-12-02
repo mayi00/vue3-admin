@@ -1,6 +1,7 @@
 <script setup>
 import api from '@/api'
 import { useElementHeight } from '@/hooks/useElement'
+import { getDictList, getDictLabel } from '@/tools/tools'
 
 defineOptions({ name: 'UserManage' })
 
@@ -29,7 +30,7 @@ const table = ref({
     { prop: 'account', label: '账户', minWidth: 80 },
     { prop: 'name', label: '用户名', minWidth: 100 },
     { prop: 'gender', label: '性别', minWidth: 60 },
-    { prop: 'status', label: '状态', minWidth: 60 },
+    { prop: 'status', label: '状态', minWidth: 60, slot: 'status' },
     { prop: 'email', label: '电子邮箱', minWidth: 100 },
     { prop: 'phone', label: '电话', minWidth: 110 },
     { prop: 'mobile', label: '手机', minWidth: 110 },
@@ -113,6 +114,9 @@ function handleDownload() {
         <template #index="{ index }">{{ getIndex(index) }}</template>
         <template #avatar="{ row }">
           <el-avatar :src="row.avatar" style="width: 32px; height: 32px"></el-avatar>
+        </template>
+        <template #status="{ row }">
+          {{ getDictLabel('USER_STATUS', row.status) || row.status }}
         </template>
       </BaseTable>
     </el-card>

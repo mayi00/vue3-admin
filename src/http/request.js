@@ -17,7 +17,7 @@ service.interceptors.request.use(
     }
 
     // 添加 token 到请求头
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('TOKEN')
     if (token) {
       config.headers['Authorization'] = token
     }

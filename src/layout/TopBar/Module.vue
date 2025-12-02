@@ -8,16 +8,6 @@ defineOptions({ name: 'Module' })
 
 const { moduleList, moduleId, allDynamicRoutes } = storeToRefs(usePermissionStore())
 
-initModule()
-
-// 初始化项目列表（模拟异步）
-function initModule() {
-  api.sys.menu.module().then(res => {
-    const menuList = res.data.filter(item => ['MODULE', 'MODULE_EXT_LINK'].includes(item.menuType))
-    moduleList.value = orderBy(menuList, ['sort'], ['asc'])
-  })
-}
-
 /**
  * 点击导航栏的模块，获取模块下的菜单
  * @param moduleInfo  被点击的模块

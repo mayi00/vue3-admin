@@ -1,11 +1,11 @@
 <script setup>
 import imgLogo from '@/assets/svg/vue.svg'
-import { useUserStore } from '@/store'
+import { useStore } from '@/store'
 
 defineOptions({ name: 'UserAvatar' })
 
 const router = useRouter()
-const { userInfo } = storeToRefs(useUserStore())
+const { userInfo } = storeToRefs(useStore().userStore)
 
 const avatar = ref(imgLogo)
 
@@ -16,7 +16,8 @@ function handleLogout() {
     type: 'warning'
   })
     .then(() => {
-      useUserStore().logout()
+      useStore().userStore.logout()
+      useStore().permissionStore.$reset()
       router.push({ path: '/login' })
       ElMessage({
         type: 'success',
