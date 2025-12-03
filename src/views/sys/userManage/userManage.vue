@@ -6,15 +6,20 @@ import { getDictList, getDictLabel } from '@/tools/tools'
 defineOptions({ name: 'UserManage' })
 
 const searchFormRef = ref(null)
-const searchForm = ref({
-  name: '',
-  account: '',
-  status: ''
-})
+const searchForm = ref({ name: '', account: '', status: '', roleName: '', orgCodes: [] })
+
+function handleSearch() {
+  table.value.currentPage = 1
+  getList()
+}
+function handleReset() {
+  searchFormRef.value.resetFields()
+  handleSearch()
+}
 
 // 动态设置表格高度
 const { elementHeight: tableHeight } = useElementHeight({
-  offsetTop: 193
+  offsetTop: 193 + 122
 })
 const baseTableRef = ref(null)
 const table = ref({
@@ -38,11 +43,6 @@ const table = ref({
   ]
 })
 
-handleSearch()
-function handleSearch() {
-  table.value.currentPage = 1
-  getList()
-}
 // 获取列表数据
 function getList() {
   const params = { currentPage: table.value.currentPage, pageSize: table.value.pageSize }
@@ -58,11 +58,11 @@ function getList() {
       table.value.loading = false
     })
 }
-function handlePageChange(page) {
+function handleUpdateCurrentPage(page) {
   table.value.currentPage = page
   getList()
 }
-function handlePageSizeChange(size) {
+function handleUpdatePageSize(size) {
   table.value.pageSize = size
   getList()
 }
@@ -88,11 +88,49 @@ function handleDownload() {
   console.log('tableRef.value?.getSelectionRows()', baseTableRef.value?.getSelectionRows())
   console.log('handleDownload', selectedRows.value)
 }
+
+handleSearch()
 </script>
 
 <template>
   <div class="g-container">
-    <!-- <el-card> </el-card> -->
+    <el-card shadow="never" body-style="padding-bottom: 20">
+      <el-form ref="searchFormRef" :model="searchForm" label-width="80px">
+        <el-row>
+          <el-col :span="6">
+            <el-form-item label="用户名称" prop="name">
+              <el-input v-model="searchForm.name" placeholder="请输入用户名称" clearable></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="登录账号" prop="account">
+              <el-input v-model="searchForm.account" placeholder="请输入登录账号" clearable></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="角色名称" prop="roleName">
+              <el-input v-model="searchForm.roleName" placeholder="请输入角色名称" clearable></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="用户状态" prop="status">
+              <el-select v-model="searchForm.status" placeholder="请选择用户状态" clearable>
+                <el-option
+                  v-for="item in getDictList('USER_STATUS')"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6" style="padding-left: 10px">
+            <el-button type="primary" @click="handleSearch">查询</el-button>
+            <el-button @click="handleReset">重置</el-button>
+          </el-col>
+        </el-row>
+      </el-form>
+    </el-card>
     <el-card style="margin-top: 10px">
       <div>
         <el-button type="primary" @click="handleDownload">下载</el-button>
@@ -108,8 +146,8 @@ function handleDownload() {
         @select="handleSelect"
         @select-all="handleSelectAll"
         @selection-change="handleSelectionChange"
-        @update:currentPage="handlePageChange"
-        @update:pageSize="handlePageSizeChange"
+        @update:currentPage="handleUpdateCurrentPage"
+        @update:pageSize="handleUpdatePageSize"
       >
         <template #index="{ index }">{{ getIndex(index) }}</template>
         <template #avatar="{ row }">
