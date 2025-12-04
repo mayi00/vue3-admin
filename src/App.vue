@@ -2,8 +2,8 @@
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import { ElConfigProvider } from 'element-plus'
 import { versionCheck } from '@/plugins/refreshPlugin'
-import { useStore } from './store'
 import { isPC, isTablet } from '@/utils/utils'
+import { useStore } from './store'
 
 const { userInfo } = storeToRefs(useStore().userStore)
 const isPCFlag = ref(true)
@@ -29,12 +29,12 @@ onUnmounted(() => {
 
 <template>
   <el-config-provider :locale="zhCn">
-    <el-watermark v-if="isPCFlag" class="app-watermark" :font="{ color: '#efefef' }" :content="userInfo.account || ''">
+    <el-watermark v-if="isPCFlag" class="app-watermark" :font="{ color: '#00000010' }" :content="userInfo.account || ''">
       <router-view />
     </el-watermark>
     <div v-else class="mobile-tip">
       <el-alert
-        title="设备提示"
+        title="提示"
         description="当前系统仅支持PC端访问，请使用电脑浏览器打开以获得最佳体验！"
         type="warning"
         show-icon
@@ -58,6 +58,5 @@ onUnmounted(() => {
   align-items: center;
   height: 100vh;
   padding: 20px;
-  box-sizing: border-box;
 }
 </style>

@@ -8,5 +8,12 @@ export default {
       params,
       data
     })
+  },
+  delete(data) {
+    return request({
+      url: '/user/delete',
+      method: 'post',
+      data
+    })
   }
 }

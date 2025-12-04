@@ -79,7 +79,7 @@ function handleLogin() {
       </div>
 
       <div class="login-copyright">
-        <Copyright />
+        <BaseCopyright />
       </div>
     </div>
   </div>

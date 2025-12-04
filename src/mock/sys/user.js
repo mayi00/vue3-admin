@@ -19,16 +19,17 @@ export function setupUserMock(mock, faker) {
     // 生成随机用户数据
     const list = Array.from({ length: currentPageSize }, (_, index) => ({
       id: faker.string.uuid(),
+      avatar: faker.image.avatar(),
       account: faker.string.alphanumeric({ length: { min: 4, max: 10 } }),
       name: faker.person.fullName(),
+      nickname: faker.person.fullName(),
       gender: faker.person.sex(),
-      age: faker.number.int({ min: 18, max: 65 }),
       status: faker.string.fromCharacters([0, 1]),
-      email: faker.internet.email(),
-      phone: faker.phone.number({ style: 'national' }),
       mobile: faker.helpers.fromRegExp(/[1][3-9][0-9]{9}/),
-      avatar: faker.image.avatar(),
-      address: faker.location.city()
+      phone: faker.phone.number({ style: 'national' }),
+      email: faker.internet.email(),
+      address: faker.location.city(),
+      age: faker.number.int({ min: 18, max: 65 })
     }))
     return [
       200,
@@ -44,5 +45,9 @@ export function setupUserMock(mock, faker) {
         }
       }
     ]
+  })
+  mock.onGet('/user/delete').reply(config => {
+    console.log('【Mock】/user/delete', config)
+    return [200, { code: 0, message: 'success' }]
   })
 }

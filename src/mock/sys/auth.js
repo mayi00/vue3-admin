@@ -11,6 +11,6 @@ export function setupAuthMock(mock, faker) {
   })
   mock.onGet('/auth/getUserInfo').reply(config => {
     console.log('【Mock】/auth/getUserInfo', config)
-    return [200, { code: 0, message: 'success', data: userInfo }]
+    return [200, { code: 0, message: 'success', data: { ...userInfo, avatar: faker.image.avatar() } }]
   })
 }

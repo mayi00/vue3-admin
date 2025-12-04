@@ -1,12 +1,13 @@
 <script setup>
 import api from '@/api'
+import { getRandomInt, sleep } from '@/utils/utils'
 import { useElementHeight } from '@/hooks/useElement'
 import { getDictList, getDictLabel } from '@/tools/tools'
 
 defineOptions({ name: 'UserManage' })
 
 const searchFormRef = ref(null)
-const searchForm = ref({ name: '', account: '', status: '', roleName: '', orgCodes: [] })
+const searchForm = ref({ name: '', account: '', status: '1', roleName: '' })
 
 function handleSearch() {
   table.value.currentPage = 1
@@ -30,16 +31,15 @@ const table = ref({
   data: [],
   columns: [
     { type: 'selection', width: 50 },
-    { label: '序号', type: 'index', minWidth: 60, slot: 'index' },
+    { type: 'index', label: '序号', minWidth: 60, slot: 'index' },
     { prop: 'avatar', label: '头像', slot: 'avatar' },
-    { prop: 'account', label: '账户', minWidth: 80 },
-    { prop: 'name', label: '用户名', minWidth: 100 },
+    { prop: 'account', label: '帐号', minWidth: 100 },
+    { prop: 'name', label: '姓名', minWidth: 100 },
     { prop: 'gender', label: '性别', minWidth: 60 },
     { prop: 'status', label: '状态', minWidth: 60, slot: 'status' },
-    { prop: 'email', label: '电子邮箱', minWidth: 100 },
-    { prop: 'phone', label: '电话', minWidth: 110 },
-    { prop: 'mobile', label: '手机', minWidth: 110 },
-    { prop: 'address', label: '地址', minWidth: 100, showOverflowTooltip: true }
+    { prop: 'mobile', label: '手机', minWidth: 120 },
+    { prop: 'email', label: '电子邮箱', minWidth: 120 },
+    { prop: 'operation', label: '操作', width: 120, align: 'center', fixed: 'right', slot: 'operation' }
   ]
 })
 
@@ -53,6 +53,10 @@ function getList() {
     .then(res => {
       table.value.data = res.data.list
       table.value.total = res.data.total
+    })
+    .catch(() => {
+      table.value.data = []
+      table.value.total = 0
     })
     .finally(() => {
       table.value.loading = false
@@ -83,10 +87,45 @@ function handleSelectAll(selection) {
 function handleSelectionChange(selection) {
   console.log('handleSelectionChange', selection)
 }
+// 下载
 function handleDownload() {
   const rows = baseTableRef.value?.getSelectionRows()
-  console.log('tableRef.value?.getSelectionRows()', baseTableRef.value?.getSelectionRows())
-  console.log('handleDownload', selectedRows.value)
+  if (!rows.length) return ElMessage.warning('请选择数据')
+  console.log('handleDownload', rows)
+}
+// 批量删除
+function handleBatchDelete() {
+  const rows = baseTableRef.value?.getSelectionRows()
+  if (!rows.length) return ElMessage.warning('请选择数据')
+  deleteInfo.value.ids = rows.map(item => item.id)
+  deleteInfo.value.title = '批量删除'
+  deleteInfo.value.visible = true
+}
+
+const deleteInfo = ref({
+  ids: [],
+  title: '删除',
+  visible: false,
+  loading: false
+})
+// 删除
+function handleDelete(row) {
+  deleteInfo.value.ids = [row.id]
+  deleteInfo.value.title = '删除'
+  deleteInfo.value.visible = true
+}
+async function handleDeleteConfirm() {
+  deleteInfo.value.loading = true
+  await api.sys.user.delete(deleteInfo.value.ids)
+  // await sleep(getRandomInt(1, 1000))
+  ElMessage({ type: 'success', message: '删除成功' })
+  deleteInfo.value.visible = false
+  deleteInfo.value.loading = false
+  getList()
+}
+function handleDeleteCancel() {
+  deleteInfo.value.visible = false
+  deleteInfo.value.ids = []
 }
 
 handleSearch()
@@ -94,7 +133,7 @@ handleSearch()
 
 <template>
   <div class="g-container">
-    <el-card shadow="never" body-style="padding-bottom: 20">
+    <el-card shadow="hover" body-style="padding-bottom: 0">
       <el-form ref="searchFormRef" :model="searchForm" label-width="80px">
         <el-row>
           <el-col :span="6">
@@ -105,11 +144,6 @@ handleSearch()
           <el-col :span="6">
             <el-form-item label="登录账号" prop="account">
               <el-input v-model="searchForm.account" placeholder="请输入登录账号" clearable></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="6">
-            <el-form-item label="角色名称" prop="roleName">
-              <el-input v-model="searchForm.roleName" placeholder="请输入角色名称" clearable></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6">
@@ -124,6 +158,16 @@ handleSearch()
               </el-select>
             </el-form-item>
           </el-col>
+          <el-col :span="6">
+            <el-form-item label="角色名称" prop="roleName">
+              <el-input v-model="searchForm.roleName" placeholder="请输入角色名称" clearable></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="角色名称" prop="roleName">
+              <el-input v-model="searchForm.roleName" placeholder="请输入角色名称" clearable></el-input>
+            </el-form-item>
+          </el-col>
           <el-col :span="6" style="padding-left: 10px">
             <el-button type="primary" @click="handleSearch">查询</el-button>
             <el-button @click="handleReset">重置</el-button>
@@ -131,9 +175,13 @@ handleSearch()
         </el-row>
       </el-form>
     </el-card>
-    <el-card style="margin-top: 10px">
+    <el-card shadow="hover" style="margin-top: 10px">
       <div>
+        <el-button type="primary">新增</el-button>
         <el-button type="primary" @click="handleDownload">下载</el-button>
+        <el-button type="">批量导入</el-button>
+        <el-button type="">下载模板</el-button>
+        <el-button type="danger" @click="handleBatchDelete">批量删除</el-button>
       </div>
       <BaseTable
         ref="baseTableRef"
@@ -156,8 +204,21 @@ handleSearch()
         <template #status="{ row }">
           {{ getDictLabel('USER_STATUS', row.status) || row.status }}
         </template>
+        <template #operation="{ row }">
+          <el-button type="primary" link size="small">编辑</el-button>
+          <el-button type="danger" link size="small" @click="handleDelete(row)">删除</el-button>
+        </template>
       </BaseTable>
     </el-card>
+
+    <BaseConfirmDialog
+      :visible="deleteInfo.visible"
+      :title="deleteInfo.title"
+      :loading="deleteInfo.loading"
+      confirmBtnType="danger"
+      @confirm="handleDeleteConfirm"
+      @cancel="handleDeleteCancel"
+    />
   </div>
 </template>
 
