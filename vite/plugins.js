@@ -44,25 +44,27 @@ export function createVitePlugins(env) {
   ]
 
   if (env.VITE_NODE_ENV === 'development') {
-    // 配置 Vue 开发者工具插件
-    // plugins.push(vueDevTools())
+    if (env.VITE_DEV_TOOLS === 'true') {
+      // 配置 Vue 开发者工具插件
+      plugins.push(vueDevTools())
+    }
   } else {
     // 配置网页更新通知插件
-    plugins.push(
-      webUpdateNotice({
-        // 可选配置项
-        notificationProps: {
-          title: '系统更新提示',
-          description: '检测到新版本，是否立即刷新页面？',
-          buttonText: '刷新',
-          dismissButtonText: '稍后提醒'
-        },
-        // 轮询检查更新的时间间隔（毫秒）
-        checkInterval: 1000 * 60 * 10,
-        // 是否在页面加载时立即检查更新
-        checkOnLoad: true
-      })
-    )
+    // plugins.push(
+    //   webUpdateNotice({
+    //     // 可选配置项
+    //     notificationProps: {
+    //       title: '系统更新提示',
+    //       description: '检测到新版本，是否立即刷新页面？',
+    //       buttonText: '刷新',
+    //       dismissButtonText: '稍后提醒'
+    //     },
+    //     // 轮询检查更新的时间间隔（毫秒）
+    //     checkInterval: 1000 * 60 * 10,
+    //     // 是否在页面加载时立即检查更新
+    //     checkOnLoad: true
+    //   })
+    // )
   }
 
   return plugins

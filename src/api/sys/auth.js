@@ -3,25 +3,16 @@ import request from '@/http/request.js'
 export default {
   // 登录
   login(data) {
-    return request({
-      url: '/auth/login',
-      method: 'post',
-      data,
+    return request.post('/auth/login', data, {
       timeout: 1000 * 5
     })
   },
   // 登出
   logout() {
-    return request({
-      url: '/auth/logout',
-      method: 'post'
-    })
+    return request.post('/auth/logout')
   },
   // 获取用户信息
   getUserInfo() {
-    return request({
-      url: '/auth/getUserInfo',
-      method: 'get'
-    })
+    return request.get('/auth/getUserInfo')
   }
 }

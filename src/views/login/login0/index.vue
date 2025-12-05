@@ -17,7 +17,7 @@ const rules = reactive({
   account: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
-    { min: 6, max: 16, message: '长度6-16位', trigger: 'blur' }
+    { min: 6, max: 20, message: '长度6-20位', trigger: 'blur' }
   ]
 })
 const loading = ref(false)
@@ -52,7 +52,7 @@ function handleLogin() {
               placeholder="请输入用户名"
               size="large"
               :prefix-icon="User"
-              maxlength="16"
+              maxlength="20"
               clearable
             />
           </el-form-item>
@@ -63,7 +63,7 @@ function handleLogin() {
               placeholder="请输入密码"
               size="large"
               show-password
-              maxlength="16"
+              maxlength="20"
               clearable
             >
               <template #prefix>

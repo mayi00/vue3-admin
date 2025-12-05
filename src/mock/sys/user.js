@@ -16,21 +16,37 @@ export function setupUserMock(mock, faker) {
       currentPageSize = total - (currentPage - 1) * pageSize
     }
 
+    const roles = ['超级管理员', '系统管理员', '普通用户', '审计员', '财务专员', '人事专员', '技术支持']
+
     // 生成随机用户数据
-    const list = Array.from({ length: currentPageSize }, (_, index) => ({
-      id: faker.string.uuid(),
-      avatar: faker.image.avatar(),
-      account: faker.string.alphanumeric({ length: { min: 4, max: 10 } }),
-      name: faker.person.fullName(),
-      nickname: faker.person.fullName(),
-      gender: faker.person.sex(),
-      status: faker.string.fromCharacters([0, 1]),
-      mobile: faker.helpers.fromRegExp(/[1][3-9][0-9]{9}/),
-      phone: faker.phone.number({ style: 'national' }),
-      email: faker.internet.email(),
-      address: faker.location.city(),
-      age: faker.number.int({ min: 18, max: 65 })
-    }))
+    const list = Array.from({ length: currentPageSize }, (_, index) => {
+      // 为每个用户随机生成1-3个角色
+      const userRoles = []
+      const roleCount = faker.number.int({ min: 0, max: roles.length - 1 })
+      const availableRoles = [...roles]
+
+      for (let i = 0; i < roleCount && availableRoles.length > 0; i++) {
+        const randomIndex = faker.number.int({ min: 0, max: availableRoles.length - 1 })
+        userRoles.push(availableRoles.splice(randomIndex, 1)[0])
+      }
+
+      return {
+        id: faker.string.uuid(),
+        avatar: faker.image.avatar(),
+        account: faker.string.alphanumeric({ length: { min: 4, max: 10 } }),
+        name: faker.person.fullName(),
+        nickname: faker.person.fullName(),
+        roleName: userRoles,
+        // gender: faker.person.sex(),
+        gender: faker.string.fromCharacters(['M', 'F']),
+        status: faker.string.fromCharacters([0, 1]),
+        mobile: faker.helpers.fromRegExp(/[1][3-9][0-9]{9}/),
+        phone: faker.phone.number({ style: 'national' }),
+        email: faker.internet.email(),
+        address: faker.location.city(),
+        age: faker.number.int({ min: 18, max: 65 })
+      }
+    })
     return [
       200,
       {
@@ -46,7 +62,15 @@ export function setupUserMock(mock, faker) {
       }
     ]
   })
-  mock.onGet('/user/delete').reply(config => {
+  mock.onPost('/user/add').reply(config => {
+    console.log('【Mock】/user/add', config)
+    return [200, { code: 0, message: 'success' }]
+  })
+  mock.onPost('/user/edit').reply(config => {
+    console.log('【Mock】/user/edit', config)
+    return [200, { code: 0, message: 'success' }]
+  })
+  mock.onPost('/user/delete').reply(config => {
     console.log('【Mock】/user/delete', config)
     return [200, { code: 0, message: 'success' }]
   })

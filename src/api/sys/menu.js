@@ -9,7 +9,7 @@ export default {
       data
     })
   },
-  // 获取菜单列表
+  // 根据模块获取菜单列表
   list(data) {
     return request({
       url: '/menu/list',

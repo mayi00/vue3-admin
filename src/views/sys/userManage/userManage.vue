@@ -1,8 +1,12 @@
 <script setup>
+import { ElMessage } from 'element-plus'
+
 import api from '@/api'
 import { getRandomInt, sleep } from '@/utils/utils'
-import { useElementHeight } from '@/hooks/useElement'
 import { getDictList, getDictLabel } from '@/tools/tools'
+import { useElementHeight } from '@/hooks/useElement'
+
+import UserFormDialog from './userFormDialog.vue'
 
 defineOptions({ name: 'UserManage' })
 
@@ -35,14 +39,19 @@ const table = ref({
     { prop: 'avatar', label: '头像', slot: 'avatar' },
     { prop: 'account', label: '帐号', minWidth: 100 },
     { prop: 'name', label: '姓名', minWidth: 100 },
-    { prop: 'gender', label: '性别', minWidth: 60 },
-    { prop: 'status', label: '状态', minWidth: 60, slot: 'status' },
+    { prop: 'roleName', label: '角色', minWidth: 120, slot: 'roleName' },
+    { prop: 'gender', label: '性别', minWidth: 60, slot: 'gender' },
+    { prop: 'status', label: '状态', minWidth: 70, slot: 'status' },
     { prop: 'mobile', label: '手机', minWidth: 120 },
     { prop: 'email', label: '电子邮箱', minWidth: 120 },
     { prop: 'operation', label: '操作', width: 120, align: 'center', fixed: 'right', slot: 'operation' }
   ]
 })
-
+const selectedRows = ref([])
+// 获取表格序号
+function getIndex(index) {
+  return table.value.pageSize * (table.value.currentPage - 1) + index + 1
+}
 // 获取列表数据
 function getList() {
   const params = { currentPage: table.value.currentPage, pageSize: table.value.pageSize }
@@ -70,12 +79,6 @@ function handleUpdatePageSize(size) {
   table.value.pageSize = size
   getList()
 }
-// 获取表格序号
-function getIndex(index) {
-  return table.value.pageSize * (table.value.currentPage - 1) + index + 1
-}
-
-const selectedRows = ref([])
 // 选中单行
 function handleSelect(selection) {
   selectedRows.value = selection
@@ -87,11 +90,39 @@ function handleSelectAll(selection) {
 function handleSelectionChange(selection) {
   console.log('handleSelectionChange', selection)
 }
+
+// 新增/编辑相关
+const userFormVisible = ref(false)
+const isEditForm = ref(false)
+const currentUserData = ref({})
+// 显示新增表单
+function handleAdd() {
+  isEditForm.value = false
+  currentUserData.value = {}
+  userFormVisible.value = true
+}
+// 显示编辑表单
+function handleEdit(row) {
+  isEditForm.value = true
+  currentUserData.value = { ...row }
+  userFormVisible.value = true
+}
+// 表单提交成功回调
+function handleFormSuccess() {
+  getList()
+}
 // 下载
 function handleDownload() {
   const rows = baseTableRef.value?.getSelectionRows()
   if (!rows.length) return ElMessage.warning('请选择数据')
   console.log('handleDownload', rows)
+  ElMessage.info('下载')
+}
+function handleBatchImport() {
+  ElMessage.info('批量导入')
+}
+function handleDownloadTemplate() {
+  ElMessage.info('下载模板')
 }
 // 批量删除
 function handleBatchDelete() {
@@ -109,19 +140,22 @@ const deleteInfo = ref({
   loading: false
 })
 // 删除
-function handleDelete(row) {
-  deleteInfo.value.ids = [row.id]
-  deleteInfo.value.title = '删除'
-  deleteInfo.value.visible = true
-}
-async function handleDeleteConfirm() {
-  deleteInfo.value.loading = true
-  await api.sys.user.delete(deleteInfo.value.ids)
-  // await sleep(getRandomInt(1, 1000))
+async function handleDeleteConfirm(row) {
+  await api.sys.user.delete({ id: [row.id] })
   ElMessage({ type: 'success', message: '删除成功' })
-  deleteInfo.value.visible = false
-  deleteInfo.value.loading = false
   getList()
+}
+async function handleBatchDeleteConfirm() {
+  deleteInfo.value.loading = true
+  try {
+    await api.sys.user.delete({ id: deleteInfo.value.ids })
+    ElMessage({ type: 'success', message: '删除成功' })
+    deleteInfo.value.visible = false
+    deleteInfo.value.loading = false
+    getList()
+  } finally {
+    deleteInfo.value.loading = false
+  }
 }
 function handleDeleteCancel() {
   deleteInfo.value.visible = false
@@ -177,10 +211,10 @@ handleSearch()
     </el-card>
     <el-card shadow="hover" style="margin-top: 10px">
       <div>
-        <el-button type="primary">新增</el-button>
+        <el-button type="primary" @click="handleAdd">新增</el-button>
         <el-button type="primary" @click="handleDownload">下载</el-button>
-        <el-button type="">批量导入</el-button>
-        <el-button type="">下载模板</el-button>
+        <el-button type="default" @click="handleBatchImport">批量导入</el-button>
+        <el-button type="default" @click="handleDownloadTemplate">下载模板</el-button>
         <el-button type="danger" @click="handleBatchDelete">批量删除</el-button>
       </div>
       <BaseTable
@@ -201,22 +235,51 @@ handleSearch()
         <template #avatar="{ row }">
           <el-avatar :src="row.avatar" style="width: 32px; height: 32px"></el-avatar>
         </template>
+        <template #roleName="{ row, column }">
+          <el-popover :title="column.label" :content="row.roleName.join(',')" placement="top">
+            <template #reference>
+              <div class="g-multi-ellipsis">{{ row.roleName.join(',') || '-' }}</div>
+            </template>
+          </el-popover>
+        </template>
         <template #status="{ row }">
-          {{ getDictLabel('USER_STATUS', row.status) || row.status }}
+          <el-tag :type="row.status === '1' ? 'success' : 'danger'" effect="dark">
+            {{ getDictLabel('USER_STATUS', row.status) || row.status }}
+          </el-tag>
+        </template>
+        <template #gender="{ row }">
+          {{ getDictLabel('GENDER', row.gender) || row.gender }}
         </template>
         <template #operation="{ row }">
-          <el-button type="primary" link size="small">编辑</el-button>
-          <el-button type="danger" link size="small" @click="handleDelete(row)">删除</el-button>
+          <el-button type="primary" link size="small" @click="handleEdit(row)">编辑</el-button>
+          <el-popconfirm
+            title="请确认是否删除？"
+            width="160"
+            placement="top"
+            confirm-button-type="danger"
+            @confirm="handleDeleteConfirm(row)"
+          >
+            <template #reference>
+              <el-button type="danger" link size="small">删除</el-button>
+            </template>
+          </el-popconfirm>
         </template>
       </BaseTable>
     </el-card>
+
+    <UserFormDialog
+      v-model:visible="userFormVisible"
+      :is-edit="isEditForm"
+      :user-data="currentUserData"
+      @success="handleFormSuccess"
+    />
 
     <BaseConfirmDialog
       :visible="deleteInfo.visible"
       :title="deleteInfo.title"
       :loading="deleteInfo.loading"
       confirmBtnType="danger"
-      @confirm="handleDeleteConfirm"
+      @confirm="handleBatchDeleteConfirm"
       @cancel="handleDeleteCancel"
     />
   </div>

@@ -15,6 +15,6 @@ setupStore(app)
 setupElementPlusIconsVue(app)
 app.mount('#app')
 
-if (import.meta.env.VITE_MOCK == 'true') {
+if (import.meta.env.VITE_MOCK === 'true') {
   startMock()
 }
