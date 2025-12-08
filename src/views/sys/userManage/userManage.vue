@@ -1,6 +1,6 @@
 <script setup>
 import { ElMessage } from 'element-plus'
-
+import * as XLSX from 'xlsx'
 import api from '@/api'
 import { getRandomInt, sleep } from '@/utils/utils'
 import { getDictList, getDictLabel } from '@/tools/tools'
@@ -117,8 +117,42 @@ function handleUserFormSuccess() {
 function handleDownload() {
   const rows = baseTableRef.value?.getSelectionRows()
   if (!rows.length) return ElMessage.warning('请选择数据')
-  console.log('handleDownload', rows)
-  ElMessage.info('下载')
+
+  // 准备导出的数据
+  const exportData = rows.map(row => ({
+    序号: getIndex(rows.indexOf(row)),
+    帐号: row.account,
+    姓名: row.name,
+    角色: Array.isArray(row.roleName) ? row.roleName.join(',') : row.roleName,
+    性别: getDictLabel('GENDER', row.gender) || row.gender,
+    状态: getDictLabel('USER_STATUS', row.status) || row.status,
+    手机: row.mobile,
+    电子邮箱: row.email
+  }))
+
+  // 创建工作簿
+  const workbook = XLSX.utils.book_new()
+
+  // 将数据转换为工作表
+  const worksheet = XLSX.utils.json_to_sheet(exportData)
+
+  // 设置列宽
+  worksheet['!cols'] = [
+    { wch: 6 },
+    { wch: 15 },
+    { wch: 10 },
+    { wch: 20 },
+    { wch: 10 },
+    { wch: 10 },
+    { wch: 15 },
+    { wch: 25 }
+  ]
+
+  // 将工作表添加到工作簿
+  XLSX.utils.book_append_sheet(workbook, worksheet, '用户数据')
+
+  // 导出文件
+  XLSX.writeFile(workbook, '用户数据.xlsx')
 }
 
 // 批量导入
