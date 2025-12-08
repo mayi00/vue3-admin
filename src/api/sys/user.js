@@ -33,5 +33,13 @@ export default {
       method: 'post',
       data
     })
+  },
+  // 批量导入用户
+  batchImport(data) {
+    return request({
+      url: '/user/batchImport',
+      method: 'post',
+      data
+    })
   }
 }

@@ -24,7 +24,7 @@ function handleReset() {
 
 // 动态设置表格高度
 const { elementHeight: tableHeight } = useElementHeight({
-  offsetTop: 193 + 122
+  offsetTop: 193 + 132
 })
 const baseTableRef = ref(null)
 const table = ref({
@@ -71,10 +71,12 @@ function getList() {
       table.value.loading = false
     })
 }
+// 切换页码
 function handleUpdateCurrentPage(page) {
   table.value.currentPage = page
   getList()
 }
+// 切换每页数量
 function handleUpdatePageSize(size) {
   table.value.pageSize = size
   getList()
@@ -107,8 +109,8 @@ function handleEdit(row) {
   currentUserData.value = { ...row }
   userFormVisible.value = true
 }
-// 表单提交成功回调
-function handleFormSuccess() {
+// 新增/编辑提交成功
+function handleUserFormSuccess() {
   getList()
 }
 // 下载
@@ -118,12 +120,38 @@ function handleDownload() {
   console.log('handleDownload', rows)
   ElMessage.info('下载')
 }
+
+// 批量导入
+const uploadInfo = ref({
+  visible: false,
+  loading: false
+})
 function handleBatchImport() {
-  ElMessage.info('批量导入')
+  uploadInfo.value.visible = true
+}
+function handleBatchImportConfirm(fileList) {
+  const fileData = new FormData()
+  fileData.append('file', fileList[0])
+  uploadInfo.value.loading = true
+  api.sys.user.batchImport(fileData).then(res => {
+    console.log(res)
+    uploadInfo.value.loading = false
+    uploadInfo.value.visible = false
+    ElMessage.success('导入成功')
+    getList()
+  })
 }
 function handleDownloadTemplate() {
   ElMessage.info('下载模板')
 }
+
+// 删除相关
+const deleteInfo = ref({
+  ids: [],
+  title: '删除',
+  visible: false,
+  loading: false
+})
 // 批量删除
 function handleBatchDelete() {
   const rows = baseTableRef.value?.getSelectionRows()
@@ -132,23 +160,16 @@ function handleBatchDelete() {
   deleteInfo.value.title = '批量删除'
   deleteInfo.value.visible = true
 }
-
-const deleteInfo = ref({
-  ids: [],
-  title: '删除',
-  visible: false,
-  loading: false
-})
 // 删除
-async function handleDeleteConfirm(row) {
-  await api.sys.user.delete({ id: [row.id] })
+async function handleDeleteConfirm({ id }) {
+  await api.sys.user.delete({ ids: [id] })
   ElMessage({ type: 'success', message: '删除成功' })
   getList()
 }
 async function handleBatchDeleteConfirm() {
   deleteInfo.value.loading = true
   try {
-    await api.sys.user.delete({ id: deleteInfo.value.ids })
+    await api.sys.user.delete({ ids: deleteInfo.value.ids })
     ElMessage({ type: 'success', message: '删除成功' })
     deleteInfo.value.visible = false
     deleteInfo.value.loading = false
@@ -210,7 +231,7 @@ handleSearch()
       </el-form>
     </el-card>
     <el-card shadow="hover" style="margin-top: 10px">
-      <div>
+      <div class="mb-[10px]">
         <el-button type="primary" @click="handleAdd">新增</el-button>
         <el-button type="primary" @click="handleDownload">下载</el-button>
         <el-button type="default" @click="handleBatchImport">批量导入</el-button>
@@ -271,7 +292,16 @@ handleSearch()
       v-model:visible="userFormVisible"
       :is-edit="isEditForm"
       :user-data="currentUserData"
-      @success="handleFormSuccess"
+      @success="handleUserFormSuccess"
+    />
+
+    <BaseUploadDialog
+      v-model:visible="uploadInfo.visible"
+      title="批量导入"
+      :loading="uploadInfo.loading"
+      :multiple="false"
+      limit="1"
+      @confirm="handleBatchImportConfirm"
     />
 
     <BaseConfirmDialog

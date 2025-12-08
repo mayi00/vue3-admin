@@ -16,12 +16,12 @@ const props = defineProps({
 })
 const emits = defineEmits(['confirm', 'cancel'])
 
-const dialogVisible = ref(false)
+const innerVisible = ref(false)
 
 watch(
   () => props.visible,
   newVal => {
-    dialogVisible.value = newVal
+    innerVisible.value = newVal
   },
   { immediate: true }
 )
@@ -35,15 +35,17 @@ function handleCancel() {
 </script>
 
 <template>
-  <el-dialog v-model="dialogVisible" :width="width" :title="title" v-bind="$attrs" @close="handleCancel">
+  <el-dialog v-model="innerVisible" :width="width" :title="title" v-bind="$attrs" @close="handleCancel">
     <slot>
       <p class="text">{{ text }}</p>
     </slot>
     <template #footer>
-      <div class="dialog-footer">
-        <el-button :type="confirmBtnType" :loading="loading" @click="handleConfirm">{{ confirmText }}</el-button>
-        <el-button @click="handleCancel">{{ cancelText }}</el-button>
-      </div>
+      <slot name="footer">
+        <div>
+          <el-button :type="confirmBtnType" :loading="loading" @click="handleConfirm">{{ confirmText }}</el-button>
+          <el-button @click="handleCancel">{{ cancelText }}</el-button>
+        </div>
+      </slot>
     </template>
   </el-dialog>
 </template>

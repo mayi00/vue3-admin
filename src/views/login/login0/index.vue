@@ -14,7 +14,10 @@ const loginForm = ref({
   password: '123456'
 })
 const rules = reactive({
-  account: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  account: [
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { min: 4, max: 20, message: '长度4-20位', trigger: 'blur' }
+  ],
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
     { min: 6, max: 20, message: '长度6-20位', trigger: 'blur' }

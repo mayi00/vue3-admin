@@ -74,4 +74,8 @@ export function setupUserMock(mock, faker) {
     console.log('【Mock】/user/delete', config)
     return [200, { code: 0, message: 'success' }]
   })
+  mock.onPost('/user/batchImport').reply(config => {
+    console.log('【Mock】/user/batchImport', config)
+    return [200, { code: 0, message: 'success' }]
+  })
 }
