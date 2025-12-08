@@ -1,4 +1,7 @@
+import { roleList } from '@/constant/sys/role'
+
 export function setupUserMock(mock, faker) {
+  // 获取用户列表
   mock.onPost('/user/list').reply(config => {
     console.log('【Mock】/user/list', config)
 
@@ -16,14 +19,12 @@ export function setupUserMock(mock, faker) {
       currentPageSize = total - (currentPage - 1) * pageSize
     }
 
-    const roles = ['超级管理员', '系统管理员', '普通用户', '审计员', '财务专员', '人事专员', '技术支持']
-
     // 生成随机用户数据
     const list = Array.from({ length: currentPageSize }, (_, index) => {
-      // 为每个用户随机生成1-3个角色
+      // 为每个用户随机生成 n 个角色
       const userRoles = []
-      const roleCount = faker.number.int({ min: 0, max: roles.length - 1 })
-      const availableRoles = [...roles]
+      const roleCount = faker.number.int({ min: 0, max: roleList.length - 1 })
+      const availableRoles = [...roleList]
 
       for (let i = 0; i < roleCount && availableRoles.length > 0; i++) {
         const randomIndex = faker.number.int({ min: 0, max: availableRoles.length - 1 })
@@ -36,10 +37,13 @@ export function setupUserMock(mock, faker) {
         account: faker.string.alphanumeric({ length: { min: 4, max: 10 } }),
         name: faker.person.fullName(),
         nickname: faker.person.fullName(),
-        roleName: userRoles,
-        // gender: faker.person.sex(),
+        roleCode: userRoles.map(item => item.code),
+        roleName: userRoles.map(item => item.label),
         gender: faker.string.fromCharacters(['M', 'F']),
-        status: faker.string.fromCharacters([0, 1]),
+        status: faker.helpers.weightedArrayElement([
+          { weight: 9, value: '1' },
+          { weight: 1, value: '0' }
+        ]),
         mobile: faker.helpers.fromRegExp(/[1][3-9][0-9]{9}/),
         phone: faker.phone.number({ style: 'national' }),
         email: faker.internet.email(),
@@ -62,20 +66,35 @@ export function setupUserMock(mock, faker) {
       }
     ]
   })
+  // 新增用户
   mock.onPost('/user/add').reply(config => {
     console.log('【Mock】/user/add', config)
     return [200, { code: 0, message: 'success' }]
   })
+  // 编辑
   mock.onPost('/user/edit').reply(config => {
     console.log('【Mock】/user/edit', config)
     return [200, { code: 0, message: 'success' }]
   })
+  // 删除
   mock.onPost('/user/delete').reply(config => {
     console.log('【Mock】/user/delete', config)
     return [200, { code: 0, message: 'success' }]
   })
+  // 批量导入
   mock.onPost('/user/batchImport').reply(config => {
     console.log('【Mock】/user/batchImport', config)
+    return [200, { code: 0, message: 'success' }]
+  })
+  // 获取用户角色
+  mock.onGet(new RegExp('/user/getUserRoles/.*')).reply(config => {
+    console.log('【Mock】/user/getUserRoles', config)
+    const userRoles = roleList.filter(() => faker.datatype.boolean())
+    return [200, { code: 0, message: 'success', data: userRoles }]
+  })
+  // 保存用户角色
+  mock.onPost('/user/saveRoles').reply(config => {
+    console.log('【Mock】/user/saveRoles', config)
     return [200, { code: 0, message: 'success' }]
   })
 }

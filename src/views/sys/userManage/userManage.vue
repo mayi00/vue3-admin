@@ -1,31 +1,30 @@
 <script setup>
 import { ElMessage } from 'element-plus'
 import * as XLSX from 'xlsx'
+import { debounce } from 'lodash-es'
 import api from '@/api'
-import { getRandomInt, sleep } from '@/utils/utils'
 import { getDictList, getDictLabel } from '@/tools/tools'
 import { useElementHeight } from '@/hooks/useElement'
 
 import UserFormDialog from './userFormDialog.vue'
+import RoleDialog from './RoleDialog.vue'
+import { fa } from '@faker-js/faker'
 
 defineOptions({ name: 'UserManage' })
 
 const searchFormRef = ref(null)
-const searchForm = ref({ name: '', account: '', status: '1', roleName: '' })
-
-function handleSearch() {
+const searchForm = ref({ name: '', account: '', gender: '', status: '', roleName: '' })
+const handleSearch = debounce(() => {
   table.value.currentPage = 1
   getList()
-}
+}, 300)
 function handleReset() {
   searchFormRef.value.resetFields()
   handleSearch()
 }
 
 // 动态设置表格高度
-const { elementHeight: tableHeight } = useElementHeight({
-  offsetTop: 193 + 132
-})
+const { elementHeight: tableHeight } = useElementHeight({ offset: 325 })
 const baseTableRef = ref(null)
 const table = ref({
   loading: false,
@@ -44,7 +43,7 @@ const table = ref({
     { prop: 'status', label: '状态', minWidth: 70, slot: 'status' },
     { prop: 'mobile', label: '手机', minWidth: 120 },
     { prop: 'email', label: '电子邮箱', minWidth: 120 },
-    { prop: 'operation', label: '操作', width: 120, align: 'center', fixed: 'right', slot: 'operation' }
+    { prop: 'operation', label: '操作', width: 140, align: 'center', fixed: 'right', slot: 'operation' }
   ]
 })
 const selectedRows = ref([])
@@ -111,8 +110,22 @@ function handleEdit(row) {
 }
 // 新增/编辑提交成功
 function handleUserFormSuccess() {
+  userFormVisible.value = false
+  currentUserData.value = {}
   getList()
 }
+
+const roleDialogVisible = ref(false)
+function handleRole(row) {
+  currentUserData.value = { ...row }
+  roleDialogVisible.value = true
+}
+function handleRoleDialogSuccess() {
+  roleDialogVisible.value = false
+  currentUserData.value = {}
+  getList()
+}
+
 // 下载
 function handleDownload() {
   const rows = baseTableRef.value?.getSelectionRows()
@@ -168,7 +181,6 @@ function handleBatchImportConfirm(fileList) {
   fileData.append('file', fileList[0])
   uploadInfo.value.loading = true
   api.sys.user.batchImport(fileData).then(res => {
-    console.log(res)
     uploadInfo.value.loading = false
     uploadInfo.value.visible = false
     ElMessage.success('导入成功')
@@ -217,7 +229,7 @@ function handleDeleteCancel() {
   deleteInfo.value.ids = []
 }
 
-handleSearch()
+getList()
 </script>
 
 <template>
@@ -226,13 +238,25 @@ handleSearch()
       <el-form ref="searchFormRef" :model="searchForm" label-width="80px">
         <el-row>
           <el-col :span="6">
-            <el-form-item label="用户名称" prop="name">
-              <el-input v-model="searchForm.name" placeholder="请输入用户名称" clearable></el-input>
+            <el-form-item label="帐号" prop="account">
+              <el-input v-model="searchForm.account" placeholder="请输入帐号" clearable></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="登录账号" prop="account">
-              <el-input v-model="searchForm.account" placeholder="请输入登录账号" clearable></el-input>
+            <el-form-item label="姓名" prop="name">
+              <el-input v-model="searchForm.name" placeholder="请输入姓名" clearable></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="性别" prop="gender">
+              <el-select v-model="searchForm.gender" placeholder="请选择性别" clearable>
+                <el-option
+                  v-for="item in getDictList('GENDER')"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="6">
@@ -252,11 +276,6 @@ handleSearch()
               <el-input v-model="searchForm.roleName" placeholder="请输入角色名称" clearable></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="6">
-            <el-form-item label="角色名称" prop="roleName">
-              <el-input v-model="searchForm.roleName" placeholder="请输入角色名称" clearable></el-input>
-            </el-form-item>
-          </el-col>
           <el-col :span="6" style="padding-left: 10px">
             <el-button type="primary" @click="handleSearch">查询</el-button>
             <el-button @click="handleReset">重置</el-button>
@@ -264,6 +283,7 @@ handleSearch()
         </el-row>
       </el-form>
     </el-card>
+
     <el-card shadow="hover" style="margin-top: 10px">
       <div class="mb-[10px]">
         <el-button type="primary" @click="handleAdd">新增</el-button>
@@ -291,9 +311,9 @@ handleSearch()
           <el-avatar :src="row.avatar" style="width: 32px; height: 32px"></el-avatar>
         </template>
         <template #roleName="{ row, column }">
-          <el-popover :title="column.label" :content="row.roleName.join(',')" placement="top">
+          <el-popover :title="column.label" :content="row.roleName.join('，')" placement="top">
             <template #reference>
-              <div class="g-multi-ellipsis">{{ row.roleName.join(',') || '-' }}</div>
+              <div class="g-multi-ellipsis">{{ row.roleName.join('，') || '-' }}</div>
             </template>
           </el-popover>
         </template>
@@ -307,6 +327,7 @@ handleSearch()
         </template>
         <template #operation="{ row }">
           <el-button type="primary" link size="small" @click="handleEdit(row)">编辑</el-button>
+          <el-button type="primary" link size="small" @click="handleRole(row)">角色</el-button>
           <el-popconfirm
             title="请确认是否删除？"
             width="160"
@@ -329,11 +350,12 @@ handleSearch()
       @success="handleUserFormSuccess"
     />
 
+    <RoleDialog v-model:visible="roleDialogVisible" :user-data="currentUserData" @success="handleRoleDialogSuccess" />
+
     <BaseUploadDialog
       v-model:visible="uploadInfo.visible"
       title="批量导入"
       :loading="uploadInfo.loading"
-      :multiple="false"
       limit="1"
       @confirm="handleBatchImportConfirm"
     />

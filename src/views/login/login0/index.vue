@@ -15,8 +15,8 @@ const loginForm = ref({
 })
 const rules = reactive({
   account: [
-    { required: true, message: '请输入用户名', trigger: 'blur' },
-    { min: 4, max: 20, message: '长度4-20位', trigger: 'blur' }
+    { required: true, message: '请输入帐号', trigger: 'blur' },
+    { min: 4, max: 10, message: '长度4-10位', trigger: 'blur' }
   ],
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
@@ -52,10 +52,10 @@ function handleLogin() {
           <el-form-item prop="account">
             <el-input
               v-model.trim="loginForm.account"
-              placeholder="请输入用户名"
+              placeholder="请输入帐号"
               size="large"
               :prefix-icon="User"
-              maxlength="20"
+              maxlength="10"
               clearable
             />
           </el-form-item>

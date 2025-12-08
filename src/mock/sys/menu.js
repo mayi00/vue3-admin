@@ -1,4 +1,4 @@
-import { menus } from '@/constant/menus/index.js'
+import { menus } from '@/constant/sys/menus/index.js'
 import { cloneDeep, orderBy } from 'lodash-es'
 
 export function setupMenuMock(mock, faker) {

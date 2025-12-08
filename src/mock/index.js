@@ -5,6 +5,7 @@ import { getRandomInt } from '@/utils/utils'
 import { setupAuthMock } from './sys/auth'
 import { setupDictMock } from './sys/dict'
 import { setupMenuMock } from './sys/menu'
+import { setupRoleMock } from './sys/role'
 import { setupUserMock } from './sys/user'
 
 // 创建 mock 实例（参数为 axios 实例）
@@ -19,5 +20,6 @@ export function startMock() {
   setupAuthMock(mock, faker)
   setupDictMock(mock, faker)
   setupMenuMock(mock, faker)
+  setupRoleMock(mock, faker)
   setupUserMock(mock, faker)
 }

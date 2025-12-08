@@ -38,7 +38,7 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   response => {
-    console.log('【响应】', response)
+    // console.log('【响应】', response)
     return new Promise((resolve, reject) => {
       if (response.status === 200) {
         // 处理二进制数据

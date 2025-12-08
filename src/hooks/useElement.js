@@ -9,8 +9,7 @@
 export function useElementHeight(options = {}) {
   // 默认配置
   const defaultOptions = {
-    offsetTop: 0,
-    offsetBottom: 0,
+    offset: 0,
     minHeight: 100
   }
 
@@ -27,8 +26,8 @@ export function useElementHeight(options = {}) {
     // 获取可视区域高度
     const windowHeight = window.innerHeight
 
-    // 计算高度: 窗口高度 - 上偏移 - 下偏移
-    const height = windowHeight - config.offsetTop - config.offsetBottom
+    // 计算高度: 窗口高度 - 偏移值
+    const height = windowHeight - config.offset
 
     // 设置最小高度防止过小
     elementHeight.value = Math.max(height, config.minHeight)

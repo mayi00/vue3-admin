@@ -41,5 +41,20 @@ export default {
       method: 'post',
       data
     })
-  }
+  },
+  // 获取用户角色
+  getUserRoles(id) {
+    return request({
+      url: `/user/getUserRoles/${id}`,
+      method: 'get'
+    })
+  },
+  // 保存用户角色
+  saveRoles(data) {
+    return request({
+      url: '/user/saveRoles',
+      method: 'post',
+      data
+    })
+  },
 }
