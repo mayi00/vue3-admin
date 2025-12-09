@@ -21,14 +21,14 @@ export const constantRoutes = [
   },
   {
     path: '/',
-    redirect: '/home',
+    redirect: '/dashboard',
     component: Layout,
     meta: { title: '首页' },
     children: [
       {
-        path: 'home',
-        name: 'Home',
-        component: () => import('@/views/home/home.vue'),
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import('@/views/dashboard/dashboard.vue'),
         meta: { title: '首页' }
       }
     ]

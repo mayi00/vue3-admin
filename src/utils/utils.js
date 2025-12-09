@@ -481,6 +481,53 @@ export function uniqueByField(arr, field) {
 export function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
+
+/**
+ * 节流函数
+ * @param {Function} func 要执行的函数
+ * @param {Number} delay 延迟时间（毫秒）
+ * @returns {Function} 节流后的函数
+ */
+export function throttle(func, delay = 200) {
+  let lastCall = 0
+  let timeoutId
+
+  return function(...args) {
+    const now = Date.now()
+    const remaining = delay - (now - lastCall)
+
+    clearTimeout(timeoutId)
+
+    if (remaining <= 0) {
+      lastCall = now
+      func.apply(this, args)
+    } else {
+      timeoutId = setTimeout(() => {
+        lastCall = Date.now()
+        func.apply(this, args)
+      }, remaining)
+    }
+  }
+}
+
+/**
+ * 防抖函数
+ * @param {Function} func 要执行的函数
+ * @param {Number} delay 延迟时间（毫秒）
+ * @returns {Function} 防抖后的函数
+ */
+export function debounce(func, delay = 200) {
+  let timeoutId
+
+  return function(...args) {
+    clearTimeout(timeoutId)
+
+    timeoutId = setTimeout(() => {
+      func.apply(this, args)
+    }, delay)
+  }
+}
+
 /**
  * 生成一个 UUID (通用唯一识别码)
  *

@@ -8,7 +8,7 @@ const keepAliveRoutes = computed(() => {
     .filter(route => route.meta?.keepAlive)
     .map(route => route.name)
 
-  return [...allDynamicRoutes, 'Home']
+  return [...allDynamicRoutes, 'Dashboard']
 })
 </script>
 

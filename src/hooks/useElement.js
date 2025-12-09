@@ -1,16 +1,19 @@
+import { throttle } from '@/utils/utils'
+
 /**
  * 动态计算元素高度
  * @param {Object} options 配置选项
- * @param {number} options.offsetTop 上方偏移量
- * @param {number} options.offsetBottom 下方偏移量
+ * @param {number} options.offset 偏移量
  * @param {number} options.minHeight 最小高度
+ * @param {number} options.delay 节流延迟时间
  * @returns {Object} 包含计算高度的响应式对象
  */
 export function useElementHeight(options = {}) {
   // 默认配置
   const defaultOptions = {
     offset: 0,
-    minHeight: 100
+    minHeight: 100,
+    delay: 200
   }
 
   // 合并配置
@@ -36,12 +39,12 @@ export function useElementHeight(options = {}) {
   /**
    * 处理窗口大小变化
    */
-  const handleResize = () => {
+  const handleResize = throttle(() => {
     // 使用nextTick确保DOM更新后再计算高度
     nextTick(() => {
       calculateHeight()
     })
-  }
+  }, config.delay)
 
   // 挂载时添加事件监听器
   onMounted(() => {

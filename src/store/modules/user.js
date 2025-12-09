@@ -31,7 +31,7 @@ export const useUserStore = defineStore(
 
     // 退出登录
     function logout() {
-      localStorage.removeItem('token')
+      localStorage.removeItem('TOKEN')
       localStorage.removeItem('LOCAL_ALL_DYNAMIC_ROUTES')
       userInfo.value = {}
     }

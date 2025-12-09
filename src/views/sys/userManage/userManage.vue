@@ -7,8 +7,7 @@ import { getDictList, getDictLabel } from '@/tools/tools'
 import { useElementHeight } from '@/hooks/useElement'
 
 import UserFormDialog from './userFormDialog.vue'
-import RoleDialog from './RoleDialog.vue'
-import { fa } from '@faker-js/faker'
+import RoleDialog from './roleDialog.vue'
 
 defineOptions({ name: 'UserManage' })
 

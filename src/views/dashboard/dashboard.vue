@@ -1,10 +1,10 @@
 <script setup>
-defineOptions({ name: 'Home' })
+defineOptions({ name: 'Dashboard' })
 </script>
 
 <template>
   <div class="g-container">
-    <el-card>Home</el-card>
+    <el-card>Dashboard</el-card>
   </div>
 </template>
 
