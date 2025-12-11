@@ -5,7 +5,7 @@ const copyrightYear = new Date().getFullYear()
 </script>
 
 <template>
-  <span class="copyright">Copyright © 2022 - {{ copyrightYear }} All Rights Reserved.</span>
+  <span class="copyright">Copyright © {{ copyrightYear }} All Rights Reserved.</span>
 </template>
 
 <style lang="less" scoped>
