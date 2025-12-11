@@ -3,13 +3,7 @@ import Layout from '@/layout/Layout.vue'
 export const constantRoutes = [
   {
     path: '/login',
-    redirect: '/login0',
-    meta: { title: '登录' }
-  },
-  {
-    path: '/login0',
-    name: 'Login0',
-    alias: '/login',
+    name: 'Login',
     component: () => import('@/views/login/login0/index.vue'),
     meta: { title: '登录' }
   },
@@ -33,4 +27,16 @@ export const constantRoutes = [
       }
     ]
   }
+  // 404页面必须放在最后
+  // {
+  //   path: '/404',
+  //   name: 'NotFound',
+  //   component: () => import('@/views/error/404.vue'),
+  //   meta: { title: '不存在' }
+  // },
+  // {
+  //   path: '/:pathMatch(.*)*',
+  //   redirect: '/404',
+  //   meta: {  }
+  // }
 ]

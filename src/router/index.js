@@ -13,15 +13,11 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   // 路由发生变化修改页面 title
-  if (to.meta.title) {
-    document.title = `${to.meta.title} | Vue`
-  } else {
-    document.title = 'Vue'
-  }
+  document.title = to.meta.title ? `${to.meta.title} | Vue` : 'Vue'
 
   const token = localStorage.getItem('TOKEN')
   if (token) {
-    if (to.path === '/login') {
+    if (to.path.includes('/login')) {
       next({ path: '/' })
     } else {
       next()
