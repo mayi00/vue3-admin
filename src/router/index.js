@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { constantRoutes } from './constantRoutes'
+import constantRoutes from './modules/index.js'
 import { initDynamicRoutes } from '@/tools/route'
 
 const router = createRouter({
