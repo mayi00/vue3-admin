@@ -1,13 +1,19 @@
 <script setup>
-import api from '@/api'
+import { useUserStore } from '@/store'
+
+const userStore = useUserStore()
+const { login } = userStore
 
 defineOptions({ name: 'Login1' })
 
 const router = useRouter()
+const loading = ref(false)
 
 function handleLogin() {
-  api.sys.auth.login({ account: 'admin', password: '123456' }).then(res => {
-    localStorage.setItem('TOKEN', res.data.token)
+  loading.value = true
+  login({ account: 'admin', password: '123456' }).then(() => {
+    ElMessage({ type: 'success', message: '登录成功' })
+    loading.value = false
     router.push('/')
   })
 }
@@ -15,7 +21,7 @@ function handleLogin() {
 
 <template>
   <div class="">
-    <el-button @click="handleLogin">Login1</el-button>
+    <el-button @click="handleLogin">Login</el-button>
   </div>
 </template>
 

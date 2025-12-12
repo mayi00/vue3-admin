@@ -7,7 +7,9 @@ export const useAppStore = defineStore('app', {
   },
   state: () => ({
     // 侧边栏折叠状态（true: 折叠，false: 展开）
-    sidebarCollapsed: false
+    sidebarCollapsed: false,
+    // 是否显示水印（true: 显示，false: 隐藏）
+    showWatermark: true
   }),
   getters: {
     // 侧边栏宽度

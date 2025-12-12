@@ -6,6 +6,7 @@ import { isPC, isTablet } from '@/utils/utils'
 import { useStore } from './store'
 
 const { userInfo } = storeToRefs(useStore().userStore)
+const { showWatermark } = storeToRefs(useStore().appStore)
 const isPCFlag = ref(true)
 // 检测是否为PC设备
 const checkDeviceType = () => {
@@ -29,8 +30,15 @@ onUnmounted(() => {
 
 <template>
   <el-config-provider :locale="zhCn">
-    <el-watermark v-if="isPCFlag" class="app-watermark" :font="{ color: '#00000010' }" :content="userInfo.account || ''">
-      <router-view />
+    <el-watermark
+      v-if="isPCFlag"
+      class="app-watermark"
+      :font="{ color: '#00000010' }"
+      :content="showWatermark ? userInfo.account || '' : ''"
+    >
+      <transition name="el-fade-in-linear" mode="out-in">
+        <router-view />
+      </transition>
     </el-watermark>
     <div v-else class="mobile-tip">
       <el-alert

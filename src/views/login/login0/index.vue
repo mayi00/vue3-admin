@@ -42,9 +42,6 @@ function handleLogin() {
 <template>
   <div class="g-container login-container">
     <div class="login-wrapper">
-      <div class="language-switcher">
-        <!-- <Language /> -->
-      </div>
       <div class="login-form">
         <h2 class="login-title">Vue</h2>
 
