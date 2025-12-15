@@ -1,10 +1,10 @@
 <script setup>
 import { ElMessage } from 'element-plus'
-import * as XLSX from 'xlsx'
 import { debounce } from 'lodash-es'
 import api from '@/api'
 import { getDictList, getDictLabel } from '@/tools/tools'
 import { useElementHeight } from '@/hooks/useElement'
+import { exportToExcel } from '@/utils/tableUtils'
 
 import UserFormDialog from './userFormDialog.vue'
 import RoleDialog from './roleDialog.vue'
@@ -28,7 +28,7 @@ const baseTableRef = ref(null)
 const table = ref({
   loading: false,
   currentPage: 1,
-  pageSize: 20,
+  pageSize: 5,
   total: 0,
   data: [],
   columns: [
@@ -130,41 +130,47 @@ function handleDownload() {
   const rows = baseTableRef.value?.getSelectionRows()
   if (!rows.length) return ElMessage.warning('请选择数据')
 
-  // 准备导出的数据
-  const exportData = rows.map(row => ({
+  // 调用导出函数
+  exportToExcel({
+    data: generateExportData(rows),
+    filename: '用户数据',
+    sheetName: '用户数据'
+  })
+}
+
+// 生成导出数据
+function generateExportData(rows) {
+  return rows.map(row => ({
     序号: getIndex(rows.indexOf(row)),
     帐号: row.account,
     姓名: row.name,
-    角色: Array.isArray(row.roleName) ? row.roleName.join(',') : row.roleName,
-    性别: getDictLabel('GENDER', row.gender) || row.gender,
-    状态: getDictLabel('USER_STATUS', row.status) || row.status,
+    角色: row.roleName.join(','),
+    性别: getDictLabel('GENDER', row.gender),
+    状态: getDictLabel('USER_STATUS', row.status),
     手机: row.mobile,
     电子邮箱: row.email
   }))
+}
 
-  // 创建工作簿
-  const workbook = XLSX.utils.book_new()
-
-  // 将数据转换为工作表
-  const worksheet = XLSX.utils.json_to_sheet(exportData)
-
-  // 设置列宽
-  worksheet['!cols'] = [
-    { wch: 6 },
-    { wch: 15 },
-    { wch: 10 },
-    { wch: 20 },
-    { wch: 10 },
-    { wch: 10 },
-    { wch: 15 },
-    { wch: 25 }
-  ]
-
-  // 将工作表添加到工作簿
-  XLSX.utils.book_append_sheet(workbook, worksheet, '用户数据')
-
-  // 导出文件
-  XLSX.writeFile(workbook, '用户数据.xlsx')
+const downloadAllLoading = ref(false)
+function handleDownloadAll() {
+  const params = { currentPage: 1, pageSize: table.value.total }
+  const data = { ...searchForm.value }
+  downloadAllLoading.value = true
+  api.sys.user
+    .list(params, data)
+    .then(res => {
+      // 调用导出函数
+      exportToExcel({
+        data: generateExportData(res.data.list),
+        filename: '全部用户数据',
+        sheetName: '用户数据'
+      })
+    })
+    .catch(() => {})
+    .finally(() => {
+      downloadAllLoading.value = false
+    })
 }
 
 // 批量导入
@@ -286,7 +292,8 @@ getList()
     <el-card shadow="hover" style="margin-top: 10px">
       <div class="mb-[10px]">
         <el-button type="primary" @click="handleAdd">新增</el-button>
-        <el-button type="primary" @click="handleDownload">下载</el-button>
+        <el-button type="primary" @click="handleDownload">批量下载</el-button>
+        <el-button type="primary" @click="handleDownloadAll">全部下载</el-button>
         <el-button type="default" @click="handleBatchImport">批量导入</el-button>
         <el-button type="default" @click="handleDownloadTemplate">下载模板</el-button>
         <el-button type="danger" @click="handleBatchDelete">批量删除</el-button>
@@ -297,7 +304,8 @@ getList()
         :loading="table.loading"
         :data="table.data"
         :columns="table.columns"
-        :defaultPageSize="20"
+        :defaultPageSize="5"
+        :pageSizes="[5, 10, 20, 50, 100]"
         :total="table.total"
         @select="handleSelect"
         @select-all="handleSelectAll"

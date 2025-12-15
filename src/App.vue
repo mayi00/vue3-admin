@@ -36,9 +36,11 @@ onUnmounted(() => {
       :font="{ color: '#00000010' }"
       :content="showWatermark ? userInfo.account || '' : ''"
     >
-      <transition name="el-fade-in-linear" mode="out-in">
-        <router-view />
-      </transition>
+      <router-view v-slot="{ Component }">
+        <transition name="el-fade-in-linear" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </el-watermark>
     <div v-else class="mobile-tip">
       <el-alert
