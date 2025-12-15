@@ -17,6 +17,8 @@ export default ({ mode }) => {
   }
 
   return defineConfig({
+    // 公共基础路径
+    base: '/vue3-admin/',
     // 环境配置
     mode,
     define: {
