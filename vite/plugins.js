@@ -2,6 +2,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import UnoCSS from 'unocss/vite'
+import viteCompression from 'vite-plugin-compression'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import { webUpdateNotice } from '@plugin-web-update-notification/vite'
@@ -39,6 +40,20 @@ export function createVitePlugins(env) {
     }),
     // 配置 UnoCSS 原子化 CSS 框架插件
     UnoCSS(),
+
+    // 配置 Gzip 压缩插件
+    viteCompression({
+      // 生成的压缩包后缀名
+      ext: '.gz',
+      // 压缩算法
+      algorithm: 'gzip',
+      // 最小压缩文件大小 (bytes)
+      threshold: 10240,
+      // 是否删除原始文件
+      deleteOriginFile: false,
+      // 仅压缩指定类型的文件
+      filter: /\.(js|css|html|svg)$/
+    }),
     // 配置 Vue 官方插件
     vue()
   ]
