@@ -140,11 +140,11 @@ function handleDownload() {
 
 // 生成导出数据
 function generateExportData(rows) {
-  return rows.map(row => ({
-    序号: getIndex(rows.indexOf(row)),
+  return rows.map((row, i) => ({
+    序号: i + 1,
     帐号: row.account,
     姓名: row.name,
-    角色: row.roleName.join(','),
+    角色: row.roleName.join('，'),
     性别: getDictLabel('GENDER', row.gender),
     状态: getDictLabel('USER_STATUS', row.status),
     手机: row.mobile,
