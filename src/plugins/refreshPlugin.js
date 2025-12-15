@@ -30,7 +30,8 @@ export const versionCheck = async () => {
 export const generateVersionFile = (env, options = {}) => {
   if (env.VITE_NODE_ENV === 'development') return
   // 声明配置文件路径
-  let configPath = ''
+  let buildOutDir = ''
+  let rootPath = ''
 
   return {
     name: 'refreshVersion',
@@ -41,13 +42,15 @@ export const generateVersionFile = (env, options = {}) => {
      */
     configResolved(resolvedConfig) {
       // 保存配置文件的路径，后续使用
-      configPath = resolvedConfig.publicDir
+      buildOutDir = resolvedConfig.build.outDir
+      rootPath = resolvedConfig.root
     },
 
-    async buildStart() {
-      // 生成版本信息文件路径
-      // const file = path.join(configPath, 'version.json')
-      const file = path.resolve(configPath, 'version.json')
+    async writeBundle() {
+      // 确保使用绝对路径
+      const absoluteBuildOutDir = path.isAbsolute(buildOutDir) ? buildOutDir : path.resolve(rootPath, buildOutDir)
+      // 生成版本信息文件路径，直接写入到构建输出目录
+      const file = path.resolve(absoluteBuildOutDir, 'version.json')
       // 合并默认配置和传入的选项
       const versionData = {
         version: Date.now().toString(),
@@ -58,8 +61,8 @@ export const generateVersionFile = (env, options = {}) => {
         process.env.NODE_ENV !== 'production' ? JSON.stringify(versionData, null, 2) : JSON.stringify(versionData)
 
       try {
-        // 确保 public 目录存在（mkdir -p 效果，递归创建）
-        await fs.mkdir(configPath, { recursive: true })
+        // 确保构建输出目录存在（mkdir -p 效果，递归创建）
+        await fs.mkdir(absoluteBuildOutDir, { recursive: true })
         // 写入文件（覆盖旧文件）
         await fs.writeFile(file, content, 'utf-8')
       } catch (error) {
