@@ -22,5 +22,13 @@ export const DICT_TYPE = [
       { label: '正常', value: '1' },
       { label: '禁用', value: '0' }
     ]
+  },
+  {
+    label: '角色状态',
+    value: 'ROLE_STATUS',
+    children: [
+      { label: '正常', value: '1' },
+      { label: '禁用', value: '0' }
+    ]
   }
 ]
