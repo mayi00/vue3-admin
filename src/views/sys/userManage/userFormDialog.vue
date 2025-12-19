@@ -115,10 +115,8 @@ const handleSubmit = async () => {
     </el-form>
 
     <template #footer>
-      <div class="dialog-footer">
-        <el-button type="primary" :loading="submitLoading" @click="handleSubmit">确定</el-button>
-        <el-button @click="handleClose">取消</el-button>
-      </div>
+      <el-button type="primary" :loading="submitLoading" @click="handleSubmit">确定</el-button>
+      <el-button @click="handleClose">取消</el-button>
     </template>
   </el-dialog>
 </template>

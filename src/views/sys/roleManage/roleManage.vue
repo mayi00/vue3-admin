@@ -5,6 +5,7 @@ import { debounce } from 'lodash-es'
 import api from '@/api'
 import { getDictList, getDictLabel } from '@/tools/tools'
 import { useElementHeight } from '@/hooks/useElement'
+import RoleFormDialog from './roleFormDialog.vue'
 
 const searchFormRef = ref(null)
 const searchForm = ref({ roleName: '', status: '' })
@@ -18,12 +19,12 @@ function handleReset() {
 }
 
 // 动态设置表格高度
-const { elementHeight: tableHeight } = useElementHeight({ offset: 250 })
+const { elementHeight: tableHeight } = useElementHeight({ offset: 275 })
 const baseTableRef = ref(null)
 const table = ref({
   loading: false,
   currentPage: 1,
-  pageSize: 10,
+  pageSize: 5,
   total: 0,
   data: [],
   columns: [
@@ -125,6 +126,33 @@ function handleDeleteCancel() {
   deleteInfo.value.ids = []
 }
 
+// 角色表单对话框
+const roleForm = ref({})
+const roleDialog = ref({
+  visible: false,
+  isEdit: false
+})
+
+// 打开新增角色对话框
+function handleAddRole() {
+  roleDialog.value.isEdit = false
+  roleForm.value = {}
+  roleDialog.value.visible = true
+}
+
+// 打开编辑角色对话框
+function handleEditRole(row) {
+  roleDialog.value.isEdit = true
+  roleForm.value = { ...row }
+  roleDialog.value.visible = true
+}
+
+// 角色表单提交成功
+function handleRoleFormSuccess() {
+  roleDialog.value.visible = false
+  getList()
+}
+
 // 初始化获取列表数据
 getList()
 </script>
@@ -161,6 +189,7 @@ getList()
 
     <el-card shadow="hover" style="margin-top: 10px">
       <div class="mb-[10px]">
+        <el-button type="primary" @click="handleAddRole">新增角色</el-button>
         <el-button type="danger" @click="handleBatchDelete">批量删除</el-button>
       </div>
       <BaseTable
@@ -169,6 +198,8 @@ getList()
         :loading="table.loading"
         :data="table.data"
         :columns="table.columns"
+        :defaultPageSize="5"
+        :pageSizes="[5, 10, 20, 50, 100]"
         :total="table.total"
         @select="handleSelect"
         @select-all="handleSelectAll"
@@ -177,9 +208,9 @@ getList()
       >
         <template #index="{ index }">{{ getIndex(index) }}</template>
         <template #description="{ row }">
-          <el-popover placement="top" :title="'角色描述'" :content="row.description || '无'" trigger="hover">
+          <el-popover placement="top" :title="'角色描述'" :content="row.description" trigger="hover">
             <template #reference>
-              <div class="g-multi-ellipsis">{{ row.description || '无' }}</div>
+              <div class="g-multi-ellipsis">{{ row.description }}</div>
             </template>
           </el-popover>
         </template>
@@ -189,6 +220,7 @@ getList()
           </el-tag>
         </template>
         <template #operation="{ row }">
+          <el-button type="primary" link size="small" @click="handleEditRole(row)">编辑</el-button>
           <el-popconfirm
             title="请确认是否删除？"
             width="160"
@@ -211,6 +243,14 @@ getList()
       confirmBtnType="danger"
       @confirm="handleBatchDeleteConfirm"
       @cancel="handleDeleteCancel"
+    />
+
+    <!-- 角色表单对话框 -->
+    <RoleFormDialog
+      v-model:visible="roleDialog.visible"
+      :is-edit="roleDialog.isEdit"
+      :role-data="roleForm"
+      @success="handleRoleFormSuccess"
     />
   </div>
 </template>

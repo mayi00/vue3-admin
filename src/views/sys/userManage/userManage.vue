@@ -7,7 +7,7 @@ import { useElementHeight } from '@/hooks/useElement'
 import { exportToExcel } from '@/utils/tableUtils'
 
 import UserFormDialog from './userFormDialog.vue'
-import RoleDialog from './roleDialog.vue'
+import UserRoleDialog from './userRoleDialog.vue'
 
 defineOptions({ name: 'UserManage' })
 
@@ -28,7 +28,7 @@ const baseTableRef = ref(null)
 const table = ref({
   loading: false,
   currentPage: 1,
-  pageSize: 5,
+  pageSize: 10,
   total: 0,
   data: [],
   columns: [
@@ -304,8 +304,6 @@ getList()
         :loading="table.loading"
         :data="table.data"
         :columns="table.columns"
-        :defaultPageSize="5"
-        :pageSizes="[5, 10, 20, 50, 100]"
         :total="table.total"
         @select="handleSelect"
         @select-all="handleSelectAll"
@@ -357,7 +355,11 @@ getList()
       @success="handleUserFormSuccess"
     />
 
-    <RoleDialog v-model:visible="roleDialogVisible" :user-data="currentUserData" @success="handleRoleDialogSuccess" />
+    <UserRoleDialog
+      v-model:visible="roleDialogVisible"
+      :user-data="currentUserData"
+      @success="handleRoleDialogSuccess"
+    />
 
     <BaseUploadDialog
       v-model:visible="uploadInfo.visible"

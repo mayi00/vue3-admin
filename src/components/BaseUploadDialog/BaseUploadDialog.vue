@@ -183,12 +183,10 @@ function handleConfirm() {
     </ul>
 
     <template #footer>
-      <div class="dialog-footer">
-        <el-button type="primary" :disabled="fileList.length === 0" :loading="loading" @click="handleConfirm">
-          确定
-        </el-button>
-        <el-button @click="handleCancel">取消</el-button>
-      </div>
+      <el-button type="primary" :disabled="fileList.length === 0" :loading="loading" @click="handleConfirm">
+        确定
+      </el-button>
+      <el-button @click="handleCancel">取消</el-button>
     </template>
   </el-dialog>
 </template>

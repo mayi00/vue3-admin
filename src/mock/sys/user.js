@@ -71,27 +71,32 @@ export function setupUserMock(mock, faker) {
     console.log('【Mock】/user/add', config)
     return [200, { code: 0, message: 'success' }]
   })
+
   // 编辑
   mock.onPost('/user/edit').reply(config => {
     console.log('【Mock】/user/edit', config)
     return [200, { code: 0, message: 'success' }]
   })
+
   // 删除
   mock.onPost('/user/delete').reply(config => {
     console.log('【Mock】/user/delete', config)
     return [200, { code: 0, message: 'success' }]
   })
+
   // 批量导入
   mock.onPost('/user/batchImport').reply(config => {
     console.log('【Mock】/user/batchImport', config)
     return [200, { code: 0, message: 'success' }]
   })
+
   // 获取用户角色
   mock.onGet(new RegExp('/user/getUserRoles/.*')).reply(config => {
     console.log('【Mock】/user/getUserRoles', config)
     const userRoles = roleList.filter(() => faker.datatype.boolean())
     return [200, { code: 0, message: 'success', data: userRoles }]
   })
+
   // 保存用户角色
   mock.onPost('/user/saveRoles').reply(config => {
     console.log('【Mock】/user/saveRoles', config)

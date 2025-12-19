@@ -53,7 +53,7 @@ export default ({ mode }) => {
     server: {
       host: '0.0.0.0',
       // 指定开发服务器端口
-      port: 920,
+      port: 5173,
       // 在开发服务器启动时自动打开
       open: true,
       // 反向代理
