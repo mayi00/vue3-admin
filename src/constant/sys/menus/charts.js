@@ -3,7 +3,7 @@ export const charts = {
   menuType: 'MODULE',
   sort: 2,
   visible: 1,
-  name: 'Charts',
+  name: '',
   path: '/charts',
   component: '',
   meta: { title: 'Charts charts', icon: '' },

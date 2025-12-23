@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import constantRoutes from './modules/index.js'
-import { initDynamicRoutes } from '@/tools/route'
+import { initDynamicRoutes } from '@/tools/route.js'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -10,6 +10,8 @@ const router = createRouter({
     return { left: 0, top: 0 }
   }
 })
+
+const whiteList = ['/404', '/screen/fit']
 
 router.beforeEach(async (to, from, next) => {
   // 路由发生变化修改页面 title
@@ -23,7 +25,7 @@ router.beforeEach(async (to, from, next) => {
       next()
     }
   } else {
-    if (to.path.includes('/login')) {
+    if (whiteList.includes(to.path) || to.path.includes('/login')) {
       next()
     } else {
       next({ path: '/login' })

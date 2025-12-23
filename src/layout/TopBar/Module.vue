@@ -1,5 +1,4 @@
 <script setup>
-import { orderBy } from 'lodash-es'
 import { initDynamicRoutes } from '@/tools/route'
 import { usePermissionStore } from '@/store'
 import api from '@/api'
@@ -13,7 +12,7 @@ const { moduleList, moduleId, allDynamicRoutes } = storeToRefs(usePermissionStor
  * @param moduleInfo  被点击的模块
  */
 function handleClickMenuItem(moduleInfo) {
-  if (moduleInfo.menuType === 'MODULE_EXT_LINK') {
+  if (moduleInfo.menuType === 'EXT_LINK') {
     window.open(moduleInfo.path)
     return
   }

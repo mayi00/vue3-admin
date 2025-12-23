@@ -14,17 +14,17 @@ export const baseRoutes = [
         meta: { title: '首页' }
       }
     ]
-  }
+  },
   // 404页面必须放在最后
-  // {
-  //   path: '/404',
-  //   name: 'NotFound',
-  //   component: () => import('@/views/error/404.vue'),
-  //   meta: { title: '不存在' }
-  // },
-  // {
-  //   path: '/:pathMatch(.*)*',
-  //   redirect: '/404',
-  //   meta: {  }
-  // }
+  {
+    path: '/404',
+    name: 'NotFound',
+    component: () => import('@/views/basic/error/404.vue'),
+    meta: { title: '404' }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/404',
+    meta: {}
+  }
 ]
