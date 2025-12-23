@@ -38,11 +38,11 @@ async function initRoleData() {
 
     Promise.all([api.sys.user.getUserRoles(props.userData.id), api.sys.role.allList()]).then(res => {
       // 用户当前角色
-      assignedRoles.value = res[0].data.map(role => role.code)
+      assignedRoles.value = res[0].data.map(role => role.roleCode)
       // 所有角色列表
       allRoles.value = res[1].data.map(role => ({
-        key: role.code,
-        label: role.label,
+        key: role.roleCode,
+        label: role.roleName,
         disabled: false
       }))
     })
@@ -86,7 +86,7 @@ function handleClose() {
     <el-transfer
       v-model="assignedRoles"
       :data="allRoles"
-      :titles="['可用角色', '已选择角色']"
+      :titles="['未选择角色', '已选择角色']"
       filterable
       :filter-placeholder="'请输入角色名称'"
     />

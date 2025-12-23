@@ -12,7 +12,7 @@ export default {
     return request.post('/auth/logout')
   },
   // 获取用户信息
-  getUserInfo() {
-    return request.get('/auth/getUserInfo')
+  getUserInfo(params) {
+    return request.get('/auth/getUserInfo', { params })
   }
 }

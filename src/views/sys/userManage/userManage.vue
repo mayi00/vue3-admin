@@ -42,7 +42,7 @@ const table = ref({
     { prop: 'status', label: '状态', minWidth: 70, slot: 'status' },
     { prop: 'mobile', label: '手机', minWidth: 120 },
     { prop: 'email', label: '电子邮箱', minWidth: 120 },
-    { prop: 'operation', label: '操作', width: 140, align: 'center', fixed: 'right', slot: 'operation' }
+    { prop: 'operation', label: '操作', width: 180, align: 'center', fixed: 'right', slot: 'operation' }
   ]
 })
 const selectedRows = ref([])
@@ -291,12 +291,18 @@ getList()
 
     <el-card shadow="hover" style="margin-top: 10px">
       <div class="mb-[10px]">
-        <el-button type="primary" @click="handleAdd">新增</el-button>
-        <el-button type="primary" @click="handleDownload">批量下载</el-button>
-        <el-button type="primary" @click="handleDownloadAll">全部下载</el-button>
-        <el-button type="default" @click="handleBatchImport">批量导入</el-button>
-        <el-button type="default" @click="handleDownloadTemplate">下载模板</el-button>
-        <el-button type="danger" @click="handleBatchDelete">批量删除</el-button>
+        <el-button v-permission="'sys:user:add'" type="primary" @click="handleAdd">新增</el-button>
+        <el-button v-permission="'sys:user:download'" type="primary" @click="handleDownload"> 批量下载 </el-button>
+        <el-button v-permission="'sys:user:downloadAll'" type="primary" @click="handleDownloadAll">
+          全部下载
+        </el-button>
+        <el-button v-permission="'sys:user:batchImport'" type="default" @click="handleBatchImport">
+          批量导入
+        </el-button>
+        <el-button v-permission="'sys:user:downloadTemplate'" type="default" @click="handleDownloadTemplate">
+          下载模板
+        </el-button>
+        <el-button v-permission="'sys:user:batchDelete'" type="danger" @click="handleBatchDelete"> 批量删除 </el-button>
       </div>
       <BaseTable
         ref="baseTableRef"
@@ -318,7 +324,7 @@ getList()
         <template #roleName="{ row, column }">
           <el-popover :title="column.label" :content="row.roleName.join('，')" placement="top">
             <template #reference>
-              <div class="g-multi-ellipsis">{{ row.roleName.join('，') || '-' }}</div>
+              <div class="g-multi-ellipsis">{{ row.roleName.join('，') || '--' }}</div>
             </template>
           </el-popover>
         </template>
@@ -331,8 +337,12 @@ getList()
           {{ getDictLabel('GENDER', row.gender) || row.gender }}
         </template>
         <template #operation="{ row }">
-          <el-button type="primary" link size="small" @click="handleEdit(row)">编辑</el-button>
-          <el-button type="primary" link size="small" @click="handleRole(row)">角色</el-button>
+          <el-button v-permission="'sys:user:edit'" type="primary" link size="small" @click="handleEdit(row)">
+            编辑
+          </el-button>
+          <el-button v-permission="'sys:user:role'" type="primary" link size="small" @click="handleRole(row)">
+            分配角色
+          </el-button>
           <el-popconfirm
             title="请确认是否删除？"
             width="160"
@@ -341,7 +351,7 @@ getList()
             @confirm="handleDeleteConfirm(row)"
           >
             <template #reference>
-              <el-button type="danger" link size="small">删除</el-button>
+              <el-button v-permission="'sys:user:delete'" type="danger" link size="small">删除</el-button>
             </template>
           </el-popconfirm>
         </template>

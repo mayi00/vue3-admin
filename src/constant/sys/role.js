@@ -53,5 +53,10 @@ export const roleList = [
     roleCode: 'securityAdmin',
     roleName: '安全管理员',
     description: '负责安全管理的角色'
+  },
+  {
+    roleCode: 'testUserAdmin',
+    roleName: '测试用户',
+    description: '测试用户角色'
   }
 ]

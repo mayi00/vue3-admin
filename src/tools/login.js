@@ -1,4 +1,4 @@
-import { cloneDeep, orderBy } from 'lodash-es'
+import { orderBy } from 'lodash-es'
 import { useStore } from '@/store'
 import api from '@/api'
 
@@ -8,7 +8,8 @@ export function initSystemInfo() {
 // 查询登录用户的详情
 export function getUserInfo() {
   return new Promise(resolve => {
-    api.sys.auth.getUserInfo().then(res => {
+    const account = useStore().userStore.userInfo.account
+    api.sys.auth.getUserInfo({ account }).then(res => { 
       useStore().userStore.saveUserInfo({ ...res.data })
       resolve(res)
     })

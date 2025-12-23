@@ -56,5 +56,5 @@ export default {
       method: 'post',
       data
     })
-  },
+  }
 }

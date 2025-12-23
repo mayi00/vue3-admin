@@ -19,6 +19,7 @@ export const useUserStore = defineStore(
           .login(arg)
           .then(async res => {
             localStorage.setItem('TOKEN', res.data)
+            saveUserInfo({ account: arg.account })
             await initSystemInfo()
             resolve(res)
           })
