@@ -3,6 +3,7 @@ import { defineConfig, loadEnv } from 'vite'
 import { createVitePlugins } from './vite/plugins.js'
 import { generateVersionFile } from './src/plugins/refreshPlugin.js'
 import { resolve } from 'path'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 export default ({ mode }) => {
   // 获取当前环境变量
@@ -72,7 +73,14 @@ export default ({ mode }) => {
       // Rollup 打包配置，打包文件按照类型分文件夹显示
       rollupOptions: {
         // 分析打包大小
-        // plugins: [visualizer()],
+        plugins: [
+          visualizer({
+            open: false,
+            gzipSize: false,
+            brotliSize: false,
+            filename: './dist/stats.html'
+          })
+        ],
         output: {
           chunkFileNames: `assets/js/[hash]-${Date.now()}.js`,
           entryFileNames: `assets/js/[hash]-${Date.now()}.js`,

@@ -32,6 +32,7 @@
     "axios-mock-adapter": "^2.1.0",
     "less": "^4.5.1",
     "prettier": "^3.7.4",
+    "rollup-plugin-visualizer": "^6.0.5",
     "unocss": "^66.5.10",
     "unplugin-auto-import": "^19.3.0",
     "unplugin-vue-components": "^28.8.0",
