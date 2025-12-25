@@ -6,6 +6,7 @@ import viteCompression from 'vite-plugin-compression'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import { webUpdateNotice } from '@plugin-web-update-notification/vite'
+import appLoading from 'vite-plugin-app-loading'
 
 /**
  * 创建 Vite 插件配置数组
@@ -13,6 +14,7 @@ import { webUpdateNotice } from '@plugin-web-update-notification/vite'
  */
 export function createVitePlugins(env) {
   const plugins = [
+    vue(),
     // 配置自动导入插件，用于自动导入常用的 Vue 相关库和组件
     AutoImport({
       imports: ['vue', 'vue-router', 'pinia'],
@@ -54,8 +56,8 @@ export function createVitePlugins(env) {
       // 仅压缩指定类型的文件
       filter: /\.(js|css|html|svg)$/
     }),
-    // 配置 Vue 官方插件
-    vue()
+    // 加载动画
+    appLoading()
   ]
 
   if (env.VITE_NODE_ENV === 'development') {

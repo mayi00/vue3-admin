@@ -1,3 +1,4 @@
+import { loadingFadeOut } from 'virtual:app-loading'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import constantRoutes from './modules/index.js'
 import { initDynamicRoutes } from '@/tools/route.js'
@@ -11,7 +12,7 @@ const router = createRouter({
   }
 })
 
-const whiteList = ['/404', '/screen/fit']
+const whiteList = ['/screen/fit']
 
 router.beforeEach(async (to, from, next) => {
   // 路由发生变化修改页面 title
@@ -34,6 +35,9 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.afterEach(() => {})
+router.isReady().then(() => {
+  loadingFadeOut()
+})
 
 // 全局注册 router
 export function setupRouter(app) {
