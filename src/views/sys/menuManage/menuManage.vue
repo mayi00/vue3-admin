@@ -1,7 +1,7 @@
 <script setup>
 import { useElementHeight } from '@/hooks/useElement.js'
 
-defineOptions({ name: 'FitScreen' })
+defineOptions({ name: 'MenuManage' })
 
 const { elementHeight: cardHeight } = useElementHeight({ offset: 67 })
 </script>

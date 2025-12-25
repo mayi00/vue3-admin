@@ -5,12 +5,15 @@ import api from '@/api'
 import { getDictList, getDictLabel } from '@/tools/tools'
 import { useElementHeight } from '@/hooks/useElement'
 import { exportToExcel } from '@/utils/tableUtils'
+import { hasBtnPermission } from '@/directives/permission'
+import { useStore } from '@/store'
 
 import UserFormDialog from './userFormDialog.vue'
 import UserRoleDialog from './userRoleDialog.vue'
 
 defineOptions({ name: 'UserManage' })
 
+const { userInfo } = storeToRefs(useStore().userStore)
 const searchFormRef = ref(null)
 const searchForm = ref({ name: '', account: '', gender: '', status: '', roleName: '' })
 const handleSearch = debounce(() => {
@@ -24,7 +27,7 @@ function handleReset() {
 
 // 动态设置表格高度
 const { elementHeight: tableHeight } = useElementHeight({ offset: 325 })
-const baseTableRef = ref(null)
+const hyTableRef = ref(null)
 const table = ref({
   loading: false,
   currentPage: 1,
@@ -127,7 +130,7 @@ function handleRoleDialogSuccess() {
 
 // 下载
 function handleDownload() {
-  const rows = baseTableRef.value?.getSelectionRows()
+  const rows = hyTableRef.value?.getSelectionRows()
   if (!rows.length) return ElMessage.warning('请选择数据')
 
   // 调用导出函数
@@ -205,7 +208,7 @@ const deleteInfo = ref({
 })
 // 批量删除
 function handleBatchDelete() {
-  const rows = baseTableRef.value?.getSelectionRows()
+  const rows = hyTableRef.value?.getSelectionRows()
   if (!rows.length) return ElMessage.warning('请选择数据')
   deleteInfo.value.ids = rows.map(item => item.id)
   deleteInfo.value.title = '批量删除'
@@ -292,8 +295,12 @@ getList()
     <el-card shadow="hover" style="margin-top: 10px">
       <div class="mb-[10px]">
         <el-button v-permission="'sys:user:add'" type="primary" @click="handleAdd">新增</el-button>
-        <el-button v-permission="'sys:user:download'" type="primary" @click="handleDownload"> 批量下载 </el-button>
-        <el-button v-permission="'sys:user:downloadAll'" type="primary" @click="handleDownloadAll">
+        <el-button v-permission="'sys:user:download'" type="primary" @click="handleDownload">批量下载</el-button>
+        <el-button
+          v-if="hasBtnPermission('sys:user:downloadAll') && userInfo.roleCodes.includes('superAdmin')"
+          type="primary"
+          @click="handleDownloadAll"
+        >
           全部下载
         </el-button>
         <el-button v-permission="'sys:user:batchImport'" type="default" @click="handleBatchImport">
@@ -302,10 +309,10 @@ getList()
         <el-button v-permission="'sys:user:downloadTemplate'" type="default" @click="handleDownloadTemplate">
           下载模板
         </el-button>
-        <el-button v-permission="'sys:user:batchDelete'" type="danger" @click="handleBatchDelete"> 批量删除 </el-button>
+        <el-button v-permission="'sys:user:batchDelete'" type="danger" @click="handleBatchDelete">批量删除</el-button>
       </div>
       <HyTable
-        ref="baseTableRef"
+        ref="hyTableRef"
         :height="tableHeight"
         :loading="table.loading"
         :data="table.data"

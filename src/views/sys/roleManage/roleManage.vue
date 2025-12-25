@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { debounce } from 'lodash-es'
+
 import api from '@/api'
 import { getDictList, getDictLabel } from '@/tools/tools'
 import { useElementHeight } from '@/hooks/useElement'
@@ -20,7 +21,7 @@ function handleReset() {
 
 // 动态设置表格高度
 const { elementHeight: tableHeight } = useElementHeight({ offset: 275 })
-const baseTableRef = ref(null)
+const hyTableRef = ref(null)
 const table = ref({
   loading: false,
   currentPage: 1,
@@ -95,7 +96,7 @@ const deleteInfo = ref({
 })
 // 批量删除
 function handleBatchDelete() {
-  const rows = baseTableRef.value?.getSelectionRows()
+  const rows = hyTableRef.value?.getSelectionRows()
   if (!rows.length) return ElMessage.warning('请选择数据')
   deleteInfo.value.ids = rows.map(item => item.id)
   deleteInfo.value.title = '批量删除'
@@ -193,7 +194,7 @@ getList()
         <el-button type="danger" @click="handleBatchDelete">批量删除</el-button>
       </div>
       <HyTable
-        ref="baseTableRef"
+        ref="hyTableRef"
         :height="tableHeight"
         :loading="table.loading"
         :data="table.data"

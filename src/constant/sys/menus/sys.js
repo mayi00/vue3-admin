@@ -27,6 +27,58 @@ export const sys = {
       path: '/sys/roleManage',
       component: 'sys/roleManage/roleManage',
       meta: { title: '角色管理', icon: '', keepAlive: true }
+    },
+    {
+      id: '1-3',
+      menuType: 'MENU',
+      sort: 3,
+      visible: 1,
+      name: 'OrgManage',
+      path: '/sys/orgManage',
+      component: 'sys/orgManage/orgManage',
+      meta: { title: '组织管理', icon: '', keepAlive: true }
+    },
+    {
+      id: '1-4',
+      menuType: 'MENU',
+      sort: 4,
+      visible: 1,
+      name: 'MenuManage',
+      path: '/sys/menuManage',
+      component: 'sys/menuManage/menuManage',
+      meta: { title: '菜单管理', icon: '', keepAlive: true }
+    },
+    {
+      id: '1-5',
+      menuType: 'CATALOG',
+      sort: 5,
+      visible: 1,
+      name: 'DictManage',
+      path: '/sys/dictManage',
+      component: '',
+      meta: { title: '字典管理', icon: '', keepAlive: true },
+      children: [
+        {
+          id: '1-5-1',
+          menuType: 'MENU',
+          sort: 1,
+          visible: 1,
+          name: 'DictType',
+          path: '/sys/dictManage/dictType',
+          component: 'sys/dictManage/dictType/dictType',
+          meta: { title: '字典类型', icon: '', keepAlive: true }
+        },
+        {
+          id: '1-5-2',
+          menuType: 'MENU',
+          sort: 2,
+          visible: 1,
+          name: 'DictData',
+          path: '/sys/dictManage/dictData',
+          component: 'sys/dictManage/dictData/dictData',
+          meta: { title: '字典数据', icon: '', keepAlive: true }
+        }
+      ]
     }
   ]
 }
