@@ -1,0 +1,1 @@
+import{k as e,j as t}from"./Co6T0MCL-1766651771818.js";const s={class:""},o=Object.assign({name:"WhiteList7"},{__name:"index",setup(a){return(c,n)=>(t(),e("div",s,"WhiteList7"))}});export{o as default};
