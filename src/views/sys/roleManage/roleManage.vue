@@ -192,7 +192,7 @@ getList()
         <el-button type="primary" @click="handleAddRole">新增角色</el-button>
         <el-button type="danger" @click="handleBatchDelete">批量删除</el-button>
       </div>
-      <BaseTable
+      <HyTable
         ref="baseTableRef"
         :height="tableHeight"
         :loading="table.loading"
@@ -233,10 +233,10 @@ getList()
             </template>
           </el-popconfirm>
         </template>
-      </BaseTable>
+      </HyTable>
     </el-card>
 
-    <BaseConfirmDialog
+    <HyConfirmDialog
       :visible="deleteInfo.visible"
       :title="deleteInfo.title"
       :loading="deleteInfo.loading"

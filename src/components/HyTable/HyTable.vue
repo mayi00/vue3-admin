@@ -1,5 +1,5 @@
 <script setup>
-defineOptions({ name: 'BaseTable' })
+defineOptions({ name: 'HyTable' })
 
 const props = defineProps({
   // 【表格】表格loading

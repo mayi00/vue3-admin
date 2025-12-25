@@ -1,5 +1,5 @@
 <script setup>
-defineOptions({ name: 'BaseConfirmDialog' })
+defineOptions({ name: 'HyConfirmDialog' })
 
 const props = defineProps({
   // 弹框显示/隐藏

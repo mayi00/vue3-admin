@@ -304,7 +304,7 @@ getList()
         </el-button>
         <el-button v-permission="'sys:user:batchDelete'" type="danger" @click="handleBatchDelete"> 批量删除 </el-button>
       </div>
-      <BaseTable
+      <HyTable
         ref="baseTableRef"
         :height="tableHeight"
         :loading="table.loading"
@@ -355,7 +355,7 @@ getList()
             </template>
           </el-popconfirm>
         </template>
-      </BaseTable>
+      </HyTable>
     </el-card>
 
     <UserFormDialog
@@ -371,7 +371,7 @@ getList()
       @success="handleRoleDialogSuccess"
     />
 
-    <BaseUploadDialog
+    <HyUploadDialog
       v-model:visible="uploadInfo.visible"
       title="批量导入"
       :loading="uploadInfo.loading"
@@ -379,7 +379,7 @@ getList()
       @confirm="handleBatchImportConfirm"
     />
 
-    <BaseConfirmDialog
+    <HyConfirmDialog
       :visible="deleteInfo.visible"
       :title="deleteInfo.title"
       :loading="deleteInfo.loading"

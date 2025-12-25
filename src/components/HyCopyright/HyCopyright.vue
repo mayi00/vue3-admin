@@ -1,5 +1,5 @@
 <script setup>
-defineOptions({ name: 'BaseCopyright' })
+defineOptions({ name: 'HyCopyright' })
 
 const copyrightYear = new Date().getFullYear()
 </script>
