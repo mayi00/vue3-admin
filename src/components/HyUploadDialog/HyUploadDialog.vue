@@ -2,7 +2,7 @@
 import { ElMessage } from 'element-plus'
 import { autoConvertStorageUnits } from '@/utils/unitConversion.js'
 
-defineOptions({ name: 'BaseUpload' })
+defineOptions({ name: 'HyUploadDialog' })
 
 const props = defineProps({
   // 控制弹框显示/隐藏

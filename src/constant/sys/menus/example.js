@@ -9,9 +9,19 @@ export const example = {
   meta: { title: '示例', icon: '' },
   children: [
     {
+      id: '2-0',
+      menuType: 'MENU',
+      sort: 0,
+      visible: 1,
+      name: 'Demo',
+      path: '/example/demo',
+      component: 'example/demo/index',
+      meta: { title: 'Demo', icon: '', keepAlive: true }
+    },
+    {
       id: '2-1',
       menuType: 'CATALOG',
-      sort: 0,
+      sort: 1,
       visible: 1,
       name: 'Outside',
       path: '/example/outside',
@@ -47,6 +57,26 @@ export const example = {
               path: '/example/outside/iframe/vite',
               component: '',
               meta: { title: 'Vite', icon: '', keepAlive: true, link: 'https://cn.vite.dev' }
+            },
+            {
+              id: '2-1-1-3',
+              menuType: 'IFRAME_LINK',
+              sort: 3,
+              visible: 1,
+              name: 'Juejin',
+              path: '/example/outside/iframe/juejin',
+              component: '',
+              meta: { title: '掘金', icon: '', link: 'https://juejin.cn/' }
+            },
+            {
+              id: '2-1-1-4',
+              menuType: 'IFRAME_LINK',
+              sort: 4,
+              visible: 1,
+              name: 'CSDN',
+              path: '/example/outside/iframe/csdn',
+              component: '',
+              meta: { title: 'CSDN', icon: '', link: 'https://www.csdn.net/' }
             }
           ]
         },
@@ -85,9 +115,9 @@ export const example = {
       ]
     },
     {
-      id: '2-1',
+      id: '2-2',
       menuType: 'MENU',
-      sort: 1,
+      sort: 2,
       visible: 1,
       name: 'Curd',
       path: '/example/curd',

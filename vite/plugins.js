@@ -42,7 +42,6 @@ export function createVitePlugins(env) {
     }),
     // 配置 UnoCSS 原子化 CSS 框架插件
     UnoCSS(),
-
     // 配置 Gzip 压缩插件
     viteCompression({
       // 生成的压缩包后缀名
