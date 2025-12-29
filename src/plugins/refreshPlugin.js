@@ -1,6 +1,7 @@
 import path from 'path'
 import fs from 'fs/promises'
 import axios from 'axios'
+import dayjs from 'dayjs'
 
 /**
  * 版本号比较
@@ -12,9 +13,12 @@ export const versionCheck = async () => {
   try {
     const response = await axios.get('version.json', {
       timeout: 5000,
-      headers: {
-        'Cache-Control': 'no-cache'
-      }
+      headers: { 'Cache-Control': 'no-cache' }
+    })
+    console.table({
+      Version: response.data.version,
+      'Build Time': response.data.buildTime,
+      'Current Time': dayjs().format('YYYY-MM-DD HH:mm:ss')
     })
     if (__APP_VERSION__ !== response.data.version) {
       setTimeout(() => {
@@ -54,7 +58,7 @@ export const generateVersionFile = (env, options = {}) => {
       // 合并默认配置和传入的选项
       const versionData = {
         version: Date.now().toString(),
-        buildTime: new Date().toISOString(),
+        buildTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
         ...options
       }
       const content =

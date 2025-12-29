@@ -16,6 +16,7 @@ const checkDeviceType = () => {
 checkDeviceType()
 
 onMounted(() => {
+  versionCheck()
   setInterval(
     () => {
       versionCheck()

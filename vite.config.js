@@ -73,14 +73,14 @@ export default ({ mode }) => {
       // Rollup 打包配置，打包文件按照类型分文件夹显示
       rollupOptions: {
         // 分析打包大小
-        plugins: [
-          visualizer({
-            open: false,
-            gzipSize: false,
-            brotliSize: false,
-            filename: './dist/stats.html'
-          })
-        ],
+        // plugins: [
+        //   visualizer({
+        //     open: false,
+        //     gzipSize: false,
+        //     brotliSize: false,
+        //     filename: './dist/stats.html'
+        //   })
+        // ],
         output: {
           chunkFileNames: `assets/js/[hash]-${Date.now()}.js`,
           entryFileNames: `assets/js/[hash]-${Date.now()}.js`,
@@ -106,11 +106,13 @@ export default ({ mode }) => {
           }
         }
       },
-      minify: env.VITE_NODE_ENV === 'production',
+      // 生产环境构建启用压缩
+      minify: env.VITE_NODE_ENV === 'production' ? 'terser' : false,
       terserOptions: {
         compress: {
+          keep_infinity: true,
           // 生产环境构建移除 console debugger
-          drop_console: env.VITE_NODE_ENV === 'production',
+          drop_console: false,
           drop_debugger: env.VITE_NODE_ENV === 'production',
           // 明确指定要移除的console方法
           pure_funcs: env.VITE_NODE_ENV === 'production' ? ['console.log'] : [],
