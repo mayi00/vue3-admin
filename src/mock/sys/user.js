@@ -41,8 +41,8 @@ export function setupUserMock(mock, faker) {
         roleName: userRoles.map(item => item.label),
         gender: faker.string.fromCharacters(['M', 'F']),
         status: faker.helpers.weightedArrayElement([
-          { weight: 9, value: '1' },
-          { weight: 1, value: '0' }
+          { weight: 9, value: 'ENABLED' },
+          { weight: 1, value: 'DISABLED' }
         ]),
         mobile: faker.helpers.fromRegExp(/[1][3-9][0-9]{9}/),
         phone: faker.phone.number({ style: 'national' }),

@@ -35,8 +35,8 @@ export function setupRoleMock(mock, faker) {
         ...item,
         id: faker.string.uuid(),
         status: faker.helpers.weightedArrayElement([
-          { weight: 9, value: '1' },
-          { weight: 1, value: '0' }
+          { weight: 9, value: 'ENABLED' },
+          { weight: 1, value: 'DISABLED' }
         ]),
         createTime: faker.date.past().toISOString()
       }

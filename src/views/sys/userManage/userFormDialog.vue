@@ -14,7 +14,7 @@ const emit = defineEmits(['update:visible', 'success'])
 
 // 字典数据
 const genderOptions = getDictList('GENDER')
-const statusOptions = getDictList('USER_STATUS')
+const statusOptions = getDictList('SYS_ENABLED_STATUS')
 
 const formRef = ref()
 const formData = ref({
@@ -25,7 +25,8 @@ const formData = ref({
   gender: '',
   mobile: '',
   email: '',
-  status: '1'
+  status: 'ENABLED',
+  remark: ''
 })
 const formRules = {
   account: [
@@ -109,8 +110,24 @@ const handleSubmit = async () => {
 
       <el-form-item label="状态" prop="status">
         <el-radio-group v-model="formData.status">
-          <el-radio v-for="item in statusOptions" :key="item.value" :value="item.value" :label="item.label"></el-radio>
+          <el-radio
+            v-for="item in statusOptions"
+            :key="item.dictValue"
+            :value="item.dictValue"
+            :label="item.dictLabel"
+          ></el-radio>
         </el-radio-group>
+      </el-form-item>
+
+      <el-form-item label="备注" prop="remark">
+        <el-input
+          v-model="formData.remark"
+          type="textarea"
+          :rows="{ minRows: 2, maxRows: 5 }"
+          placeholder="请输入备注"
+          maxlength="200"
+          clearable
+        />
       </el-form-item>
     </el-form>
 

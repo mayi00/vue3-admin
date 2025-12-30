@@ -25,7 +25,7 @@ const roleForm = ref({
   roleCode: '',
   roleName: '',
   description: '',
-  status: '1'
+  status: 'ENABLED'
 })
 // 表单规则
 const formRules = {
@@ -87,15 +87,22 @@ async function handleSubmit() {
         <el-input v-model="roleForm.roleName" placeholder="请输入角色名称" clearable></el-input>
       </el-form-item>
       <el-form-item label="角色描述" prop="description">
-        <el-input v-model="roleForm.description" placeholder="请输入角色描述" type="textarea" :rows="3"></el-input>
+        <el-input
+          v-model="roleForm.description"
+          placeholder="请输入角色描述"
+          type="textarea"
+          :rows="3"
+          maxlength="50"
+          clearable
+        ></el-input>
       </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-select v-model="roleForm.status" placeholder="请选择状态">
           <el-option
-            v-for="item in getDictList('ROLE_STATUS')"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
+            v-for="item in getDictList('SYS_ENABLED_STATUS')"
+            :key="item.dictValue"
+            :label="item.dictLabel"
+            :value="item.dictValue"
           ></el-option>
         </el-select>
       </el-form-item>

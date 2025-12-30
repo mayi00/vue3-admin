@@ -1,45 +1,37 @@
 export const DICT_TYPE = [
   {
-    label: '系统通用',
-    value: 'SYSTEM_COMMON',
+    dictLabel: '系统通用',
+    dictValue: 'SYS_COMMON_STATUS',
     children: [
-      { label: '是', value: '1' },
-      { label: '否', value: '0' }
+      { dictLabel: '是', dictValue: '1' },
+      { dictLabel: '否', dictValue: '0' }
     ]
   },
   {
-    label: '性别',
-    value: 'GENDER',
+    dictLabel: '系统启用状态',
+    dictValue: 'SYS_ENABLED_STATUS',
     children: [
-      { label: '男', value: 'M' },
-      { label: '女', value: 'F' }
+      { dictLabel: '启用', dictValue: 'ENABLED' },
+      { dictLabel: '禁用', dictValue: 'DISABLED' }
     ]
   },
   {
-    label: '用户状态',
-    value: 'USER_STATUS',
+    dictLabel: '菜单类型',
+    dictValue: 'MENU_TYPE',
     children: [
-      { label: '正常', value: '1' },
-      { label: '禁用', value: '0' }
+      { dictLabel: '模块', dictValue: 'MODULE' },
+      { dictLabel: '目录', dictValue: 'CATALOG' },
+      { dictLabel: '菜单', dictValue: 'MENU' },
+      { dictLabel: '外部链接', dictValue: 'EXT_LINK' },
+      { dictLabel: '内链', dictValue: 'IFRAME_LINK' }
     ]
   },
   {
-    label: '角色状态',
-    value: 'ROLE_STATUS',
+    dictLabel: '性别',
+    dictValue: 'GENDER',
     children: [
-      { label: '正常', value: '1' },
-      { label: '禁用', value: '0' }
-    ]
-  },
-  {
-    label: '菜单类型',
-    value: 'MENU_TYPE',
-    children: [
-      { label: '模块', value: 'MODULE' },
-      { label: '目录', value: 'CATALOG' },
-      { label: '菜单', value: 'MENU' },
-      { label: '外部链接', value: 'EXT_LINK' },
-      { label: '内链', value: 'IFRAME_LINK' }
+      { dictLabel: '男', dictValue: 'M' },
+      { dictLabel: '女', dictValue: 'F' }
     ]
   }
 ]

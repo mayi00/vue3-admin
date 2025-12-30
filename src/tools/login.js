@@ -30,7 +30,7 @@ export function initModule() {
 // 初始化字典数据
 export function initDict() {
   return new Promise(resolve => {
-    api.sys.dict.list().then(res => {
+    api.sys.dict.allList().then(res => {
       localStorage.setItem('DICT_TYPE', JSON.stringify(res.data))
       resolve(res)
     })

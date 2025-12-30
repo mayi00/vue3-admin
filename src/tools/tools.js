@@ -2,7 +2,7 @@
 export const getDictList = dictTypeKey => {
   if (!dictTypeKey) return []
   const DICT_TYPE_ALL = JSON.parse(localStorage.getItem('DICT_TYPE') || '[]')
-  const dictType = DICT_TYPE_ALL.find(item => item.value === dictTypeKey)
+  const dictType = DICT_TYPE_ALL.find(item => item.dictValue === dictTypeKey)
   return dictType ? dictType.children : []
 }
 // 获取字典映射
@@ -10,7 +10,7 @@ export const getDictMap = dictTypeKey => {
   const dictList = getDictList(dictTypeKey)
   const dictMap = {}
   dictList.forEach(item => {
-    dictMap[item.value] = item.label
+    dictMap[item.dictValue] = item.dictLabel
   })
   return dictMap
 }

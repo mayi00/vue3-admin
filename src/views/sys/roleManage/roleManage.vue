@@ -172,10 +172,10 @@ getList()
             <el-form-item label="状态" prop="status">
               <el-select v-model="searchForm.status" placeholder="请选择状态" clearable>
                 <el-option
-                  v-for="item in getDictList('ROLE_STATUS')"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
+                  v-for="item in getDictList('SYS_ENABLED_STATUS')"
+                  :key="item.dictValue"
+                  :label="item.dictLabel"
+                  :value="item.dictValue"
                 ></el-option>
               </el-select>
             </el-form-item>
@@ -216,8 +216,8 @@ getList()
           </el-popover>
         </template>
         <template #status="{ row }">
-          <el-tag :type="row.status === '1' ? 'success' : 'danger'" effect="dark">
-            {{ getDictLabel('ROLE_STATUS', row.status) || row.status }}
+          <el-tag :type="row.status === 'ENABLED' ? 'success' : 'danger'" effect="dark">
+            {{ getDictLabel('SYS_ENABLED_STATUS', row.status) || row.status }}
           </el-tag>
         </template>
         <template #operation="{ row }">

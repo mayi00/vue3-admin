@@ -149,7 +149,7 @@ function generateExportData(rows) {
     姓名: row.name,
     角色: row.roleName.join('，'),
     性别: getDictLabel('GENDER', row.gender),
-    状态: getDictLabel('USER_STATUS', row.status),
+    状态: getDictLabel('SYS_ENABLED_STATUS', row.status),
     手机: row.mobile,
     电子邮箱: row.email
   }))
@@ -260,9 +260,9 @@ getList()
               <el-select v-model="searchForm.gender" placeholder="请选择性别" clearable>
                 <el-option
                   v-for="item in getDictList('GENDER')"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
+                  :key="item.dictValue"
+                  :label="item.dictLabel"
+                  :value="item.dictValue"
                 ></el-option>
               </el-select>
             </el-form-item>
@@ -271,10 +271,10 @@ getList()
             <el-form-item label="用户状态" prop="status">
               <el-select v-model="searchForm.status" placeholder="请选择用户状态" clearable>
                 <el-option
-                  v-for="item in getDictList('USER_STATUS')"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
+                  v-for="item in getDictList('SYS_ENABLED_STATUS')"
+                  :key="item.dictValue"
+                  :label="item.dictLabel"
+                  :value="item.dictValue"
                 ></el-option>
               </el-select>
             </el-form-item>
@@ -336,8 +336,8 @@ getList()
           </el-popover>
         </template>
         <template #status="{ row }">
-          <el-tag :type="row.status === '1' ? 'success' : 'danger'" effect="dark">
-            {{ getDictLabel('USER_STATUS', row.status) || row.status }}
+          <el-tag :type="row.status === 'ENABLED' ? 'success' : 'danger'" effect="dark">
+            {{ getDictLabel('SYS_ENABLED_STATUS', row.status) || row.status }}
           </el-tag>
         </template>
         <template #gender="{ row }">
