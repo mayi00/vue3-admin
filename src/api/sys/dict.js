@@ -37,5 +37,37 @@ export default {
   // 获取所有字典
   allList() {
     return request.get('/dict/allList')
+  },
+  // 获取字典数据列表
+  dataList(params) {
+    return request({
+      url: '/dict/data/list',
+      method: 'get',
+      params
+    })
+  },
+  // 新增字典数据
+  addDictData(data) {
+    return request({
+      url: '/dict/data/add',
+      method: 'post',
+      data
+    })
+  },
+  // 编辑字典数据
+  editDictData(data) {
+    return request({
+      url: '/dict/data/edit',
+      method: 'put',
+      data
+    })
+  },
+  // 删除字典数据
+  deleteDictData(data) {
+    return request({
+      url: '/dict/data/delete',
+      method: 'delete',
+      data
+    })
   }
 }

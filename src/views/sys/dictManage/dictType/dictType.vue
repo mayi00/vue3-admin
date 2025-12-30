@@ -51,6 +51,7 @@ function getList() {
   api.sys.dict
     .list(params, data)
     .then(res => {
+      console.log(res)
       table.value.data = res.data.list
       table.value.total = res.data.total
     })
