@@ -73,14 +73,13 @@ export default ({ mode }) => {
       // Rollup 打包配置，打包文件按照类型分文件夹显示
       rollupOptions: {
         // 分析打包大小
-        // plugins: [
-        //   visualizer({
-        //     open: false,
-        //     gzipSize: false,
-        //     brotliSize: false,
-        //     filename: './dist/stats.html'
-        //   })
-        // ],
+        plugins: [
+          visualizer({
+            open: false,
+            gzipSize: false,
+            brotliSize: false,
+          })
+        ],
         output: {
           chunkFileNames: `assets/js/[hash]-${Date.now()}.js`,
           entryFileNames: `assets/js/[hash]-${Date.now()}.js`,
