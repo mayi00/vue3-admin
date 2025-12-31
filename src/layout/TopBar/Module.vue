@@ -25,7 +25,7 @@ function handleClickMenuItem(moduleInfo) {
     usePermissionStore().saveSidebarRoutes(tempModule)
     initDynamicRoutes()
   } else {
-    api.sys.menu.list({ moduleId: moduleInfo.id }).then(res => {
+    api.sys.menu.getListByModule({ moduleId: moduleInfo.id }).then(res => {
       usePermissionStore().saveRoutes(res.data)
       initDynamicRoutes()
     })
