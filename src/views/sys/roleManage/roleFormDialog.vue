@@ -24,14 +24,13 @@ const roleForm = ref({
   id: '',
   roleCode: '',
   roleName: '',
-  description: '',
+  remark: '',
   status: 'ENABLED'
 })
 // 表单规则
 const formRules = {
   roleCode: [{ required: true, message: '请输入角色编码', trigger: 'blur' }],
   roleName: [{ required: true, message: '请输入角色名称', trigger: 'blur' }],
-  description: [{ required: true, message: '请输入角色描述', trigger: 'blur' }],
   status: [{ required: true, message: '请选择状态', trigger: 'change' }]
 }
 
@@ -54,42 +53,43 @@ function handleClose() {
 
 // 提交表单
 async function handleSubmit() {
-  try {
-    await roleFormRef.value.validate()
-    const data = { ...roleForm.value }
-    submitLoading.value = true
-
-    if (props.isEdit) {
-      await api.sys.role.edit(data)
-    } else {
-      await api.sys.role.add(data)
+  roleFormRef.value.validate(async valid => {
+    if (valid) {
+      try {
+        const data = { ...roleForm.value }
+        submitLoading.value = true
+        if (props.isEdit) {
+          await api.sys.role.edit(data)
+        } else {
+          await api.sys.role.add(data)
+        }
+        ElMessage.success(`${props.isEdit ? '编辑' : '新增'}成功`)
+        handleClose()
+        emit('success')
+      } catch (error) {
+        console.error(error)
+        ElMessage.error(`${props.isEdit ? '编辑' : '新增'}失败：${error.message || '未知错误'}`)
+      } finally {
+        submitLoading.value = false
+      }
     }
-
-    ElMessage.success(`${props.isEdit ? '编辑' : '新增'}成功`)
-    handleClose()
-    emit('success')
-  } catch (error) {
-    console.error(error)
-    ElMessage.error(`${props.isEdit ? '编辑' : '新增'}失败：${error.message || '未知错误'}`)
-  } finally {
-    submitLoading.value = false
-  }
+  })
 }
 </script>
 
 <template>
   <el-dialog :model-value="visible" :title="isEdit ? '编辑角色' : '新增角色'" width="480px" @close="handleClose">
     <el-form ref="roleFormRef" :model="roleForm" label-width="80px" :rules="formRules">
-      <el-form-item label="角色编码" prop="roleCode">
-        <el-input v-model="roleForm.roleCode" placeholder="请输入角色编码" :disabled="isEdit" clearable></el-input>
-      </el-form-item>
       <el-form-item label="角色名称" prop="roleName">
         <el-input v-model="roleForm.roleName" placeholder="请输入角色名称" clearable></el-input>
       </el-form-item>
-      <el-form-item label="角色描述" prop="description">
+      <el-form-item label="角色编码" prop="roleCode">
+        <el-input v-model="roleForm.roleCode" placeholder="请输入角色编码" :disabled="isEdit" clearable></el-input>
+      </el-form-item>
+      <el-form-item label="角色描述" prop="remark">
         <el-input
-          v-model="roleForm.description"
-          placeholder="请输入角色描述"
+          v-model="roleForm.remark"
+          placeholder="请输入"
           type="textarea"
           :rows="3"
           maxlength="50"
@@ -97,7 +97,7 @@ async function handleSubmit() {
         ></el-input>
       </el-form-item>
       <el-form-item label="状态" prop="status">
-        <el-select v-model="roleForm.status" placeholder="请选择状态">
+        <el-select v-model="roleForm.status" placeholder="请选择状态" clearable>
           <el-option
             v-for="item in getDictList('SYS_ENABLED_STATUS')"
             :key="item.dictValue"

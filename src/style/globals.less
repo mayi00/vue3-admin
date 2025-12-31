@@ -17,6 +17,7 @@
 ::-webkit-scrollbar-thumb {
   background: #bfbfbf;
   border-radius: 8px;
+  cursor: all-scroll;
 }
 
 /* 滚动条轨道样式 */
@@ -36,6 +37,17 @@
   font-size: 14px;
   overflow-x: auto;
   overflow-y: hidden;
+}
+
+.g-thin-scrollbar {
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    cursor: all-scroll;
+  }
 }
 
 /* 页面布局容器 */

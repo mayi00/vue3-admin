@@ -25,8 +25,8 @@ const formData = ref({
 
 const formRules = {
   dictLabel: [
-    { required: true, message: '请输入字典标签', trigger: 'blur' },
-    { min: 2, max: 20, message: '请输入2-20位字典标签', trigger: 'blur' }
+    { required: true, message: '请输入字典名称', trigger: 'blur' },
+    { min: 2, max: 20, message: '请输入2-20位字典名称', trigger: 'blur' }
   ],
   dictValue: [
     { required: true, message: '请输入字典值', trigger: 'blur' },
@@ -60,33 +60,39 @@ const handleClose = () => {
 
 // 提交表单
 const handleSubmit = async () => {
-  try {
-    await formRef.value.validate()
-    const data = { ...formData.value, dictType: props.dictType.dictValue }
-    submitLoading.value = true
+  formRef.value.validate(async (valid, fields) => {
+    if (valid) {
+      try {
+        const data = { ...formData.value, dictType: props.dictType.dictValue }
+        submitLoading.value = true
 
-    if (props.isEdit) {
-      await api.sys.dict.editDictData(data)
-    } else {
-      await api.sys.dict.addDictData(data)
+        if (props.isEdit) {
+          await api.sys.dict.editDictData(data)
+        } else {
+          await api.sys.dict.addDictData(data)
+        }
+
+        ElMessage.success(`${props.isEdit ? '编辑' : '新增'}成功`)
+        handleClose()
+        emit('success')
+      } catch (error) {
+        console.error('提交表单失败:', error)
+        ElMessage.error(`${props.isEdit ? '编辑' : '新增'}失败`)
+      } finally {
+        submitLoading.value = false
+      }
     }
-
-    ElMessage.success(`${props.isEdit ? '编辑' : '新增'}成功`)
-    handleClose()
-    emit('success')
-  } catch (error) {
-    console.error('提交表单失败:', error)
-    ElMessage.error(`${props.isEdit ? '编辑' : '新增'}失败`)
-  } finally {
-    submitLoading.value = false
-  }
+  })
 }
 </script>
 
 <template>
-  <el-dialog :model-value="visible" :title="isEdit ? '编辑字典数据' : '新增字典数据'" :width="500" @close="handleClose">
-    <el-form ref="formRef" :model="formData" :rules="formRules" label-width="100px">
-      <el-form-item label="字典标签" prop="dictLabel">
+  <el-dialog :model-value="visible" :title="isEdit ? '编辑' : '新增'" :width="500" @close="handleClose">
+    <el-form ref="formRef" :model="formData" :rules="formRules" label-width="80px">
+      <el-form-item label="字典类型">
+        <span>{{ dictType.dictLabel }}</span>
+      </el-form-item>
+      <el-form-item label="字典名称" prop="dictLabel">
         <el-input v-model.trim="formData.dictLabel" placeholder="请输入字典名称" maxlength="20" clearable />
       </el-form-item>
 
@@ -95,7 +101,7 @@ const handleSubmit = async () => {
       </el-form-item>
 
       <el-form-item label="排序" prop="sort">
-        <el-input-number v-model="formData.sort" :min="1" :max="9999" :precision="1" placeholder="请输入排序值" />
+        <el-input-number v-model="formData.sort" :min="1" :max="9999" :precision="0" placeholder="请输入排序值" />
       </el-form-item>
 
       <el-form-item label="状态" prop="status">

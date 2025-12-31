@@ -33,7 +33,7 @@ const table = ref({
     { type: 'index', label: '序号', minWidth: 60, slot: 'index' },
     { prop: 'roleName', label: '角色名称', minWidth: 150 },
     { prop: 'roleCode', label: '角色编码', minWidth: 150 },
-    { prop: 'description', label: '角色描述', minWidth: 200, slot: 'description' },
+    { prop: 'remark', label: '备注', minWidth: 200, slot: 'remark' },
     { prop: 'status', label: '状态', minWidth: 70, slot: 'status' },
     { prop: 'operation', label: '操作', width: 100, align: 'center', fixed: 'right', slot: 'operation' }
   ]
@@ -209,9 +209,9 @@ getList()
       >
         <template #index="{ index }">{{ getIndex(index) }}</template>
         <template #description="{ row }">
-          <el-popover placement="top" :title="'角色描述'" :content="row.description" trigger="hover">
+          <el-popover placement="top" title="备注" :content="row.remark" trigger="hover">
             <template #reference>
-              <div class="g-multi-ellipsis">{{ row.description }}</div>
+              <div class="g-multi-ellipsis">{{ row.remark }}</div>
             </template>
           </el-popover>
         </template>

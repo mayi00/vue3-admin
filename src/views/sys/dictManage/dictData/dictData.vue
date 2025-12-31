@@ -1,5 +1,4 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import { debounce } from 'lodash-es'
 import { Search } from '@element-plus/icons-vue'
@@ -10,76 +9,44 @@ import DictDataFormDialog from './dictDataFormDialog.vue'
 
 defineOptions({ name: 'DictData' })
 
-// 左侧字典类型树形结构
+// 字典类型
+const dictTypeLoading = ref(false)
 const dictTypeList = ref([])
 const selectedDictType = ref({})
 const dictTypeSearch = ref('')
+// 过滤后的字典类型
 const filteredDictTypeList = ref([])
 
-// 右侧字典数据列表
-const { elementHeight: tableHeight } = useElementHeight({ offset: 275 })
+// 字典数据列表
+const { elementHeight: tableHeight } = useElementHeight({ offset: 227 })
 const table = ref({
   loading: false,
   currentPage: 1,
   pageSize: 10,
   total: 0,
-  data: []
+  data: [],
+  columns: [
+    { type: 'index', label: '序号', minWidth: 60, slot: 'index' },
+    { prop: 'dictLabel', label: '字典名称', minWidth: 100 },
+    { prop: 'dictValue', label: '字典值', minWidth: 100 },
+    { prop: 'sort', label: '排序', minWidth: 80 },
+    { prop: 'status', label: '状态', minWidth: 80, slot: 'status' },
+    { prop: 'remark', label: '备注', minWidth: 100 },
+    { prop: 'operation', label: '操作', width: 120, align: 'center', fixed: 'right', slot: 'operation' }
+  ]
 })
-
-// 字典数据表格列配置
-const columns = ref([
-  { type: 'index', label: '序号', minWidth: 60, slot: 'index' },
-  { prop: 'dictLabel', label: '字典名称', minWidth: 150 },
-  { prop: 'dictValue', label: '字典值', minWidth: 150 },
-  { prop: 'sort', label: '排序', minWidth: 80 },
-  { prop: 'status', label: '状态', minWidth: 80, slot: 'status' },
-  { prop: 'remark', label: '备注', minWidth: 200 },
-  { prop: 'operation', label: '操作', width: 120, align: 'center', fixed: 'right', slot: 'operation' }
-])
 
 // 字典数据表单对话框
 const dictDataFormVisible = ref(false)
 const isEditForm = ref(false)
 const currentDictData = ref({})
 
-// 新增字典数据
-const handleAddDictData = () => {
-  isEditForm.value = false
-  currentDictData.value = {}
-  dictDataFormVisible.value = true
-}
-
-// 编辑字典数据
-const handleEditDictData = row => {
-  isEditForm.value = true
-  currentDictData.value = { ...row }
-  dictDataFormVisible.value = true
-}
-
-// 删除字典数据
-const handleDeleteDictData = async row => {
-  try {
-    await api.sys.dict.deleteDictData({ dictValue: row.dictValue, dictType: selectedDictType.value.dictValue })
-    ElMessage.success('删除成功')
-    getDictDataList()
-  } catch (error) {
-    console.error('删除字典数据失败:', error)
-    ElMessage.error('删除失败')
-  }
-}
-
-// 字典数据表单提交成功
-const handleDictDataFormSuccess = () => {
-  dictDataFormVisible.value = false
-  currentDictData.value = {}
-  // 刷新字典类型列表，以便获取最新的字典数据
-  getDictTypeList()
-}
-
 // 获取字典类型列表
 const getDictTypeList = async () => {
+  dictTypeLoading.value = true
   try {
     const res = await api.sys.dict.list()
+    dictTypeLoading.value = false
     dictTypeList.value = res.data.list || []
     filteredDictTypeList.value = [...dictTypeList.value]
     // 默认选择第一个字典类型
@@ -89,22 +56,21 @@ const getDictTypeList = async () => {
     }
   } catch (error) {
     console.error('获取字典类型列表失败:', error)
+    dictTypeLoading.value = false
     dictTypeList.value = []
     filteredDictTypeList.value = []
   }
 }
-
 // 字典类型搜索
-const handleDictTypeSearch = debounce(value => {
-  if (!value) {
+const handleDictTypeSearch = debounce(searchKey => {
+  if (!searchKey) {
     filteredDictTypeList.value = [...dictTypeList.value]
     return
   }
   filteredDictTypeList.value = dictTypeList.value.filter(
-    item => item.dictLabel.includes(value) || item.dictValue.includes(value)
+    item => item.dictLabel.includes(searchKey) || item.dictValue.includes(searchKey)
   )
 }, 300)
-
 // 选择字典类型
 const handleDictTypeSelect = dictType => {
   selectedDictType.value = dictType
@@ -119,7 +85,6 @@ const getDictDataList = async () => {
     table.value.total = 0
     return
   }
-
   try {
     table.value.loading = true
     const res = await api.sys.dict.dataList({
@@ -137,124 +102,131 @@ const getDictDataList = async () => {
     table.value.loading = false
   }
 }
-
 // 切换页码
 const handleUpdateCurrentPage = page => {
   table.value.currentPage = page
   getDictDataList()
 }
-
 // 切换每页数量
 const handleUpdatePageSize = size => {
   table.value.pageSize = size
   getDictDataList()
 }
-
 // 获取表格序号
 const getIndex = index => {
   return table.value.pageSize * (table.value.currentPage - 1) + index + 1
 }
 
-// 页面挂载时获取字典类型列表
+// 新增字典数据
+const handleCreate = () => {
+  isEditForm.value = false
+  currentDictData.value = {}
+  dictDataFormVisible.value = true
+}
+// 编辑字典数据
+const handleEdit = row => {
+  isEditForm.value = true
+  currentDictData.value = { ...row }
+  dictDataFormVisible.value = true
+}
+// 字典数据表单提交成功
+const handleDictDataFormSuccess = () => {
+  dictDataFormVisible.value = false
+  currentDictData.value = {}
+  getDictTypeList()
+}
+// 删除字典数据
+const handleDelete = async ({ id }) => {
+  try {
+    await api.sys.dict.deleteDictData({ id })
+    ElMessage.success('删除成功')
+    getDictDataList()
+  } catch (error) {
+    console.error('删除字典数据失败:', error)
+    ElMessage.error('删除失败')
+  }
+}
+
 onMounted(() => {
   getDictTypeList()
 })
 </script>
 
 <template>
-  <div class="g-container">
-    <div class="dict-data-container">
-      <!-- 左侧字典类型树形结构 -->
-      <div class="dict-type-tree">
-        <el-card shadow="hover" class="dict-type-card">
-          <template #header>
-            <div class="search-header">
-              <el-input
-                v-model.trim="dictTypeSearch"
-                placeholder="搜索字典类型"
-                clearable
-                style="width: 100%"
-                @keyup.enter="handleDictTypeSearch"
-                @change="handleDictTypeSearch"
-              >
-                <template #prefix>
-                  <el-icon><Search /></el-icon>
-                </template>
-              </el-input>
-            </div>
+  <div class="g-container dict-data-container">
+    <!-- 字典类型 -->
+    <el-card shadow="hover" class="dict-type-card g-thin-scrollbar">
+      <template #header>
+        <el-input
+          v-model.trim="dictTypeSearch"
+          placeholder="搜索字典类型"
+          clearable
+          style="width: 100%"
+          @keyup.enter="handleDictTypeSearch"
+          @change="handleDictTypeSearch"
+        >
+          <template #prefix>
+            <el-icon><Search /></el-icon>
           </template>
+        </el-input>
+      </template>
 
-          <div class="dict-type-tree-content">
-            <el-tree
-              v-if="filteredDictTypeList.length > 0"
-              :data="filteredDictTypeList"
-              :props="{ label: 'dictLabel', value: 'dictValue' }"
-              :highlight-current="true"
-              node-key="dictValue"
-              :default-expanded-keys="[selectedDictType.dictValue]"
-              @node-click="handleDictTypeSelect"
-            />
-            <div v-else class="empty-tree">
-              <el-empty description="暂无数据" />
-            </div>
-          </div>
-        </el-card>
+      <div v-loading="dictTypeLoading" class="w-full h-full">
+        <el-tree
+          v-if="filteredDictTypeList.length"
+          :data="filteredDictTypeList"
+          :props="{ label: 'dictLabel', value: 'dictValue' }"
+          :highlight-current="true"
+          node-key="dictValue"
+          :current-node-key="selectedDictType.dictValue"
+          @node-click="handleDictTypeSelect"
+        />
+        <el-empty v-else description="暂无数据" />
       </div>
+    </el-card>
 
-      <!-- 右侧字典数据列表 -->
-      <div class="dict-data-list">
-        <el-card shadow="hover" class="dict-data-card">
-          <template #header>
-            <div class="card-header">
-              <span>
-                {{ selectedDictType.dictLabel ? `${selectedDictType.dictLabel}` : '字典数据' }}
-              </span>
-              <el-button type="primary" size="small" :disabled="!selectedDictType.dictValue" @click="handleAddDictData">
-                新增字典
-              </el-button>
-            </div>
-          </template>
+    <!-- 字典数据列表 -->
+    <el-card shadow="hover" class="dict-data-card">
+      <template #header>
+        <div class="card-header">
+          <span>字典类型：{{ selectedDictType.dictLabel || '--' }}</span>
+          <el-button type="primary" :disabled="!selectedDictType.dictValue" @click="handleCreate">新增字典</el-button>
+        </div>
+      </template>
 
-          <div v-if="selectedDictType.dictValue" class="dict-data-table">
-            <HyTable
-              :height="tableHeight"
-              :loading="table.loading"
-              :data="table.data"
-              :columns="columns"
-              :total="table.total"
-              @update:currentPage="handleUpdateCurrentPage"
-              @update:pageSize="handleUpdatePageSize"
-            >
-              <template #index="{ index }">
-                {{ getIndex(index) }}
-              </template>
-              <template #status="{ row }">
-                <el-tag :type="row.status === 'ENABLED' ? 'success' : 'danger'" effect="dark">
-                  {{ getDictLabel('SYS_ENABLED_STATUS', row.status) }}
-                </el-tag>
-              </template>
-              <template #operation="{ row }">
-                <el-button type="primary" link size="small" @click="handleEditDictData(row)">编辑</el-button>
-                <el-popconfirm
-                  title="请确认是否删除？"
-                  width="160"
-                  placement="top"
-                  confirm-button-type="danger"
-                  @confirm="handleDeleteDictData(row)"
-                >
-                  <template #reference>
-                    <el-button type="danger" link size="small">删除</el-button>
-                  </template>
-                </el-popconfirm>
-              </template>
-            </HyTable>
-          </div>
-          <div v-else class="empty-data">
-            <el-empty description="请选择字典类型" />
-          </div>
-        </el-card>
-      </div>
-    </div>
+      <HyTable
+        v-if="selectedDictType.dictValue"
+        :height="tableHeight"
+        :loading="table.loading"
+        :data="table.data"
+        :columns="table.columns"
+        :total="table.total"
+        @update:currentPage="handleUpdateCurrentPage"
+        @update:pageSize="handleUpdatePageSize"
+      >
+        <template #index="{ index }">{{ getIndex(index) }} </template>
+        <template #status="{ row }">
+          <el-tag :type="row.status === 'ENABLED' ? 'success' : 'danger'" effect="dark">
+            {{ getDictLabel('SYS_ENABLED_STATUS', row.status) }}
+          </el-tag>
+        </template>
+        <template #operation="{ row }">
+          <el-button type="primary" link size="small" @click="handleEdit(row)">编辑</el-button>
+          <el-popconfirm
+            title="请确认是否删除？"
+            width="160"
+            placement="top"
+            confirm-button-type="danger"
+            @confirm="handleDelete(row)"
+          >
+            <template #reference>
+              <el-button type="danger" link size="small">删除</el-button>
+            </template>
+          </el-popconfirm>
+        </template>
+      </HyTable>
+      <el-empty v-else description="请选择字典类型" />
+    </el-card>
 
     <DictDataFormDialog
       ref="dictDataFormRef"
@@ -271,57 +243,21 @@ onMounted(() => {
 .dict-data-container {
   display: flex;
   gap: 16px;
-  height: 100%;
 
-  .dict-type-tree {
-    width: 300px;
+  .dict-type-card {
     flex-shrink: 0;
-
-    .dict-type-card {
-      height: 100%;
-
-      .search-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .dict-type-tree-content {
-        height: calc(100% - 60px);
-        overflow-y: auto;
-      }
-
-      .empty-tree {
-        height: calc(100% - 60px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    }
+    width: 300px;
+    height: 100%;
   }
 
-  .dict-data-list {
+  .dict-data-card {
     flex: 1;
+    min-width: 0;
 
-    .dict-data-card {
-      height: 100%;
-
-      .card-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .empty-data {
-        height: calc(100% - 60px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .dict-data-table {
-        height: calc(100% - 60px);
-      }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 }

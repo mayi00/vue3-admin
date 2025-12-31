@@ -4,7 +4,6 @@ import { debounce } from 'lodash-es'
 import api from '@/api'
 import { useElementHeight } from '@/hooks/useElement'
 import { getDictList, getDictLabel } from '@/tools/tools'
-
 import DictTypeFormDialog from './dictTypeFormDialog.vue'
 
 defineOptions({ name: 'DictType' })
@@ -31,9 +30,9 @@ const table = ref({
   data: [],
   columns: [
     { type: 'index', label: '序号', minWidth: 60, slot: 'index' },
-    { prop: 'dictLabel', label: '字典类型名称', minWidth: 150 },
-    { prop: 'dictValue', label: '字典类型值', minWidth: 150 },
-    { prop: 'status', label: '状态', minWidth: 70, slot: 'status' },
+    { prop: 'dictLabel', label: '字典类型名称', minWidth: 120 },
+    { prop: 'dictValue', label: '字典类型值', minWidth: 100 },
+    { prop: 'status', label: '状态', minWidth: 60, slot: 'status' },
     { prop: 'operation', label: '操作', width: 120, align: 'center', fixed: 'right', slot: 'operation' }
   ]
 })
@@ -51,7 +50,6 @@ function getList() {
   api.sys.dict
     .list(params, data)
     .then(res => {
-      console.log(res)
       table.value.data = res.data.list
       table.value.total = res.data.total
     })

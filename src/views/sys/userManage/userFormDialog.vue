@@ -37,6 +37,7 @@ const formRules = {
     { required: true, message: '请输入姓名', trigger: 'blur' },
     { min: 2, max: 20, message: '2-20个字符', trigger: 'blur' }
   ],
+  gender: [{ required: true, message: '请选择性别', trigger: 'change' }],
   mobile: [{ pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号', trigger: 'blur' }],
   email: [{ type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }]
 }
@@ -63,23 +64,27 @@ const handleClose = () => {
 
 // 提交表单
 const handleSubmit = async () => {
-  try {
-    await formRef.value.validate()
-    const data = { ...formData.value }
-    submitLoading.value = true
-    if (props.isEdit) {
-      await api.sys.user.edit(data)
-    } else {
-      await api.sys.user.add(data)
+  formRef.value.validate(async valid => {
+    if (valid) {
+      try {
+        const data = { ...formData.value }
+        submitLoading.value = true
+        if (props.isEdit) {
+          await api.sys.user.edit(data)
+        } else {
+          await api.sys.user.add(data)
+        }
+        ElMessage.success(`${props.isEdit ? '操作' : '新增'}成功`)
+        handleClose()
+        emit('success')
+      } catch (error) {
+        console.error(error)
+        ElMessage.error(`${props.isEdit ? '编辑' : '新增'}失败：${error.message || '未知错误'}`)
+      } finally {
+        submitLoading.value = false
+      }
     }
-    ElMessage.success(`${props.isEdit ? '操作' : '新增'}成功`)
-    handleClose()
-    emit('success')
-  } catch (error) {
-    console.error(error)
-  } finally {
-    submitLoading.value = false
-  }
+  })
 }
 </script>
 
@@ -96,7 +101,12 @@ const handleSubmit = async () => {
 
       <el-form-item label="性别" prop="gender">
         <el-radio-group v-model="formData.gender">
-          <el-radio v-for="item in genderOptions" :key="item.value" :value="item.value" :label="item.label"></el-radio>
+          <el-radio
+            v-for="item in genderOptions"
+            :key="item.dictValue"
+            :value="item.dictValue"
+            :label="item.dictLabel"
+          ></el-radio>
         </el-radio-group>
       </el-form-item>
 
@@ -123,7 +133,7 @@ const handleSubmit = async () => {
         <el-input
           v-model="formData.remark"
           type="textarea"
-          :rows="{ minRows: 2, maxRows: 5 }"
+          :autosize="{ minRows: 2, maxRows: 5 }"
           placeholder="请输入备注"
           maxlength="200"
           clearable
