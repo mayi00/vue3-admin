@@ -70,6 +70,12 @@ export function setupRoleMock(mock, faker) {
     return [200, { code: 0, message: 'success' }]
   })
 
+  // 更新角色状态
+  mock.onPost('/role/updateStatus').reply(config => {
+    console.log('【Mock】/role/updateStatus', config)
+    return [200, { code: 0, message: 'success' }]
+  })
+
   // 删除角色
   mock.onPost('/role/delete').reply(config => {
     console.log('【Mock】/role/delete', config)

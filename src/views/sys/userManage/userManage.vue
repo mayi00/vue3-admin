@@ -40,7 +40,7 @@ const table = ref({
     { prop: 'avatar', label: '头像', slot: 'avatar' },
     { prop: 'account', label: '帐号', minWidth: 100 },
     { prop: 'name', label: '姓名', minWidth: 100 },
-    { prop: 'roleName', label: '角色', minWidth: 120, slot: 'roleName' },
+    { prop: 'roleName', label: '角色', minWidth: 150, slot: 'roleName' },
     { prop: 'gender', label: '性别', minWidth: 60, slot: 'gender' },
     { prop: 'status', label: '状态', minWidth: 70, slot: 'status' },
     { prop: 'mobile', label: '手机', minWidth: 120 },
@@ -329,9 +329,9 @@ getList()
           <el-avatar :src="row.avatar" style="width: 32px; height: 32px"></el-avatar>
         </template>
         <template #roleName="{ row, column }">
-          <el-popover :title="column.label" :content="row.roleName.join('，')" placement="top">
+          <el-popover :title="column.label" :content="row.roleName.join('，')" placement="top" width="300">
             <template #reference>
-              <div class="g-multi-ellipsis">{{ row.roleName.join('，') || '--' }}</div>
+              <span class="g-multi-ellipsis">{{ row.roleName.join('，') }}</span>
             </template>
           </el-popover>
         </template>

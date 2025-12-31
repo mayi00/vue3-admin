@@ -37,12 +37,12 @@ export function setupUserMock(mock, faker) {
         account: faker.string.alphanumeric({ length: { min: 4, max: 10 } }),
         name: faker.person.fullName(),
         nickname: faker.person.fullName(),
-        roleCode: userRoles.map(item => item.code),
-        roleName: userRoles.map(item => item.label),
+        roleCode: userRoles.map(item => item.roleCode),
+        roleName: userRoles.map(item => item.roleName),
         gender: faker.string.fromCharacters(['M', 'F']),
         status: faker.helpers.weightedArrayElement([
           { weight: 9, value: 'ENABLED' },
-          { weight: 1, value: 'DISABLED' }
+          { weight: 2, value: 'DISABLED' }
         ]),
         mobile: faker.helpers.fromRegExp(/[1][3-9][0-9]{9}/),
         phone: faker.phone.number({ style: 'national' }),
@@ -51,6 +51,7 @@ export function setupUserMock(mock, faker) {
         age: faker.number.int({ min: 18, max: 65 })
       }
     })
+    console.log('【Mock】/user/list', list)
     return [
       200,
       {

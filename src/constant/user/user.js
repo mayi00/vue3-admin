@@ -23,7 +23,8 @@ export const userMap = {
       'sys:user:downloadAll',
       'sys:user:batchImport',
       'sys:user:downloadTemplate',
-      'sys:user:role'
+      'sys:user:role',
+      'sys:role:updateStatus'
     ]
   },
   testUser: {

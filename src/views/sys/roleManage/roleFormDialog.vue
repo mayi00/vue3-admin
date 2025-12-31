@@ -86,16 +86,6 @@ async function handleSubmit() {
       <el-form-item label="角色编码" prop="roleCode">
         <el-input v-model="roleForm.roleCode" placeholder="请输入角色编码" :disabled="isEdit" clearable></el-input>
       </el-form-item>
-      <el-form-item label="角色描述" prop="remark">
-        <el-input
-          v-model="roleForm.remark"
-          placeholder="请输入"
-          type="textarea"
-          :rows="3"
-          maxlength="50"
-          clearable
-        ></el-input>
-      </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-select v-model="roleForm.status" placeholder="请选择状态" clearable>
           <el-option
@@ -105,6 +95,16 @@ async function handleSubmit() {
             :value="item.dictValue"
           ></el-option>
         </el-select>
+      </el-form-item>
+      <el-form-item label="备注" prop="remark">
+        <el-input
+          v-model="roleForm.remark"
+          placeholder="请输入备注"
+          type="textarea"
+          :rows="3"
+          maxlength="50"
+          clearable
+        ></el-input>
       </el-form-item>
     </el-form>
     <template #footer>

@@ -26,6 +26,14 @@ export default {
       data
     })
   },
+  // 更新角色状态
+  updateStatus(data) {
+    return request({
+      url: '/role/updateStatus',
+      method: 'post',
+      data
+    })
+  },
   // 删除角色
   delete(data) {
     return request({

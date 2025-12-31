@@ -7,6 +7,7 @@ import api from '@/api'
 import { getDictList, getDictLabel } from '@/tools/tools'
 import { useElementHeight } from '@/hooks/useElement'
 import RoleFormDialog from './roleFormDialog.vue'
+import { hasBtnPermission } from '@/directives/permission.js'
 
 const searchFormRef = ref(null)
 const searchForm = ref({ roleName: '', status: '' })
@@ -34,7 +35,7 @@ const table = ref({
     { prop: 'roleName', label: '角色名称', minWidth: 150 },
     { prop: 'roleCode', label: '角色编码', minWidth: 150 },
     { prop: 'remark', label: '备注', minWidth: 200, slot: 'remark' },
-    { prop: 'status', label: '状态', minWidth: 70, slot: 'status' },
+    { prop: 'status', label: '状态', minWidth: 80, slot: 'status' },
     { prop: 'operation', label: '操作', width: 100, align: 'center', fixed: 'right', slot: 'operation' }
   ]
 })
@@ -127,6 +128,14 @@ function handleDeleteCancel() {
   deleteInfo.value.ids = []
 }
 
+// 角色状态
+function handleStatusChange(row) {
+  api.sys.role.updateStatus({ id: row.id, status: row.status }).then(() => {
+    ElMessage({ type: 'success', message: '状态更新成功' })
+    getList()
+  })
+}
+
 // 角色表单对话框
 const roleForm = ref({})
 const roleDialog = ref({
@@ -140,14 +149,12 @@ function handleAddRole() {
   roleForm.value = {}
   roleDialog.value.visible = true
 }
-
 // 打开编辑角色对话框
 function handleEditRole(row) {
   roleDialog.value.isEdit = true
   roleForm.value = { ...row }
   roleDialog.value.visible = true
 }
-
 // 角色表单提交成功
 function handleRoleFormSuccess() {
   roleDialog.value.visible = false
@@ -208,7 +215,7 @@ getList()
         @update:pageSize="handleUpdatePageSize"
       >
         <template #index="{ index }">{{ getIndex(index) }}</template>
-        <template #description="{ row }">
+        <template #remark="{ row }">
           <el-popover placement="top" title="备注" :content="row.remark" trigger="hover">
             <template #reference>
               <div class="g-multi-ellipsis">{{ row.remark }}</div>
@@ -216,7 +223,17 @@ getList()
           </el-popover>
         </template>
         <template #status="{ row }">
-          <el-tag :type="row.status === 'ENABLED' ? 'success' : 'danger'" effect="dark">
+          <el-switch
+            v-if="hasBtnPermission('sys:role:updateStatus')"
+            v-model="row.status"
+            inline-prompt
+            active-value="ENABLED"
+            inactive-value="DISABLED"
+            :active-text="getDictLabel('SYS_ENABLED_STATUS', 'ENABLED')"
+            :inactive-text="getDictLabel('SYS_ENABLED_STATUS', 'DISABLED')"
+            @change="handleStatusChange(row)"
+          />
+          <el-tag v-else :type="row.status === 'ENABLED' ? 'success' : 'danger'" effect="dark">
             {{ getDictLabel('SYS_ENABLED_STATUS', row.status) || row.status }}
           </el-tag>
         </template>
