@@ -1,8 +1,8 @@
 export const extLink = [
   {
-    id: '5',
+    id: '50',
     menuType: 'EXT_LINK',
-    sort: 7,
+    sort: 50,
     visible: 1,
     name: '',
     path: 'https://www.baidu.com',
@@ -11,9 +11,9 @@ export const extLink = [
     children: []
   },
   {
-    id: '6',
+    id: '60',
     menuType: 'EXT_LINK',
-    sort: 8,
+    sort: 60,
     visible: 1,
     name: '',
     path: '/vue3-admin/#/screen/fit',

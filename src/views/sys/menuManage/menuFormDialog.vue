@@ -1,148 +1,196 @@
 <script setup>
-import { ref, watch } from 'vue'
 import { ElMessage } from 'element-plus'
+import { cloneDeep } from 'lodash-es'
+import api from '@/api'
+import { getDictList } from '@/tools/tools.js'
 
 const props = defineProps({
-  visible: {
-    type: Boolean,
-    default: false
-  },
-  isEdit: {
-    type: Boolean,
-    default: false
-  },
-  menuData: {
-    type: Object,
-    default: () => ({})
-  },
-  flatMenuList: {
-    type: Array,
-    default: () => []
-  }
+  visible: { type: Boolean, default: false },
+  isEdit: { type: Boolean, default: false },
+  menuData: { type: Object, default: () => ({}) }
 })
 
 const emit = defineEmits(['update:visible', 'success'])
 
 const formRef = ref(null)
-const menuForm = ref({
+const originalMenuForm = {
   id: '',
+  parentId: '',
   menuType: 'MENU',
-  sort: 0,
+  sort: 1,
   visible: 1,
-  name: '',
   path: '',
   component: '',
+  name: '',
   meta: {
     title: '',
     icon: '',
+    link: '',
     keepAlive: false
-  },
-  parentId: ''
-})
-
-// 监听菜单数据变化
-watch(
-  () => props.menuData,
-  newVal => {
-    if (newVal) {
-      menuForm.value = JSON.parse(JSON.stringify(newVal))
+  }
+}
+const menuForm = ref({})
+const formRules = computed(() => {
+  return {
+    menuType: [{ required: true, message: '请选择菜单类型', trigger: ['change'] }],
+    parentId: [{ required: menuForm.value.menuType !== 'MODULE', message: '请选择上级菜单', trigger: ['change'] }],
+    sort: [{ required: true, message: '请输入排序', trigger: ['blur'] }],
+    path: [
+      {
+        required: ['MENU', 'IFRAME_LINK', 'EXT_LINK'].includes(menuForm.value.menuType),
+        message: '请输入路由路径',
+        trigger: ['blur']
+      }
+    ],
+    component: [{ required: menuForm.value.menuType === 'MENU', message: '请输入组件路径', trigger: ['blur'] }],
+    name: [{ required: menuForm.value.menuType === 'MENU', message: '请输入菜单名称', trigger: ['blur'] }],
+    meta: {
+      title: [{ required: true, message: '请输入菜单名称', trigger: ['blur'] }],
+      link: [{ required: menuForm.value.menuType === 'IFRAME_LINK', message: '请输入内链地址', trigger: ['blur'] }]
     }
+  }
+})
+// 树形菜单数据
+const menuTree = ref([])
+const menuTreeProps = {
+  label(node) {
+    return node.meta.title
   },
-  { deep: true }
-)
+  value: 'id'
+}
+const getMenuTree = async () => {
+  const menuRes = await api.sys.menu.list()
+  if (menuRes.code === 0) {
+    menuTree.value = menuRes.data
+  }
+}
 
-// 监听可见性变化
 watch(
   () => props.visible,
   newVal => {
-    if (newVal && !props.isEdit) {
-      // 新增时重置表单
-      resetForm()
+    if (newVal) {
+      getMenuTree()
+      menuForm.value = cloneDeep(originalMenuForm)
+      if (props.isEdit) menuForm.value = Object.assign({}, menuForm.value, JSON.parse(JSON.stringify(props.menuData)))
     }
   }
 )
 
-// 重置表单
-const resetForm = () => {
-  menuForm.value = {
-    id: '',
-    menuType: 'MENU',
-    sort: 0,
-    visible: 1,
-    name: '',
-    path: '',
-    component: '',
-    meta: {
-      title: '',
-      icon: '',
-      keepAlive: false
-    },
-    parentId: ''
-  }
-}
-
-// 关闭对话框
-const handleCancel = () => {
-  emit('update:visible', false)
-}
-
 // 确认提交
 const handleConfirm = () => {
-  if (!menuForm.value.name || !menuForm.value.meta.title) {
-    ElMessage.warning('请填写菜单名称和显示标题')
-    return
-  }
+  formRef.value.validate(async valid => {
+    if (valid) {
+      try {
+        if (props.isEdit) {
+          // 编辑菜单
+          const res = await api.sys.menu.update(menuForm.value)
+          if (res.code === 0) {
+            ElMessage.success('编辑菜单成功')
+          } else {
+            ElMessage.error(res.message || '编辑菜单失败')
+          }
+        } else {
+          // 新增菜单
+          const res = await api.sys.menu.add(menuForm.value)
+          if (res.code === 0) {
+            ElMessage.success('新增菜单成功')
+          } else {
+            ElMessage.error(res.message || '新增菜单失败')
+          }
+        }
 
-  emit('success', menuForm.value)
+        emit('success')
+        emit('update:visible', false)
+      } catch (error) {
+        console.error('操作菜单失败:', error)
+      }
+    }
+  })
+}
+// 关闭对话框
+const handleCancel = () => {
+  formRef.value?.resetFields()
   emit('update:visible', false)
 }
 </script>
 
 <template>
   <el-dialog :model-value="visible" :title="isEdit ? '编辑' : '新增'" width="500px" :close-on-click-modal="false">
-    <el-form :model="menuForm" label-width="80px">
-      <el-form-item label="菜单类型">
-        <el-select v-model="menuForm.menuType" style="width: 100%">
-          <el-option label="模块" value="MODULE" />
-          <el-option label="目录" value="CATALOG" />
-          <el-option label="菜单" value="MENU" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="父菜单">
-        <el-select v-model="menuForm.parentId" style="width: 100%" placeholder="选择父菜单（可选）">
-          <el-option label="根菜单" value="" />
+    <el-form ref="formRef" :model="menuForm" :rules="formRules" label-width="100px">
+      <el-form-item label="菜单类型" prop="menuType">
+        <el-select v-model="menuForm.menuType" style="width: 100%" placeholder="请选择菜单类型" clearable>
           <el-option
-            v-for="menu in flatMenuList"
-            :key="menu.id"
-            :label="menu.title"
-            :value="menu.id"
-            :disabled="menu.id === menuForm.id"
+            v-for="item in getDictList('MENU_TYPE')"
+            :key="item.dictValue"
+            :label="item.dictLabel"
+            :value="item.dictValue"
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="菜单名称" prop="name" required>
-        <el-input v-model="menuForm.name" placeholder="请输入菜单名称" />
+      <el-form-item v-if="menuForm.menuType !== 'MODULE'" label="上级菜单" prop="parentId">
+        <el-tree-select
+          v-model="menuForm.parentId"
+          :data="menuTree"
+          :props="menuTreeProps"
+          :render-after-expand="false"
+          show-checkbox
+          style="width: 100%"
+          placeholder="选择上级菜单"
+          clearable
+        />
       </el-form-item>
-      <el-form-item label="显示标题" prop="meta.title" required>
-        <el-input v-model="menuForm.meta.title" placeholder="请输入显示标题" />
+      <el-form-item label="菜单名称" prop="meta.title">
+        <el-input v-model="menuForm.meta.title" placeholder="请输入菜单名称" clearable />
       </el-form-item>
-      <el-form-item label="排序">
-        <el-input-number v-model="menuForm.sort" :min="0" />
+      <el-form-item label="是否隐藏" prop="visible">
+        <el-switch
+          v-model="menuForm.visible"
+          inline-prompt
+          :active-value="1"
+          :inactive-value="0"
+          active-text="显示"
+          inactive-text="隐藏"
+        />
       </el-form-item>
-      <el-form-item label="可见性">
-        <el-switch v-model="menuForm.visible" />
+      <el-form-item label="访问路径" prop="path">
+        <el-input v-model="menuForm.path" placeholder="请输入访问路径" clearable />
       </el-form-item>
-      <el-form-item label="路径">
-        <el-input v-model="menuForm.path" placeholder="请输入路径" />
+      <el-form-item v-if="menuForm.menuType === 'MENU'" label="组件路径" prop="component">
+        <el-input v-model="menuForm.component" placeholder="请输入组件路径" clearable>
+          <template #prepend>src/views/</template>
+        </el-input>
       </el-form-item>
-      <el-form-item label="组件路径">
-        <el-input v-model="menuForm.component" placeholder="请输入组件路径" />
+      <el-form-item v-if="menuForm.menuType === 'IFRAME_LINK'" label="内链地址" prop="meta.link">
+        <el-input v-model="menuForm.meta.link" placeholder="请输入内链" clearable>
+          <template #prepend>http://</template>
+        </el-input>
       </el-form-item>
-      <el-form-item label="图标">
-        <el-input v-model="menuForm.meta.icon" placeholder="请输入图标名称" />
+      <el-form-item
+        v-if="menuForm.menuType !== 'MODULE' && menuForm.menuType !== 'CATALOG' && menuForm.menuType !== 'EXT_LINK'"
+        label="路由 name"
+        prop="name"
+      >
+        <el-input v-model="menuForm.name" placeholder="请输入路由名称" clearable />
       </el-form-item>
-      <el-form-item label="缓存">
-        <el-switch v-model="menuForm.meta.keepAlive" />
+      <el-form-item label="图标" prop="meta.icon">
+        <el-input v-model="menuForm.meta.icon" placeholder="请输入图标名称" clearable />
+      </el-form-item>
+      <el-form-item
+        v-if="menuForm.menuType !== 'MODULE' && menuForm.menuType !== 'CATALOG'"
+        label="缓存"
+        prop="meta.keepAlive"
+      >
+        <el-switch
+          v-model="menuForm.meta.keepAlive"
+          inline-prompt
+          :active-value="true"
+          :inactive-value="false"
+          active-text="开启"
+          inactive-text="关闭"
+        />
+      </el-form-item>
+      <el-form-item label="排序" prop="sort">
+        <el-input-number v-model="menuForm.sort" :min="1" :max="9999" :precision="0" />
       </el-form-item>
     </el-form>
     <template #footer>

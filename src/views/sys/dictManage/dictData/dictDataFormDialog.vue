@@ -101,7 +101,7 @@ const handleSubmit = async () => {
       </el-form-item>
 
       <el-form-item label="排序" prop="sort">
-        <el-input-number v-model="formData.sort" :min="1" :max="9999" :precision="0" placeholder="请输入排序值" />
+        <el-input-number v-model="formData.sort" :min="1" :max="9999" :precision="0" />
       </el-form-item>
 
       <el-form-item label="状态" prop="status">

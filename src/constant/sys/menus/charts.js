@@ -1,11 +1,11 @@
 export const charts = {
-  id: '4',
+  id: '3',
   menuType: 'MODULE',
-  sort: 2,
+  sort: 3,
   visible: 1,
   name: '',
   path: '/charts',
   component: '',
-  meta: { title: 'Charts charts', icon: '' },
+  meta: { title: '图表', icon: '' },
   children: []
 }

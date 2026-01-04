@@ -22,8 +22,16 @@ export const DICT_TYPE = [
       { dictLabel: '模块', dictValue: 'MODULE' },
       { dictLabel: '目录', dictValue: 'CATALOG' },
       { dictLabel: '菜单', dictValue: 'MENU' },
-      { dictLabel: '外部链接', dictValue: 'EXT_LINK' },
+      { dictLabel: '外链', dictValue: 'EXT_LINK' },
       { dictLabel: '内链', dictValue: 'IFRAME_LINK' }
+    ]
+  },
+  {
+    dictLabel: '菜单是否显示',
+    dictValue: 'MENU_VISIBLE',
+    children: [
+      { dictLabel: '显示', dictValue: '1' },
+      { dictLabel: '隐藏', dictValue: '0' }
     ]
   },
   {
