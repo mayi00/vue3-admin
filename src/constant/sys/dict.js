@@ -41,5 +41,15 @@ export const DICT_TYPE = [
       { dictLabel: '男', dictValue: 'M' },
       { dictLabel: '女', dictValue: 'F' }
     ]
+  },
+  {
+    dictLabel: '机构分类',
+    dictValue: 'ORG_TYPE',
+    children: [
+      { dictLabel: '总公司', dictValue: 'COMPANY' },
+      { dictLabel: '子公司', dictValue: 'SUBCORP' },
+      { dictLabel: '分公司', dictValue: 'BRANCH' },
+      { dictLabel: '部门', dictValue: 'DEPARTMENT' }
+    ]
   }
 ]

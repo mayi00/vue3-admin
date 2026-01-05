@@ -11,7 +11,7 @@ export const sys = {
     {
       id: '1-1',
       menuType: 'MENU',
-      sort: 1,
+      sort: 10,
       visible: 1,
       name: 'UserManage',
       path: '/sys/userManage',
@@ -21,7 +21,7 @@ export const sys = {
     {
       id: '1-2',
       menuType: 'MENU',
-      sort: 2,
+      sort: 20,
       visible: 1,
       name: 'RoleManage',
       path: '/sys/roleManage',
@@ -31,17 +31,7 @@ export const sys = {
     {
       id: '1-3',
       menuType: 'MENU',
-      sort: 3,
-      visible: 1,
-      name: 'OrgManage',
-      path: '/sys/orgManage',
-      component: 'sys/orgManage/orgManage',
-      meta: { title: '组织管理', icon: '', keepAlive: true }
-    },
-    {
-      id: '1-4',
-      menuType: 'MENU',
-      sort: 4,
+      sort: 30,
       visible: 1,
       name: 'MenuManage',
       path: '/sys/menuManage',
@@ -49,9 +39,19 @@ export const sys = {
       meta: { title: '菜单管理', icon: '', keepAlive: true }
     },
     {
+      id: '1-4',
+      menuType: 'MENU',
+      sort: 40,
+      visible: 1,
+      name: 'OrganizationManage',
+      path: '/sys/organizationManage',
+      component: 'sys/organizationManage/organizationManage',
+      meta: { title: '机构管理', icon: '', keepAlive: true }
+    },
+    {
       id: '1-5',
       menuType: 'CATALOG',
-      sort: 5,
+      sort: 50,
       visible: 1,
       name: 'DictManage',
       path: '/sys/dictManage',

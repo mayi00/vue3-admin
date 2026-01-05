@@ -133,7 +133,7 @@ const handleCancel = () => {
           :data="menuTree"
           :props="menuTreeProps"
           :render-after-expand="false"
-          show-checkbox
+          check-strictly
           style="width: 100%"
           placeholder="选择上级菜单"
           clearable
