@@ -70,17 +70,22 @@ watch(
   newVal => {
     if (newVal) {
       getMenuTree()
-      menuForm.value = cloneDeep(originalMenuForm)
-      if (props.isEdit) menuForm.value = Object.assign({}, menuForm.value, JSON.parse(JSON.stringify(props.menuData)))
+      if (props.isEdit) {
+        menuForm.value = cloneDeep(props.menuData)
+      } else {
+        menuForm.value = cloneDeep(originalMenuForm)
+      }
     }
   }
 )
 
+const loading = ref(false)
 // 确认提交
 const handleConfirm = () => {
   formRef.value.validate(async valid => {
     if (valid) {
       try {
+        loading.value = true
         if (props.isEdit) {
           // 编辑菜单
           const res = await api.sys.menu.update(menuForm.value)
@@ -100,22 +105,30 @@ const handleConfirm = () => {
         }
 
         emit('success')
-        emit('update:visible', false)
+        handleClose()
       } catch (error) {
         console.error('操作菜单失败:', error)
+      } finally {
+        loading.value = false
       }
     }
   })
 }
 // 关闭对话框
-const handleCancel = () => {
+const handleClose = () => {
   formRef.value?.resetFields()
   emit('update:visible', false)
 }
 </script>
 
 <template>
-  <el-dialog :model-value="visible" :title="isEdit ? '编辑' : '新增'" width="500px" :close-on-click-modal="false">
+  <el-dialog
+    :model-value="visible"
+    :title="isEdit ? '编辑' : '新增'"
+    width="500px"
+    :close-on-click-modal="false"
+    @close="handleClose"
+  >
     <el-form ref="formRef" :model="menuForm" :rules="formRules" label-width="100px">
       <el-form-item label="菜单类型" prop="menuType">
         <el-select v-model="menuForm.menuType" style="width: 100%" placeholder="请选择菜单类型" clearable>
@@ -194,8 +207,8 @@ const handleCancel = () => {
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button @click="handleCancel">取消</el-button>
-      <el-button type="primary" @click="handleConfirm">确定</el-button>
+      <el-button type="primary" :loading="loading" @click="handleConfirm">确定</el-button>
+      <el-button @click="handleClose">取消</el-button>
     </template>
   </el-dialog>
 </template>

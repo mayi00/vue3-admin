@@ -22,7 +22,7 @@ const originalOrgForm = {
   orgCode: '',
   remark: ''
 }
-const orgForm = ref(originalOrgForm)
+const orgForm = ref({ ...originalOrgForm })
 const formRules = computed(() => {
   return {
     orgName: [{ required: true, message: '请输入机构名称', trigger: ['blur'] }],
@@ -53,9 +53,9 @@ watch(
     if (newVal) {
       getOrgTree()
       if (props.isEdit) {
-        orgForm.value = Object.assign({}, JSON.parse(JSON.stringify(props.orgData)))
+        orgForm.value = cloneDeep(props.orgData)
       } else {
-        orgForm.value = Object.assign({}, cloneDeep(originalOrgForm), JSON.parse(JSON.stringify(props.orgData)))
+        orgForm.value.parentId = props.orgData.parentId
       }
     }
   }
@@ -86,7 +86,7 @@ const handleConfirm = () => {
         }
 
         emit('success')
-        emit('update:visible', false)
+        handleClose()
       } catch (error) {
         console.error('操作机构失败:', error)
       } finally {
@@ -96,7 +96,7 @@ const handleConfirm = () => {
   })
 }
 // 关闭对话框
-const handleCancel = () => {
+const handleClose = () => {
   formRef.value?.resetFields()
   emit('update:visible', false)
 }
@@ -108,7 +108,7 @@ const handleCancel = () => {
     :title="isEdit ? '编辑' : '新增'"
     width="500px"
     :close-on-click-modal="false"
-    @close="handleCancel"
+    @close="handleClose"
   >
     <el-form ref="formRef" :model="orgForm" :rules="formRules" label-width="100px">
       <el-form-item label="机构分类" prop="orgType">
@@ -156,8 +156,8 @@ const handleCancel = () => {
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button @click="handleCancel">取消</el-button>
       <el-button type="primary" :loading="loading" @click="handleConfirm">确定</el-button>
+      <el-button @click="handleClose">取消</el-button>
     </template>
   </el-dialog>
 </template>
