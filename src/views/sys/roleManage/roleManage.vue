@@ -1,13 +1,13 @@
 <script setup>
-import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { debounce } from 'lodash-es'
 
 import api from '@/api'
 import { getDictList, getDictLabel } from '@/tools/tools'
 import { useElementHeight } from '@/hooks/useElement'
-import RoleFormDialog from './roleFormDialog.vue'
 import { hasBtnPermission } from '@/directives/permission.js'
+import RoleFormDialog from './roleFormDialog.vue'
+import RolePermissionDrawer from './rolePermissionDrawer.vue'
 
 const searchFormRef = ref(null)
 const searchForm = ref({ roleName: '', status: '' })
@@ -36,7 +36,7 @@ const table = ref({
     { prop: 'roleCode', label: '角色编码', minWidth: 150 },
     { prop: 'remark', label: '备注', minWidth: 200, slot: 'remark' },
     { prop: 'status', label: '状态', minWidth: 80, slot: 'status' },
-    { prop: 'operation', label: '操作', width: 100, align: 'center', fixed: 'right', slot: 'operation' }
+    { prop: 'operation', label: '操作', width: 170, align: 'center', fixed: 'right', slot: 'operation' }
   ]
 })
 const selectedRows = ref([])
@@ -45,7 +45,6 @@ const selectedRows = ref([])
 function getIndex(index) {
   return table.value.pageSize * (table.value.currentPage - 1) + index + 1
 }
-
 // 获取列表数据
 function getList() {
   const params = { currentPage: table.value.currentPage, pageSize: table.value.pageSize }
@@ -65,24 +64,20 @@ function getList() {
       table.value.loading = false
     })
 }
-
 // 切换页码
 function handleUpdateCurrentPage(page) {
   table.value.currentPage = page
   getList()
 }
-
 // 切换每页数量
 function handleUpdatePageSize(size) {
   table.value.pageSize = size
   getList()
 }
-
 // 选中单行
 function handleSelect(selection) {
   selectedRows.value = selection
 }
-
 // 全选
 function handleSelectAll(selection) {
   selectedRows.value = selection
@@ -130,9 +125,10 @@ function handleDeleteCancel() {
 
 // 角色状态
 function handleStatusChange(row) {
+  if (!row.id) return
   api.sys.role.updateStatus({ id: row.id, status: row.status }).then(() => {
     ElMessage({ type: 'success', message: '状态更新成功' })
-    getList()
+    // getList()
   })
 }
 
@@ -142,7 +138,6 @@ const roleDialog = ref({
   visible: false,
   isEdit: false
 })
-
 // 打开新增角色对话框
 function handleAddRole() {
   roleDialog.value.isEdit = false
@@ -159,6 +154,23 @@ function handleEditRole(row) {
 function handleRoleFormSuccess() {
   roleDialog.value.visible = false
   getList()
+}
+
+// 角色权限分配
+const permissionDrawer = ref({
+  visible: false,
+  roleData: {}
+})
+
+// 打开分配权限抽屉
+function handleAssignPermission(row) {
+  permissionDrawer.value.roleData = { ...row }
+  permissionDrawer.value.visible = true
+}
+
+// 权限分配成功
+function handlePermissionSuccess() {
+  permissionDrawer.value.visible = false
 }
 
 // 初始化获取列表数据
@@ -224,8 +236,8 @@ getList()
         </template>
         <template #status="{ row }">
           <el-switch
-            v-if="hasBtnPermission('sys:role:updateStatus')"
             v-model="row.status"
+            :disabled="!hasBtnPermission('sys:role:updateStatus')"
             inline-prompt
             active-value="ENABLED"
             inactive-value="DISABLED"
@@ -233,11 +245,9 @@ getList()
             :inactive-text="getDictLabel('SYS_ENABLED_STATUS', 'DISABLED')"
             @change="handleStatusChange(row)"
           />
-          <el-tag v-else :type="row.status === 'ENABLED' ? 'success' : 'danger'" effect="dark">
-            {{ getDictLabel('SYS_ENABLED_STATUS', row.status) || row.status }}
-          </el-tag>
         </template>
         <template #operation="{ row }">
+          <el-button type="success" link size="small" @click="handleAssignPermission(row)">分配权限</el-button>
           <el-button type="primary" link size="small" @click="handleEditRole(row)">编辑</el-button>
           <el-popconfirm
             title="请确认是否删除？"
@@ -269,6 +279,13 @@ getList()
       :is-edit="roleDialog.isEdit"
       :role-data="roleForm"
       @success="handleRoleFormSuccess"
+    />
+
+    <!-- 角色权限分配抽屉 -->
+    <RolePermissionDrawer
+      v-model:visible="permissionDrawer.visible"
+      :role-data="permissionDrawer.roleData"
+      @success="handlePermissionSuccess"
     />
   </div>
 </template>

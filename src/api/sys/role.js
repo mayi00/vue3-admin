@@ -45,5 +45,21 @@ export default {
   // 获取所有角色
   allList() {
     return request.get('/role/allList')
+  },
+  // 获取角色菜单权限
+  getRolePermissions(data) {
+    return request({
+      url: '/role/getRolePermissions',
+      method: 'post',
+      data
+    })
+  },
+  // 分配角色菜单权限
+  assignPermissions(data) {
+    return request({
+      url: '/role/assignPermissions',
+      method: 'post',
+      data
+    })
   }
 }

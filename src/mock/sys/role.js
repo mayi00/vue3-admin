@@ -86,4 +86,16 @@ export function setupRoleMock(mock, faker) {
   mock.onGet('/role/allList').reply(config => {
     return [200, { code: 0, message: 'success', data: roleList }]
   })
+
+  // 获取角色菜单权限
+  mock.onPost('/role/getRolePermissions').reply(config => {
+    console.log('【Mock】/role/getRolePermissions', config)
+    return [200, { code: 0, message: 'success', data: [] }]
+  })
+
+  // 分配角色菜单权限
+  mock.onPost('/role/assignPermissions').reply(config => {
+    console.log('【Mock】/role/assignPermissions', config)
+    return [200, { code: 0, message: 'success' }]
+  })
 }

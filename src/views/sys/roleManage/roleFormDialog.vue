@@ -1,25 +1,20 @@
 <script setup>
-import { ref, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import { cloneDeep } from 'lodash-es'
 import { getDictList } from '@/tools/tools'
 import api from '@/api'
 
-// 定义组件属性
 const props = defineProps({
   visible: { type: Boolean, required: true },
   isEdit: { type: Boolean, default: false },
   roleData: { type: Object, default: () => ({}) }
 })
 
-// 定义事件
 const emit = defineEmits(['update:visible', 'success'])
 
-// 表单引用
+// 表单
 const roleFormRef = ref(null)
-// 提交加载状态
 const submitLoading = ref(false)
-// 表单数据
 const roleForm = ref({
   id: '',
   roleCode: '',
@@ -27,7 +22,6 @@ const roleForm = ref({
   remark: '',
   status: 'ENABLED'
 })
-// 表单规则
 const formRules = {
   roleCode: [{ required: true, message: '请输入角色编码', trigger: 'blur' }],
   roleName: [{ required: true, message: '请输入角色名称', trigger: 'blur' }],
@@ -87,14 +81,9 @@ async function handleSubmit() {
         <el-input v-model="roleForm.roleCode" placeholder="请输入角色编码" :disabled="isEdit" clearable></el-input>
       </el-form-item>
       <el-form-item label="状态" prop="status">
-        <el-select v-model="roleForm.status" placeholder="请选择状态" clearable>
-          <el-option
-            v-for="item in getDictList('SYS_ENABLED_STATUS')"
-            :key="item.dictValue"
-            :label="item.dictLabel"
-            :value="item.dictValue"
-          ></el-option>
-        </el-select>
+        <el-radio-group v-model="roleForm.status" >
+          <el-radio-button v-for="item in getDictList('SYS_ENABLED_STATUS')" :key="item.dictValue" :label="item.dictLabel" :value="item.dictValue" />
+        </el-radio-group>
       </el-form-item>
       <el-form-item label="备注" prop="remark">
         <el-input
