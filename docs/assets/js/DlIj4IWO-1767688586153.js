@@ -1,0 +1,1 @@
+const t=t=>{if(!t)return[];const e=JSON.parse(localStorage.getItem("DICT_TYPE")||"[]").find(e=>e.dictValue===t);return e?e.children:[]},e=e=>{const a=t(e),r={};return a.forEach(t=>{r[t.dictValue]=t.dictLabel}),r},a=(t,a)=>e(t)[a]||"";export{t as a,e as b,a as g};
