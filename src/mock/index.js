@@ -8,6 +8,7 @@ import { setupMenuMock } from './sys/menu'
 import { setupRoleMock } from './sys/role'
 import { setupUserMock } from './sys/user'
 import { setupOrganizationMock } from './sys/organization'
+import { setupNoticeMock } from './sys/notice'
 
 // 创建 mock 实例（参数为 axios 实例）
 const mock = new MockAdapter(axiosInstance, {
@@ -24,4 +25,5 @@ export function startMock() {
   setupRoleMock(mock, faker)
   setupUserMock(mock, faker)
   setupOrganizationMock(mock, faker)
+  setupNoticeMock(mock, faker)
 }

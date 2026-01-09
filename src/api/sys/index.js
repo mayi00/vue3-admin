@@ -4,6 +4,7 @@ import menu from './menu'
 import role from './role'
 import user from './user'
 import organization from './organization'
+import notice from './notice'
 
 export default {
   auth,
@@ -11,5 +12,6 @@ export default {
   menu,
   role,
   user,
-  organization
+  organization,
+  notice
 }

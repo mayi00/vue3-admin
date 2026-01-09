@@ -79,6 +79,17 @@ export const sys = {
           meta: { title: '字典数据', icon: '', keepAlive: true }
         }
       ]
+    },
+
+    {
+      id: '1-6',
+      menuType: 'MENU',
+      sort: 60,
+      visible: 1,
+      name: 'NoticeManage',
+      path: '/sys/noticeManage',
+      component: 'sys/noticeManage/index',
+      meta: { title: '通知公告', icon: '', keepAlive: true }
     }
   ]
 }
