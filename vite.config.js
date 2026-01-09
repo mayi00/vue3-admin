@@ -77,7 +77,7 @@ export default ({ mode }) => {
           visualizer({
             open: false,
             gzipSize: false,
-            brotliSize: false,
+            brotliSize: false
           })
         ],
         output: {

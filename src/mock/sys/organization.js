@@ -38,7 +38,7 @@ export function setupOrganizationMock(mock, faker) {
     const tempOrg = cloneDeep(organizations)
 
     // 递归查找父机构
-    const findOrg = (orgs) => {
+    const findOrg = orgs => {
       for (const org of orgs) {
         if (org.id === parentId) {
           return org

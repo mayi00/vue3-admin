@@ -81,8 +81,13 @@ async function handleSubmit() {
         <el-input v-model="roleForm.roleCode" placeholder="请输入角色编码" :disabled="isEdit" clearable></el-input>
       </el-form-item>
       <el-form-item label="状态" prop="status">
-        <el-radio-group v-model="roleForm.status" >
-          <el-radio-button v-for="item in getDictList('SYS_ENABLED_STATUS')" :key="item.dictValue" :label="item.dictLabel" :value="item.dictValue" />
+        <el-radio-group v-model="roleForm.status">
+          <el-radio-button
+            v-for="item in getDictList('SYS_ENABLED_STATUS')"
+            :key="item.dictValue"
+            :label="item.dictLabel"
+            :value="item.dictValue"
+          />
         </el-radio-group>
       </el-form-item>
       <el-form-item label="备注" prop="remark">
