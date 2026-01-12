@@ -6,7 +6,7 @@ const IframeView = () => import('@/views/basic/iframeView/iframeView.vue')
 
 // 初始化动态路由
 export function initDynamicRoutes() {
-  const tempDynamicRoutes = JSON.parse(localStorage.getItem('LOCAL_ALL_DYNAMIC_ROUTES')) || []
+  const tempDynamicRoutes = JSON.parse(localStorage.getItem('ALL_DYNAMIC_ROUTES')) || []
   const allDynamicRoutes = parseDynamicRoutes(tempDynamicRoutes)
   if (allDynamicRoutes && allDynamicRoutes.length > 0) {
     allDynamicRoutes.forEach(route => {

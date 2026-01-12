@@ -8,14 +8,14 @@ export const getDictList = dictTypeKey => {
 // 获取字典映射
 export const getDictMap = dictTypeKey => {
   const dictList = getDictList(dictTypeKey)
-  const dictMap = {}
+  const dictMap = new Map()
   dictList.forEach(item => {
-    dictMap[item.dictValue] = item.dictLabel
+    dictMap.set(item.dictValue, item.dictLabel)
   })
   return dictMap
 }
 // 获取字典标签
 export const getDictLabel = (dictTypeKey, dictValue) => {
   const dictMap = getDictMap(dictTypeKey)
-  return dictMap[dictValue] || ''
+  return dictMap.get(dictValue) || ''
 }

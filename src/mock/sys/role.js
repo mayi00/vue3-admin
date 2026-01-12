@@ -8,7 +8,6 @@ export function setupRoleMock(mock, faker) {
     // 解析参数
     const currentPage = parseInt(config.params?.currentPage) || 1
     const pageSize = parseInt(config.params?.pageSize) || 10
-    const total = roleList.length
 
     // 解析查询条件
     let searchData = {}

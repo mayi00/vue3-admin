@@ -187,7 +187,7 @@ const onDeleteMenu = async ({ id }) => {
           :showPagination="false"
         >
           <template #menuType="{ row }">
-            <span>{{ menuTypeMap[row.menuType] }}</span>
+            <span>{{ menuTypeMap.get(row.menuType) || '-' }}</span>
           </template>
           <template #path="{ row }">
             <span>{{ ['MENU', 'IFRAME_LINK'].includes(row.menuType) ? row.path : '-' }}</span>

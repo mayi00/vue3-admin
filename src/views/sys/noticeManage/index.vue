@@ -3,12 +3,15 @@ import { ElMessage } from 'element-plus'
 import api from '@/api'
 import { useElementHeight } from '@/hooks/useElement'
 import NoticeFormDialog from './noticeFormDialog.vue'
+import { getDictList,getDictMap } from '../../../tools/tools'
 
 defineOptions({ name: 'NoticeManage' })
 
 // 搜索表单
 const searchFormRef = ref(null)
 const searchForm = reactive({ title: '', noticeType: '' })
+const noticeTypeMap = getDictMap('NOTICE_TYPE')
+const noticeTypeOptions = getDictList('NOTICE_TYPE')
 
 function handleSearch() {
   table.value.currentPage = 1
@@ -20,7 +23,7 @@ function handleReset() {
 }
 
 // 动态设置表格高度
-const { elementHeight: tableHeight } = useElementHeight({ offset: 325 })
+const { elementHeight: tableHeight } = useElementHeight({ offset: 275 })
 const hyTableRef = ref(null)
 const table = ref({
   loading: false,
@@ -31,12 +34,11 @@ const table = ref({
   columns: [
     { type: 'selection', width: 50 },
     { type: 'index', label: '序号', minWidth: 60, slot: 'index' },
-    { prop: 'title', label: '通知标题', minWidth: 200 },
-    { prop: 'noticeType', label: '通知类型', minWidth: 100, slot: 'type' },
-    { prop: 'startTime', label: '通知开始时间', minWidth: 180 },
-    { prop: 'endTime', label: '通知结束时间', minWidth: 180 },
+    { prop: 'title', label: '通知标题', minWidth: 120 },
+    { prop: 'noticeType', label: '通知类型', minWidth: 100, slot: 'noticeType' },
+    { prop: 'startTime', label: '通知开始时间', minWidth: 150 },
+    { prop: 'endTime', label: '通知结束时间', minWidth: 150 },
     { prop: 'createUser', label: '创建人', minWidth: 100 },
-    { prop: 'status', label: '状态', minWidth: 80, slot: 'status' },
     { prop: 'operation', label: '操作', width: 180, align: 'center', fixed: 'right', slot: 'operation' }
   ]
 })
@@ -187,13 +189,8 @@ getList()
         @update:pageSize="handleUpdatePageSize"
       >
         <template #index="{ index }">{{ getIndex(index) }}</template>
-        <template #type="{ row }">
-          {{ row.noticeType === '1' ? '通知' : '公告' }}
-        </template>
-        <template #status="{ row }">
-          <el-tag :type="row.status === '1' ? 'success' : 'danger'" effect="dark">
-            {{ row.status === '1' ? '启用' : '禁用' }}
-          </el-tag>
+        <template #noticeType="{ row }">
+          {{ noticeTypeMap.get(row.noticeType) || '' }}
         </template>
         <template #operation="{ row }">
           <el-button type="primary" link size="small" @click="handleEdit(row)">编辑</el-button>

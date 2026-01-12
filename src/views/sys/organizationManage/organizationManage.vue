@@ -284,7 +284,7 @@ const onDeleteOrg = async ({ id }) => {
         :showPagination="false"
       >
         <template #orgType="{ row }">
-          <span>{{ orgTypeMap[row.orgType] }}</span>
+          <span>{{ orgTypeMap.get(row.orgType) || '' }}</span>
         </template>
         <template #operation="{ row }">
           <el-button type="primary" link size="small" @click="handleEditOrg(row)">

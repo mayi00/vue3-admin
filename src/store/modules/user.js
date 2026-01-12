@@ -34,7 +34,7 @@ export const useUserStore = defineStore(
     function logout() {
       localStorage.removeItem('TOKEN')
       localStorage.removeItem('DICT_TYPE')
-      localStorage.removeItem('LOCAL_ALL_DYNAMIC_ROUTES')
+      localStorage.removeItem('ALL_DYNAMIC_ROUTES')
       userInfo.value = {}
     }
 

@@ -29,7 +29,7 @@ export const usePermissionStore = defineStore('permission', {
       const tempRoutes = [...this.allDynamicRoutes, sourceRoute]
       const nonrepetitiveRoutes = uniqueByField(tempRoutes, 'id')
       this.allDynamicRoutes = sortByFields(nonrepetitiveRoutes, [{ field: 'sort', order: 'asc' }])
-      localStorage.setItem('LOCAL_ALL_DYNAMIC_ROUTES', JSON.stringify(this.allDynamicRoutes))
+      localStorage.setItem('ALL_DYNAMIC_ROUTES', JSON.stringify(this.allDynamicRoutes))
     },
     // 保存侧边栏路由源数据
     saveSidebarRoutes(sourceRoute) {

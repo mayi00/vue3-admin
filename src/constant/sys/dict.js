@@ -51,5 +51,14 @@ export const DICT_TYPE = [
       { dictLabel: '分公司', dictValue: 'BRANCH' },
       { dictLabel: '部门', dictValue: 'DEPARTMENT' }
     ]
+  },
+  {
+    dictLabel: '通知类型',
+    dictValue: 'NOTICE_TYPE',
+    children: [
+      { dictLabel: '系统', dictValue: 'SYS' },
+      { dictLabel: '放假通知', dictValue: 'HOLIDAY_NOTICE' },
+      { dictLabel: '其他通知', dictValue: 'OTHER_NOTICE' }
+    ]
   }
 ]
