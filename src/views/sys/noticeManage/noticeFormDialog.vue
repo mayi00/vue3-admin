@@ -128,14 +128,16 @@ function handleClose() {
       </el-form-item>
 
       <el-form-item label="通知内容" prop="content">
-        <el-input
+        <HyTinymce v-model:value="noticeForm.content" placeholder="请输入通知内容" />
+
+        <!-- <el-input
           v-model="noticeForm.content"
           type="textarea"
           :rows="6"
           placeholder="请输入通知内容"
           maxlength="2000"
           clearable
-        ></el-input>
+        ></el-input> -->
       </el-form-item>
     </el-form>
 

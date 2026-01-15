@@ -4,17 +4,13 @@ import Editor from '@tinymce/tinymce-vue'
 defineOptions({ name: 'HyTinymce' })
 
 const props = defineProps({
-  value: { type: String, default: '' }
-})
-const emit = defineEmits(['update:value'])
-
-const init = computed(() => {
-  return {
-    language_url: '/vue3-admin/tinymce/langs/zh_CN.js',
-    language: 'zh_CN',
-    toolbar_mode: 'sliding',
-    plugins: [
-      // Core editing features
+  value: { type: String, default: '' },
+  disabled: { type: Boolean, default: false },
+  placeholder: { type: String, default: '请输入' },
+  height: { type: Number, default: 300 },
+  plugins: {
+    type: Array,
+    default: () => [
       'anchor',
       'autolink',
       'charmap',
@@ -27,8 +23,6 @@ const init = computed(() => {
       'table',
       'visualblocks',
       'wordcount',
-      // Your account includes a free trial of TinyMCE premium features
-      // Try the most popular premium features until Jan 26, 2026:
       'checklist',
       'mediaembed',
       'casechange',
@@ -55,9 +49,32 @@ const init = computed(() => {
       'importword',
       'exportword',
       'exportpdf'
-    ],
-    toolbar:
-      'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    ]
+  },
+  toolbar: {
+    type: String,
+    default:
+      'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat'
+  }
+})
+const emit = defineEmits(['update:value'])
+
+const content = ref('')
+
+const init = computed(() => {
+  return {
+    // 去除tinyMCE的logo
+    branding: false,
+    // 去除右上角的按钮
+    promotion: false,
+    // 中文语言
+    language: 'zh_CN',
+    // 中文语言包路径
+    language_url: '/vue3-admin/tinymce/langs/zh_CN.js',
+    height: props.height,
+    plugins: props.plugins,
+    toolbar: props.toolbar,
+    toolbar_mode: 'sliding',
     tinycomments_mode: 'embedded',
     tinycomments_author: 'Author name',
     mergetags_list: [
@@ -69,14 +86,25 @@ const init = computed(() => {
     uploadcare_public_key: '42774401878b6a9bc700'
   }
 })
+
+watch(
+  () => props.value,
+  newVal => {
+    content.value = newVal
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
 </script>
 
 <template>
-  <main id="sample">
-    <Editor
-      api-key="uex0cgm72otveima6y89tgtsmypr29g7141zukq7kfuni2r3"
-      :init="init"
-      initial-value="Welcome to TinyMCE!"
-    />
-  </main>
+  <Editor
+    v-model="content"
+    api-key="uex0cgm72otveima6y89tgtsmypr29g7141zukq7kfuni2r3"
+    :init="init"
+    :disabled="disabled"
+    :placeholder="placeholder"
+  />
 </template>

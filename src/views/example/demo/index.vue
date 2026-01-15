@@ -16,7 +16,6 @@ function handleImageConfirm(img) {
 <template>
   <div class="g-container">
     <el-card shadow="hover" :style="{ height: cardHeight + 'px' }">
-      <HyTinymce />
       <div class="w-[800px]">
         <el-button type="primary" @click="visible = true">上传图片</el-button>
         <HyImageCropper v-model:visible="visible" @confirm="handleImageConfirm" />
