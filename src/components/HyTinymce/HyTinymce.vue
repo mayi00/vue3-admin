@@ -1,6 +1,7 @@
 <script setup>
 import Editor from '@tinymce/tinymce-vue'
 
+// import tinymce from 'tinymce/tinymce'
 defineOptions({ name: 'HyTinymce' })
 
 const props = defineProps({
@@ -9,7 +10,7 @@ const props = defineProps({
   placeholder: { type: String, default: '请输入' },
   height: { type: Number, default: 300 },
   plugins: {
-    type: Array,
+    type: [String, Array],
     default: () => [
       'anchor',
       'autolink',
@@ -52,9 +53,9 @@ const props = defineProps({
     ]
   },
   toolbar: {
-    type: String,
+    type: [String, Array],
     default:
-      'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat'
+      'undo redo | blocks fontfamily fontsize | \ bold italic underline strikethrough | link media table mergetags | \ addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | \ align lineheight | checklist numlist bullist indent outdent | \ emoticons charmap | removeformat'
   }
 })
 const emit = defineEmits(['update:value'])
@@ -67,6 +68,8 @@ const init = computed(() => {
     branding: false,
     // 去除右上角的按钮
     promotion: false,
+    // 关闭 tinymce 的推广
+    onboarding: false,
     // 中文语言
     language: 'zh_CN',
     // 中文语言包路径
@@ -74,13 +77,10 @@ const init = computed(() => {
     height: props.height,
     plugins: props.plugins,
     toolbar: props.toolbar,
-    toolbar_mode: 'sliding',
-    tinycomments_mode: 'embedded',
-    tinycomments_author: 'Author name',
-    mergetags_list: [
-      { value: 'First.Name', title: 'First Name' },
-      { value: 'Email', title: 'Email' }
-    ],
+    skin_url: '/vue3-admin/tinymce/skins/ui/oxide',
+    selector: 'textarea',
+    toolbar_mode: 'wrap',
+    mergetags_list: [{ value: 'Email', title: 'Email' }],
     ai_request: (request, respondWith) =>
       respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
     uploadcare_public_key: '42774401878b6a9bc700'
@@ -97,6 +97,17 @@ watch(
     deep: true
   }
 )
+// 监听输入
+watch(
+  () => content.value,
+  newValue => {
+    emit('update:value', newValue)
+  }
+)
+
+onMounted(() => {
+  // tinymce.init({})
+})
 </script>
 
 <template>
