@@ -1,7 +1,6 @@
 <script setup>
 import Editor from '@tinymce/tinymce-vue'
 
-// import tinymce from 'tinymce/tinymce'
 defineOptions({ name: 'HyTinymce' })
 
 const props = defineProps({
@@ -24,89 +23,62 @@ const props = defineProps({
       'table',
       'visualblocks',
       'wordcount',
-      'checklist',
-      'mediaembed',
-      'casechange',
-      'formatpainter',
-      'pageembed',
-      'a11ychecker',
-      'tinymcespellchecker',
-      'permanentpen',
-      'powerpaste',
-      'advtable',
-      'advcode',
-      'advtemplate',
-      'ai',
-      'uploadcare',
-      'mentions',
-      'tinycomments',
-      'tableofcontents',
-      'footnotes',
-      'mergetags',
-      'autocorrect',
-      'typography',
-      'inlinecss',
-      'markdown',
-      'importword',
-      'exportword',
-      'exportpdf'
+      'checklist'
     ]
   },
   toolbar: {
     type: [String, Array],
     default:
-      'undo redo | blocks fontfamily fontsize | \ bold italic underline strikethrough | link media table mergetags | \ addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | \ align lineheight | checklist numlist bullist indent outdent | \ emoticons charmap | removeformat'
+      'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link media table | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat'
   }
 })
 const emit = defineEmits(['update:value'])
 
-const content = ref('')
+const content = ref(props.value)
 
 const init = computed(() => {
   return {
-    // 去除tinyMCE的logo
     branding: false,
-    // 去除右上角的按钮
     promotion: false,
-    // 关闭 tinymce 的推广
     onboarding: false,
-    // 中文语言
     language: 'zh_CN',
-    // 中文语言包路径
     language_url: '/vue3-admin/tinymce/langs/zh_CN.js',
     height: props.height,
     plugins: props.plugins,
     toolbar: props.toolbar,
     skin_url: '/vue3-admin/tinymce/skins/ui/oxide',
-    selector: 'textarea',
     toolbar_mode: 'wrap',
-    mergetags_list: [{ value: 'Email', title: 'Email' }],
-    ai_request: (request, respondWith) =>
-      respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
-    uploadcare_public_key: '42774401878b6a9bc700'
+    placeholder: props.placeholder
   }
 })
 
 watch(
   () => props.value,
   newVal => {
-    content.value = newVal
+    if (newVal !== content.value) {
+      content.value = newVal
+    }
   },
-  {
-    immediate: true,
-    deep: true
-  }
+  { immediate: true }
 )
-// 监听输入
+
+let debounceTimer = null
 watch(
   () => content.value,
   newValue => {
-    emit('update:value', newValue)
+    if (debounceTimer) {
+      clearTimeout(debounceTimer)
+    }
+    debounceTimer = setTimeout(() => {
+      emit('update:value', newValue)
+    }, 300)
   }
 )
 
-onMounted(() => {
-  // tinymce.init({})
+onBeforeUnmount(() => {
+  if (debounceTimer) {
+    clearTimeout(debounceTimer)
+  }
 })
 </script>
 
