@@ -284,7 +284,7 @@ getList()
               <el-input v-model="searchForm.roleName" placeholder="请输入角色名称" clearable></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="6" style="padding-left: 10px">
+          <el-col :span="18" style="padding-left: 10px">
             <el-button type="primary" @click="handleSearch">查询</el-button>
             <el-button @click="handleReset">重置</el-button>
           </el-col>

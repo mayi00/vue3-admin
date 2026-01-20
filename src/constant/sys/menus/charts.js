@@ -1,7 +1,7 @@
 export const charts = {
   id: '3',
   menuType: 'MODULE',
-  sort: 3,
+  sort: 30,
   visible: 1,
   name: '',
   path: '/charts',

@@ -60,7 +60,6 @@ onUnmounted(() => {
 .app-watermark {
   width: 100%;
   height: 100%;
-  min-width: 1000px;
 }
 
 .mobile-tip {

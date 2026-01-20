@@ -1,7 +1,7 @@
 export const example = {
   id: '2',
   menuType: 'MODULE',
-  sort: 2,
+  sort: 20,
   visible: 1,
   name: 'Example',
   path: '/example',
@@ -123,16 +123,6 @@ export const example = {
           ]
         }
       ]
-    },
-    {
-      id: '2-2',
-      menuType: 'MENU',
-      sort: 2,
-      visible: 1,
-      name: 'Curd',
-      path: '/example/curd',
-      component: 'example/curd/curd',
-      meta: { title: '增删改查', icon: '', keepAlive: true }
     }
   ]
 }

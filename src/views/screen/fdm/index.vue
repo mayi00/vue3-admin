@@ -1,7 +1,8 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import * as echarts from 'echarts'
 import 'echarts/extension/bmap/bmap'
+import FdmHeader from './fdmHeader.vue'
+import FdmCard from './fdmCard.vue'
 
 defineOptions({ name: 'FdmScreen' })
 
@@ -37,7 +38,6 @@ const deviceMonitorData = ref([
   { time: '20190601', location: '北京市昌平区回龙园会展业等学校', code: '100002' },
   { time: '20190704', location: '北京市昌平区科技园财信商务楼...', code: '100003' },
   { time: '20180701', location: '北京市昌平区回龙会展业等学校', code: '100004' },
-  { time: '20190701', location: '更多相似失实公众号【DreamCode...', code: '100005' },
   { time: '20190701', location: '北京市昌平区科技园财信商务楼...', code: '100006' },
   { time: '20190701', location: '北京市昌平区回龙园会展业等学校', code: '100007' }
 ])
@@ -323,8 +323,8 @@ const handleResize = () => {
 
 // 数据大屏自适应函数
 const handleScreenAuto = () => {
-  const designDraftWidth = 1920 // 设计稿的宽度
-  const designDraftHeight = 1080 // 设计稿的高度
+  const designDraftWidth = 1920
+  const designDraftHeight = 1080
   const isW =
     document.documentElement.clientWidth / document.documentElement.clientHeight < designDraftWidth / designDraftHeight
   // 根据屏幕的变化适配的比例
@@ -332,10 +332,11 @@ const handleScreenAuto = () => {
     ? document.documentElement.clientWidth / designDraftWidth
     : document.documentElement.clientHeight / designDraftHeight
 
-  document.querySelector('.screen-content').style.transform = `scale(${scale}) translate(-50%, -50%)`
+  document.querySelector('.fdm-screen-wrapper').style.transform = `scale(${scale}) translate(-50%, -50%)`
 }
 
 onMounted(() => {
+  document.querySelector('#app').style.minWidth = 'auto'
   nextTick(() => {
     initSalesTrendChart()
     initChannelDistChart()
@@ -347,6 +348,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  document.querySelector('#app').style.minWidth = '1000px'
   window.removeEventListener('resize', handleResize)
   salesTrendChart?.dispose()
   channelDistChart?.dispose()
@@ -357,18 +359,25 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="screen-container">
-    <div class="screen-content">
+    <div class="screen-wrapper fdm-screen-wrapper">
       <!-- 头部 -->
-      <div class="screen-header">
-        <img src="../../../assets/images/screen/fdm/logo.png" alt="" class="title-img" />
-      </div>
+      <FdmHeader />
 
-      <!-- 主体内容 -->
       <div class="screen-body">
+        <div class="w-[30%]">
+          <FdmCard>123</FdmCard>
+        </div>
+        <div class="w-[40%] pt-[60px]">
+          <FdmCard>45</FdmCard>
+        </div>
+        <div class="w-[30%]">
+          <FdmCard></FdmCard>
+        </div>
         <!-- 左侧区域 -->
-        <div class="screen-left">
-          <!-- 数据统计卡片 -->
-          <div class="panel stats-panel">
+        <!-- <div class="screen-left"> -->
+
+        <!-- 数据统计卡片 -->
+        <!-- <div class="panel stats-panel">
             <div class="panel-border">
               <img src="../../../assets/images/screen/fdm/border.png" alt="" class="border-img" />
             </div>
@@ -402,10 +411,10 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <!-- 设备监控 -->
-          <div class="panel monitor-panel">
+        <!-- 设备监控 -->
+        <!-- <div class="panel monitor-panel">
             <div class="panel-border">
               <img src="../../../assets/images/screen/fdm/border.png" alt="" class="border-img" />
             </div>
@@ -427,10 +436,10 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <!-- 点位分布统计 -->
-          <div class="panel chart-panel">
+        <!-- 点位分布统计 -->
+        <!-- <div class="panel chart-panel">
             <div class="panel-border">
               <img src="../../../assets/images/screen/fdm/border.png" alt="" class="border-img" />
             </div>
@@ -448,16 +457,15 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </div> -->
+        <!-- </div> -->
 
         <!-- 中间区域 -->
-        <div class="screen-center">
-          <!-- 地图区域 -->
-          <div class="map-container">
+        <!-- <div class="screen-center"> -->
+        <!-- 地图区域 -->
+        <!-- <div class="map-container">
             <div class="map-title">设备数据统计</div>
             <div class="china-map">
-              <!-- 这里可以集成真实的地图组件，暂时使用占位 -->
               <div class="map-placeholder">
                 <div class="map-point" style="top: 20%; left: 30%">
                   <div class="point-ripple"></div>
@@ -496,10 +504,10 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <!-- 全国用户总量统计 -->
-          <div class="panel user-stats-panel">
+        <!-- 全国用户总量统计 -->
+        <!-- <div class="panel user-stats-panel">
             <div class="panel-border">
               <img src="../../../assets/images/screen/fdm/border.png" alt="" class="border-img" />
             </div>
@@ -517,13 +525,13 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </div> -->
+        <!-- </div> -->
 
         <!-- 右侧区域 -->
-        <div class="screen-right">
-          <!-- 时间统计 -->
-          <div class="panel time-panel">
+        <!-- <div class="screen-right"> -->
+        <!-- 时间统计 -->
+        <!-- <div class="panel time-panel">
             <div class="panel-border">
               <img src="../../../assets/images/screen/fdm/border.png" alt="" class="border-img" />
             </div>
@@ -557,10 +565,10 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <!-- 销售额统计 -->
-          <div class="panel sales-panel">
+        <!-- 销售额统计 -->
+        <!-- <div class="panel sales-panel">
             <div class="panel-border">
               <img src="../../../assets/images/screen/fdm/border.png" alt="" class="border-img" />
             </div>
@@ -576,10 +584,10 @@ onBeforeUnmount(() => {
             <div class="chart-content">
               <div id="salesTrendChart" style="width: 100%; height: 200px"></div>
             </div>
-          </div>
+          </div> -->
 
-          <!-- 渠道分布 -->
-          <div class="panel channel-panel">
+        <!-- 渠道分布 -->
+        <!-- <div class="panel channel-panel">
             <div class="panel-border">
               <img src="../../../assets/images/screen/fdm/border.png" alt="" class="border-img" />
             </div>
@@ -596,10 +604,10 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <!-- 一季度销售进度 -->
-          <div class="panel progress-panel">
+        <!-- 一季度销售进度 -->
+        <!-- <div class="panel progress-panel">
             <div class="panel-border">
               <img src="../../../assets/images/screen/fdm/border.png" alt="" class="border-img" />
             </div>
@@ -622,10 +630,10 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <!-- 全国热榜 -->
-          <div class="panel rank-panel">
+        <!-- 全国热榜 -->
+        <!-- <div class="panel rank-panel">
             <div class="panel-border">
               <img src="../../../assets/images/screen/fdm/border.png" alt="" class="border-img" />
             </div>
@@ -658,8 +666,8 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </div> -->
+        <!-- </div> -->
       </div>
     </div>
   </div>
@@ -673,38 +681,27 @@ onBeforeUnmount(() => {
   background: linear-gradient(180deg, #0a1e3c 0%, #030d1f 100%);
 }
 
-.screen-content {
+.screen-wrapper {
   position: absolute;
   left: 50%;
   top: 50%;
   width: 1920px;
   height: 1080px;
-  // transform: scale(1) translate(-50%, -50%);
   transform-origin: 0 0;
-  background: linear-gradient(180deg, #0a1e3c 0%, #030d1f 100%);
-  padding: 20px;
-  box-sizing: border-box;
+  border: 1px solid #0a1e3c;
   color: #fff;
-}
-
-// 头部样式
-.screen-header {
-  width: 100%;
-  height: 130px;
-  text-align: center;
-
-  .title-img {
-    width: 100%;
-    height: 50px;
-    object-fit: cover;
-  }
 }
 
 // 主体布局
 .screen-body {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
+  padding: 88px 20px 20px;
+  width: 100%;
+  height: 100%;
   gap: 20px;
-  height: calc(100vh - 120px);
 }
 
 .screen-left,
@@ -723,71 +720,71 @@ onBeforeUnmount(() => {
 }
 
 // 面板通用样式
-.panel {
-  position: relative;
-  background: rgba(6, 30, 93, 0.5);
-  border: 1px solid rgba(0, 215, 233, 0.3);
-  border-radius: 4px;
-  padding: 15px;
-  backdrop-filter: blur(10px);
+// .panel {
+//   position: relative;
+//   background: rgba(6, 30, 93, 0.5);
+//   border: 1px solid rgba(0, 215, 233, 0.3);
+//   border-radius: 4px;
+//   padding: 15px;
+//   backdrop-filter: blur(10px);
 
-  .panel-border {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    overflow: hidden;
-    border-radius: 4px;
+//   .panel-border {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     pointer-events: none;
+//     overflow: hidden;
+//     border-radius: 4px;
 
-    .border-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.3;
-    }
-  }
+//     .border-img {
+//       width: 100%;
+//       height: 100%;
+//       object-fit: cover;
+//       opacity: 0.3;
+//     }
+//   }
 
-  .panel-title {
-    font-size: 16px;
-    color: #00d7e9;
-    margin-bottom: 15px;
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+//   .panel-title {
+//     font-size: 16px;
+//     color: #00d7e9;
+//     margin-bottom: 15px;
+//     position: relative;
+//     z-index: 1;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
 
-    &.active {
-      color: #fff;
-    }
-  }
+//     &.active {
+//       color: #fff;
+//     }
+//   }
 
-  .tab-group {
-    display: flex;
-    gap: 10px;
+//   .tab-group {
+//     display: flex;
+//     gap: 10px;
 
-    .tab {
-      padding: 2px 8px;
-      font-size: 12px;
-      color: #00d7e9;
-      border: 1px solid rgba(0, 215, 233, 0.3);
-      border-radius: 2px;
-      cursor: pointer;
-      transition: all 0.3s;
+//     .tab {
+//       padding: 2px 8px;
+//       font-size: 12px;
+//       color: #00d7e9;
+//       border: 1px solid rgba(0, 215, 233, 0.3);
+//       border-radius: 2px;
+//       cursor: pointer;
+//       transition: all 0.3s;
 
-      &.active {
-        background: rgba(0, 215, 233, 0.3);
-        color: #fff;
-      }
+//       &.active {
+//         background: rgba(0, 215, 233, 0.3);
+//         color: #fff;
+//       }
 
-      &:hover {
-        border-color: #00d7e9;
-      }
-    }
-  }
-}
+//       &:hover {
+//         border-color: #00d7e9;
+//       }
+//     }
+//   }
+// }
 
 // 数据统计卡片
 .stats-panel {

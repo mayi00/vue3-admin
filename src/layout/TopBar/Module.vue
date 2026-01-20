@@ -36,7 +36,7 @@ function handleClickMenuItem(moduleInfo) {
 <template>
   <div class="module-menu">
     <el-menu mode="horizontal" :default-active="moduleId" :ellipsis="true">
-      <template v-for="item in moduleList" :key="item.id">
+      <template v-for="(item, index) in moduleList" :key="`${item.id}_${index}`">
         <el-menu-item v-if="item.visible === 1" :index="item.id" @click.stop>
           <span @click.stop="handleClickMenuItem(item)"> {{ item.meta.title }}</span>
         </el-menu-item>

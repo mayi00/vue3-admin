@@ -81,8 +81,8 @@ export default ({ mode }) => {
           })
         ],
         output: {
-          chunkFileNames: `assets/js/[hash]-${Date.now()}.js`,
-          entryFileNames: `assets/js/[hash]-${Date.now()}.js`,
+          chunkFileNames: `assets/js/[hash].js`,
+          entryFileNames: `assets/js/[hash].js`,
           // assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
           // 用于输出静态资源的命名，[ext]表示文件扩展名
           assetFileNames: assetInfo => {
@@ -95,7 +95,7 @@ export default ({ mode }) => {
             } else if (/\.(woff2?|eot|ttf|otf)(\?.*)?$/i.test(assetInfo.names[0])) {
               extType = 'fonts'
             }
-            return `assets/${extType}/[hash]-${new Date().getTime()}.[ext]`
+            return `assets/${extType}/[hash].[ext]`
           },
           // 打包文件拆分
           manualChunks(id) {

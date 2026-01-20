@@ -161,7 +161,7 @@ const onDeleteMenu = async ({ id }) => {
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="6" class="pl-[10px]">
+          <el-col :span="12" class="pl-[10px]">
             <el-button type="primary" @click="handleSearch">查询</el-button>
             <el-button @click="handleReset">重置</el-button>
           </el-col>

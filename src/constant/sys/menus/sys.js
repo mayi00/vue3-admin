@@ -1,7 +1,7 @@
 export const sys = {
   id: '1',
   menuType: 'MODULE',
-  sort: 1,
+  sort: 10,
   visible: 1,
   name: 'Sys',
   path: '/sys',
