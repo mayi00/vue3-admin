@@ -1,14 +1,19 @@
 <script setup>
-defineOptions({ name: 'FdmCard' })
+defineOptions({ name: 'FdmPanel' })
 
-const props = defineProps({})
+const props = defineProps({
+  class: {
+    type: String,
+    default: ''
+  }
+})
 const emit = defineEmits([])
 // 暴露方法给父组件
 defineExpose({})
 </script>
 
 <template>
-  <div class="panel">
+  <div class="panel" :class="class">
     <div class="panel-content">
       <slot></slot>
     </div>

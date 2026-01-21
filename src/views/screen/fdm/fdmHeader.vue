@@ -9,7 +9,11 @@ defineExpose({})
 
 <template>
   <div class="screen-header">
-    <img src="../../../assets/images/screen/fdm/header.png" alt="" class="title-img" />
+    <img
+      src="../../../assets/images/screen/fdm/header.png"
+      alt="Fastest Data Monitoring & Display Platform"
+      class="header-img"
+    />
   </div>
 </template>
 
@@ -19,7 +23,7 @@ defineExpose({})
   height: 130px;
   text-align: center;
 
-  .title-img {
+  .header-img {
     width: 100%;
     height: 100%;
     object-fit: cover;

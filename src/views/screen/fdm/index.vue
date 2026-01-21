@@ -2,7 +2,7 @@
 import * as echarts from 'echarts'
 import 'echarts/extension/bmap/bmap'
 import FdmHeader from './fdmHeader.vue'
-import FdmCard from './fdmCard.vue'
+import FdmPanel from './fdmPanel.vue'
 
 defineOptions({ name: 'FdmScreen' })
 
@@ -360,18 +360,26 @@ onBeforeUnmount(() => {
 <template>
   <div class="screen-container">
     <div class="screen-wrapper fdm-screen-wrapper">
-      <!-- 头部 -->
       <FdmHeader />
 
       <div class="screen-body">
-        <div class="w-[30%]">
-          <FdmCard>123</FdmCard>
+        <div class="w-[30%] flex flex-col gap-[20px]">
+          <FdmPanel>数据统计</FdmPanel>
+          <FdmPanel>设备监控</FdmPanel>
+          <FdmPanel>点位分布</FdmPanel>
         </div>
-        <div class="w-[40%] pt-[60px]">
-          <FdmCard>45</FdmCard>
+        <div class="w-[40%] pt-[60px] flex flex-col gap-[20px]">
+          <div class="w-full h-[40%]">地图</div>
+          <FdmPanel class="flex-1">全国用户总量</FdmPanel>
         </div>
-        <div class="w-[30%]">
-          <FdmCard></FdmCard>
+        <div class="w-[30%] flex flex-col gap-[20px]">
+          <FdmPanel>时间统计</FdmPanel>
+          <FdmPanel>销售额统计</FdmPanel>
+          <div class="flex gap-[20px]">
+            <FdmPanel class="flex-1">渠道分布</FdmPanel>
+            <FdmPanel class="flex-1">季度销售进度</FdmPanel>
+          </div>
+          <FdmPanel>热榜</FdmPanel>
         </div>
         <!-- 左侧区域 -->
         <!-- <div class="screen-left"> -->
@@ -688,7 +696,7 @@ onBeforeUnmount(() => {
   width: 1920px;
   height: 1080px;
   transform-origin: 0 0;
-  border: 1px solid #0a1e3c;
+  border: 1px solid #000;
   color: #fff;
 }
 
