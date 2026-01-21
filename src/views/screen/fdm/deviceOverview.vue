@@ -1,10 +1,12 @@
 <script setup>
-defineOptions({ name: 'DataStats' })
+defineOptions({ name: 'DataOverview' })
 
-const props = defineProps({})
-const emit = defineEmits([])
-// 暴露方法给父组件
-defineExpose({})
+const props = defineProps({
+  data: {
+    type: Object,
+    default: () => ({})
+  }
+})
 
 const statsData = ref({
   deviceTotal: 2190,
@@ -15,9 +17,9 @@ const statsData = ref({
 </script>
 
 <template>
-  <div class="stats-grid">
+  <div class="stats-wrapper">
     <div class="stat-item">
-      <div class="stat-value">{{ statsData.deviceTotal.toLocaleString() }}</div>
+      <div class="stat-value">{{ statsData.deviceTotal }}</div>
       <div class="stat-label">
         <span class="dot" style="background: #0090ff"></span>
         设备总数
@@ -31,7 +33,7 @@ const statsData = ref({
       </div>
     </div>
     <div class="stat-item">
-      <div class="stat-value">{{ statsData.operatingDevice.toLocaleString() }}</div>
+      <div class="stat-value">{{ statsData.operatingDevice }}</div>
       <div class="stat-label">
         <span class="dot" style="background: #00d7e9"></span>
         运营设备
@@ -48,12 +50,10 @@ const statsData = ref({
 </template>
 
 <style lang="less" scoped>
-.stats-grid {
+.stats-wrapper {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
-  position: relative;
-  z-index: 1;
 }
 
 .stat-item {

@@ -1,7 +1,7 @@
 <script setup>
 import FdmHeader from './fdmHeader.vue'
 import FdmPanel from './fdmPanel.vue'
-import DataStats from './dataStats.vue'
+import DeviceOverview from './deviceOverview.vue'
 import DeviceMonitor from './deviceMonitor.vue'
 import PointDistribution from './pointDistribution.vue'
 import MapComponent from './mapComponent.vue'
@@ -14,7 +14,7 @@ import HotRank from './hotRank.vue'
 
 defineOptions({ name: 'FdmScreen' })
 
-// 数据大屏自适应函数
+// 数据大屏自适应缩放
 const handleScreenAuto = () => {
   const designDraftWidth = 1920
   const designDraftHeight = 1080
@@ -28,22 +28,17 @@ const handleScreenAuto = () => {
   document.querySelector('.fdm-screen-wrapper').style.transform = `scale(${scale}) translate(-50%, -50%)`
 }
 
-// 窗口resize事件处理
-const handleResize = () => {
-  handleScreenAuto()
-}
-
 onMounted(() => {
   document.querySelector('#app').style.minWidth = 'auto'
   nextTick(() => {
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleScreenAuto)
     handleScreenAuto()
   })
 })
 
 onBeforeUnmount(() => {
   document.querySelector('#app').style.minWidth = '1000px'
-  window.removeEventListener('resize', handleResize)
+  window.removeEventListener('resize', handleScreenAuto)
 })
 </script>
 
@@ -55,7 +50,7 @@ onBeforeUnmount(() => {
       <div class="screen-body">
         <div class="w-[30%] flex flex-col gap-[20px]">
           <FdmPanel class="h-[110px]">
-            <DataStats />
+            <DeviceOverview />
           </FdmPanel>
           <FdmPanel class="h-[480px]">
             <DeviceMonitor />

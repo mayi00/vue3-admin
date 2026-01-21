@@ -35,5 +35,6 @@ defineExpose({})
   bottom: -21px;
   left: -132px;
   padding: 20px;
+  overflow: hidden;
 }
 </style>
