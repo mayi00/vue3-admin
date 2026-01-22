@@ -155,7 +155,7 @@ onMounted(() => {
 <template>
   <div class="g-container dict-data-container">
     <!-- 字典类型 -->
-    <el-card shadow="hover" class="dict-type-card g-thin-scrollbar">
+    <el-card shadow="hover" class="dict-type-card g-children-thin-scrollbar">
       <template #header>
         <el-input
           v-model.trim="dictTypeSearch"

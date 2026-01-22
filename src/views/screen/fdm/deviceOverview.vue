@@ -2,13 +2,10 @@
 defineOptions({ name: 'DataOverview' })
 
 const props = defineProps({
-  data: {
-    type: Object,
-    default: () => ({})
-  }
+  sourceData: { type: Object, default: () => ({}) }
 })
 
-const statsData = ref({
+const collection = ref({
   deviceTotal: 2190,
   seasonNew: 190,
   operatingDevice: 3001,
@@ -17,31 +14,31 @@ const statsData = ref({
 </script>
 
 <template>
-  <div class="stats-wrapper">
-    <div class="stat-item">
-      <div class="stat-value">{{ statsData.deviceTotal }}</div>
-      <div class="stat-label">
+  <div class="overview-wrapper">
+    <div class="overview-item">
+      <div class="overview-value">{{ collection.deviceTotal }}</div>
+      <div class="overview-label">
         <span class="dot" style="background: #0090ff"></span>
         设备总数
       </div>
     </div>
-    <div class="stat-item">
-      <div class="stat-value">{{ statsData.seasonNew }}</div>
-      <div class="stat-label">
+    <div class="overview-item">
+      <div class="overview-value">{{ collection.seasonNew }}</div>
+      <div class="overview-label">
         <span class="dot" style="background: #00e4a0"></span>
         季度新增
       </div>
     </div>
-    <div class="stat-item">
-      <div class="stat-value">{{ statsData.operatingDevice }}</div>
-      <div class="stat-label">
+    <div class="overview-item">
+      <div class="overview-value">{{ collection.operatingDevice }}</div>
+      <div class="overview-label">
         <span class="dot" style="background: #00d7e9"></span>
         运营设备
       </div>
     </div>
-    <div class="stat-item">
-      <div class="stat-value">{{ statsData.exceptionDevice }}</div>
-      <div class="stat-label">
+    <div class="overview-item">
+      <div class="overview-value">{{ collection.exceptionDevice }}</div>
+      <div class="overview-label">
         <span class="dot" style="background: #e4393c"></span>
         异常设备
       </div>
@@ -50,23 +47,23 @@ const statsData = ref({
 </template>
 
 <style lang="less" scoped>
-.stats-wrapper {
+.overview-wrapper {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
 }
 
-.stat-item {
+.overview-item {
   text-align: center;
 
-  .stat-value {
+  .overview-value {
     font-size: 28px;
     font-weight: bold;
     color: #fff;
     margin-bottom: 8px;
   }
 
-  .stat-label {
+  .overview-label {
     font-size: 12px;
     color: #00d7e9;
     display: flex;

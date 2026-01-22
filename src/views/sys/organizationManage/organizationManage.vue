@@ -192,7 +192,7 @@ const onDeleteOrg = async ({ id }) => {
 
 <template>
   <div class="g-container organization-container">
-    <el-card shadow="hover" class="organization-tree-card g-thin-scrollbar">
+    <el-card shadow="hover" class="organization-tree-card g-children-thin-scrollbar">
       <template #header>
         <el-input
           v-model.trim="orgTreeSearch"
