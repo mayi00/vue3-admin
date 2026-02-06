@@ -64,6 +64,12 @@ export default ({ mode }) => {
           target: env.VITE_BASE_URL,
           changeOrigin: true,
           rewrite: path => path.replace(/^\/proxy-apifox/, '')
+        },
+        // jisuapi API
+        '/proxy-jisuapi': {
+          target: 'https://api.jisuapi.com',
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/proxy-jisuapi/, '')
         }
       }
     },

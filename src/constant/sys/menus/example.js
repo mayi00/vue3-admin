@@ -123,6 +123,16 @@ export const example = {
           ]
         }
       ]
+    },
+    {
+      id: '2-2',
+      menuType: 'MENU',
+      sort: 2,
+      visible: 1,
+      name: 'Gold',
+      path: '/example/gold',
+      component: 'example/gold/index',
+      meta: { title: '黄金价格', icon: '', keepAlive: true }
     }
   ]
 }
