@@ -1,10 +1,13 @@
 import request from '@/http/request'
+import { getProxyConfig } from '@/api/baseConfig.js'
+
+const { sys } = getProxyConfig()
 
 export default {
   // 获取角色列表
   list(params, data) {
     return request({
-      url: '/role/list',
+      url: `${sys}/role/list`,
       method: 'post',
       params,
       data
@@ -13,7 +16,7 @@ export default {
   // 添加角色
   add(data) {
     return request({
-      url: '/role/add',
+      url: `${sys}/role/add`,
       method: 'post',
       data
     })
@@ -21,7 +24,7 @@ export default {
   // 编辑角色
   edit(data) {
     return request({
-      url: '/role/edit',
+      url: `${sys}/role/edit`,
       method: 'post',
       data
     })
@@ -29,7 +32,7 @@ export default {
   // 更新角色状态
   updateStatus(data) {
     return request({
-      url: '/role/updateStatus',
+      url: `${sys}/role/updateStatus`,
       method: 'post',
       data
     })
@@ -37,7 +40,7 @@ export default {
   // 删除角色
   delete(data) {
     return request({
-      url: '/role/delete',
+      url: `${sys}/role/delete`,
       method: 'post',
       data
     })
@@ -49,7 +52,7 @@ export default {
   // 获取角色菜单权限
   getRolePermissions(data) {
     return request({
-      url: '/role/getRolePermissions',
+      url: `${sys}/role/getRolePermissions`,
       method: 'post',
       data
     })
@@ -57,7 +60,7 @@ export default {
   // 分配角色菜单权限
   assignPermissions(data) {
     return request({
-      url: '/role/assignPermissions',
+      url: `${sys}/role/assignPermissions`,
       method: 'post',
       data
     })

@@ -1,10 +1,13 @@
 import request from '@/http/request.js'
+import { getProxyConfig } from '@/api/baseConfig.js'
+
+const { sys } = getProxyConfig()
 
 export default {
   // 获取菜单模块
   module(data) {
     return request({
-      url: '/menu/module',
+      url: `${sys}/menu/module`,
       method: 'post',
       data
     })
@@ -12,7 +15,7 @@ export default {
   // 根据模块获取菜单列表
   getListByModule(data) {
     return request({
-      url: '/menu/getListByModule',
+      url: `${sys}/menu/getListByModule`,
       method: 'post',
       data
     })
@@ -20,7 +23,7 @@ export default {
   // 获取所有菜单列表
   list(data) {
     return request({
-      url: '/menu/list',
+      url: `${sys}/menu/list`,
       method: 'post',
       data
     })
@@ -28,7 +31,7 @@ export default {
   // 新增菜单
   add(data) {
     return request({
-      url: '/menu/add',
+      url: `${sys}/menu/add`,
       method: 'post',
       data
     })
@@ -36,7 +39,7 @@ export default {
   // 编辑菜单
   update(data) {
     return request({
-      url: '/menu/update',
+      url: `${sys}/menu/update`,
       method: 'post',
       data
     })
@@ -44,7 +47,7 @@ export default {
   // 删除菜单
   delete(data) {
     return request({
-      url: '/menu/delete',
+      url: `${sys}/menu/delete`,
       method: 'post',
       data
     })

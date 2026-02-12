@@ -1,8 +1,11 @@
 import { roleList } from '@/constant/sys/role'
+import { getProxyConfig } from '@/api/baseConfig.js'
+
+const { sys } = getProxyConfig()
 
 export function setupUserMock(mock, faker) {
   // 获取用户列表
-  mock.onPost('/user/list').reply(config => {
+  mock.onPost(`${sys}/user/list`).reply(config => {
     console.log('【Mock】/user/list', config)
 
     // 生成动态用户列表
@@ -68,38 +71,38 @@ export function setupUserMock(mock, faker) {
     ]
   })
   // 新增用户
-  mock.onPost('/user/add').reply(config => {
+  mock.onPost(`${sys}/user/add`).reply(config => {
     console.log('【Mock】/user/add', config)
     return [200, { code: 0, message: 'success' }]
   })
 
-  // 编辑
-  mock.onPost('/user/edit').reply(config => {
+  // 编辑用户
+  mock.onPost(`${sys}/user/edit`).reply(config => {
     console.log('【Mock】/user/edit', config)
     return [200, { code: 0, message: 'success' }]
   })
 
-  // 删除
-  mock.onPost('/user/delete').reply(config => {
+  // 删除用户
+  mock.onPost(`${sys}/user/delete`).reply(config => {
     console.log('【Mock】/user/delete', config)
     return [200, { code: 0, message: 'success' }]
   })
 
-  // 批量导入
-  mock.onPost('/user/batchImport').reply(config => {
+  // 批量导入用户
+  mock.onPost(`${sys}/user/batchImport`).reply(config => {
     console.log('【Mock】/user/batchImport', config)
     return [200, { code: 0, message: 'success' }]
   })
 
   // 获取用户角色
-  mock.onGet(new RegExp('/user/getUserRoles/.*')).reply(config => {
+  mock.onGet(new RegExp(`${sys}/user/getUserRoles/.*`)).reply(config => {
     console.log('【Mock】/user/getUserRoles', config)
     const userRoles = roleList.filter(() => faker.datatype.boolean())
     return [200, { code: 0, message: 'success', data: userRoles }]
   })
 
   // 保存用户角色
-  mock.onPost('/user/saveRoles').reply(config => {
+  mock.onPost(`${sys}/user/saveRoles`).reply(config => {
     console.log('【Mock】/user/saveRoles', config)
     return [200, { code: 0, message: 'success' }]
   })

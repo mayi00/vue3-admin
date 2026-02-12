@@ -1,3 +1,7 @@
+import { getProxyConfig } from '@/api/baseConfig.js'
+
+const { sys } = getProxyConfig()
+
 // 模拟数据
 const mockData = [
   {
@@ -30,7 +34,7 @@ const mockData = [
 
 export function setupNoticeMock(mock, faker) {
   // 获取通知公告列表
-  mock.onPost('/sys/notice/list').reply(config => {
+  mock.onPost(`${sys}/notice/list`).reply(config => {
     const currentPage = parseInt(config.params?.currentPage) || 1
     const pageSize = parseInt(config.params?.pageSize) || 10
 
@@ -78,7 +82,7 @@ export function setupNoticeMock(mock, faker) {
   })
 
   // 获取通知公告详情
-  mock.onGet(/\/sys\/notice\/get\/\d+/).reply(config => {
+  mock.onGet(`${sys}/notice/get/:id`).reply(config => {
     const id = parseInt(config.url.split('/').pop())
     const notice = mockData.find(item => item.id === id)
 
@@ -93,17 +97,17 @@ export function setupNoticeMock(mock, faker) {
   })
 
   // 新增通知公告
-  mock.onPost('/sys/notice/add').reply(() => {
+  mock.onPost(`${sys}/notice/add`).reply(() => {
     return [200, { code: 200, message: 'success' }]
   })
 
   // 编辑通知公告
-  mock.onPost('/sys/notice/edit').reply(() => {
+  mock.onPost(`${sys}/notice/edit`).reply(() => {
     return [200, { code: 200, message: 'success' }]
   })
 
   // 删除通知公告
-  mock.onPost('/sys/notice/delete').reply(() => {
+  mock.onPost(`${sys}/notice/delete`).reply(() => {
     return [200, { code: 200, message: 'success' }]
   })
 }

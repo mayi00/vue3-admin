@@ -1,10 +1,13 @@
 import request from '@/http/request.js'
+import { getProxyConfig } from '@/api/baseConfig.js'
+
+const { sys } = getProxyConfig()
 
 export default {
   // 获取字典列表
   list(params, data) {
     return request({
-      url: '/dict/list',
+      url: `${sys}/dict/list`,
       method: 'post',
       params,
       data
@@ -13,7 +16,7 @@ export default {
   // 新增字典
   add(data) {
     return request({
-      url: '/dict/add',
+      url: `${sys}/dict/add`,
       method: 'post',
       data
     })
@@ -21,7 +24,7 @@ export default {
   // 编辑字典
   edit(data) {
     return request({
-      url: '/dict/edit',
+      url: `${sys}/dict/edit`,
       method: 'put',
       data
     })
@@ -29,19 +32,19 @@ export default {
   // 删除字典
   delete(data) {
     return request({
-      url: '/dict/delete',
+      url: `${sys}/dict/delete`,
       method: 'delete',
       data
     })
   },
   // 获取所有字典
   allList() {
-    return request.get('/dict/allList')
+    return request.get(`${sys}/dict/allList`)
   },
   // 获取字典数据列表
   dataList(params) {
     return request({
-      url: '/dict/data/list',
+      url: `${sys}/dict/data/list`,
       method: 'get',
       params
     })
@@ -49,7 +52,7 @@ export default {
   // 新增字典数据
   addDictData(data) {
     return request({
-      url: '/dict/data/add',
+      url: `${sys}/dict/data/add`,
       method: 'post',
       data
     })
@@ -57,7 +60,7 @@ export default {
   // 编辑字典数据
   editDictData(data) {
     return request({
-      url: '/dict/data/edit',
+      url: `${sys}/dict/data/edit`,
       method: 'put',
       data
     })
@@ -65,7 +68,7 @@ export default {
   // 删除字典数据
   deleteDictData(data) {
     return request({
-      url: '/dict/data/delete',
+      url: `${sys}/dict/data/delete`, 
       method: 'delete',
       data
     })

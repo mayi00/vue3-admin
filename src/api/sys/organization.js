@@ -1,10 +1,13 @@
 import request from '@/http/request.js'
+import { getProxyConfig } from '@/api/baseConfig.js'
+
+const { sys } = getProxyConfig()
 
 export default {
   // 获取机构列表
   list(data) {
     return request({
-      url: '/organization/list',
+      url: `${sys}/organization/list`,
       method: 'post',
       data
     })
@@ -12,7 +15,7 @@ export default {
   // 获取子机构列表
   getChildren(data) {
     return request({
-      url: '/organization/getChildren',
+      url: `${sys}/organization/getChildren`,
       method: 'post',
       data
     })
@@ -20,7 +23,7 @@ export default {
   // 新增机构
   add(data) {
     return request({
-      url: '/organization/add',
+      url: `${sys}/organization/add`,
       method: 'post',
       data
     })
@@ -28,7 +31,7 @@ export default {
   // 编辑机构
   update(data) {
     return request({
-      url: '/organization/update',
+      url: `${sys}/organization/update`,
       method: 'post',
       data
     })
@@ -36,7 +39,7 @@ export default {
   // 删除机构
   delete(data) {
     return request({
-      url: '/organization/delete',
+      url: `${sys}/organization/delete`,
       method: 'post',
       data
     })

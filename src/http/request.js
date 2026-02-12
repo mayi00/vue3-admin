@@ -2,8 +2,8 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
 const service = axios.create({
-  baseURL: process.env.VITE_BASE_URL,
-  timeout: 1000 * 10
+  baseURL: import.meta.env.VITE_MOCK === 'true' ? '/mock' : '',
+  timeout: 1000 * 30
 })
 
 // 请求拦截器
@@ -13,7 +13,7 @@ service.interceptors.request.use(
     if (config.timeout === 0) {
       config.timeout = 0
     } else if (!config.timeout) {
-      config.timeout = 1000 * 10
+      config.timeout = 1000 * 30
     }
 
     // 添加 token 到请求头

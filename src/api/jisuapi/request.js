@@ -2,7 +2,7 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
 const service = axios.create({
-  // baseURL: process.env.VITE_BASE_URL,
+  baseURL: '',
   timeout: 1000 * 60
 })
 const appkey = '37a832dcac88a651'
@@ -14,7 +14,7 @@ service.interceptors.request.use(
     if (config.timeout === 0) {
       config.timeout = 0
     } else if (!config.timeout) {
-      config.timeout = 1000 * 10
+      config.timeout = 1000 * 60
     }
 
     config.params = { ...(config.params || {}), appkey }

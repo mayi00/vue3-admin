@@ -1,10 +1,13 @@
 import request from '@/http/request'
+import { getProxyConfig } from '@/api/baseConfig.js'
+
+const { sys } = getProxyConfig()
 
 export default {
   // 获取用户列表
   list(params, data) {
     return request({
-      url: '/user/list',
+      url: `${sys}/user/list`,
       method: 'post',
       params,
       data
@@ -13,7 +16,7 @@ export default {
   // 添加用户
   add(data) {
     return request({
-      url: '/user/add',
+      url: `${sys}/user/add`,
       method: 'post',
       data
     })
@@ -21,7 +24,7 @@ export default {
   // 编辑用户
   edit(data) {
     return request({
-      url: '/user/edit',
+      url: `${sys}/user/edit`,
       method: 'post',
       data
     })
@@ -29,7 +32,7 @@ export default {
   // 删除用户
   delete(data) {
     return request({
-      url: '/user/delete',
+      url: `${sys}/user/delete`,
       method: 'post',
       data
     })
@@ -37,7 +40,7 @@ export default {
   // 批量导入用户
   batchImport(data) {
     return request({
-      url: '/user/batchImport',
+      url: `${sys}/user/batchImport`,
       method: 'post',
       data
     })
@@ -45,14 +48,14 @@ export default {
   // 获取用户角色
   getUserRoles(id) {
     return request({
-      url: `/user/getUserRoles/${id}`,
+      url: `${sys}/user/getUserRoles/${id}`,
       method: 'get'
     })
   },
   // 保存用户角色
   saveRoles(data) {
     return request({
-      url: '/user/saveRoles',
+      url: `${sys}/user/saveRoles`,
       method: 'post',
       data
     })

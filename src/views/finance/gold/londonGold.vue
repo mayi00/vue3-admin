@@ -50,7 +50,7 @@ function handleRefresh() {
     </div>
     <HyTable
       ref="hyTableRef"
-      height="200"
+      height="198"
       :loading="table.loading"
       :data="table.data"
       :columns="table.columns"

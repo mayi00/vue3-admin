@@ -56,7 +56,7 @@ defineExpose({})
     </div>
     <HyTable
       ref="hyTableRef"
-      height="360"
+      height="358"
       :loading="table.loading"
       :data="table.data"
       :columns="table.columns"

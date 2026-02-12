@@ -1,9 +1,12 @@
 import { organizations } from '@/constant/sys/organizations.js'
 import { cloneDeep, orderBy } from 'lodash-es'
+import { getProxyConfig } from '@/api/baseConfig.js'
+
+const { sys } = getProxyConfig()
 
 export function setupOrganizationMock(mock, faker) {
   // 获取机构列表
-  mock.onPost('/organization/list').reply(config => {
+  mock.onPost(`${sys}/organization/list`).reply(config => {
     console.log('【Mock】/organization/list', config)
     const tempOrg = cloneDeep(organizations)
     const orgList = orderBy(tempOrg, 'sort', 'asc')
@@ -11,28 +14,28 @@ export function setupOrganizationMock(mock, faker) {
   })
 
   // 新增机构
-  mock.onPost('/organization/add').reply(config => {
+  mock.onPost(`${sys}/organization/add`).reply(config => {
     console.log('【Mock】/organization/add', config)
     // 新增逻辑
     return [200, { code: 0, message: '新增成功' }]
   })
 
   // 编辑机构
-  mock.onPost('/organization/update').reply(config => {
+  mock.onPost(`${sys}/organization/update`).reply(config => {
     console.log('【Mock】/organization/update', config)
     // 处理编辑逻辑
     return [200, { code: 0, message: '编辑成功' }]
   })
 
   // 删除机构
-  mock.onPost('/organization/delete').reply(config => {
+  mock.onPost(`${sys}/organization/delete`).reply(config => {
     console.log('【Mock】/organization/delete', config)
     // 处理删除逻辑
     return [200, { code: 0, message: '删除成功' }]
   })
 
   // 获取子机构列表
-  mock.onPost('/organization/getChildren').reply(config => {
+  mock.onPost(`${sys}/organization/getChildren`).reply(config => {
     console.log('【Mock】/organization/getChildren', config)
     const { parentId } = JSON.parse(config.data) || {}
     const tempOrg = cloneDeep(organizations)

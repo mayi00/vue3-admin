@@ -1,8 +1,11 @@
 import { roleList } from '@/constant/sys/role'
+import { getProxyConfig } from '@/api/baseConfig.js'
+
+const { sys } = getProxyConfig()
 
 export function setupRoleMock(mock, faker) {
   // 获取角色列表
-  mock.onPost('/role/list').reply(config => {
+  mock.onPost(`${sys}/role/list`).reply(config => {
     console.log('【Mock】/role/list', config)
 
     // 解析参数
@@ -58,42 +61,42 @@ export function setupRoleMock(mock, faker) {
   })
 
   // 新增角色
-  mock.onPost('/role/add').reply(config => {
+  mock.onPost(`${sys}/role/add`).reply(config => {
     console.log('【Mock】/role/add', config)
     return [200, { code: 0, message: 'success' }]
   })
 
   // 编辑角色
-  mock.onPost('/role/edit').reply(config => {
+  mock.onPost(`${sys}/role/edit`).reply(config => {
     console.log('【Mock】/role/edit', config)
     return [200, { code: 0, message: 'success' }]
   })
 
   // 更新角色状态
-  mock.onPost('/role/updateStatus').reply(config => {
+  mock.onPost(`${sys}/role/updateStatus`).reply(config => {
     console.log('【Mock】/role/updateStatus', config)
     return [200, { code: 0, message: 'success' }]
   })
 
   // 删除角色
-  mock.onPost('/role/delete').reply(config => {
+  mock.onPost(`${sys}/role/delete`).reply(config => {
     console.log('【Mock】/role/delete', config)
     return [200, { code: 0, message: 'success' }]
   })
 
   // 获取所有角色列表
-  mock.onGet('/role/allList').reply(config => {
+  mock.onGet(`${sys}/role/allList`).reply(config => {
     return [200, { code: 0, message: 'success', data: roleList }]
   })
 
   // 获取角色菜单权限
-  mock.onPost('/role/getRolePermissions').reply(config => {
+  mock.onPost(`${sys}/role/getRolePermissions`).reply(config => {
     console.log('【Mock】/role/getRolePermissions', config)
     return [200, { code: 0, message: 'success', data: [] }]
   })
 
   // 分配角色菜单权限
-  mock.onPost('/role/assignPermissions').reply(config => {
+  mock.onPost(`${sys}/role/assignPermissions`).reply(config => {
     console.log('【Mock】/role/assignPermissions', config)
     return [200, { code: 0, message: 'success' }]
   })
