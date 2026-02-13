@@ -17,7 +17,7 @@
     "@plugin-web-update-notification/vite": "^2.0.2",
     "@tinymce/tinymce-vue": "^6.3.0",
     "@vueuse/core": "^13.9.0",
-    "axios": "^1.13.4",
+    "axios": "^1.13.5",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.19",
     "echarts": "^6.0.0",

@@ -17,12 +17,13 @@ service.interceptors.request.use(
 
     // 添加 token 到请求头
     const token = localStorage.getItem('TOKEN')
-    if (token) {
-      config.headers['token'] = token
-    }
+    // if (token) {
+    // config.headers['token'] = token
+    // }
     config.params = config.params || {}
-    config.params.t = Date.now()
+    // config.params.t = Date.now()
 
+    console.log('【请求配置】', config)
     return config
   },
   error => {
@@ -37,7 +38,7 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   response => {
-    // console.log('【响应】', response)
+    console.log('【响应】', response)
     return new Promise((resolve, reject) => {
       if (response.status === 200) {
         // 处理二进制数据

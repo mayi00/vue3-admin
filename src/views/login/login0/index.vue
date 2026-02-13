@@ -2,6 +2,20 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import { useUserStore } from '@/store'
 
+import service from '@/http/request.js'
+// import service from '@/http/request2.js'
+
+service({
+  url: `https://m1.apifoxmock.com/m1/7834477-7582702-default/screen-api/fdm/getGroupInfo`,
+  method: 'get'
+})
+  .then(res => {
+    console.log('axios', res.data)
+  })
+  .catch(err => {
+    console.error('axios', err)
+  })
+
 defineOptions({ name: 'Login0' })
 
 const router = useRouter()

@@ -1,5 +1,6 @@
 <script setup>
 import { useElementHeight } from '@/hooks/useElement.js'
+
 defineOptions({ name: 'Dashboard' })
 
 const { elementHeight: cardHeight } = useElementHeight({ offset: 67 })

@@ -1,4 +1,4 @@
-import request from '@/http/request'
+import request from '@/http/request.js'
 import { getProxyConfig } from '@/api/baseConfig.js'
 
 const { sys } = getProxyConfig()

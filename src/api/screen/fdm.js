@@ -5,7 +5,10 @@ const { screen } = getProxyConfig()
 
 export default {
   // 获取概览数据
-  overview() {
-    return request.get(`${screen}/fdm/overview`)
+  getGroupInfo() {
+    return request({
+      url: `${screen}/fdm/getGroupInfo`,
+      method: 'get'
+    })
   }
 }

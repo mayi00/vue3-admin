@@ -1,4 +1,6 @@
 <script setup>
+import api from '@/api'
+
 defineOptions({ name: 'DataOverview' })
 
 const props = defineProps({
@@ -11,6 +13,13 @@ const collection = ref({
   operatingDevice: 3001,
   exceptionDevice: 108
 })
+
+const getOverviewData = () => {
+  api.screen.fdm.getGroupInfo().then(res => {
+    collection.value = res.data
+  })
+}
+getOverviewData()
 </script>
 
 <template>
